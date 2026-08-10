@@ -1,69 +1,102 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
     // =========================
     // VARIABLES
     // =========================
     // Movement settings
-    [SerializeField] private float moveSpeed = 5f;  
+    [SerializeField] private float moveSpeed = 5f;
+
     // Jump settings
-    [SerializeField] private float jumpForce = 5f;  
+    [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float jumpHoldForce = 0.5f;
     [SerializeField] private float maxJumpHoldTime = 0.25f;
-    // Components & References
-    private Rigidbody2D circle;
+
+    // Ground detection settings
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private float groundCheckRadius = 0.1f;
+    [SerializeField] private LayerMask groundLayer;
+
+    // Components
+    private Rigidbody2D rb;
     private InputSystem_Actions inputActions;
-    // Runtime State
+
+    // Player state
+    private Vector2 moveInput;
+    private bool jumpPressedThisFrame;
     private float jumpHoldTime = 0f;
     private bool isGrounded = false;
 
-
     // =========================
-    // UNITY METHODS
+    // START
     // =========================
-
     private void Start()
     {
         // Get the Rigidbody2D attached to the player
-        circle = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
 
         // Create the input actions instance
         inputActions = new InputSystem_Actions();
 
-        // Enable the input actions so they can receive player input
+        // Enable the input actions
         inputActions.Enable();
     }
 
+    // =========================
+    // UPDATE (input reading only)
+    // =========================
     private void Update()
     {
-        HandleMovement();
-        HandleJump();
+        // Cache movement input for use in FixedUpdate
+        moveInput = inputActions.Player.Move.ReadValue<Vector2>();
+
+        // Latch the jump press so it isn't missed between physics steps
+        if (inputActions.Player.Jump.WasPressedThisFrame())
+        {
+            jumpPressedThisFrame = true;
+        }
     }
 
+    // =========================
+    // FIXED UPDATE (physics only)
+    // =========================
+    private void FixedUpdate()
+    {
+        CheckGrounded();
+        HandleMovement();
+        HandleJump();
+
+        // Consume the buffered jump press after processing it
+        jumpPressedThisFrame = false;
+    }
 
     // =========================
     // FUNCTIONS
     // =========================
+    private void CheckGrounded()
+    {
+        // Check for ground overlap at the groundCheck position
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+    }
+
     private void HandleMovement()
     {
-        // Read the current movement input
-        Vector2 movement = inputActions.Player.Move.ReadValue<Vector2>();
-
-        // Set horizontal velocity
-        circle.linearVelocity = new Vector2(movement.x * moveSpeed, circle.linearVelocity.y);
+        // Set horizontal velocity while keeping vertical velocity
+        rb.linearVelocity = new Vector2(
+            moveInput.x * moveSpeed,
+            rb.linearVelocity.y
+        );
     }
 
     private void HandleJump()
     {
-        // Check if the jump button was pressed this frame
-        bool jumpPressed = inputActions.Player.Jump.WasPressedThisFrame();
-
-        // Apply the initial jump impulse only when the player is grounded
-        if (jumpPressed && isGrounded)
+        // Apply the initial jump impulse only if the player is grounded
+        if (jumpPressedThisFrame && isGrounded)
         {
-            circle.AddForce(
+            rb.AddForce(
                 Vector2.up * jumpForce,
                 ForceMode2D.Impulse
             );
@@ -73,32 +106,35 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Apply additional force while the jump button is held
-        if (inputActions.Player.Jump.IsPressed() && jumpHoldTime < maxJumpHoldTime)
+        if (inputActions.Player.Jump.IsPressed() &&
+            jumpHoldTime < maxJumpHoldTime)
         {
-            circle.AddForce(
+            rb.AddForce(
                 Vector2.up * jumpHoldForce,
                 ForceMode2D.Force
             );
 
-            // Keep track of how long the button has been held
-            jumpHoldTime += Time.deltaTime;
+            // Track how long the jump button has been held
+            jumpHoldTime += Time.fixedDeltaTime;
         }
     }
 
-
-    // =========================
-    // Ground Detection
-    // =========================
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnDestroy()
     {
-        // The player has started touching another collider
-        isGrounded = true;
+        // Clean up the input actions when this object is destroyed
+        inputActions.Disable();
+        inputActions.Dispose();
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    // =========================
+    // DEBUG
+    // =========================
+    private void OnDrawGizmosSelected()
     {
-        // The player has stopped touching another collider
-        isGrounded = false;
+        // Visualize the ground check radius in the editor
+        if (groundCheck == null) return;
+
+        Gizmos.color = isGrounded ? Color.green : Color.red;
+        Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
     }
 }
