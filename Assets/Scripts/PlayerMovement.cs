@@ -4,36 +4,24 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     // =========================
-    // Movement Settings
+    // VARIABLES
     // =========================
-
-    [SerializeField] private float moveSpeed = 5f;
-
-    // =========================
-    // Jump Settings
-    // =========================
-
-    [SerializeField] private float jumpForce = 5f;
+    // Movement settings
+    [SerializeField] private float moveSpeed = 5f;  
+    // Jump settings
+    [SerializeField] private float jumpForce = 5f;  
     [SerializeField] private float jumpHoldForce = 0.5f;
     [SerializeField] private float maxJumpHoldTime = 0.25f;
-
-    // =========================
     // Components & References
-    // =========================
-
     private Rigidbody2D circle;
     private InputSystem_Actions inputActions;
-
-    // =========================
     // Runtime State
-    // =========================
-
     private float jumpHoldTime = 0f;
     private bool isGrounded = false;
 
 
     // =========================
-    // Unity Methods
+    // UNITY METHODS
     // =========================
 
     private void Start()
@@ -56,29 +44,16 @@ public class PlayerMovement : MonoBehaviour
 
 
     // =========================
-    // Movement
+    // FUNCTIONS
     // =========================
-
     private void HandleMovement()
     {
         // Read the current movement input
         Vector2 movement = inputActions.Player.Move.ReadValue<Vector2>();
 
-        // Create a horizontal movement vector
-        Vector3 movementVector = new Vector3(
-            movement.x * moveSpeed,
-            0,
-            0
-        );
-
-        // Apply horizontal movement
-        transform.Translate(movementVector * Time.deltaTime);
+        // Set horizontal velocity
+        circle.linearVelocity = new Vector2(movement.x * moveSpeed, circle.linearVelocity.y);
     }
-
-
-    // =========================
-    // Jump
-    // =========================
 
     private void HandleJump()
     {
