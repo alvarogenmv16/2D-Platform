@@ -9,6 +9,16 @@ public class PlayerMovement : MonoBehaviour
     // =========================
     // Movement settings
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float facingDirection = 1f; // 1 for right, -1 for left
+    [SerializeField] private float dashSpeed = 15f;
+    [SerializeField] private float dashDuration = 0.15f;
+    [SerializeField] private float dashCooldown = 0.5f;
+
+    private bool isDashing = false;
+    private float dashTimer = 0f;
+    private bool dashPressedThisFrame;
+    private float dashCooldownTimer = 0f;
+
 
     // Jump settings
     [SerializeField] private float jumpForce = 5f;
@@ -58,6 +68,12 @@ public class PlayerMovement : MonoBehaviour
         {
             jumpPressedThisFrame = true;
         }
+
+        // Dash movement
+        if (inputActions.Player.Dash.WasPressedThisFrame())
+        {
+            dashPressedThisFrame = true;
+        }
     }
 
     // =========================
@@ -68,9 +84,12 @@ public class PlayerMovement : MonoBehaviour
         CheckGrounded();
         HandleMovement();
         HandleJump();
+        HandleDash();
 
         // Consume the buffered jump press after processing it
         jumpPressedThisFrame = false;
+        // Consume the buffered dash after processing it
+        dashPressedThisFrame = false;
     }
 
     // =========================
@@ -84,11 +103,58 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleMovement()
     {
+        if (isDashing)
+        {
+            return;
+        }
         // Set horizontal velocity while keeping vertical velocity
         rb.linearVelocity = new Vector2(
             moveInput.x * moveSpeed,
             rb.linearVelocity.y
         );
+        // Update facing direction based on movement input
+        if (moveInput.x > 0)
+        {
+            facingDirection = 1f;
+        }
+        else if (moveInput.x < 0)
+        {
+            facingDirection = -1f;
+        }
+        
+    }
+
+    private void HandleDash()
+    {
+        // Reduce cooldown timer
+        if (dashCooldownTimer > 0f)
+        {
+            dashCooldownTimer -= Time.fixedDeltaTime;
+        }
+
+        // Start dash
+        if (dashPressedThisFrame && !isDashing && dashCooldownTimer <= 0f)
+        {
+            isDashing = true;
+            dashTimer = 0f;
+            dashCooldownTimer = dashCooldown;
+
+            rb.linearVelocity = new Vector2(
+                facingDirection * dashSpeed,
+                rb.linearVelocity.y
+            );
+        }
+
+        // Track dash duration
+        if (isDashing)
+        {
+            dashTimer += Time.fixedDeltaTime;
+
+            if (dashTimer >= dashDuration)
+            {
+                isDashing = false;
+            }
+        }
     }
 
     private void HandleJump()
