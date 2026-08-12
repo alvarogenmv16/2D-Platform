@@ -9,9 +9,22 @@ public class PlayerMovement : MonoBehaviour
     // =========================
     // Movement settings
     [SerializeField] private float moveSpeed = 5f;
+    private float facingDirection = 1f; // 1 for right, -1 for left
+    [SerializeField] private float dashSpeed = 15f;
+    [SerializeField] private float dashDuration = 0.15f;
+    [SerializeField] private float dashCooldown = 0.5f;
+    [SerializeField] private int maxJumps = 2;
+
+    private bool isDashing = false;
+    private float dashTimer = 0f;
+    private bool dashPressedThisFrame;
+    private float dashCooldownTimer = 0f;
+    private int jumpCount = 0;
 
     // Jump settings
-    [SerializeField] private float jumpForce = 5f;
+    // One entry per jump in the chain: index 0 = first (grounded) jump,
+    // index 1 = second (air) jump, etc. Size this array to match maxJumps.
+    [SerializeField] private float[] jumpForces = { 5f, 4f };
     [SerializeField] private float jumpHoldForce = 0.5f;
     [SerializeField] private float maxJumpHoldTime = 0.25f;
 
@@ -28,7 +41,9 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveInput;
     private bool jumpPressedThisFrame;
     private float jumpHoldTime = 0f;
+    private bool isJumpHeld = false; // true only while extending the CURRENT jump
     private bool isGrounded = false;
+    private bool wasGroundedLastFrame = true;
 
     // =========================
     // START
@@ -58,6 +73,12 @@ public class PlayerMovement : MonoBehaviour
         {
             jumpPressedThisFrame = true;
         }
+
+        // Dash movement
+        if (inputActions.Player.Dash.WasPressedThisFrame())
+        {
+            dashPressedThisFrame = true;
+        }
     }
 
     // =========================
@@ -68,9 +89,12 @@ public class PlayerMovement : MonoBehaviour
         CheckGrounded();
         HandleMovement();
         HandleJump();
+        HandleDash();
 
         // Consume the buffered jump press after processing it
         jumpPressedThisFrame = false;
+        // Consume the buffered dash after processing it
+        dashPressedThisFrame = false;
     }
 
     // =========================
@@ -80,34 +104,108 @@ public class PlayerMovement : MonoBehaviour
     {
         // Check for ground overlap at the groundCheck position
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+
+        // Only reset the jump counter on the frame the player actually LANDS
+        // (transition from airborne to grounded), not on every grounded frame.
+        // This avoids resetting the counter mid-takeoff, before physics has
+        // moved the Rigidbody out of the ground check radius.
+        if (isGrounded && !wasGroundedLastFrame)
+        {
+            jumpCount = 0;
+        }
+
+        wasGroundedLastFrame = isGrounded;
     }
 
     private void HandleMovement()
     {
+        if (isDashing)
+        {
+            return;
+        }
         // Set horizontal velocity while keeping vertical velocity
         rb.linearVelocity = new Vector2(
             moveInput.x * moveSpeed,
             rb.linearVelocity.y
         );
+        // Update facing direction based on movement input
+        if (moveInput.x > 0)
+        {
+            facingDirection = 1f;
+        }
+        else if (moveInput.x < 0)
+        {
+            facingDirection = -1f;
+        }
+    }
+
+    private void HandleDash()
+    {
+        // Reduce cooldown timer
+        if (dashCooldownTimer > 0f)
+        {
+            dashCooldownTimer -= Time.fixedDeltaTime;
+        }
+
+        // Start dash
+        if (dashPressedThisFrame && !isDashing && dashCooldownTimer <= 0f)
+        {
+            isDashing = true;
+            dashTimer = 0f;
+            dashCooldownTimer = dashCooldown;
+
+            rb.linearVelocity = new Vector2(
+                facingDirection * dashSpeed,
+                rb.linearVelocity.y
+            );
+        }
+
+        // Track dash duration
+        if (isDashing)
+        {
+            dashTimer += Time.fixedDeltaTime;
+
+            if (dashTimer >= dashDuration)
+            {
+                isDashing = false;
+            }
+        }
     }
 
     private void HandleJump()
     {
-        // Apply the initial jump impulse only if the player is grounded
-        if (jumpPressedThisFrame && isGrounded)
+        // Apply the initial jump impulse only if jumps remain
+        if (jumpPressedThisFrame && jumpCount < maxJumps)
         {
+            // Cancel any existing vertical velocity before applying the new
+            // impulse. Without this, jumping again while still moving upward
+            // from the previous jump STACKS velocity, causing wildly
+            // inconsistent jump heights depending on timing.
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
+
+            // Pick the force for this jump in the chain (first jump, second
+            // jump, etc). Falls back to the last defined value if the array
+            // is shorter than maxJumps, so a missing entry never breaks.
+            float currentJumpForce = jumpForces[Mathf.Min(jumpCount, jumpForces.Length - 1)];
+
             rb.AddForce(
-                Vector2.up * jumpForce,
+                Vector2.up * currentJumpForce,
                 ForceMode2D.Impulse
             );
 
-            // Reset the jump hold timer for the new jump
+            // Start a fresh hold window for THIS jump
             jumpHoldTime = 0f;
+            isJumpHeld = true;
+
+            // Increase jump counter
+            jumpCount++;
         }
 
-        // Apply additional force while the jump button is held
-        if (inputActions.Player.Jump.IsPressed() &&
-            jumpHoldTime < maxJumpHoldTime)
+        // Apply additional force while the jump button is held, but only
+        // while we're inside an active jump's hold window. This prevents
+        // hold force from leaking in when the button happens to be held
+        // outside of a real jump (e.g. holding it before ever jumping).
+        if (isJumpHeld && inputActions.Player.Jump.IsPressed() && jumpHoldTime < maxJumpHoldTime)
         {
             rb.AddForce(
                 Vector2.up * jumpHoldForce,
@@ -116,6 +214,11 @@ public class PlayerMovement : MonoBehaviour
 
             // Track how long the jump button has been held
             jumpHoldTime += Time.fixedDeltaTime;
+        }
+        else
+        {
+            // Button released or hold window expired: stop extending this jump
+            isJumpHeld = false;
         }
     }
 
