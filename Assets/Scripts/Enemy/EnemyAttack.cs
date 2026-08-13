@@ -5,20 +5,16 @@ public class EnemyAttack : MonoBehaviour
     // =========================
     // VARIABLES
     // =========================
+
     [SerializeField] private float attackCooldown = 1f;
+    [SerializeField] private EnemyWeapon weapon;
 
     private float attackCooldownTimer = 0f;
-    // =========================
-    // START
-    // =========================
-
-    private void Start()
-    {
-    }
 
     // =========================
     // UPDATE / FIXED UPDATE
     // =========================
+
     private void FixedUpdate()
     {
         if (attackCooldownTimer > 0f)
@@ -26,6 +22,7 @@ public class EnemyAttack : MonoBehaviour
             attackCooldownTimer -= Time.fixedDeltaTime;
         }
     }
+
     // =========================
     // FUNCTIONS
     // =========================
@@ -38,6 +35,11 @@ public class EnemyAttack : MonoBehaviour
         }
 
         Debug.Log("Enemy attacks!");
+
+        if (weapon != null)
+        {
+            weapon.TryHitPlayer();
+        }
 
         attackCooldownTimer = attackCooldown;
     }
