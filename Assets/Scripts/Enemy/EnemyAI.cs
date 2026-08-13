@@ -24,8 +24,17 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float detectionRange = 5f;
     [SerializeField] private float attackRange = 1.5f;
 
+    // Child transform holding the sprite and the weapon pivot. Only THIS
+    // gets flipped, never the root (which holds the Rigidbody2D/Collider2D),
+    // so flipping never affects physics.
+    [SerializeField] private Transform visuals;
+
     private EnemyMovement movement;
     private EnemyAttack attack;
+
+    // 1 = facing right, -1 = facing left. Persists through Idle so the
+    // enemy doesn't snap back to a default facing when the player leaves range.
+    private float facingDirection = 1f;
 
     // =========================
     // START
@@ -58,6 +67,7 @@ public class EnemyAI : MonoBehaviour
         if (player == null) return;
 
         UpdateState();
+        UpdateFacing();
         HandleStateBehavior();
     }
 
@@ -83,6 +93,26 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    private void UpdateFacing()
+    {
+        // Only update facing while we actually know where the player is
+        // relative to us (Chasing or Attacking). In Idle, keep the last
+        // known facing instead of snapping to a default.
+        if (currentState == EnemyState.Idle) return;
+
+        float newFacingDirection = Mathf.Sign(player.position.x - transform.position.x);
+
+        if (newFacingDirection != facingDirection)
+        {
+            facingDirection = newFacingDirection;
+
+            if (visuals != null)
+            {
+                visuals.localScale = new Vector3(facingDirection, 1f, 1f);
+            }
+        }
+    }
+
     private void HandleStateBehavior()
     {
         switch (currentState)
@@ -92,15 +122,13 @@ public class EnemyAI : MonoBehaviour
                 break;
 
             case EnemyState.Chasing:
-                // Move toward the player: +1 if the player is to the right, -1 if to the left
-                float direction = Mathf.Sign(player.position.x - transform.position.x);
-                movement.Move(direction);
+                movement.Move(facingDirection);
                 break;
 
             case EnemyState.Attacking:
-            movement.Stop();
-            attack.Attack();
-            break;
+                movement.Stop();
+                attack.Attack();
+                break;
         }
     }
 
@@ -120,10 +148,7 @@ public class EnemyAI : MonoBehaviour
             Gizmos.color = Color.yellow;
         }
 
-        Gizmos.DrawWireSphere(
-            transform.position,
-            detectionRange
-        );
+        Gizmos.DrawWireSphere(transform.position, detectionRange);
 
         // Attack range
         if (currentState == EnemyState.Attacking)
@@ -135,9 +160,6 @@ public class EnemyAI : MonoBehaviour
             Gizmos.color = Color.red;
         }
 
-        Gizmos.DrawWireSphere(
-            transform.position,
-            attackRange
-        );
-}
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
 }

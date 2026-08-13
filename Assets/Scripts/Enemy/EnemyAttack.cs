@@ -6,17 +6,22 @@ public class EnemyAttack : MonoBehaviour
     // VARIABLES
     // =========================
 
-    // =========================
-    // START
-    // =========================
+    [SerializeField] private float attackCooldown = 1f;
+    [SerializeField] private EnemyWeapon weapon;
 
-    private void Start()
-    {
-    }
+    private float attackCooldownTimer = 0f;
 
     // =========================
     // UPDATE / FIXED UPDATE
     // =========================
+
+    private void FixedUpdate()
+    {
+        if (attackCooldownTimer > 0f)
+        {
+            attackCooldownTimer -= Time.fixedDeltaTime;
+        }
+    }
 
     // =========================
     // FUNCTIONS
@@ -24,6 +29,18 @@ public class EnemyAttack : MonoBehaviour
 
     public void Attack()
     {
+        if (attackCooldownTimer > 0f)
+        {
+            return;
+        }
+
         Debug.Log("Enemy attacks!");
+
+        if (weapon != null)
+        {
+            weapon.TryHitPlayer();
+        }
+
+        attackCooldownTimer = attackCooldown;
     }
 }
