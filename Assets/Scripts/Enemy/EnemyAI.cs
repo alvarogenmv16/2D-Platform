@@ -25,6 +25,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float attackRange = 1.5f;
 
     private EnemyMovement movement;
+    private EnemyAttack attack;
 
     // =========================
     // START
@@ -33,6 +34,7 @@ public class EnemyAI : MonoBehaviour
     private void Start()
     {
         movement = GetComponent<EnemyMovement>();
+        attack = GetComponent<EnemyAttack>();
 
         // Fallback: if no player was assigned in the Inspector, try to find
         // one by tag. Assigning it manually is still preferred and more
@@ -96,10 +98,9 @@ public class EnemyAI : MonoBehaviour
                 break;
 
             case EnemyState.Attacking:
-                // Stand still for now. Actual attack logic (cooldown + damage)
-                // comes in the next phase.
-                movement.Stop();
-                break;
+            movement.Stop();
+            attack.Attack();
+            break;
         }
     }
 
