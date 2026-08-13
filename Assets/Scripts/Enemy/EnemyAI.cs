@@ -109,10 +109,34 @@ public class EnemyAI : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, detectionRange);
+        // Detection range
+        if (currentState == EnemyState.Chasing)
+        {
+            Gizmos.color = Color.green;
+        }
+        else
+        {
+            Gizmos.color = Color.yellow;
+        }
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
-    }
+        Gizmos.DrawWireSphere(
+            transform.position,
+            detectionRange
+        );
+
+        // Attack range
+        if (currentState == EnemyState.Attacking)
+        {
+            Gizmos.color = Color.green;
+        }
+        else
+        {
+            Gizmos.color = Color.red;
+        }
+
+        Gizmos.DrawWireSphere(
+            transform.position,
+            attackRange
+        );
+}
 }
