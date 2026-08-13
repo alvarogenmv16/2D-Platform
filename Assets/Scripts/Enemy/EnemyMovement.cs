@@ -11,7 +11,6 @@ public class EnemyMovement : MonoBehaviour
 
     private Rigidbody2D rb;
 
-
     // =========================
     // START
     // =========================
@@ -21,20 +20,12 @@ public class EnemyMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-
-    // =========================
-    // UPDATE / FIXED UPDATE
-    // =========================
-
-    private void FixedUpdate()
-    {
-    }
-
-
     // =========================
     // FUNCTIONS
     // =========================
 
+    // direction should be -1, 0 or 1 (sign only). Passing arbitrary
+    // fractional values will scale speed unintentionally.
     public void Move(float direction)
     {
         rb.linearVelocity = new Vector2(
