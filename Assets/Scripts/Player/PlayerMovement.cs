@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckRadius = 0.1f;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private SpriteRenderer spriteRenderer; // Reference to the SpriteRenderer component
 
     // Components
     private Rigidbody2D rb;
@@ -128,6 +129,7 @@ public class PlayerMovement : MonoBehaviour
             moveInput.x * moveSpeed,
             rb.linearVelocity.y
         );
+
         // Update facing direction based on movement input
         if (moveInput.x > 0)
         {
@@ -137,6 +139,9 @@ public class PlayerMovement : MonoBehaviour
         {
             facingDirection = -1f;
         }
+
+        // Flip the sprite based on facing direction
+        spriteRenderer.flipX = facingDirection < 0;
     }
 
     private void HandleDash()
