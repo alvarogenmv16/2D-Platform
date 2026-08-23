@@ -315,6 +315,50 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Player_Dash0
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 587
+        width: 128
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c22cf3cb694a1944b95ac157c139f728
+      internalID: 1624250233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Dash1
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 597
+        width: 150
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 511292394d5669f46b261324b3350d31
+      internalID: -795071504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -359,6 +403,8 @@ TextureImporter:
       Player_7: 5938012242645255967
       Player_8: -4245738604243887485
       Player_9: 2473453845335418800
+      Player_Dash0: 1624250233
+      Player_Dash1: -795071504
       Player_Idle: -2311659948842064771
       Player_Jump1: 963387516
       Player_Jump2: 1171877037

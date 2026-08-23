@@ -202,6 +202,16 @@ public class PlayerMovement : MonoBehaviour
                 ForceMode2D.Impulse
             );
 
+            // Fire the correct Animator trigger for THIS jump in the chain,
+            // exactly once, at the moment the impulse is applied. Using a
+            // Trigger (instead of the persistent JumpCount condition) avoids
+            // it staying "true" for the rest of the airtime and causing the
+            // Animator to bounce between DoubleJump and Fall repeatedly.
+            if (animator != null)
+            {
+                animator.SetTrigger(jumpCount == 0 ? "JumpTrigger" : "DoubleJumpTrigger");
+            }
+
             // Start a fresh hold window for THIS jump
             jumpHoldTime = 0f;
             isJumpHeld = true;
@@ -242,6 +252,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("IsGrounded", isGrounded);
         animator.SetInteger("JumpCount", jumpCount);
         animator.SetFloat("VerticalVelocity", rb.linearVelocity.y);
+        animator.SetBool("IsDashing", isDashing);
     }
 
     private void OnDestroy()
