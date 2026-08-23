@@ -134,10 +134,12 @@ public class PlayerMovement : MonoBehaviour
         if (moveInput.x > 0)
         {
             facingDirection = 1f;
+            spriteRenderer.flipX = false;
         }
         else if (moveInput.x < 0)
         {
             facingDirection = -1f;
+            spriteRenderer.flipX = true;
         }
 
         // Flip the sprite based on facing direction
