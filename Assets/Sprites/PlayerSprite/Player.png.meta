@@ -228,13 +228,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Walk0
+      name: Player_Jump1
       rect:
         serializedVersion: 2
-        x: 453
-        y: 891
-        width: 103
-        height: 113
+        x: 137
+        y: 735
+        width: 75
+        height: 116
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -243,20 +243,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 668d168e66575df4fac9cd022cf9dd2f
-      internalID: 1549955865
+      spriteID: 36160aef89413d5448b7640375779f0c
+      internalID: 963387516
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Walk1
+      name: Player_Jump2
       rect:
         serializedVersion: 2
-        x: 580
-        y: 891
-        width: 87
-        height: 113
+        x: 598
+        y: 423
+        width: 102
+        height: 110
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -265,30 +265,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d1f02058adcc8942a4a6144ec882090
-      internalID: 438699571
+      spriteID: 437c76155565a0241b1784c5139e7126
+      internalID: 1171877037
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Walk2
+      name: Player_Jump3
       rect:
         serializedVersion: 2
-        x: 692
-        y: 891
-        width: 85
-        height: 113
+        x: 719
+        y: 417
+        width: 122
+        height: 134
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c942a4eddfdba9044a2c8a84434a86ff
-      internalID: 278337041
+      spriteID: 08e0b84ec2532534a8a6d876acda724c
+      internalID: 278104436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_JumpFall
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 723
+        width: 79
+        height: 106
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b73b7be2b210ae4e820c96da23041c8
+      internalID: 2033707907
       vertices: []
       indices: 
       edges: []
@@ -338,6 +360,10 @@ TextureImporter:
       Player_8: -4245738604243887485
       Player_9: 2473453845335418800
       Player_Idle: -2311659948842064771
+      Player_Jump1: 963387516
+      Player_Jump2: 1171877037
+      Player_Jump3: 278104436
+      Player_JumpFall: 2033707907
       Player_Walk0: 1549955865
       Player_Walk1: 438699571
       Player_Walk2: 278337041

@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashDuration = 0.15f;
     [SerializeField] private float dashCooldown = 0.5f;
     [SerializeField] private int maxJumps = 2;
+    [SerializeField] private Animator animator;
 
     private bool isDashing = false;
     private float dashTimer = 0f;
@@ -91,6 +92,7 @@ public class PlayerMovement : MonoBehaviour
         HandleMovement();
         HandleJump();
         HandleDash();
+        UpdateAnimatorParameters();
 
         // Consume the buffered jump press after processing it
         jumpPressedThisFrame = false;
@@ -134,15 +136,15 @@ public class PlayerMovement : MonoBehaviour
         if (moveInput.x > 0)
         {
             facingDirection = 1f;
-            spriteRenderer.flipX = false;
         }
         else if (moveInput.x < 0)
         {
             facingDirection = -1f;
-            spriteRenderer.flipX = true;
         }
 
-        // Flip the sprite based on facing direction
+        // Flip the sprite based on facing direction. Done once here,
+        // outside the if/else, so it also applies correctly when
+        // moveInput.x == 0 (keeps the last known facing).
         spriteRenderer.flipX = facingDirection < 0;
     }
 
@@ -227,6 +229,19 @@ public class PlayerMovement : MonoBehaviour
             // Button released or hold window expired: stop extending this jump
             isJumpHeld = false;
         }
+    }
+
+    // Pushes the current physics/jump state to the Animator so its state
+    // machine can decide which clip to play (Idle/Jump/DoubleJump/Fall).
+    // Called at the end of FixedUpdate, after HandleJump has updated
+    // jumpCount and physics has updated rb.linearVelocity for this step.
+    private void UpdateAnimatorParameters()
+    {
+        if (animator == null) return;
+
+        animator.SetBool("IsGrounded", isGrounded);
+        animator.SetInteger("JumpCount", jumpCount);
+        animator.SetFloat("VerticalVelocity", rb.linearVelocity.y);
     }
 
     private void OnDestroy()

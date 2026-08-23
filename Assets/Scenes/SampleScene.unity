@@ -849,7 +849,7 @@ Transform:
   m_GameObject: {fileID: 1099159487}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.7, z: 0}
+  m_LocalPosition: {x: 0, y: -0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -905,6 +905,7 @@ GameObject:
   - component: {fileID: 1318698828}
   - component: {fileID: 1318698829}
   - component: {fileID: 1318698830}
+  - component: {fileID: 1318698831}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -1078,6 +1079,7 @@ MonoBehaviour:
   dashDuration: 0.15
   dashCooldown: 0.5
   maxJumps: 2
+  animator: {fileID: 1318698831}
   jumpForces:
   - 6
   - 4
@@ -1132,6 +1134,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   maxHealth: 100
+--- !u!95 &1318698831
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318698823}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b772184ff7899184c9b2d2e0a41c9a6a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1328305844
 GameObject:
   m_ObjectHideFlags: 0
