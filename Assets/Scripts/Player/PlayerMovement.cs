@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashDuration = 0.15f;
     [SerializeField] private float dashCooldown = 0.5f;
     [SerializeField] private int maxJumps = 2;
+    [SerializeField] private Animator animator;
 
     private bool isDashing = false;
     private float dashTimer = 0f;
@@ -32,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckRadius = 0.1f;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private SpriteRenderer spriteRenderer; // Reference to the SpriteRenderer component
 
     // Components
     private Rigidbody2D rb;
@@ -90,6 +92,7 @@ public class PlayerMovement : MonoBehaviour
         HandleMovement();
         HandleJump();
         HandleDash();
+        UpdateAnimatorParameters();
 
         // Consume the buffered jump press after processing it
         jumpPressedThisFrame = false;
@@ -128,6 +131,7 @@ public class PlayerMovement : MonoBehaviour
             moveInput.x * moveSpeed,
             rb.linearVelocity.y
         );
+
         // Update facing direction based on movement input
         if (moveInput.x > 0)
         {
@@ -137,6 +141,11 @@ public class PlayerMovement : MonoBehaviour
         {
             facingDirection = -1f;
         }
+
+        // Flip the sprite based on facing direction. Done once here,
+        // outside the if/else, so it also applies correctly when
+        // moveInput.x == 0 (keeps the last known facing).
+        spriteRenderer.flipX = facingDirection < 0;
     }
 
     private void HandleDash()
@@ -193,6 +202,16 @@ public class PlayerMovement : MonoBehaviour
                 ForceMode2D.Impulse
             );
 
+            // Fire the correct Animator trigger for THIS jump in the chain,
+            // exactly once, at the moment the impulse is applied. Using a
+            // Trigger (instead of the persistent JumpCount condition) avoids
+            // it staying "true" for the rest of the airtime and causing the
+            // Animator to bounce between DoubleJump and Fall repeatedly.
+            if (animator != null)
+            {
+                animator.SetTrigger(jumpCount == 0 ? "JumpTrigger" : "DoubleJumpTrigger");
+            }
+
             // Start a fresh hold window for THIS jump
             jumpHoldTime = 0f;
             isJumpHeld = true;
@@ -220,6 +239,20 @@ public class PlayerMovement : MonoBehaviour
             // Button released or hold window expired: stop extending this jump
             isJumpHeld = false;
         }
+    }
+
+    // Pushes the current physics/jump state to the Animator so its state
+    // machine can decide which clip to play (Idle/Jump/DoubleJump/Fall).
+    // Called at the end of FixedUpdate, after HandleJump has updated
+    // jumpCount and physics has updated rb.linearVelocity for this step.
+    private void UpdateAnimatorParameters()
+    {
+        if (animator == null) return;
+
+        animator.SetBool("IsGrounded", isGrounded);
+        animator.SetInteger("JumpCount", jumpCount);
+        animator.SetFloat("VerticalVelocity", rb.linearVelocity.y);
+        animator.SetBool("IsDashing", isDashing);
     }
 
     private void OnDestroy()
