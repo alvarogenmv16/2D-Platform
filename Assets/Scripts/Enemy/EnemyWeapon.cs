@@ -8,7 +8,7 @@ public class EnemyWeapon : MonoBehaviour
     // VARIABLES
     // =========================
 
-    [SerializeField] private float damage = 10f;
+    [SerializeField] private float damage = 1f;
     [SerializeField] private float attackRadius = 0.5f;
     [SerializeField] private LayerMask playerLayer;
 
