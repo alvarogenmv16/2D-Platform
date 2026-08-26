@@ -456,7 +456,7 @@ TextureImporter:
         width: 65
         height: 136
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -465,6 +465,28 @@ TextureImporter:
       bones: []
       spriteID: f3fff7495ed66974699ecde493bc951a
       internalID: -1911384559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Hit
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 266
+        width: 100
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a201400bc7ab7c499f66c48a6b8a047
+      internalID: -82280180
       vertices: []
       indices: 
       edges: []
@@ -520,6 +542,7 @@ TextureImporter:
       Player_Dead2: -1964765181
       Player_Dead3: -2090555961
       Player_Dead4: -1911384559
+      Player_Hit: -82280180
       Player_Idle: -2311659948842064771
       Player_Jump1: 963387516
       Player_Jump2: 1171877037
