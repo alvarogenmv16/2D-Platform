@@ -58,16 +58,20 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log($"Player took {amount} damage. Current health: {currentHealth}/{maxHealth}");
 
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
-        OnDamaged?.Invoke(amount, hitSourcePosition);
 
         if (currentHealth <= 0f)
         {
+            // Lethal hit: skip the hit reaction entirely and go straight to
+            // death. Firing OnDamaged here would start a hit-stun coroutine
+            // that races against the death sequence for control of the
+            // Rigidbody2D and playerMovement.enabled.
             Die();
         }
         else
         {
             // Start the invulnerability timer so the player can't take
             // damage again immediately.
+            OnDamaged?.Invoke(amount, hitSourcePosition);
             StartCoroutine(InvulnerabilityWindow());
         }
     }
