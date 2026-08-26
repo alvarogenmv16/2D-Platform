@@ -329,6 +329,7 @@ GameObject:
   - component: {fileID: 401935405}
   - component: {fileID: 401935404}
   - component: {fileID: 401935406}
+  - component: {fileID: 401935407}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -425,6 +426,30 @@ MonoBehaviour:
     Time: 0
     Smoothing: 0
     IgnoreY: 0
+--- !u!114 &401935407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401935403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineImpulseListener
+  ApplyAfter: 2
+  ChannelMask: 1
+  Gain: 1
+  Use2DDistance: 0
+  UseCameraSpace: 1
+  SignalCombinationMode: 0
+  ReactionSettings:
+    m_SecondaryNoise: {fileID: 0}
+    AmplitudeGain: 1
+    FrequencyGain: 1
+    Duration: 1
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &448366804
 GameObject:
   m_ObjectHideFlags: 0
@@ -1457,7 +1482,10 @@ GameObject:
   - component: {fileID: 1318698829}
   - component: {fileID: 1318698830}
   - component: {fileID: 1318698832}
+  - component: {fileID: 1318698833}
+  - component: {fileID: 1318698834}
   - component: {fileID: 1318698831}
+  - component: {fileID: 1318698835}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -1686,10 +1714,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   maxHealth: 5
+  invulnerabilityDuration: 0.5
   OnHealthChanged:
     m_PersistentCalls:
       m_Calls: []
   OnDied:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDamaged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnInvulnerabilityStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnInvulnerabilityEnd:
     m_PersistentCalls:
       m_Calls: []
 --- !u!95 &1318698831
@@ -1731,6 +1769,95 @@ MonoBehaviour:
   animator: {fileID: 1318698831}
   soulPrefab: {fileID: 494285228201388544, guid: de15b739ceabf0346a9db477f869b308, type: 3}
   fadeOverlay: {fileID: 1782598955}
+  fadeDuration: 1.5
+  playerSpriteRenderer: {fileID: 1318698824}
+--- !u!114 &1318698833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318698823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b19e60a0f294e489ab72972ec7757c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHitReaction
+  playerHealth: {fileID: 1318698830}
+  playerMovement: {fileID: 1318698828}
+  animator: {fileID: 1318698831}
+  impulseSource: {fileID: 1318698835}
+  knockbackForceX: 6
+  knockbackForceY: 4
+  hitStunDuration: 0.25
+--- !u!114 &1318698834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318698823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec937de5992103548bf100abe1e00fa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInvulnerabilityBlink
+  playerHealth: {fileID: 1318698830}
+  spriteRenderer: {fileID: 1318698824}
+  blinkInterval: 0.08
+--- !u!114 &1318698835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318698823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineImpulseSource
+  ImpulseDefinition:
+    ImpulseChannel: 1
+    ImpulseShape: 2
+    CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    ImpulseDuration: 0.2
+    ImpulseType: 0
+    DissipationRate: 0.25
+    RawSignal: {fileID: 0}
+    AmplitudeGain: 1
+    FrequencyGain: 1
+    RepeatMode: 0
+    Randomize: 1
+    TimeEnvelope:
+      AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      AttackTime: 0
+      SustainTime: 0.2
+      DecayTime: 0.7
+      ScaleWithImpact: 1
+      HoldForever: 0
+    ImpactRadius: 100
+    DirectionMode: 0
+    DissipationMode: 2
+    DissipationDistance: 100
+    PropagationSpeed: 343
+  DefaultVelocity: {x: 0.3, y: 0.3, z: 0}
 --- !u!1 &1328305844
 GameObject:
   m_ObjectHideFlags: 0

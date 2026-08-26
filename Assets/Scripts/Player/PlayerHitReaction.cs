@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class PlayerHitReaction : MonoBehaviour
@@ -10,6 +11,7 @@ public class PlayerHitReaction : MonoBehaviour
     [SerializeField] private PlayerHealth playerHealth;
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private Animator animator;
+    [SerializeField] private CinemachineImpulseSource impulseSource;
 
     [Header("Knockback")]
     [SerializeField] private float knockbackForceX = 6f;
@@ -49,6 +51,13 @@ public class PlayerHitReaction : MonoBehaviour
 
     private void HandleDamaged(float amount, Vector2 hitSourcePosition)
     {
+        // Trigger the screen shake right when the hit is confirmed,
+        // independent of the knockback/hit-stun coroutine timing.
+        if (impulseSource != null)
+        {
+            impulseSource.GenerateImpulse();
+        }
+
         StartCoroutine(HitReaction(hitSourcePosition));
     }
 
