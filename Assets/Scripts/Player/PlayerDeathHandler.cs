@@ -14,6 +14,7 @@ public class PlayerDeathHandler : MonoBehaviour
     [SerializeField] private GameObject soulPrefab;
     [SerializeField] private CanvasGroup fadeOverlay;
     [SerializeField] private float fadeDuration = 1.5f;
+    [SerializeField] private SpriteRenderer playerSpriteRenderer;
     private Rigidbody2D rb;
 
     // =========================
@@ -99,6 +100,14 @@ public class PlayerDeathHandler : MonoBehaviour
         if (soulPrefab == null) return;
 
         Instantiate(soulPrefab, transform.position, Quaternion.identity);
+
+        // Hide the player's sprite now that the soul object is taking its
+        // place visually. The last frame of Player_Death already shows the
+        // soul pose, so this swap is seamless — no visible pop or flicker.
+        if (playerSpriteRenderer != null)
+        {
+            playerSpriteRenderer.enabled = false;
+        }
     }
 
     private IEnumerator FadeToBlack()
