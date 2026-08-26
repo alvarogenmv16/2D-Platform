@@ -8,6 +8,7 @@ public class PlayerHealth : MonoBehaviour
     // =========================
 
     [SerializeField] private float maxHealth = 5f;
+    [SerializeField] private float invulnerabilityDuration = 0.5f;
 
     private float currentHealth;
 
@@ -21,7 +22,12 @@ public class PlayerHealth : MonoBehaviour
     // to this instead of being hardcoded inside Die().
     public UnityEvent OnDied;
 
+    // Fired whenever damage lands, passing (damageAmount, hitSourcePosition).
+    // The hit source position lets listeners (like knockback) figure out
+    // which direction to push the player.
+    public UnityEvent<float, Vector2> OnDamaged;
     private bool isDead = false;
+    private bool isInvulnerable = false;
 
     // =========================
     // START
@@ -39,9 +45,12 @@ public class PlayerHealth : MonoBehaviour
     // FUNCTIONS
     // =========================
 
-    public void TakeDamage(float amount)
+    public void TakeDamage(float amount, Vector2 hitSourcePosition)
     {
-        if (isDead) return;
+        // Ignore damage while dead or during the brief invulnerability
+        // window right after getting hit. Without this, standing inside
+        // an enemy's attack range would drain health every single frame.
+        if (isDead || isInvulnerable) return;
 
         currentHealth -= amount;
         currentHealth = Mathf.Max(currentHealth, 0f);
@@ -49,19 +58,29 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log($"Player took {amount} damage. Current health: {currentHealth}/{maxHealth}");
 
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
+        OnDamaged?.Invoke(amount, hitSourcePosition);
 
         if (currentHealth <= 0f)
         {
             Die();
         }
+        else
+        {
+            // Start the invulnerability timer so the player can't take
+            // damage again immediately.
+            StartCoroutine(InvulnerabilityWindow());
+        }
     }
-
+    private System.Collections.IEnumerator InvulnerabilityWindow()
+        {
+            isInvulnerable = true;
+            yield return new WaitForSeconds(invulnerabilityDuration);
+            isInvulnerable = false;
+        }
     private void Die()
     {
         isDead = true;
-
         Debug.Log("Player died!");
-
         OnDied?.Invoke();
     }
 }
