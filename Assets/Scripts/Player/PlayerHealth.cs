@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -26,6 +27,11 @@ public class PlayerHealth : MonoBehaviour
     // The hit source position lets listeners (like knockback) figure out
     // which direction to push the player.
     public UnityEvent<float, Vector2> OnDamaged;
+    // Fired when the post-hit invulnerability window starts and ends.
+    // Used by visual feedback (like the blink effect) to know exactly
+    // how long to run, without duplicating invulnerabilityDuration elsewhere.
+    public UnityEvent OnInvulnerabilityStart;
+    public UnityEvent OnInvulnerabilityEnd;
     private bool isDead = false;
     private bool isInvulnerable = false;
 
@@ -75,12 +81,16 @@ public class PlayerHealth : MonoBehaviour
             StartCoroutine(InvulnerabilityWindow());
         }
     }
-    private System.Collections.IEnumerator InvulnerabilityWindow()
-        {
-            isInvulnerable = true;
-            yield return new WaitForSeconds(invulnerabilityDuration);
-            isInvulnerable = false;
-        }
+    private IEnumerator InvulnerabilityWindow()
+    {
+        isInvulnerable = true;
+        OnInvulnerabilityStart?.Invoke();
+
+        yield return new WaitForSeconds(invulnerabilityDuration);
+
+        isInvulnerable = false;
+        OnInvulnerabilityEnd?.Invoke();
+    }
     private void Die()
     {
         isDead = true;
