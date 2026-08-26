@@ -252,6 +252,8 @@ MonoBehaviour:
   maskSlots: []
   fullMask: {fileID: 0}
   brokenMask: {fileID: 0}
+  punchDuration: 0.2
+  punchScale: 0.4
 --- !u!114 &48098638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -512,6 +514,8 @@ MonoBehaviour:
   - {fileID: 1082341855}
   fullMask: {fileID: 7928004021640426736, guid: 833d5ca4170a2a3438aa1c111fa6d8fd, type: 3}
   brokenMask: {fileID: 209765568, guid: 833d5ca4170a2a3438aa1c111fa6d8fd, type: 3}
+  punchDuration: 0.2
+  punchScale: 0.4
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1452,6 +1456,7 @@ GameObject:
   - component: {fileID: 1318698828}
   - component: {fileID: 1318698829}
   - component: {fileID: 1318698830}
+  - component: {fileID: 1318698832}
   - component: {fileID: 1318698831}
   m_Layer: 7
   m_Name: Player
@@ -1709,6 +1714,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1318698832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318698823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e47ad5ba7af563e4da341e9b08901955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerDeathHandler
+  playerHealth: {fileID: 1318698830}
+  playerMovement: {fileID: 1318698828}
+  animator: {fileID: 1318698831}
+  soulPrefab: {fileID: 494285228201388544, guid: de15b739ceabf0346a9db477f869b308, type: 3}
 --- !u!1 &1328305844
 GameObject:
   m_ObjectHideFlags: 0
