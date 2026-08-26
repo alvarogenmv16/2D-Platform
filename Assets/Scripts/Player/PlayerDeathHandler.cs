@@ -12,7 +12,8 @@ public class PlayerDeathHandler : MonoBehaviour
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject soulPrefab;
-
+    [SerializeField] private CanvasGroup fadeOverlay;
+    [SerializeField] private float fadeDuration = 1.5f;
     private Rigidbody2D rb;
 
     // =========================
@@ -85,6 +86,11 @@ public class PlayerDeathHandler : MonoBehaviour
         }
 
         SpawnSoul();
+        // Fade to black slowly before resetting, instead of cutting instantly
+        if (fadeOverlay != null)
+        {
+            yield return StartCoroutine(FadeToBlack());
+        }
         ResetGame();
     }
 
@@ -95,6 +101,19 @@ public class PlayerDeathHandler : MonoBehaviour
         Instantiate(soulPrefab, transform.position, Quaternion.identity);
     }
 
+    private IEnumerator FadeToBlack()
+    {
+        float elapsed = 0f;
+
+        while (elapsed < fadeDuration)
+        {
+            elapsed += Time.deltaTime;
+            fadeOverlay.alpha = Mathf.Clamp01(elapsed / fadeDuration);
+            yield return null;
+        }
+
+        fadeOverlay.alpha = 1f;
+    }
     private void ResetGame()
     {
         Scene currentScene = SceneManager.GetActiveScene();
