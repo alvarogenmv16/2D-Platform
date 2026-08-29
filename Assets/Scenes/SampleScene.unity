@@ -725,7 +725,8 @@ GameObject:
   - component: {fileID: 529831046}
   - component: {fileID: 529831045}
   - component: {fileID: 529831047}
-  m_Layer: 0
+  - component: {fileID: 529831048}
+  m_Layer: 8
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -867,6 +868,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAttack
   attackCooldown: 1
   weapon: {fileID: 1560825812}
+--- !u!114 &529831048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529831040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6880f022588ee7241a2fa22acbe1025f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
+  maxHealth: 30
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1484,6 +1498,8 @@ GameObject:
   - component: {fileID: 1318698832}
   - component: {fileID: 1318698833}
   - component: {fileID: 1318698834}
+  - component: {fileID: 1318698837}
+  - component: {fileID: 1318698836}
   - component: {fileID: 1318698831}
   - component: {fileID: 1318698835}
   m_Layer: 7
@@ -1858,6 +1874,40 @@ MonoBehaviour:
     DissipationDistance: 100
     PropagationSpeed: 343
   DefaultVelocity: {x: 0.3, y: 0.3, z: 0}
+--- !u!114 &1318698836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318698823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b526e173e060914f868b966114498c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
+  playerMovement: {fileID: 1318698828}
+  animator: {fileID: 1318698831}
+  attackCooldown: 0.4
+--- !u!114 &1318698837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318698823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 185d3b3e1b1722f4eb94ae41d775bece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAttackHitbox
+  attackRadius: 0.5
+  attackOffsetX: 0.6
+  attackOffsetY: 0
+  damage: 15
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &1328305844
 GameObject:
   m_ObjectHideFlags: 0
@@ -2035,7 +2085,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1429780863}
   - component: {fileID: 1429780864}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DetectionRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2103,7 +2153,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1440147612}
   - component: {fileID: 1440147613}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AttackRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2338,7 +2388,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1480965946}
   - component: {fileID: 1480965947}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Visuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2431,7 +2481,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1560825811}
   - component: {fileID: 1560825812}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WeaponPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

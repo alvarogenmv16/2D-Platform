@@ -213,8 +213,8 @@ TextureImporter:
         y: 889
         width: 73
         height: 115
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.50765866, y: 0.008976414}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -235,8 +235,8 @@ TextureImporter:
         y: 735
         width: 75
         height: 116
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.48947755, y: 0.0033506197}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -254,11 +254,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 598
-        y: 423
-        width: 102
-        height: 110
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        y: 415
+        width: 103
+        height: 118
+      alignment: 9
+      pivot: {x: 0.49272606, y: 0.00089222303}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -279,8 +279,8 @@ TextureImporter:
         y: 417
         width: 122
         height: 134
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.38445544, y: 0.04045424}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -301,8 +301,8 @@ TextureImporter:
         y: 725
         width: 90
         height: 131
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.49123162, y: 0.005999616}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -323,8 +323,8 @@ TextureImporter:
         y: 587
         width: 128
         height: 96
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.50579596, y: 0.013116837}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -367,8 +367,8 @@ TextureImporter:
         y: 238
         width: 107
         height: 99
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.49306595, y: 0.012882579}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -389,8 +389,8 @@ TextureImporter:
         y: 239
         width: 92
         height: 103
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.4919354, y: -0.004215574}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -407,12 +407,12 @@ TextureImporter:
       name: Player_Dead2
       rect:
         serializedVersion: 2
-        x: 656
+        x: 657
         y: 239
         width: 95
         height: 101
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.49999934, y: 0.029874291}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -433,8 +433,8 @@ TextureImporter:
         y: 239
         width: 97
         height: 99
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5076483, y: 0.0053888187}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -455,8 +455,8 @@ TextureImporter:
         y: 233
         width: 65
         height: 136
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5228281, y: 0.0035704444}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -477,8 +477,8 @@ TextureImporter:
         y: 266
         width: 100
         height: 122
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5222574, y: 0.0013347688}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -492,45 +492,23 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Attack1
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 429
-        width: 144
-        height: 105
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fabb3de02715dd6409632cadd8b909cb
-      internalID: -1487222940
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Player_Attack0
       rect:
         serializedVersion: 2
-        x: 1389
-        y: 888
-        width: 112
-        height: 120
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 922
+        y: 576
+        width: 341
+        height: 142
+      alignment: 9
+      pivot: {x: 0.14866786, y: 0.050030775}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b979587b8a2932e4290847166637f3d7
-      internalID: -1139826141
+      spriteID: 2e0bdd39dac233147b00880ab5d088a7
+      internalID: -1487222940
       vertices: []
       indices: 
       edges: []
@@ -579,8 +557,7 @@ TextureImporter:
       Player_7: 5938012242645255967
       Player_8: -4245738604243887485
       Player_9: 2473453845335418800
-      Player_Attack0: -1139826141
-      Player_Attack1: -1487222940
+      Player_Attack0: -1487222940
       Player_Dash0: 1624250233
       Player_Dash1: -795071504
       Player_Dead0: 1044531903
