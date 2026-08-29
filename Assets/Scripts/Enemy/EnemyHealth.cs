@@ -6,7 +6,7 @@ public class EnemyHealth : MonoBehaviour
     // VARIABLES
     // =========================
 
-    [SerializeField] private float maxHealth = 30f;
+    [SerializeField] private float maxHealth = 3f;
 
     private float currentHealth;
     private bool isDead = false;

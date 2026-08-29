@@ -22,7 +22,7 @@ public class EnemyAI : MonoBehaviour
     // Single source of truth for detection ranges. No separate colliders,
     // so the gizmo always matches exactly what the logic uses.
     [SerializeField] private float detectionRange = 5f;
-    [SerializeField] private float attackRange = 1.5f;
+    [SerializeField] private float attackRange = 3f;
 
     // Child transform holding the sprite and the weapon pivot. Only THIS
     // gets flipped, never the root (which holds the Rigidbody2D/Collider2D),
