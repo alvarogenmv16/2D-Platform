@@ -478,7 +478,7 @@ TextureImporter:
         width: 100
         height: 122
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -487,6 +487,50 @@ TextureImporter:
       bones: []
       spriteID: 8a201400bc7ab7c499f66c48a6b8a047
       internalID: -82280180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack1
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 429
+        width: 144
+        height: 105
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fabb3de02715dd6409632cadd8b909cb
+      internalID: -1487222940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack0
+      rect:
+        serializedVersion: 2
+        x: 1389
+        y: 888
+        width: 112
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b979587b8a2932e4290847166637f3d7
+      internalID: -1139826141
       vertices: []
       indices: 
       edges: []
@@ -535,6 +579,8 @@ TextureImporter:
       Player_7: 5938012242645255967
       Player_8: -4245738604243887485
       Player_9: 2473453845335418800
+      Player_Attack0: -1139826141
+      Player_Attack1: -1487222940
       Player_Dash0: 1624250233
       Player_Dash1: -795071504
       Player_Dead0: 1044531903
