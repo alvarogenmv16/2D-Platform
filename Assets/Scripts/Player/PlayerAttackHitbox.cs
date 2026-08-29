@@ -9,7 +9,7 @@ public class PlayerAttackHitbox : MonoBehaviour
     [SerializeField] private float attackRadius = 0.5f;
     [SerializeField] private float attackOffsetX = 0.6f;
     [SerializeField] private float attackOffsetY = 0f;
-    [SerializeField] private float damage = 15f;
+    [SerializeField] private float damage = 1f;
     [SerializeField] private LayerMask enemyLayer;
 
     private SpriteRenderer spriteRenderer;
