@@ -7,11 +7,15 @@ public class EnemyHealth : MonoBehaviour
     // VARIABLES
     // =========================
 
-    [SerializeField] private float maxHealth = 3f;
+    [SerializeField] private float maxHealth = 30f;
     [SerializeField] private Animator animator;
-    [SerializeField] private EnemyMovement enemyMovement;
-    [SerializeField] private EnemyAI enemyAI;
-    [SerializeField] private EnemyAttack enemyAttack;
+
+    // Any behaviour that drives this enemy's AI/movement/attacks.
+    // Melee enemy: EnemyAI, EnemyMovement, EnemyAttack.
+    // Flying enemy: FlyingEnemyAI, FlyingEnemyMovement.
+    // Generalized to MonoBehaviour so this single script works for any
+    // enemy type without needing a separate EnemyHealth variant each time.
+    [SerializeField] private MonoBehaviour[] aiComponentsToDisable;
 
     [Header("Knockback")]
     [SerializeField] private float knockbackForceX = 5f;
@@ -26,7 +30,6 @@ public class EnemyHealth : MonoBehaviour
     // =========================
     // START
     // =========================
-
     private void Start()
     {
         currentHealth = maxHealth;
@@ -47,10 +50,6 @@ public class EnemyHealth : MonoBehaviour
 
         if (currentHealth <= 0f)
         {
-            // Lethal hit: skip knockback entirely and go straight to
-            // death, same reasoning as the player's TakeDamage — avoids
-            // a knockback coroutine racing against the death sequence
-            // for control of the Rigidbody2D and AI components.
             Die();
         }
         else
@@ -64,10 +63,7 @@ public class EnemyHealth : MonoBehaviour
         float direction = Mathf.Sign(transform.position.x - hitSourcePosition.x);
         if (direction == 0f) direction = -1f;
 
-        // Disable AI/attack briefly so their FixedUpdate calls don't
-        // immediately overwrite the knockback velocity we're about to set.
-        if (enemyAI != null) enemyAI.enabled = false;
-        if (enemyAttack != null) enemyAttack.enabled = false;
+        SetAiComponentsEnabled(false);
 
         if (rb != null)
         {
@@ -76,12 +72,9 @@ public class EnemyHealth : MonoBehaviour
 
         yield return new WaitForSeconds(knockbackDuration);
 
-        // Don't re-enable if the enemy died during the knockback stun —
-        // DeathSequence() has already taken ownership of these components.
         if (!isDead)
         {
-            if (enemyAI != null) enemyAI.enabled = true;
-            if (enemyAttack != null) enemyAttack.enabled = true;
+            SetAiComponentsEnabled(true);
         }
     }
 
@@ -95,16 +88,14 @@ public class EnemyHealth : MonoBehaviour
 
     private IEnumerator DeathSequence()
     {
-        if (enemyAI != null) enemyAI.enabled = false;
-        if (enemyMovement != null) enemyMovement.enabled = false;
-        if (enemyAttack != null) enemyAttack.enabled = false;
+        SetAiComponentsEnabled(false);
 
         if (rb != null) rb.simulated = false;
         if (col != null) col.enabled = false;
 
         if (animator != null)
         {
-            animator.SetTrigger("DeathTrigger");
+            animator.SetTrigger("DieTrigger");
 
             int safetyFrameLimit = 60;
             int framesWaited = 0;
@@ -120,5 +111,16 @@ public class EnemyHealth : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    private void SetAiComponentsEnabled(bool enabled)
+    {
+        foreach (MonoBehaviour component in aiComponentsToDisable)
+        {
+            if (component != null)
+            {
+                component.enabled = enabled;
+            }
+        }
     }
 }
