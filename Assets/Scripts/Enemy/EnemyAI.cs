@@ -35,6 +35,7 @@ public class EnemyAI : MonoBehaviour
     // 1 = facing right, -1 = facing left. Persists through Idle so the
     // enemy doesn't snap back to a default facing when the player leaves range.
     private float facingDirection = 1f;
+    private Vector3 baseVisualsScale; // Used to flip the visuals without scaling them down to zero or negative.
 
     // =========================
     // START
@@ -45,6 +46,10 @@ public class EnemyAI : MonoBehaviour
         movement = GetComponent<EnemyMovement>();
         attack = GetComponent<EnemyAttack>();
 
+        if (visuals != null)
+        {
+            baseVisualsScale = visuals.localScale;
+        }
         // Fallback: if no player was assigned in the Inspector, try to find
         // one by tag. Assigning it manually is still preferred and more
         // explicit, but this avoids a null reference in quick prototyping.
@@ -108,7 +113,13 @@ public class EnemyAI : MonoBehaviour
 
             if (visuals != null)
             {
-                visuals.localScale = new Vector3(facingDirection, 1f, 1f);
+                // Preserve the original magnitude (e.g. 0.5) captured in Start,
+                // only flipping the X sign to mirror the sprite.
+                visuals.localScale = new Vector3(
+                    Mathf.Abs(baseVisualsScale.x) * facingDirection,
+                    baseVisualsScale.y,
+                    baseVisualsScale.z
+                );
             }
         }
     }
