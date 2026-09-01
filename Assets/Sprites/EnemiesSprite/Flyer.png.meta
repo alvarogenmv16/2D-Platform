@@ -149,10 +149,10 @@ TextureImporter:
       name: Flyer_Idle
       rect:
         serializedVersion: 2
-        x: 25
-        y: 701
-        width: 601
-        height: 319
+        x: 22
+        y: 711
+        width: 604
+        height: 309
       alignment: 9
       pivot: {x: 0.49595913, y: 0.02037962}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,28 +163,6 @@ TextureImporter:
       bones: []
       spriteID: fa978cec6499c5ea0800000000000000
       internalID: -5882658483856705105
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Flyer_10
-      rect:
-        serializedVersion: 2
-        x: 1506
-        y: 203
-        width: 17
-        height: 21
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e19dd17abdb2aedd0800000000000000
-      internalID: -2456102424375600866
       vertices: []
       indices: 
       edges: []

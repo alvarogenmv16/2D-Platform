@@ -30,6 +30,7 @@ public class FlyingEnemyAI : MonoBehaviour
 
     [Header("Dive")]
     [SerializeField] private float diveSpeed = 14f;
+    [SerializeField] private float maxDiveDuration = 1.5f; // safety fallback
 
     [Header("Stuck (player's attack window)")]
     [SerializeField] private float stuckDuration = 1f;
@@ -45,6 +46,7 @@ public class FlyingEnemyAI : MonoBehaviour
     private Vector2 diveTargetPosition;
     private float stateTimer;
     private bool hasDealtDamageThisDive;
+    private Collider2D col; // Add this line to store the Collider2D reference
 
     // =========================
     // START
@@ -52,6 +54,7 @@ public class FlyingEnemyAI : MonoBehaviour
     private void Start()
     {
         movement = GetComponent<FlyingEnemyMovement>();
+        col = GetComponent<Collider2D>(); // add this line
         originPosition = transform.position;
 
         if (player == null)
@@ -117,19 +120,32 @@ public class FlyingEnemyAI : MonoBehaviour
 
         if (stateTimer >= lockOnDuration)
         {
-            // Captured ONCE here — intentionally not updated during the
-            // dive. The dive relies on high speed, not homing, to be fair.
             diveTargetPosition = player.position;
             hasDealtDamageThisDive = false;
+
+            // Stop colliding physically during the dive/stuck window — the
+            // enemy needs to reach the player's exact captured position,
+            // which a solid collider would otherwise block. Actual damage
+            // is still handled by EnemyWeapon's OverlapCircle, independent
+            // of physical collision.
+            if (col != null) col.isTrigger = true;
+
             currentState = FlyingEnemyState.Diving;
         }
     }
 
     private void HandleDiving()
     {
+        stateTimer += Time.fixedDeltaTime;
+
         bool arrived = movement.MoveTowards(diveTargetPosition, diveSpeed);
 
-        if (arrived && !hasDealtDamageThisDive)
+        // Safety fallback: if something unexpected still prevents reaching
+        // the exact target (e.g. terrain in the way), force arrival after a
+        // timeout instead of risking getting stuck in Diving forever.
+        bool timedOut = stateTimer >= maxDiveDuration;
+
+        if ((arrived || timedOut) && !hasDealtDamageThisDive)
         {
             if (weapon != null)
             {
@@ -144,14 +160,15 @@ public class FlyingEnemyAI : MonoBehaviour
 
     private void HandleStuck()
     {
-        // Just stay put here — this IS the player's attack window.
-        // No extra code needed; PlayerAttackHitbox already detects any
-        // enemy in the "Enemy" layer via OverlapCircleAll.
         movement.Stop();
         stateTimer += Time.fixedDeltaTime;
 
         if (stateTimer >= stuckDuration)
         {
+            // Solid again once it starts flying back — it shouldn't pass
+            // through the player (or anything else) during normal flight.
+            if (col != null) col.isTrigger = false;
+
             currentState = FlyingEnemyState.Returning;
         }
     }
