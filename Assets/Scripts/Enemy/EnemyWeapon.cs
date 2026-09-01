@@ -9,7 +9,7 @@ public class EnemyWeapon : MonoBehaviour
     // =========================
 
     [SerializeField] private float damage = 1f;
-    [SerializeField] private float attackRadius = 2f;
+    [SerializeField] private float attackRadius = 1.25f;
     [SerializeField] private LayerMask playerLayer;
 
     // =========================

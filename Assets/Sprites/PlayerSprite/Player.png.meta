@@ -513,6 +513,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Player_Fall1
+      rect:
+        serializedVersion: 2
+        x: 1225
+        y: 721
+        width: 105
+        height: 112
+      alignment: 9
+      pivot: {x: 0.48843703, y: 0.044646673}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4f798b9f79a47441b279e8d05e38545
+      internalID: -792697436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -565,6 +587,7 @@ TextureImporter:
       Player_Dead2: -1964765181
       Player_Dead3: -2090555961
       Player_Dead4: -1911384559
+      Player_Fall1: -792697436
       Player_Hit: -82280180
       Player_Idle: -2311659948842064771
       Player_Jump1: 963387516

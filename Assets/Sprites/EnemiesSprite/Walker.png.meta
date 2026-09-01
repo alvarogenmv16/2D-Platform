@@ -185,6 +185,138 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Walker_Attack0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 330
+        width: 371
+        height: 319
+      alignment: 9
+      pivot: {x: 0.49018112, y: 0.016573245}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 251066ee140cc864e987b803d2fedf30
+      internalID: 787200784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walker_Attack1
+      rect:
+        serializedVersion: 2
+        x: 394
+        y: 329
+        width: 526
+        height: 309
+      alignment: 9
+      pivot: {x: 0.45899263, y: 0.039685816}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc3f48d5bf82b8c4680e939bd0f96c59
+      internalID: 534175089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walker_Attack2
+      rect:
+        serializedVersion: 2
+        x: 925
+        y: 331
+        width: 602
+        height: 285
+      alignment: 9
+      pivot: {x: 0.1833198, y: 0.039852746}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de89b7ec8c4cc934ca46bbfa9f662c46
+      internalID: 818200468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walker_Dead0
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 49
+        width: 486
+        height: 256
+      alignment: 9
+      pivot: {x: 0.480012, y: 0.011443257}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1843c1f7eb164d34f825c95241767d0b
+      internalID: 762496556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walker_Dead1
+      rect:
+        serializedVersion: 2
+        x: 507
+        y: 45
+        width: 499
+        height: 262
+      alignment: 9
+      pivot: {x: 0.5073004, y: 0.031900812}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17691d17d17c04a40ada28d4c2e643f0
+      internalID: 1385654316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walker_Dead2
+      rect:
+        serializedVersion: 2
+        x: 1036
+        y: 30
+        width: 479
+        height: 268
+      alignment: 9
+      pivot: {x: 0.5152213, y: 0.017102256}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32404265a263d5d4e9b019ddd28bf653
+      internalID: -163706874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -216,6 +348,12 @@ TextureImporter:
       Walker_7: -3219563038311795417
       Walker_8: -5481221794758979627
       Walker_9: -1930006549327607568
+      Walker_Attack0: 787200784
+      Walker_Attack1: 534175089
+      Walker_Attack2: 818200468
+      Walker_Dead0: 762496556
+      Walker_Dead1: 1385654316
+      Walker_Dead2: -163706874
       Walker_idle: -6248698276573809173
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

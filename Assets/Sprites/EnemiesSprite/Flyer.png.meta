@@ -201,7 +201,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Flyer_Death0
+      name: Flyer_Dead0
       rect:
         serializedVersion: 2
         x: 560
@@ -253,7 +253,7 @@ TextureImporter:
         width: 214
         height: 207
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -283,8 +283,8 @@ TextureImporter:
       Flyer_Attack0: -1802665752
       Flyer_Attack1: 1264255190
       Flyer_Attack2: 703734053
+      Flyer_Dead0: -1447168273
       Flyer_Dead2: -902345108
-      Flyer_Death0: -1447168273
       Flyer_Death1: 1010880275
       Flyer_Idle: -5882658483856705105
   mipmapLimitGroupName: 
