@@ -56,14 +56,10 @@ public class EnemyHealth : MonoBehaviour
 
     private IEnumerator DeathSequence()
     {
-        // Stop chasing, attacking and moving immediately.
         if (enemyAI != null) enemyAI.enabled = false;
         if (enemyMovement != null) enemyMovement.enabled = false;
         if (enemyAttack != null) enemyAttack.enabled = false;
 
-        // Stop physics and disable collision so the corpse doesn't keep
-        // blocking the player or reacting to hits while the death
-        // animation plays.
         if (rb != null) rb.simulated = false;
         if (col != null) col.enabled = false;
 
@@ -71,9 +67,19 @@ public class EnemyHealth : MonoBehaviour
         {
             animator.SetTrigger("DeathTrigger");
 
-            // Wait one frame so the Animator processes the transition
-            // before we read the current state's length.
-            yield return null;
+            // Actively wait until the Animator has actually entered the
+            // EnemyDeath state, instead of assuming one frame is enough.
+            // If the enemy dies mid-transition (e.g. right after an attack),
+            // it can take more than one frame to resolve — reading the clip
+            // length too early was the cause of the enemy vanishing instantly.
+            int safetyFrameLimit = 60; // ~1 second at 60fps, avoids an infinite loop if misconfigured
+            int framesWaited = 0;
+
+            while (!animator.GetCurrentAnimatorStateInfo(0).IsName("EnemyDeath") && framesWaited < safetyFrameLimit)
+            {
+                framesWaited++;
+                yield return null;
+            }
 
             float deathAnimationLength = animator.GetCurrentAnimatorStateInfo(0).length;
             yield return new WaitForSeconds(deathAnimationLength);
