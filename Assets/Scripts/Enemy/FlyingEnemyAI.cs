@@ -22,21 +22,21 @@ public class FlyingEnemyAI : MonoBehaviour
     [SerializeField] private float detectionRange = 6f;
 
     [Header("Telegraph (windup)")]
-    [SerializeField] private float telegraphHeight = 0.5f;
-    [SerializeField] private float telegraphSpeed = 3f;
+    [SerializeField] private float telegraphHeight = 2f;
+    [SerializeField] private float telegraphSpeed = 4f;
 
     [Header("Lock-on")]
-    [SerializeField] private float lockOnDuration = 0.4f;
+    [SerializeField] private float lockOnDuration = 1f;
 
     [Header("Dive")]
-    [SerializeField] private float diveSpeed = 14f;
-    [SerializeField] private float maxDiveDuration = 1.5f; // safety fallback
+    [SerializeField] private float diveSpeed = 16f;
+    [SerializeField] private float maxDiveDuration = 2f; // safety fallback
 
     [Header("Stuck (player's attack window)")]
     [SerializeField] private float stuckDuration = 1f;
 
     [Header("Return")]
-    [SerializeField] private float returnSpeed = 4f;
+    [SerializeField] private float returnSpeed = 8f;
 
     [SerializeField] private EnemyWeapon weapon;
     [SerializeField] private CinemachineImpulseSource impulseSource;    // Optional: for screen shake when hitting the player

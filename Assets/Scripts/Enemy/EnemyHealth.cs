@@ -18,9 +18,9 @@ public class EnemyHealth : MonoBehaviour
     public UnityEvent OnDied;
 
     [Header("Knockback")]
-    [SerializeField] private float knockbackForceX = 5f;
-    [SerializeField] private float knockbackForceY = 3f;
-    [SerializeField] private float knockbackDuration = 0.2f;
+    [SerializeField] private float knockbackForceX = 8f;
+    [SerializeField] private float knockbackForceY = 4f;
+    [SerializeField] private float knockbackDuration = 0.5f;
 
     [Header("Fall before death (flying enemies)")]
     [SerializeField] private bool fallsBeforeDeath = false;
