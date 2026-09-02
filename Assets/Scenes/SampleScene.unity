@@ -149,7 +149,7 @@ Transform:
   m_GameObject: {fileID: 10006436}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 96.06, y: -2.61, z: 0}
+  m_LocalPosition: {x: 120.33, y: -2.61, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -175,11 +175,16 @@ MonoBehaviour:
   animator: {fileID: 1642788323}
   arena: {fileID: 1887903252}
   spikeHazardPrefab: {fileID: 4761976939355454828, guid: 3facf594d8422c948b79c211882e60c5, type: 3}
-  flySpeed: 5
-  flightHeightAboveFloor: 5
-  landSpeed: 5
-  attackCooldown: 1
-  spikeSpacing: 2
+  flySpeed: 7
+  flightHeightAboveFloor: 6
+  landSpeed: 6
+  groundCheck: {fileID: 992878839}
+  groundCheckRadius: 0.2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  attackCooldown: 2
+  spikeSpacing: 4
 --- !u!114 &10006439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,7 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6880f022588ee7241a2fa22acbe1025f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  maxHealth: 30
+  maxHealth: 20
   animator: {fileID: 1642788323}
   aiComponentsToDisable:
   - {fileID: 10006438}
@@ -258,7 +263,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.14868164, y: 2.4779677}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -268,7 +273,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 4.4691467, y: 5.9559355}
   m_EdgeRadius: 0
 --- !u!50 &10006442
 Rigidbody2D:
@@ -730,6 +735,7 @@ GameObject:
   m_Component:
   - component: {fileID: 475552561}
   - component: {fileID: 475552562}
+  - component: {fileID: 475552563}
   m_Layer: 0
   m_Name: WallRight
   m_TagString: Untagged
@@ -746,7 +752,7 @@ Transform:
   m_GameObject: {fileID: 475552560}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 56.41, y: 4.92, z: 0}
+  m_LocalPosition: {x: 55.26, y: 4.92, z: 0}
   m_LocalScale: {x: 1.2923, y: 16.4517, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -812,6 +818,52 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!61 &475552563
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475552560}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1153,14 +1205,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 3
   animator: {fileID: 1480965948}
-  aiComponentsToDisable: []
+  aiComponentsToDisable:
+  - {fileID: 529831046}
+  - {fileID: 529831047}
   OnHealthChanged:
     m_PersistentCalls:
       m_Calls: []
   OnDied:
     m_PersistentCalls:
       m_Calls: []
-  knockbackForceX: 5
+  knockbackForceX: 10
   knockbackForceY: 3
   knockbackDuration: 0.2
   fallsBeforeDeath: 0
@@ -1417,11 +1471,11 @@ MonoBehaviour:
   currentState: 0
   player: {fileID: 1318698825}
   detectionRange: 6
-  telegraphHeight: 1
-  telegraphSpeed: 3
+  telegraphHeight: 2
+  telegraphSpeed: 5
   lockOnDuration: 1
-  diveSpeed: 14
-  maxDiveDuration: 1.5
+  diveSpeed: 16
+  maxDiveDuration: 2
   stuckDuration: 1
   returnSpeed: 4
   weapon: {fileID: 789269250}
@@ -1546,7 +1600,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyWeapon
   damage: 1
-  attackRadius: 0.5
+  attackRadius: 1
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -1704,7 +1758,7 @@ Transform:
   m_GameObject: {fileID: 990885238}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1, y: 12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1723,7 +1777,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyWeapon
   damage: 1
-  attackRadius: 1
+  attackRadius: 1.5
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -1752,7 +1806,7 @@ Transform:
   m_GameObject: {fileID: 992878838}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.41, z: 0}
+  m_LocalPosition: {x: 0, y: -0.47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2144,6 +2198,7 @@ GameObject:
   - component: {fileID: 1184366798}
   - component: {fileID: 1184366800}
   - component: {fileID: 1184366799}
+  - component: {fileID: 1184366801}
   m_Layer: 5
   m_Name: BossHealthBar
   m_TagString: Untagged
@@ -2184,7 +2239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4339623, g: 0.41553935, b: 0.41553935, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2209,6 +2264,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1184366797}
   m_CullTransparentMesh: 1
+--- !u!114 &1184366801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184366797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b59677180a113c542811fc79263bbaa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossHealthUI
+  bossHealth: {fileID: 10006439}
+  barRoot: {fileID: 1184366797}
+  fillImage: {fileID: 2076160572}
 --- !u!1 &1318698823
 GameObject:
   m_ObjectHideFlags: 0
@@ -3435,7 +3505,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.48, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 990885239}
@@ -3677,7 +3747,7 @@ Transform:
   m_GameObject: {fileID: 1685230851}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3, z: 0}
+  m_LocalPosition: {x: 14.7, y: -3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3727,6 +3797,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1771952258}
   - component: {fileID: 1771952259}
+  - component: {fileID: 1771952260}
   m_Layer: 0
   m_Name: WallLeft
   m_TagString: Untagged
@@ -3743,7 +3814,7 @@ Transform:
   m_GameObject: {fileID: 1771952257}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1462, y: 4.92, z: 0}
+  m_LocalPosition: {x: 12.25, y: 4.92, z: 0}
   m_LocalScale: {x: 1.2923, y: 16.4517, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3809,6 +3880,52 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!61 &1771952260
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1771952257}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &1780566302
 GameObject:
   m_ObjectHideFlags: 0
@@ -4083,7 +4200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BossArenaController
   boss: {fileID: 10006438}
   bossHealth: {fileID: 10006439}
-  bossHealthUI: {fileID: 0}
+  bossHealthUI: {fileID: 1184366801}
   arenaWalls:
   - {fileID: 1771952257}
   - {fileID: 475552560}
@@ -4124,7 +4241,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 1.9389434}
+  m_Offset: {x: 15, y: 1.9389434}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -4145,7 +4262,7 @@ Transform:
   m_GameObject: {fileID: 1887903251}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 107.18, y: 2.89509, z: 0}
+  m_LocalPosition: {x: 107.11, y: 2.89509, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4444,7 +4561,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 400, y: 100}
+  m_SizeDelta: {x: 500, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2076160572
 MonoBehaviour:
@@ -4676,7 +4793,7 @@ Transform:
   m_GameObject: {fileID: 2140085713}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 57, y: -3, z: 0}
+  m_LocalPosition: {x: 53.43, y: -3, z: 0}
   m_LocalScale: {x: 1, y: 2.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

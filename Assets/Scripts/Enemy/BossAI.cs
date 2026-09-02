@@ -32,15 +32,22 @@ public class BossAI : MonoBehaviour
     [SerializeField] private GameObject spikeHazardPrefab;
 
     [Header("Flight")]
-    [SerializeField] private float flySpeed = 4f;
-    [SerializeField] private float flightHeightAboveFloor = 4f;
+    [SerializeField] private float flySpeed = 8f;
+    [SerializeField] private float flightHeightAboveFloor = 6f;
 
     [Header("Landing")]
     [SerializeField] private float landSpeed = 5f;
+    // Optional: if assigned, landing stops as soon as this touches the Ground
+    // layer, instead of relying on reaching arena.FloorY exactly. Removes the
+    // need to hand-calibrate FloorY to the pixel — the boss just descends
+    // until it actually finds solid ground, same idea as EnemyHealth.FallToGround.
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private float groundCheckRadius = 0.2f;
+    [SerializeField] private LayerMask groundLayer;
 
     [Header("Attacks")]
     [SerializeField] private float attackCooldown = 1f;
-    [SerializeField] private float spikeSpacing = 2f;
+    [SerializeField] private float spikeSpacing = 3f;
 
     private FlyingEnemyMovement movement;
     private Vector2 flightTarget;
@@ -132,7 +139,13 @@ public class BossAI : MonoBehaviour
         float targetX = arena != null
             ? Mathf.Clamp(player.position.x, arena.LeftBoundX, arena.RightBoundX)
             : player.position.x;
-        float targetY = arena != null ? arena.FloorY : transform.position.y;
+
+        // Aim comfortably below the floor estimate — with groundCheck assigned,
+        // HandleLanding stops the instant it detects solid ground, so this exact
+        // Y never actually needs to be reached, only descended towards.
+        // Without groundCheck, it falls back to the old exact-Y behavior.
+        float floorEstimate = arena != null ? arena.FloorY : transform.position.y;
+        float targetY = groundCheck != null ? floorEstimate - 5f : floorEstimate;
 
         // Captured once on entry, not continuously homing — same reasoning
         // as FlyingEnemyAI's dive target: high enough speed makes it read
@@ -144,6 +157,22 @@ public class BossAI : MonoBehaviour
     private void HandleLanding()
     {
         UpdateFacing();
+
+        if (groundCheck != null)
+        {
+            bool grounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+
+            if (grounded)
+            {
+                movement.Stop();
+                currentState = BossState.Attacking;
+                StartCoroutine(AttackSequence());
+                return;
+            }
+
+            movement.MoveTowards(landingTarget, landSpeed);
+            return;
+        }
 
         bool arrived = movement.MoveTowards(landingTarget, landSpeed);
 
