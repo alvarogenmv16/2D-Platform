@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FlyingEnemyAttack
+  m_Name: EnemyDeath
   serializedVersion: 8
   m_Legacy: 0
   m_Compressed: 0
@@ -21,11 +21,13 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -1471238824, guid: 75e7f0f800abced43ba36dbd7e466de5, type: 3}
-    - time: 0.05
-      value: {fileID: 2094769300, guid: 75e7f0f800abced43ba36dbd7e466de5, type: 3}
-    - time: 0.2
-      value: {fileID: 1006701104, guid: 75e7f0f800abced43ba36dbd7e466de5, type: 3}
+      value: {fileID: 171795983, guid: b09c6d73d258b0f4fb38727515075065, type: 3}
+    - time: 0.25
+      value: {fileID: 1845363460, guid: b09c6d73d258b0f4fb38727515075065, type: 3}
+    - time: 0.4
+      value: {fileID: -1748968353, guid: b09c6d73d258b0f4fb38727515075065, type: 3}
+    - time: 0.51666665
+      value: {fileID: 369933827, guid: b09c6d73d258b0f4fb38727515075065, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -49,15 +51,16 @@ AnimationClip:
       isSerializeReferenceCurve: 0
       metaData: 0
     pptrCurveMapping:
-    - {fileID: -1471238824, guid: 75e7f0f800abced43ba36dbd7e466de5, type: 3}
-    - {fileID: 2094769300, guid: 75e7f0f800abced43ba36dbd7e466de5, type: 3}
-    - {fileID: 1006701104, guid: 75e7f0f800abced43ba36dbd7e466de5, type: 3}
+    - {fileID: 171795983, guid: b09c6d73d258b0f4fb38727515075065, type: 3}
+    - {fileID: 1845363460, guid: b09c6d73d258b0f4fb38727515075065, type: 3}
+    - {fileID: -1748968353, guid: b09c6d73d258b0f4fb38727515075065, type: 3}
+    - {fileID: 369933827, guid: b09c6d73d258b0f4fb38727515075065, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.21666667
+    m_StopTime: 0.5333333
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

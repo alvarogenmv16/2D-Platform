@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FlyingEnemyAttack
+  m_Name: BossScytheAttack
   serializedVersion: 8
   m_Legacy: 0
   m_Compressed: 0
@@ -21,11 +21,13 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -1471238824, guid: 75e7f0f800abced43ba36dbd7e466de5, type: 3}
-    - time: 0.05
-      value: {fileID: 2094769300, guid: 75e7f0f800abced43ba36dbd7e466de5, type: 3}
-    - time: 0.2
-      value: {fileID: 1006701104, guid: 75e7f0f800abced43ba36dbd7e466de5, type: 3}
+      value: {fileID: -891053436, guid: b09c6d73d258b0f4fb38727515075065, type: 3}
+    - time: 0.15
+      value: {fileID: -1679302739, guid: b09c6d73d258b0f4fb38727515075065, type: 3}
+    - time: 0.28333333
+      value: {fileID: 371126723, guid: b09c6d73d258b0f4fb38727515075065, type: 3}
+    - time: 0.35
+      value: {fileID: -1626094190, guid: b09c6d73d258b0f4fb38727515075065, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -49,15 +51,16 @@ AnimationClip:
       isSerializeReferenceCurve: 0
       metaData: 0
     pptrCurveMapping:
-    - {fileID: -1471238824, guid: 75e7f0f800abced43ba36dbd7e466de5, type: 3}
-    - {fileID: 2094769300, guid: 75e7f0f800abced43ba36dbd7e466de5, type: 3}
-    - {fileID: 1006701104, guid: 75e7f0f800abced43ba36dbd7e466de5, type: 3}
+    - {fileID: -891053436, guid: b09c6d73d258b0f4fb38727515075065, type: 3}
+    - {fileID: -1679302739, guid: b09c6d73d258b0f4fb38727515075065, type: 3}
+    - {fileID: 371126723, guid: b09c6d73d258b0f4fb38727515075065, type: 3}
+    - {fileID: -1626094190, guid: b09c6d73d258b0f4fb38727515075065, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.21666667
+    m_StopTime: 0.36666667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -76,4 +79,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.15
+    functionName: OnScytheHit
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

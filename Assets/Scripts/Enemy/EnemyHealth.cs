@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private float maxHealth = 30f;
     [SerializeField] private Animator animator;
     [SerializeField] private MonoBehaviour[] aiComponentsToDisable;
+
+    // Optional listeners (e.g. a boss health bar, arena controller). Walker/Flyer
+    // leave these unused — same opt-in pattern as PlayerHealth's events.
+    public UnityEvent<float, float> OnHealthChanged; // (currentHealth, maxHealth)
+    public UnityEvent OnDied;
 
     [Header("Knockback")]
     [SerializeField] private float knockbackForceX = 5f;
@@ -49,6 +55,8 @@ public class EnemyHealth : MonoBehaviour
         currentHealth -= amount;
         Debug.Log($"Enemy took {amount} damage. Current health: {currentHealth}/{maxHealth}");
 
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
+
         if (currentHealth <= 0f)
         {
             Die();
@@ -84,6 +92,7 @@ public class EnemyHealth : MonoBehaviour
         isDead = true;
         Debug.Log("Enemy died!");
 
+        OnDied?.Invoke();
         StartCoroutine(DeathSequence());
     }
 
