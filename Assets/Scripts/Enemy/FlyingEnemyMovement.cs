@@ -22,19 +22,25 @@ public class FlyingEnemyMovement : MonoBehaviour
     // =========================
 
     // Moves in a straight line toward targetPosition at the given speed.
-    // Returns true once close enough to be considered "arrived".
+    // Returns true once arrived — snaps exactly onto the target instead
+    // of letting velocity carry it past, which at high speeds caused it
+    // to oscillate around the target and never register as "arrived".
     public bool MoveTowards(Vector2 targetPosition, float speed)
     {
-        Vector2 toTarget = targetPosition - rb.position;
-        float distance = toTarget.magnitude;
+        Vector2 currentPosition = rb.position;
+        float distance = Vector2.Distance(currentPosition, targetPosition);
+        float stepThisFrame = speed * Time.fixedDeltaTime;
 
-        if (distance < 0.1f)
+        if (distance <= stepThisFrame)
         {
+            // This frame's movement would reach or overshoot the target:
+            // snap precisely onto it instead, for a clean, hard impact.
+            rb.MovePosition(targetPosition);
             rb.linearVelocity = Vector2.zero;
             return true;
         }
 
-        rb.linearVelocity = toTarget.normalized * speed;
+        rb.linearVelocity = (targetPosition - currentPosition).normalized * speed;
         return false;
     }
 

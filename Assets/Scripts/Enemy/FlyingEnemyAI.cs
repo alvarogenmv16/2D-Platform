@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using Unity.Cinemachine;
 public class FlyingEnemyAI : MonoBehaviour
 {
     // =========================
@@ -39,6 +39,7 @@ public class FlyingEnemyAI : MonoBehaviour
     [SerializeField] private float returnSpeed = 4f;
 
     [SerializeField] private EnemyWeapon weapon;
+    [SerializeField] private CinemachineImpulseSource impulseSource;    // Optional: for screen shake when hitting the player
 
     private FlyingEnemyMovement movement;
     private Vector2 originPosition;
@@ -139,10 +140,6 @@ public class FlyingEnemyAI : MonoBehaviour
         stateTimer += Time.fixedDeltaTime;
 
         bool arrived = movement.MoveTowards(diveTargetPosition, diveSpeed);
-
-        // Safety fallback: if something unexpected still prevents reaching
-        // the exact target (e.g. terrain in the way), force arrival after a
-        // timeout instead of risking getting stuck in Diving forever.
         bool timedOut = stateTimer >= maxDiveDuration;
 
         if ((arrived || timedOut) && !hasDealtDamageThisDive)
@@ -151,8 +148,14 @@ public class FlyingEnemyAI : MonoBehaviour
             {
                 weapon.TryHitPlayer();
             }
-            hasDealtDamageThisDive = true;
 
+            // Screen shake right at the moment of impact, not before or after
+            if (impulseSource != null)
+            {
+                impulseSource.GenerateImpulse();
+            }
+
+            hasDealtDamageThisDive = true;
             stateTimer = 0f;
             currentState = FlyingEnemyState.Stuck;
         }
