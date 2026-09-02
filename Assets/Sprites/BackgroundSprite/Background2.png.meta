@@ -129,7 +129,491 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Void
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 31
+        width: 335
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4e961f2c963ed0448c90395bf151143
+      internalID: -1180930545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlockShort0
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 890
+        width: 189
+        height: 124
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5421bb4c693733346b0d8c9b99e70fe1
+      internalID: 191636960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlockLong0
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 873
+        width: 230
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdd6c3d3aaf73da4ab09b597855391da
+      internalID: 693121355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spike0
+      rect:
+        serializedVersion: 2
+        x: 1114
+        y: 836
+        width: 281
+        height: 182
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3276a95ea21ad504aac1018f56c26f5d
+      internalID: 343863714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spyke1
+      rect:
+        serializedVersion: 2
+        x: 861
+        y: 834
+        width: 247
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbbdd8f1b9063fb4094666f05ba502dd
+      internalID: 803462797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpikeLat1
+      rect:
+        serializedVersion: 2
+        x: 892
+        y: 628
+        width: 144
+        height: 195
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35935ce8dfb2ef54bbcb9e4fe49b473f
+      internalID: -615692565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpykeLat0
+      rect:
+        serializedVersion: 2
+        x: 1401
+        y: 706
+        width: 126
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 801ca691998a69244a6bc2ab37660dcc
+      internalID: -30491466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Column0
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 358
+        width: 87
+        height: 662
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e23e4a9257bd7d548827aab679e3e441
+      internalID: 1208568980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Column1
+      rect:
+        serializedVersion: 2
+        x: 759
+        y: 446
+        width: 95
+        height: 576
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55d3223c3aa394545bd1339704a0db6c
+      internalID: 341762483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bush0
+      rect:
+        serializedVersion: 2
+        x: 874
+        y: 31
+        width: 185
+        height: 151
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1cf9be3a86954d4889197bc6a2c52f9
+      internalID: -759774301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bush1
+      rect:
+        serializedVersion: 2
+        x: 581
+        y: 258
+        width: 140
+        height: 133
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1be0222e00b44e499408f11509a6b5e
+      internalID: 1304154676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bush2
+      rect:
+        serializedVersion: 2
+        x: 904
+        y: 256
+        width: 126
+        height: 134
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dacc90a8728efc24798cb0eda83c6e41
+      internalID: 1592506375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rock0
+      rect:
+        serializedVersion: 2
+        x: 724
+        y: 293
+        width: 169
+        height: 115
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ae31a6c9e25fd44b9b485ea26c88c5f
+      internalID: -272418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rock1
+      rect:
+        serializedVersion: 2
+        x: 863
+        y: 414
+        width: 171
+        height: 154
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a1d2ae666697d248aa86566c2c97aa1
+      internalID: -457731177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edge0
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 566
+        width: 139
+        height: 154
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2952930d1fc625740a33e92dac050d87
+      internalID: 466140089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edge1
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 374
+        width: 168
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6d54234b788feb4a982b0f07f75e0f3
+      internalID: -1725805967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edge2
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 417
+        width: 144
+        height: 243
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35876768ed4bd0e42aee3fa288bedeb1
+      internalID: -378223869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edge3
+      rect:
+        serializedVersion: 2
+        x: 536
+        y: 853
+        width: 196
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02d822ee539b6e341ba61c6ef2a00072
+      internalID: 1441277455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlockLong1
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 717
+        width: 329
+        height: 130
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a61307ec5d3143745960fc3bc2401952
+      internalID: 705813738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlockLong2
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 538
+        width: 314
+        height: 142
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b38ebfc77f1f0d4bbef85c850b5a8f2
+      internalID: 309836468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlockShort1
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 734
+        width: 159
+        height: 107
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 369498e85d7556043a8eb308802f3d85
+      internalID: -1476664707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bush3
+      rect:
+        serializedVersion: 2
+        x: 551
+        y: 30
+        width: 319
+        height: 206
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c9242d0abdede541a4e39e0e9a9fac3
+      internalID: -846773167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -144,13 +628,34 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Background2_0: 7282461348544508605
       Background2_1: 1761556231732324091
       Background2_2: -2546122701619588853
       Background2_3: -3574223051414832269
       Background2_4: 4864849618974431169
       Background2_5: -7335371568187617224
       Background2_6: -8517983043249011470
+      BlockLong0: 693121355
+      BlockLong1: 705813738
+      BlockLong2: 309836468
+      BlockShort0: 191636960
+      BlockShort1: -1476664707
+      Bush0: -759774301
+      Bush1: 1304154676
+      Bush2: 1592506375
+      Bush3: -846773167
+      Column0: 1208568980
+      Column1: 341762483
+      Edge0: 466140089
+      Edge1: -1725805967
+      Edge2: -378223869
+      Edge3: 1441277455
+      Rock0: -272418
+      Rock1: -457731177
+      Spike0: 343863714
+      SpikeLat1: -615692565
+      Spyke1: 803462797
+      SpykeLat0: -30491466
+      Void: -1180930545
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
