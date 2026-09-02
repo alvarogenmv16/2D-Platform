@@ -40,6 +40,7 @@ public class FlyingEnemyAI : MonoBehaviour
 
     [SerializeField] private EnemyWeapon weapon;
     [SerializeField] private CinemachineImpulseSource impulseSource;    // Optional: for screen shake when hitting the player
+    [SerializeField] private Animator animator;     // Optional: for triggering animations during different states
 
     private FlyingEnemyMovement movement;
     private Vector2 originPosition;
@@ -124,12 +125,11 @@ public class FlyingEnemyAI : MonoBehaviour
             diveTargetPosition = player.position;
             hasDealtDamageThisDive = false;
 
-            // Stop colliding physically during the dive/stuck window — the
-            // enemy needs to reach the player's exact captured position,
-            // which a solid collider would otherwise block. Actual damage
-            // is still handled by EnemyWeapon's OverlapCircle, independent
-            // of physical collision.
             if (col != null) col.isTrigger = true;
+
+            // Start the attack animation now — it should keep playing
+            // throughout Diving AND Stuck, not just the dive itself.
+            if (animator != null) animator.SetBool("IsAttacking", true);
 
             currentState = FlyingEnemyState.Diving;
         }
@@ -168,9 +168,10 @@ public class FlyingEnemyAI : MonoBehaviour
 
         if (stateTimer >= stuckDuration)
         {
-            // Solid again once it starts flying back — it shouldn't pass
-            // through the player (or anything else) during normal flight.
             if (col != null) col.isTrigger = false;
+
+            // Attack animation ends here, right before flying back
+            if (animator != null) animator.SetBool("IsAttacking", false);
 
             currentState = FlyingEnemyState.Returning;
         }

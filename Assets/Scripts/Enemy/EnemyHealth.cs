@@ -9,18 +9,19 @@ public class EnemyHealth : MonoBehaviour
 
     [SerializeField] private float maxHealth = 30f;
     [SerializeField] private Animator animator;
-
-    // Any behaviour that drives this enemy's AI/movement/attacks.
-    // Melee enemy: EnemyAI, EnemyMovement, EnemyAttack.
-    // Flying enemy: FlyingEnemyAI, FlyingEnemyMovement.
-    // Generalized to MonoBehaviour so this single script works for any
-    // enemy type without needing a separate EnemyHealth variant each time.
     [SerializeField] private MonoBehaviour[] aiComponentsToDisable;
 
     [Header("Knockback")]
     [SerializeField] private float knockbackForceX = 5f;
     [SerializeField] private float knockbackForceY = 3f;
     [SerializeField] private float knockbackDuration = 0.2f;
+
+    [Header("Fall before death (flying enemies)")]
+    [SerializeField] private bool fallsBeforeDeath = false;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private float groundCheckRadius = 0.2f;
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private float fallGravityScale = 3f;
 
     private float currentHealth;
     private bool isDead = false;
@@ -90,11 +91,29 @@ public class EnemyHealth : MonoBehaviour
     {
         SetAiComponentsEnabled(false);
 
+        // Flying enemies need to fall to the ground FIRST, so the death
+        // animation plays on the floor, not floating mid-air. Ground
+        // enemies skip this entirely (fallsBeforeDeath is false for them).
+        if (fallsBeforeDeath)
+        {
+            yield return StartCoroutine(FallToGround());
+        }
+
         if (rb != null) rb.simulated = false;
         if (col != null) col.enabled = false;
 
         if (animator != null)
         {
+            // Clear persistent bool parameters (e.g. IsAttacking) so an Any State
+            // transition gated by one of them can't fire again and override EnemyDeath.
+            foreach (AnimatorControllerParameter param in animator.parameters)
+            {
+                if (param.type == AnimatorControllerParameterType.Bool)
+                {
+                    animator.SetBool(param.name, false);
+                }
+            }
+
             animator.SetTrigger("DieTrigger");
 
             int safetyFrameLimit = 60;
@@ -111,6 +130,30 @@ public class EnemyHealth : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    private IEnumerator FallToGround()
+    {
+        if (rb == null) yield break;
+
+        if (col != null) col.isTrigger = false;
+
+        rb.gravityScale = fallGravityScale;
+
+        bool grounded = false;
+        float fallSafetyTimer = 0f;
+        float maxFallWaitTime = 2f; // safety fallback
+
+        while (!grounded && fallSafetyTimer < maxFallWaitTime)
+        {
+            grounded = groundCheck != null &&
+                    Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+
+            fallSafetyTimer += Time.deltaTime;
+            yield return null;
+        }
+
+        rb.linearVelocity = Vector2.zero;
     }
 
     private void SetAiComponentsEnabled(bool enabled)
