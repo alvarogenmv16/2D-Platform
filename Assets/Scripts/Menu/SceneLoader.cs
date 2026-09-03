@@ -8,16 +8,21 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
     // Wired to a button's OnClick, passing the target scene name as its
-    // string argument (e.g. "SampleScene", "MainMenu", "Settings").
+    // string argument (e.g. "SampleScene", "MainMenu", "SettingsScene").
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
     }
 
-    // Wired to a Quit button's OnClick. Only closes a real build —
-    // Application.Quit() is a no-op inside the Unity Editor.
+    // Wired to a Quit button's OnClick. Application.Quit() is a no-op inside
+    // the Unity Editor, so this also stops Play Mode there — lets the button
+    // be verified without needing a real build every time.
     public void QuitGame()
     {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
+#endif
     }
 }
