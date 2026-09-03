@@ -39,7 +39,7 @@ public class PlayerAttackHitbox : MonoBehaviour
             EnemyHealth enemyHealth = hit.GetComponent<EnemyHealth>();
             if (enemyHealth != null)
             {
-                enemyHealth.TakeDamage(damage);
+                enemyHealth.TakeDamage(damage, attackPointPosition);
             }
         }
     }

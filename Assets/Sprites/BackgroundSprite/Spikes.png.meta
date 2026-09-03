@@ -1,43 +1,16 @@
 fileFormatVersion: 2
-guid: 75e7f0f800abced43ba36dbd7e466de5
+guid: 1fb738f8b1def54499b5a05736f36bed
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5882658483856705105
-    second: Flyer_0
+      213: 6723963429988506304
+    second: Spikes_0
   - first:
-      213: 2319663198070066341
-    second: Flyer_1
+      213: -7010832575621253078
+    second: Spikes_1
   - first:
-      213: 530708633417819832
-    second: Flyer_2
-  - first:
-      213: -2606686832195932340
-    second: Flyer_3
-  - first:
-      213: 3914961873580812277
-    second: Flyer_4
-  - first:
-      213: -3131924460830552387
-    second: Flyer_5
-  - first:
-      213: -9128522181943111066
-    second: Flyer_6
-  - first:
-      213: -8533253095813106506
-    second: Flyer_7
-  - first:
-      213: 8020164604365352209
-    second: Flyer_8
-  - first:
-      213: -4330122615690133543
-    second: Flyer_9
-  - first:
-      213: -2456102424375600866
-    second: Flyer_10
-  - first:
-      213: -5832243742623873245
-    second: Flyer_11
+      213: 8562923692314260799
+    second: Spikes_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -146,155 +119,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Flyer_Idle
+      name: Spikes_0
       rect:
         serializedVersion: 2
-        x: 22
-        y: 711
-        width: 604
-        height: 309
+        x: 14
+        y: 55
+        width: 380
+        height: 187
       alignment: 9
-      pivot: {x: 0.49595913, y: 0.02037962}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: fa978cec6499c5ea0800000000000000
-      internalID: -5882658483856705105
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Flyer_Death0
-      rect:
-        serializedVersion: 2
-        x: 22
-        y: 24
-        width: 421
-        height: 315
-      alignment: 9
-      pivot: {x: 0.5028843, y: 0.025853584}
+      pivot: {x: 0.49360907, y: 0.045457788}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e519c49d583011e46a2e42a670c65cb6
-      internalID: 678077130
+      spriteID: 51c0e37c609716c4ea4efb8119e6dde5
+      internalID: 6723963429988506304
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Flyer_Death1
+      name: Spikes_1
       rect:
         serializedVersion: 2
-        x: 468
-        y: 21
-        width: 512
-        height: 214
+        x: 417
+        y: 62
+        width: 341
+        height: 272
       alignment: 9
-      pivot: {x: 0.5000001, y: -0.005003314}
+      pivot: {x: 0.4964392, y: 0.022324646}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8955b037c5a746b44a01705111d75b3e
-      internalID: -500678559
+      spriteID: 924bcb9fc03ffc94e843632de7a41b04
+      internalID: -7010832575621253078
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Flyer_Death2
+      name: Spikes_2
       rect:
         serializedVersion: 2
-        x: 1034
-        y: 26
-        width: 446
-        height: 250
+        x: 780
+        y: 69
+        width: 349
+        height: 516
       alignment: 9
-      pivot: {x: 0.50272304, y: 0.0045749284}
+      pivot: {x: 0.5313142, y: 0.008170712}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 45c1a3ad35a6cdd4e81d9c6e9b2262e0
-      internalID: 2076157400
+      spriteID: cc2f1bf56437609419e94bd863c3271f
+      internalID: 8562923692314260799
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Flyer_Attack0
+      name: Spikes_3
       rect:
         serializedVersion: 2
-        x: 26
-        y: 366
-        width: 559
-        height: 319
+        x: 1147
+        y: 68
+        width: 385
+        height: 938
       alignment: 9
-      pivot: {x: 0.5, y: 0.035605595}
+      pivot: {x: 0.51261634, y: 0.0016026527}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 47dab99d0c602874fb484e9a7b30bfb7
-      internalID: -1471238824
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Flyer_Attack1
-      rect:
-        serializedVersion: 2
-        x: 596
-        y: 321
-        width: 415
-        height: 369
-      alignment: 9
-      pivot: {x: 0.5000003, y: 0.022845013}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d5b1a86abb8508948a37f189e1ca21ca
-      internalID: 2094769300
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Flyer_Attack2
-      rect:
-        serializedVersion: 2
-        x: 1079
-        y: 326
-        width: 430
-        height: 438
-      alignment: 9
-      pivot: {x: 0.50847197, y: 0.017615959}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0b6cbf44da6a3d24faa6dee1ea88b5af
-      internalID: 1006701104
+      spriteID: 9eeff3b2cbe117f439db3e344b3e2701
+      internalID: 2036519354
       vertices: []
       indices: 
       edges: []
@@ -303,7 +210,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: bb53fba789e84494997b72d058c0287f
+    spriteID: 0956e44177f4a2d408c76e6ecdb4d7b9
     internalID: 0
     vertices: []
     indices: 
@@ -313,24 +220,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Flyer_1: 2319663198070066341
-      Flyer_10: -2456102424375600866
-      Flyer_11: -5832243742623873245
-      Flyer_2: 530708633417819832
-      Flyer_3: -2606686832195932340
-      Flyer_4: 3914961873580812277
-      Flyer_5: -3131924460830552387
-      Flyer_6: -9128522181943111066
-      Flyer_7: -8533253095813106506
-      Flyer_8: 8020164604365352209
-      Flyer_9: -4330122615690133543
-      Flyer_Attack0: -1471238824
-      Flyer_Attack1: 2094769300
-      Flyer_Attack2: 1006701104
-      Flyer_Death0: 678077130
-      Flyer_Death1: -500678559
-      Flyer_Death2: 2076157400
-      Flyer_Idle: -5882658483856705105
+      Spikes_0: 6723963429988506304
+      Spikes_1: -7010832575621253078
+      Spikes_2: 8562923692314260799
+      Spikes_3: 2036519354
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
