@@ -29,6 +29,14 @@ public class EnemyAI : MonoBehaviour
     // so flipping never affects physics.
     [SerializeField] private Transform visuals;
 
+    [Header("Sound")]
+    [SerializeField] private SfxPlayer sfxPlayer;
+    // Plays once, right when the player first enters detection range.
+    [SerializeField] private AudioClip awakeSound;
+    // Loops while actively chasing; a separate AudioSource (not sfxPlayer)
+    // because it needs Play()/Stop() toggling, not a one-shot.
+    [SerializeField] private AudioSource chargeAudioSource; // Loop on, Play On Awake off
+
     private EnemyMovement movement;
     private EnemyAttack attack;
 
@@ -36,6 +44,14 @@ public class EnemyAI : MonoBehaviour
     // enemy doesn't snap back to a default facing when the player leaves range.
     private float facingDirection = 1f;
     private Vector3 baseVisualsScale; // Used to flip the visuals without scaling them down to zero or negative.
+
+    // Tracks the state from the PREVIOUS FixedUpdate, so sound triggers fire
+    // exactly once on the transition, not every frame the state holds.
+    private EnemyState previousState = EnemyState.Idle;
+
+    // Charge doesn't start until this time is reached — set to "now + awake
+    // clip length" whenever awake plays, so the two never overlap.
+    private float chargeAllowedTime = 0f;
 
     // =========================
     // START
@@ -74,6 +90,7 @@ public class EnemyAI : MonoBehaviour
         UpdateState();
         UpdateFacing();
         HandleStateBehavior();
+        HandleStateSound();
     }
 
     // =========================
@@ -141,6 +158,38 @@ public class EnemyAI : MonoBehaviour
                 attack.Attack();
                 break;
         }
+    }
+
+    private void HandleStateSound()
+    {
+        // Awake: fires once, exactly on the frame the player is first
+        // detected (leaving Idle for either Chasing or Attacking). Pushes
+        // chargeAllowedTime out by the clip's own length, so charge never
+        // starts underneath it — no manual syncing needed.
+        if (previousState == EnemyState.Idle && currentState != EnemyState.Idle)
+        {
+            sfxPlayer?.Play(awakeSound);
+            chargeAllowedTime = Time.time + (awakeSound != null ? awakeSound.length : 0f);
+        }
+
+        // Charge: loops for as long as the player is in range at all
+        // (Chasing or Attacking) — only stops once it fully loses the
+        // player and returns to Idle.
+        if (chargeAudioSource != null)
+        {
+            bool shouldCharge = currentState != EnemyState.Idle && Time.time >= chargeAllowedTime;
+
+            if (shouldCharge && !chargeAudioSource.isPlaying)
+            {
+                chargeAudioSource.Play();
+            }
+            else if (!shouldCharge && chargeAudioSource.isPlaying)
+            {
+                chargeAudioSource.Stop();
+            }
+        }
+
+        previousState = currentState;
     }
 
     // =========================
