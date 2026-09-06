@@ -46,7 +46,10 @@ public class FlyingEnemyAI : MonoBehaviour
     [SerializeField] private SfxPlayer sfxPlayer;
     [SerializeField] private AudioClip awakeSound; // plays once, entering Telegraph
     [SerializeField] private AudioClip hitSound; // plays once, entering Stuck (the crash)
-    [SerializeField] private AudioSource flyAudioSource; // loops in every state except Diving; Loop on, Play On Awake off
+    [SerializeField] private AudioSource flyAudioSource; // loops in every state except Diving/Stuck; Loop on, Play On Awake off
+    // Separate from detectionRange on purpose — lets the ambient flying sound
+    // start closer (or further) than actual detection, tuned independently.
+    [SerializeField] private float flySoundRange = 6f;
 
     private FlyingEnemyMovement movement;
     private Vector2 originPosition;
@@ -99,7 +102,8 @@ public class FlyingEnemyAI : MonoBehaviour
     {
         if (flyAudioSource == null) return;
 
-        bool shouldFly = currentState != FlyingEnemyState.Diving && currentState != FlyingEnemyState.Stuck;
+        bool playerInRange = Vector2.Distance(transform.position, player.position) <= flySoundRange;
+        bool shouldFly = playerInRange && currentState != FlyingEnemyState.Diving && currentState != FlyingEnemyState.Stuck;
 
         if (shouldFly && !flyAudioSource.isPlaying)
         {
