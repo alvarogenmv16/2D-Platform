@@ -21,7 +21,7 @@ public class BossContactDamage : MonoBehaviour
     // Re-check interval, not a hit cooldown — PlayerHealth's own invulnerability
     // window already prevents repeat damage; this just avoids querying every
     // single physics step while overlapping.
-    [SerializeField] private float checkInterval = 0.2f;
+    [SerializeField] private float checkInterval = 1.5f;
 
     private float checkTimer;
 
