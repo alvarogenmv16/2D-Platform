@@ -34,6 +34,10 @@ public class BossAI : MonoBehaviour
     [Header("Flight")]
     [SerializeField] private float flySpeed = 8f;
     [SerializeField] private float flightHeightAboveFloor = 6f;
+    // Keeps flight/landing targets from landing exactly on (or inside) the
+    // solid arena walls — a target flush with the wall can never actually be
+    // reached (physics blocks it), leaving the boss stuck pressed against it.
+    [SerializeField] private float wallMargin = 1.5f;
 
     [Header("Landing")]
     [SerializeField] private float landSpeed = 5f;
@@ -152,7 +156,7 @@ public class BossAI : MonoBehaviour
         float rawTargetX = player.position.x + approachDirection * landingOffsetFromPlayer;
 
         float targetX = arena != null
-            ? Mathf.Clamp(rawTargetX, arena.LeftBoundX, arena.RightBoundX)
+            ? Mathf.Clamp(rawTargetX, InsetLeftBoundX, InsetRightBoundX)
             : rawTargetX;
 
         // Aim comfortably below the floor estimate — with groundCheck assigned,
@@ -242,10 +246,16 @@ public class BossAI : MonoBehaviour
     {
         if (arena == null) return transform.position;
 
-        float x = Random.Range(arena.LeftBoundX, arena.RightBoundX);
+        float x = Random.Range(InsetLeftBoundX, InsetRightBoundX);
         float y = arena.FloorY + flightHeightAboveFloor;
         return new Vector2(x, y);
     }
+
+    // Arena bounds pulled inward by wallMargin, so flight/landing targets
+    // never sit flush against a solid wall. Ordered with Min/Max so a
+    // margin larger than half the arena width can't invert the range.
+    private float InsetLeftBoundX => Mathf.Min(arena.LeftBoundX + wallMargin, arena.RightBoundX - wallMargin);
+    private float InsetRightBoundX => Mathf.Max(arena.RightBoundX - wallMargin, arena.LeftBoundX + wallMargin);
 
     private void UpdateFacing()
     {
