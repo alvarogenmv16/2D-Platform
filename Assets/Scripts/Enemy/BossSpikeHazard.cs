@@ -15,11 +15,18 @@ public class BossSpikeHazard : MonoBehaviour
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private float lifetimeSeconds = 2f; // safety net; destroys itself even if the Animation Event never fires
 
+    [Header("Sound")]
+    [SerializeField] private SfxPlayer sfxPlayer;
+    [SerializeField] private AudioClip startSound; // plays on spawn, telegraph begins
+    [SerializeField] private AudioClip emergeSound; // plays on the erupt frame
+    [SerializeField] private AudioClip retractSound; // plays as it starts sinking back down
+
     // =========================
     // START
     // =========================
     private void Start()
     {
+        sfxPlayer?.Play(startSound);
         Destroy(gameObject, lifetimeSeconds);
     }
 
@@ -30,6 +37,8 @@ public class BossSpikeHazard : MonoBehaviour
     // Called via an Animation Event on the Erupt frame of this prefab's own clip.
     public void OnSpikeErupt()
     {
+        sfxPlayer?.Play(emergeSound);
+
         Collider2D hit = Physics2D.OverlapCircle(transform.position, hitRadius, playerLayer);
 
         if (hit == null) return;
@@ -40,6 +49,12 @@ public class BossSpikeHazard : MonoBehaviour
         {
             playerHealth.TakeDamage(damage, transform.position);
         }
+    }
+
+    // Called via an Animation Event on the first retract keyframe of this prefab's own clip.
+    public void OnSpikeRetract()
+    {
+        sfxPlayer?.Play(retractSound);
     }
 
     // =========================
