@@ -15,6 +15,9 @@ public class PlayerDeathHandler : MonoBehaviour
     [SerializeField] private CanvasGroup fadeOverlay;
     [SerializeField] private float fadeDuration = 1.5f;
     [SerializeField] private SpriteRenderer playerSpriteRenderer;
+    [SerializeField] private SfxPlayer sfxPlayer;
+    [SerializeField] private AudioClip deathSound;
+    [SerializeField, Range(0f, 1f)] private float deathVolume = 1f;
     private Rigidbody2D rb;
 
     // =========================
@@ -50,6 +53,7 @@ public class PlayerDeathHandler : MonoBehaviour
 
     private void HandleDeath()
     {
+        sfxPlayer?.Play(deathSound, deathVolume);
         StartCoroutine(DeathSequence());
     }
 

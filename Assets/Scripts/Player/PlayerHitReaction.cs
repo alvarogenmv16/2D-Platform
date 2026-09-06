@@ -12,6 +12,9 @@ public class PlayerHitReaction : MonoBehaviour
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private Animator animator;
     [SerializeField] private CinemachineImpulseSource impulseSource;
+    [SerializeField] private SfxPlayer sfxPlayer;
+    [SerializeField] private AudioClip hurtSound;
+    [SerializeField, Range(0f, 1f)] private float hurtVolume = 1f;
 
     [Header("Knockback")]
     [SerializeField] private float knockbackForceX = 6f;
@@ -57,6 +60,8 @@ public class PlayerHitReaction : MonoBehaviour
         {
             impulseSource.GenerateImpulse();
         }
+
+        sfxPlayer?.Play(hurtSound, hurtVolume);
 
         StartCoroutine(HitReaction(hitSourcePosition));
     }
