@@ -42,6 +42,12 @@ public class FlyingEnemyAI : MonoBehaviour
     [SerializeField] private CinemachineImpulseSource impulseSource;    // Optional: for screen shake when hitting the player
     [SerializeField] private Animator animator;     // Optional: for triggering animations during different states
 
+    [Header("Sound")]
+    [SerializeField] private SfxPlayer sfxPlayer;
+    [SerializeField] private AudioClip awakeSound; // plays once, entering Telegraph
+    [SerializeField] private AudioClip hitSound; // plays once, entering Stuck (the crash)
+    [SerializeField] private AudioSource flyAudioSource; // loops in every state except Diving; Loop on, Play On Awake off
+
     private FlyingEnemyMovement movement;
     private Vector2 originPosition;
     private Vector2 telegraphTargetPosition;
@@ -85,6 +91,24 @@ public class FlyingEnemyAI : MonoBehaviour
             case FlyingEnemyState.Stuck: HandleStuck(); break;
             case FlyingEnemyState.Returning: HandleReturning(); break;
         }
+
+        UpdateFlySound();
+    }
+
+    private void UpdateFlySound()
+    {
+        if (flyAudioSource == null) return;
+
+        bool shouldFly = currentState != FlyingEnemyState.Diving && currentState != FlyingEnemyState.Stuck;
+
+        if (shouldFly && !flyAudioSource.isPlaying)
+        {
+            flyAudioSource.Play();
+        }
+        else if (!shouldFly && flyAudioSource.isPlaying)
+        {
+            flyAudioSource.Stop();
+        }
     }
 
     // =========================
@@ -101,6 +125,7 @@ public class FlyingEnemyAI : MonoBehaviour
             // Capture the windup destination once, right when the player is spotted
             telegraphTargetPosition = (Vector2)transform.position + Vector2.up * telegraphHeight;
             currentState = FlyingEnemyState.Telegraph;
+            sfxPlayer?.Play(awakeSound);
         }
     }
 
@@ -158,6 +183,7 @@ public class FlyingEnemyAI : MonoBehaviour
             hasDealtDamageThisDive = true;
             stateTimer = 0f;
             currentState = FlyingEnemyState.Stuck;
+            sfxPlayer?.Play(hitSound);
         }
     }
 
