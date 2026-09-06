@@ -53,6 +53,10 @@ public class BossAI : MonoBehaviour
     [SerializeField] private float attackCooldown = 1f;
     [SerializeField] private float spikeSpacing = 3f;
 
+    [Header("Sound")]
+    [SerializeField] private SfxPlayer sfxPlayer;
+    [SerializeField] private AudioClip screamSound; // plays right as the spike windup begins
+
     private FlyingEnemyMovement movement;
     private Vector2 flightTarget;
     private Vector2 landingTarget;
@@ -201,6 +205,11 @@ public class BossAI : MonoBehaviour
         bool useSpikeAttack = Random.Range(0, 2) == 0;
         string trigger = useSpikeAttack ? "SpikeAttackTrigger" : "ScytheAttackTrigger";
         string stateName = useSpikeAttack ? "BossSpikeAttack" : "BossScytheAttack";
+
+        if (useSpikeAttack)
+        {
+            sfxPlayer?.Play(screamSound);
+        }
 
         if (animator != null)
         {
