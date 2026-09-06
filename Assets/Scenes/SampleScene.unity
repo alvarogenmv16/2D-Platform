@@ -317,7 +317,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossContactDamage
   damage: 1
-  checkRadius: 0.6
+  checkSize: {x: 4, y: 0.4}
+  checkOffsetY: -0.5
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -1620,7 +1621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyWeapon
   damage: 1
-  attackRadius: 1
+  attackSize: {x: 2, y: 2}
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -1797,7 +1798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyWeapon
   damage: 1
-  attackRadius: 2
+  attackSize: {x: 4, y: 4}
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -2720,9 +2721,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 185d3b3e1b1722f4eb94ae41d775bece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttackHitbox
-  attackRadius: 1
-  attackOffsetX: 3
-  attackOffsetY: 0.75
+  attackSize: {x: 2, y: 2}
+  attackOffsetX: 1.75
+  attackOffsetY: 1
   damage: 1
   enemyLayer:
     serializedVersion: 2
@@ -3372,7 +3373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyWeapon
   damage: 1
-  attackRadius: 0.5
+  attackSize: {x: 2.5, y: 1}
   playerLayer:
     serializedVersion: 2
     m_Bits: 128

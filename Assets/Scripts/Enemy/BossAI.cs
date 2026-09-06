@@ -276,13 +276,4 @@ public class BossAI : MonoBehaviour
         float stateLength = animator.GetCurrentAnimatorStateInfo(0).length;
         yield return new WaitForSeconds(stateLength);
     }
-
-    // =========================
-    // DEBUG
-    // =========================
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.magenta;
-        Gizmos.DrawWireSphere(transform.position, 0.3f);
-    }
 }

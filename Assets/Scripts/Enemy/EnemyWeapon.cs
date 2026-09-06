@@ -9,7 +9,7 @@ public class EnemyWeapon : MonoBehaviour
     // =========================
 
     [SerializeField] private float damage = 1f;
-    [SerializeField] private float attackRadius = 2f;
+    [SerializeField] private Vector2 attackSize = new Vector2(2.5f, 1f);
     [SerializeField] private LayerMask playerLayer;
 
     // =========================
@@ -26,7 +26,7 @@ public class EnemyWeapon : MonoBehaviour
     // if found. Called by EnemyAttack at the moment the attack lands.
     public void TryHitPlayer()
     {
-        Collider2D hit = Physics2D.OverlapCircle(AttackPointPosition, attackRadius, playerLayer);
+        Collider2D hit = Physics2D.OverlapBox(AttackPointPosition, attackSize, 0f, playerLayer);
 
         if (hit == null) return;
 
@@ -45,6 +45,6 @@ public class EnemyWeapon : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.magenta;
-        Gizmos.DrawWireSphere(transform.position, attackRadius);
+        Gizmos.DrawWireCube(transform.position, attackSize);
     }
 }

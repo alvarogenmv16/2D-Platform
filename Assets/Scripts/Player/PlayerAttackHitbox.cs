@@ -6,9 +6,9 @@ public class PlayerAttackHitbox : MonoBehaviour
     // VARIABLES
     // =========================
 
-    [SerializeField] private float attackRadius = 0.5f;
-    [SerializeField] private float attackOffsetX = 0.6f;
-    [SerializeField] private float attackOffsetY = 0f;
+    [SerializeField] private Vector2 attackSize = new Vector2(2f, 2f);
+    [SerializeField] private float attackOffsetX = 1.75f;
+    [SerializeField] private float attackOffsetY = 1f;
     [SerializeField] private float damage = 1f;
     [SerializeField] private LayerMask enemyLayer;
 
@@ -32,7 +32,10 @@ public class PlayerAttackHitbox : MonoBehaviour
     public void OnAttackHit()
     {
         Vector2 attackPointPosition = GetAttackPointPosition();
-        Collider2D[] hits = Physics2D.OverlapCircleAll(attackPointPosition, attackRadius, enemyLayer);
+        // Box instead of circle: a circle centered on the attack point misses
+        // enemies standing very close (just outside its near edge) — a box
+        // covers the whole front arc uniformly, closer to the actual swing shape.
+        Collider2D[] hits = Physics2D.OverlapBoxAll(attackPointPosition, attackSize, 0f, enemyLayer);
 
         foreach (Collider2D hit in hits)
         {
@@ -65,6 +68,6 @@ public class PlayerAttackHitbox : MonoBehaviour
         }
 
         Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(GetAttackPointPosition(), attackRadius);
+        Gizmos.DrawWireCube(GetAttackPointPosition(), attackSize);
     }
 }
