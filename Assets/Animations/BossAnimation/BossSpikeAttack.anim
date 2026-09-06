@@ -22,7 +22,7 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: -891053436, guid: b09c6d73d258b0f4fb38727515075065, type: 3}
-    - time: 0.06666667
+    - time: 0.2
       value: {fileID: -2019206244, guid: b09c6d73d258b0f4fb38727515075065, type: 3}
     attribute: m_Sprite
     path: 
@@ -54,7 +54,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.083333336
+    m_StopTime: 1
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -74,7 +74,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.06666667
+  - time: 0.9
     functionName: OnSpikeAttackRelease
     data: 
     objectReferenceParameter: {fileID: 0}

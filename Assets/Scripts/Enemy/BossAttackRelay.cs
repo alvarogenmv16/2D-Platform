@@ -9,10 +9,14 @@ public class BossAttackRelay : MonoBehaviour
 {
     [SerializeField] private BossAI bossAI;
     [SerializeField] private EnemyWeapon scytheWeapon;
+    [SerializeField] private SfxPlayer sfxPlayer;
+    [SerializeField] private AudioClip swordSound; // plays on every scythe swing, connects or not
 
     // Called via an Animation Event on the BossScytheAttack clip, at the impact frame.
     public void OnScytheHit()
     {
+        sfxPlayer?.Play(swordSound);
+
         if (scytheWeapon != null)
         {
             scytheWeapon.TryHitPlayer();

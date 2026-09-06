@@ -37,6 +37,10 @@ public class BossAI : MonoBehaviour
 
     [Header("Landing")]
     [SerializeField] private float landSpeed = 5f;
+    // Keeps the boss from landing exactly on top of the player. It lands this
+    // far to whichever side it's already approaching from, instead of aiming
+    // straight at the player's own position.
+    [SerializeField] private float landingOffsetFromPlayer = 2f;
     // Optional: if assigned, landing stops as soon as this touches the Ground
     // layer, instead of relying on reaching arena.FloorY exactly. Removes the
     // need to hand-calibrate FloorY to the pixel — the boss just descends
@@ -48,6 +52,10 @@ public class BossAI : MonoBehaviour
     [Header("Attacks")]
     [SerializeField] private float attackCooldown = 1f;
     [SerializeField] private float spikeSpacing = 3f;
+
+    [Header("Sound")]
+    [SerializeField] private SfxPlayer sfxPlayer;
+    [SerializeField] private AudioClip screamSound; // plays right as the spike windup begins
 
     private FlyingEnemyMovement movement;
     private Vector2 flightTarget;
@@ -136,9 +144,16 @@ public class BossAI : MonoBehaviour
 
     private void EnterLanding()
     {
+        // Land beside the player, not on top of them — offset towards
+        // whichever side the boss is currently approaching from.
+        float approachDirection = Mathf.Sign(transform.position.x - player.position.x);
+        if (approachDirection == 0f) approachDirection = 1f;
+
+        float rawTargetX = player.position.x + approachDirection * landingOffsetFromPlayer;
+
         float targetX = arena != null
-            ? Mathf.Clamp(player.position.x, arena.LeftBoundX, arena.RightBoundX)
-            : player.position.x;
+            ? Mathf.Clamp(rawTargetX, arena.LeftBoundX, arena.RightBoundX)
+            : rawTargetX;
 
         // Aim comfortably below the floor estimate — with groundCheck assigned,
         // HandleLanding stops the instant it detects solid ground, so this exact
@@ -190,6 +205,11 @@ public class BossAI : MonoBehaviour
         bool useSpikeAttack = Random.Range(0, 2) == 0;
         string trigger = useSpikeAttack ? "SpikeAttackTrigger" : "ScytheAttackTrigger";
         string stateName = useSpikeAttack ? "BossSpikeAttack" : "BossScytheAttack";
+
+        if (useSpikeAttack)
+        {
+            sfxPlayer?.Play(screamSound);
+        }
 
         if (animator != null)
         {
@@ -264,14 +284,5 @@ public class BossAI : MonoBehaviour
 
         float stateLength = animator.GetCurrentAnimatorStateInfo(0).length;
         yield return new WaitForSeconds(stateLength);
-    }
-
-    // =========================
-    // DEBUG
-    // =========================
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.magenta;
-        Gizmos.DrawWireSphere(transform.position, 0.3f);
     }
 }

@@ -21,6 +21,11 @@ public class BossArenaController : MonoBehaviour
     [SerializeField] private Transform rightBound;
     [SerializeField] private Transform floorReference;
 
+    [Header("Music")]
+    [SerializeField] private AudioSource musicSource; // one source, clip swapped per phase
+    [SerializeField] private AudioClip battleMusic;
+    [SerializeField] private AudioClip victoryMusic;
+
     private Collider2D triggerCollider;
     private bool hasActivated = false;
 
@@ -75,6 +80,13 @@ public class BossArenaController : MonoBehaviour
         if (bossHealthUI != null) bossHealthUI.Show();
         SetWallsActive(true);
 
+        if (musicSource != null && battleMusic != null)
+        {
+            musicSource.clip = battleMusic;
+            musicSource.loop = true;
+            musicSource.Play();
+        }
+
         // One-shot: never fire again once the fight has started.
         triggerCollider.enabled = false;
     }
@@ -82,6 +94,13 @@ public class BossArenaController : MonoBehaviour
     private void HandleBossDied()
     {
         SetWallsActive(false);
+
+        if (musicSource != null)
+        {
+            musicSource.loop = false;
+            musicSource.clip = victoryMusic;
+            musicSource.Play();
+        }
     }
 
     private void SetWallsActive(bool active)
