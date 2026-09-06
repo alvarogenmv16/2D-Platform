@@ -11,6 +11,9 @@ public class PlayerAttackHitbox : MonoBehaviour
     [SerializeField] private float attackOffsetY = 1f;
     [SerializeField] private float damage = 1f;
     [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private SfxPlayer sfxPlayer;
+    [SerializeField] private AudioClip swingSound; // plays on every attack, connects or not
+    [SerializeField, Range(0f, 1f)] private float swingVolume = 1f;
 
     private SpriteRenderer spriteRenderer;
 
@@ -31,6 +34,8 @@ public class PlayerAttackHitbox : MonoBehaviour
     // attack begins, so the damage is tied to the visual impact.
     public void OnAttackHit()
     {
+        sfxPlayer?.Play(swingSound, swingVolume);
+
         Vector2 attackPointPosition = GetAttackPointPosition();
         // Box instead of circle: a circle centered on the attack point misses
         // enemies standing very close (just outside its near edge) — a box
