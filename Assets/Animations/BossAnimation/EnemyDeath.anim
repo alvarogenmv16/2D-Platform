@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PlayerDoubleJump
+  m_Name: EnemyDeath
   serializedVersion: 8
   m_Legacy: 0
   m_Compressed: 0
@@ -21,9 +21,13 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 1171877037, guid: 9efcd51428d598843b54254ba1520a8e, type: 3}
-    - time: 0.16666667
-      value: {fileID: 278104436, guid: 9efcd51428d598843b54254ba1520a8e, type: 3}
+      value: {fileID: 171795983, guid: b09c6d73d258b0f4fb38727515075065, type: 3}
+    - time: 0.41666666
+      value: {fileID: 1845363460, guid: b09c6d73d258b0f4fb38727515075065, type: 3}
+    - time: 0.5833333
+      value: {fileID: -1748968353, guid: b09c6d73d258b0f4fb38727515075065, type: 3}
+    - time: 0.68333334
+      value: {fileID: 369933827, guid: b09c6d73d258b0f4fb38727515075065, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -47,14 +51,16 @@ AnimationClip:
       isSerializeReferenceCurve: 0
       metaData: 0
     pptrCurveMapping:
-    - {fileID: 1171877037, guid: 9efcd51428d598843b54254ba1520a8e, type: 3}
-    - {fileID: 278104436, guid: 9efcd51428d598843b54254ba1520a8e, type: 3}
+    - {fileID: 171795983, guid: b09c6d73d258b0f4fb38727515075065, type: 3}
+    - {fileID: 1845363460, guid: b09c6d73d258b0f4fb38727515075065, type: 3}
+    - {fileID: -1748968353, guid: b09c6d73d258b0f4fb38727515075065, type: 3}
+    - {fileID: 369933827, guid: b09c6d73d258b0f4fb38727515075065, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.18333334
+    m_StopTime: 0.7
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

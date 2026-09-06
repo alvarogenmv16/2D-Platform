@@ -5,16 +5,14 @@ public class EnemyAttack : MonoBehaviour
     // =========================
     // VARIABLES
     // =========================
-
-    [SerializeField] private float attackCooldown = 1f;
-    [SerializeField] private EnemyWeapon weapon;
+    [SerializeField] private float attackCooldown = 2f;
+    [SerializeField] private Animator animator;
 
     private float attackCooldownTimer = 0f;
 
     // =========================
     // UPDATE / FIXED UPDATE
     // =========================
-
     private void FixedUpdate()
     {
         if (attackCooldownTimer > 0f)
@@ -34,11 +32,12 @@ public class EnemyAttack : MonoBehaviour
             return;
         }
 
-        Debug.Log("Enemy attacks!");
-
-        if (weapon != null)
+        // Only trigger the animation here. Actual damage is applied later,
+        // via an Animation Event on the frame the tongue is fully extended
+        // — not instantly when the attack starts.
+        if (animator != null)
         {
-            weapon.TryHitPlayer();
+            animator.SetTrigger("AttackTrigger");
         }
 
         attackCooldownTimer = attackCooldown;

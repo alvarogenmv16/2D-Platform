@@ -35,6 +35,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private SpriteRenderer spriteRenderer; // Reference to the SpriteRenderer component
 
+    // Sound
+    [SerializeField] private SfxPlayer sfxPlayer;
+    [SerializeField] private AudioClip dashSound;
+    [SerializeField] private AudioSource walkAudioSource; // separate looping source: Loop on, Play On Awake off
+
     // Components
     private Rigidbody2D rb;
     private InputSystem_Actions inputActions;
@@ -46,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isJumpHeld = false; // true only while extending the CURRENT jump
     private bool isGrounded = false;
     private bool wasGroundedLastFrame = true;
+    public InputSystem_Actions InputActions => inputActions;    // Public getter for inputActions
 
     // =========================
     // START
@@ -124,6 +130,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isDashing)
         {
+            StopWalkSound();
             return;
         }
         // Set horizontal velocity while keeping vertical velocity
@@ -146,6 +153,32 @@ public class PlayerMovement : MonoBehaviour
         // outside the if/else, so it also applies correctly when
         // moveInput.x == 0 (keeps the last known facing).
         spriteRenderer.flipX = facingDirection < 0;
+
+        // Walking sound: only while actually moving on the ground.
+        if (isGrounded && moveInput.x != 0f)
+        {
+            PlayWalkSound();
+        }
+        else
+        {
+            StopWalkSound();
+        }
+    }
+
+    private void PlayWalkSound()
+    {
+        if (walkAudioSource != null && !walkAudioSource.isPlaying)
+        {
+            walkAudioSource.Play();
+        }
+    }
+
+    private void StopWalkSound()
+    {
+        if (walkAudioSource != null && walkAudioSource.isPlaying)
+        {
+            walkAudioSource.Stop();
+        }
     }
 
     private void HandleDash()
@@ -167,6 +200,8 @@ public class PlayerMovement : MonoBehaviour
                 facingDirection * dashSpeed,
                 rb.linearVelocity.y
             );
+
+            sfxPlayer?.Play(dashSound);
         }
 
         // Track dash duration

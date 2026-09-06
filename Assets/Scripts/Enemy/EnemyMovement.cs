@@ -7,7 +7,7 @@ public class EnemyMovement : MonoBehaviour
     // VARIABLES
     // =========================
 
-    [SerializeField] private float moveSpeed = 3f;
+    [SerializeField] private float moveSpeed = 5f;
 
     private Rigidbody2D rb;
 

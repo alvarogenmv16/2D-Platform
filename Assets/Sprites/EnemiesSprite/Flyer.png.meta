@@ -1,0 +1,338 @@
+fileFormatVersion: 2
+guid: 75e7f0f800abced43ba36dbd7e466de5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5882658483856705105
+    second: Flyer_0
+  - first:
+      213: 2319663198070066341
+    second: Flyer_1
+  - first:
+      213: 530708633417819832
+    second: Flyer_2
+  - first:
+      213: -2606686832195932340
+    second: Flyer_3
+  - first:
+      213: 3914961873580812277
+    second: Flyer_4
+  - first:
+      213: -3131924460830552387
+    second: Flyer_5
+  - first:
+      213: -9128522181943111066
+    second: Flyer_6
+  - first:
+      213: -8533253095813106506
+    second: Flyer_7
+  - first:
+      213: 8020164604365352209
+    second: Flyer_8
+  - first:
+      213: -4330122615690133543
+    second: Flyer_9
+  - first:
+      213: -2456102424375600866
+    second: Flyer_10
+  - first:
+      213: -5832243742623873245
+    second: Flyer_11
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Flyer_Idle
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 711
+        width: 604
+        height: 309
+      alignment: 9
+      pivot: {x: 0.49595913, y: 0.02037962}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa978cec6499c5ea0800000000000000
+      internalID: -5882658483856705105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flyer_Death0
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 24
+        width: 421
+        height: 315
+      alignment: 9
+      pivot: {x: 0.5028843, y: 0.025853584}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e519c49d583011e46a2e42a670c65cb6
+      internalID: 678077130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flyer_Death1
+      rect:
+        serializedVersion: 2
+        x: 468
+        y: 21
+        width: 512
+        height: 214
+      alignment: 9
+      pivot: {x: 0.5000001, y: -0.005003314}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8955b037c5a746b44a01705111d75b3e
+      internalID: -500678559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flyer_Death2
+      rect:
+        serializedVersion: 2
+        x: 1034
+        y: 26
+        width: 446
+        height: 250
+      alignment: 9
+      pivot: {x: 0.50272304, y: 0.0045749284}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45c1a3ad35a6cdd4e81d9c6e9b2262e0
+      internalID: 2076157400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flyer_Attack0
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 366
+        width: 559
+        height: 319
+      alignment: 9
+      pivot: {x: 0.5, y: 0.035605595}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47dab99d0c602874fb484e9a7b30bfb7
+      internalID: -1471238824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flyer_Attack1
+      rect:
+        serializedVersion: 2
+        x: 596
+        y: 321
+        width: 415
+        height: 369
+      alignment: 9
+      pivot: {x: 0.5000003, y: 0.022845013}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5b1a86abb8508948a37f189e1ca21ca
+      internalID: 2094769300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flyer_Attack2
+      rect:
+        serializedVersion: 2
+        x: 1079
+        y: 326
+        width: 430
+        height: 438
+      alignment: 9
+      pivot: {x: 0.50847197, y: 0.017615959}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b6cbf44da6a3d24faa6dee1ea88b5af
+      internalID: 1006701104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: bb53fba789e84494997b72d058c0287f
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Flyer_1: 2319663198070066341
+      Flyer_10: -2456102424375600866
+      Flyer_11: -5832243742623873245
+      Flyer_2: 530708633417819832
+      Flyer_3: -2606686832195932340
+      Flyer_4: 3914961873580812277
+      Flyer_5: -3131924460830552387
+      Flyer_6: -9128522181943111066
+      Flyer_7: -8533253095813106506
+      Flyer_8: 8020164604365352209
+      Flyer_9: -4330122615690133543
+      Flyer_Attack0: -1471238824
+      Flyer_Attack1: 2094769300
+      Flyer_Attack2: 1006701104
+      Flyer_Death0: 678077130
+      Flyer_Death1: -500678559
+      Flyer_Death2: 2076157400
+      Flyer_Idle: -5882658483856705105
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
