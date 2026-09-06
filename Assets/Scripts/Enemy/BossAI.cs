@@ -37,6 +37,10 @@ public class BossAI : MonoBehaviour
 
     [Header("Landing")]
     [SerializeField] private float landSpeed = 5f;
+    // Keeps the boss from landing exactly on top of the player. It lands this
+    // far to whichever side it's already approaching from, instead of aiming
+    // straight at the player's own position.
+    [SerializeField] private float landingOffsetFromPlayer = 2f;
     // Optional: if assigned, landing stops as soon as this touches the Ground
     // layer, instead of relying on reaching arena.FloorY exactly. Removes the
     // need to hand-calibrate FloorY to the pixel — the boss just descends
@@ -136,9 +140,16 @@ public class BossAI : MonoBehaviour
 
     private void EnterLanding()
     {
+        // Land beside the player, not on top of them — offset towards
+        // whichever side the boss is currently approaching from.
+        float approachDirection = Mathf.Sign(transform.position.x - player.position.x);
+        if (approachDirection == 0f) approachDirection = 1f;
+
+        float rawTargetX = player.position.x + approachDirection * landingOffsetFromPlayer;
+
         float targetX = arena != null
-            ? Mathf.Clamp(player.position.x, arena.LeftBoundX, arena.RightBoundX)
-            : player.position.x;
+            ? Mathf.Clamp(rawTargetX, arena.LeftBoundX, arena.RightBoundX)
+            : rawTargetX;
 
         // Aim comfortably below the floor estimate — with groundCheck assigned,
         // HandleLanding stops the instant it detects solid ground, so this exact
