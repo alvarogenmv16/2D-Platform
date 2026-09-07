@@ -1,0 +1,528 @@
+fileFormatVersion: 2
+guid: 06953bff88bcca5449537e35eb9a7e0d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8818369724469349649
+    second: eye_attacks_0
+  - first:
+      213: -8530296342938029052
+    second: eye_attacks_1
+  - first:
+      213: 7280036636814418674
+    second: eye_attacks_2
+  - first:
+      213: 7607930353866897018
+    second: eye_attacks_3
+  - first:
+      213: -7219958874472573928
+    second: eye_attacks_4
+  - first:
+      213: 4172628650525545350
+    second: eye_attacks_5
+  - first:
+      213: 7705522973379487107
+    second: eye_attacks_6
+  - first:
+      213: 4631053332802904346
+    second: eye_attacks_7
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: eye_portal0
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 866
+        width: 135
+        height: 77
+      alignment: 9
+      pivot: {x: 0.4910055, y: 0.389612}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e683bb214d84c34a8a66c085752faef
+      internalID: -8818369724469349649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: eye_portal1
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 862
+        width: 166
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca4bb8e5efba2304ab61e2332f65ec48
+      internalID: 2015268498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: eye_portal2
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 846
+        width: 198
+        height: 115
+      alignment: 9
+      pivot: {x: 0.5061331, y: 0.45776474}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb86dfa350e3a5f4db5eebd9c1fbaba4
+      internalID: 1557928287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: eye_beamV0
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 555
+        width: 65
+        height: 419
+      alignment: 9
+      pivot: {x: 0.50000095, y: 0.06819273}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b517d89af5e32424f94f3c2c3195cfec
+      internalID: 443492800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: eye_beamV1
+      rect:
+        serializedVersion: 2
+        x: 834
+        y: 555
+        width: 64
+        height: 421
+      alignment: 9
+      pivot: {x: 0.5373648, y: 0.05952708}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3f4062ca3741fb4d8b3476628462038
+      internalID: 1481683299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: eye_beamV2
+      rect:
+        serializedVersion: 2
+        x: 913
+        y: 560
+        width: 97
+        height: 413
+      alignment: 9
+      pivot: {x: 0.52503765, y: 0.035458174}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 667b9f6dcc5e7a841ba7ecda13c0f7bc
+      internalID: -1661978882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: eye_beamV3
+      rect:
+        serializedVersion: 2
+        x: 1018
+        y: 559
+        width: 106
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a2a2f95db61603489505519fe6891c5
+      internalID: 567420556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: eye_beamH0
+      rect:
+        serializedVersion: 2
+        x: 1160
+        y: 915
+        width: 351
+        height: 61
+      alignment: 9
+      pivot: {x: 0.09870063, y: 0.4402826}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee8e53b6452c4074dbb64137f82c2051
+      internalID: -19849548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: eye_beamH1
+      rect:
+        serializedVersion: 2
+        x: 1170
+        y: 837
+        width: 339
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ff931d8b53c2ab49abd16089db524b9
+      internalID: -1186977574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: eye_beamH2
+      rect:
+        serializedVersion: 2
+        x: 1165
+        y: 728
+        width: 358
+        height: 77
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee68b89571a58214db83ada0cd899999
+      internalID: -898857812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: eye_beamH3
+      rect:
+        serializedVersion: 2
+        x: 1166
+        y: 581
+        width: 355
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e674f8efdbd2c3944b11bfa006e9e7d1
+      internalID: -705521985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: eye_rock
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 556
+        width: 116
+        height: 227
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfcc1010ed0cc054d8ed6e0891d8edc7
+      internalID: -1828326663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: eye_death0
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 129
+        width: 173
+        height: 335
+      alignment: 9
+      pivot: {x: 0.47894317, y: 0.039662056}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55260f0bb696b774d87eadc93c1158dd
+      internalID: -1212292176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: eye_death1
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 130
+        width: 178
+        height: 336
+      alignment: 9
+      pivot: {x: 0.5000002, y: 0.022962434}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e525db1edd16c6a49b40dd25680b641d
+      internalID: -2112364120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: eye_death2
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 126
+        width: 164
+        height: 337
+      alignment: 9
+      pivot: {x: 0.5148085, y: 0.02798136}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 588bb5be916bcc6498bf977c051454bf
+      internalID: -1776419347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: eye_death3
+      rect:
+        serializedVersion: 2
+        x: 553
+        y: 133
+        width: 141
+        height: 335
+      alignment: 9
+      pivot: {x: 0.52583647, y: 0.021538442}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96e94b325f75a4f44a889cd2a99c84f4
+      internalID: -2053403730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 4966b6f6a9bb41c4fbc7bada27e3cff7
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      eye_attacks_1: -8530296342938029052
+      eye_attacks_3: 7607930353866897018
+      eye_attacks_4: -7219958874472573928
+      eye_attacks_5: 4172628650525545350
+      eye_attacks_6: 7705522973379487107
+      eye_attacks_7: 4631053332802904346
+      eye_beamH0: -19849548
+      eye_beamH1: -1186977574
+      eye_beamH2: -898857812
+      eye_beamH3: -705521985
+      eye_beamV0: 443492800
+      eye_beamV1: 1481683299
+      eye_beamV2: -1661978882
+      eye_beamV3: 567420556
+      eye_death0: -1212292176
+      eye_death1: -2112364120
+      eye_death2: -1776419347
+      eye_death3: -2053403730
+      eye_portal0: -8818369724469349649
+      eye_portal1: 7280036636814418674
+      eye_portal2: 1557928287
+      eye_rock: -1828326663
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
