@@ -1,10 +1,12 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 // Eye boss state machine. Sits Dormant until something (EyeArenaController)
-// calls Activate(). Phase 1 (portal/projectile attacks) and Phase 2
-// (platforming + light-burst attacks) hook into their respective states once
-// designed — this only covers the summon and the health-driven phase switch.
+// calls Activate(). Phase 1 (portal/projectile attacks, plus wandering
+// between spots in the arena) and Phase 2 (platforming + light-burst
+// attacks) hook into their respective states once fully designed.
+[RequireComponent(typeof(FlyingEnemyMovement))]
 public class EyeAI : MonoBehaviour
 {
     // =========================
@@ -25,6 +27,11 @@ public class EyeAI : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private EnemyHealth health;
     [SerializeField] private EyeArenaController arena;
+    [SerializeField] private EyeFloorCrumble arenaFloor;
+    // Hidden until the summon actually starts — otherwise the Animator's
+    // default Idle state (holding the fully-grown sprite) is visible from
+    // the moment the scene loads, well before Activate() is ever called.
+    [SerializeField] private SpriteRenderer visualsRenderer;
 
     [Header("Phase transition")]
     // Fraction of max health (0-1) at which Phase 1 ends and Phase 2 begins.
@@ -36,15 +43,39 @@ public class EyeAI : MonoBehaviour
     [SerializeField] private float barrageDuration = 10f; // how long a single barrage keeps spawning portals
     [SerializeField] private float barrageCooldown = 1.5f; // pause between barrages, before the next one starts
 
+    [Header("Phase 1 - wandering")]
+    [SerializeField] private float wanderSpeed = 3f;
+    [SerializeField] private float minWanderPause = 2f; // how long it sits still at each spot before moving again
+    [SerializeField] private float maxWanderPause = 4f;
+    // Keeps wander targets off the walls, same reasoning as BossAI's wallMargin.
+    [SerializeField] private float wanderMarginX = 3.5f;
+    // No upward attack exists yet, so it's kept low enough that a double jump
+    // can still reach it — this is a rough estimate from the player's jump
+    // physics (jumpForces 5/4, gravityScale 1), not a measured value. Tune
+    // both after playtesting the actual double-jump apex.
+    [SerializeField] private float minHeightAboveFloor = 1.5f;
+    [SerializeField] private float maxHeightAboveFloor = 3.5f;
+
     [Header("Sound")]
     [SerializeField] private SfxPlayer sfxPlayer;
     [SerializeField] private AudioClip summonSound;
 
+    // Fires once the summon animation actually finishes (fully grown), not
+    // when it starts — lets EyeArenaController hold the battle music until
+    // the Eye is fully "loaded" instead of starting it on the reveal cut.
+    public UnityEvent OnSummonComplete;
+
     private bool hasEnteredPhase2 = false;
+    private FlyingEnemyMovement movement;
 
     // =========================
     // START
     // =========================
+    private void Start()
+    {
+        movement = GetComponent<FlyingEnemyMovement>();
+    }
+
     private void OnEnable()
     {
         if (health != null)
@@ -76,6 +107,8 @@ public class EyeAI : MonoBehaviour
 
     private IEnumerator SummonSequence()
     {
+        if (visualsRenderer != null) visualsRenderer.enabled = true;
+
         sfxPlayer?.Play(summonSound);
 
         if (animator != null)
@@ -85,7 +118,43 @@ public class EyeAI : MonoBehaviour
         }
 
         currentState = EyeState.Phase1;
+        OnSummonComplete?.Invoke();
         StartCoroutine(Phase1Loop());
+        StartCoroutine(WanderLoop());
+    }
+
+    // Drifts to a random spot in the arena, sits there a while, then picks a
+    // new one — runs alongside Phase1Loop so the Eye isn't just a static
+    // target sitting wherever it landed after the summon.
+    private IEnumerator WanderLoop()
+    {
+        while (currentState == EyeState.Phase1)
+        {
+            Vector2 target = PickWanderTarget();
+
+            bool arrived = false;
+            while (currentState == EyeState.Phase1 && !arrived)
+            {
+                arrived = movement.MoveTowards(target, wanderSpeed);
+                yield return new WaitForFixedUpdate();
+            }
+
+            if (currentState != EyeState.Phase1) yield break;
+
+            yield return new WaitForSeconds(Random.Range(minWanderPause, maxWanderPause));
+        }
+    }
+
+    private Vector2 PickWanderTarget()
+    {
+        if (arena == null) return transform.position;
+
+        float minX = Mathf.Min(arena.LeftBoundX + wanderMarginX, arena.RightBoundX - wanderMarginX);
+        float maxX = Mathf.Max(arena.RightBoundX - wanderMarginX, arena.LeftBoundX + wanderMarginX);
+
+        float x = Random.Range(minX, maxX);
+        float y = arena.FloorY + Random.Range(minHeightAboveFloor, maxHeightAboveFloor);
+        return new Vector2(x, y);
     }
 
     // Repeats barrage -> cooldown -> barrage for as long as Phase1 stays
@@ -147,10 +216,16 @@ public class EyeAI : MonoBehaviour
 
     private IEnumerator Phase2TransitionSequence()
     {
-        // TODO: stop Phase 1's portal attacks and play the phase-transition
-        // animation/VFX here once Phase 2's art and arena are designed.
-        yield return null;
+        // Phase1Loop/WanderLoop stop on their own next iteration (both check
+        // currentState == Phase1, already false by the time this runs).
+        if (arenaFloor != null)
+        {
+            yield return StartCoroutine(arenaFloor.Crumble());
+        }
 
+        // TODO: once Room 2 (the Phase 2 platforming arena) exists below,
+        // move the Eye down to its first perch point here instead of just
+        // sitting still — right now it has no real Phase 2 yet.
         currentState = EyeState.Phase2;
     }
 

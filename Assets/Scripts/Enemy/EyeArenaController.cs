@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 // Owns the Eye fight's entry trigger, arena bounds, and the wall/health-bar
@@ -26,6 +27,11 @@ public class EyeArenaController : MonoBehaviour
     [SerializeField] private AudioSource musicSource; // one source, clip swapped per phase
     [SerializeField] private AudioClip battleMusic;
     [SerializeField] private AudioClip victoryMusic;
+
+    [Header("Reveal timing")]
+    // Gap between the arena sealing shut and the Eye/music actually kicking
+    // in — reads as "something is about to happen" instead of an instant cut.
+    [SerializeField] private float revealDelay = 1.5f;
 
     private Collider2D triggerCollider;
     private bool hasActivated = false;
@@ -56,6 +62,11 @@ public class EyeArenaController : MonoBehaviour
         {
             eyeHealth.OnDied.AddListener(HandleEyeDied);
         }
+
+        if (eye != null)
+        {
+            eye.OnSummonComplete.AddListener(HandleSummonComplete);
+        }
     }
 
     private void OnDisable()
@@ -63,6 +74,11 @@ public class EyeArenaController : MonoBehaviour
         if (eyeHealth != null)
         {
             eyeHealth.OnDied.RemoveListener(HandleEyeDied);
+        }
+
+        if (eye != null)
+        {
+            eye.OnSummonComplete.RemoveListener(HandleSummonComplete);
         }
     }
 
@@ -78,19 +94,32 @@ public class EyeArenaController : MonoBehaviour
 
         hasActivated = true;
 
+        // Seal the room immediately — the trapped feeling comes first, the
+        // reveal follows after a beat instead of landing on the same frame.
+        SetWallsActive(true);
+        triggerCollider.enabled = false; // one-shot: never fire again once the fight has started
+
+        StartCoroutine(RevealSequence());
+    }
+
+    private IEnumerator RevealSequence()
+    {
+        yield return new WaitForSeconds(revealDelay);
+
         if (eye != null) eye.Activate();
         if (eyeHealthUI != null) eyeHealthUI.Show();
-        SetWallsActive(true);
+    }
 
+    // Called via EyeAI.OnSummonComplete — only once the Eye has actually
+    // finished growing in, not the moment it starts appearing.
+    private void HandleSummonComplete()
+    {
         if (musicSource != null && battleMusic != null)
         {
             musicSource.clip = battleMusic;
             musicSource.loop = true;
             musicSource.Play();
         }
-
-        // One-shot: never fire again once the fight has started.
-        triggerCollider.enabled = false;
     }
 
     private void HandleEyeDied()
