@@ -28,6 +28,32 @@ public class BossHealthUI : MonoBehaviour
 
     private void OnEnable()
     {
+        Subscribe();
+    }
+
+    private void OnDisable()
+    {
+        Unsubscribe();
+    }
+
+    // =========================
+    // FUNCTIONS
+    // =========================
+
+    // Points this bar at a different EnemyHealth after the fact — needed
+    // when the target (e.g. the Eye, arriving via a mid-fight scene
+    // transition) isn't part of this scene's saved data, so it can't be
+    // wired through the Inspector like the normal Boss fight can.
+    public void Bind(EnemyHealth health)
+    {
+        Unsubscribe();
+        bossHealth = health;
+        Subscribe();
+        bossHealth?.RepublishHealth();
+    }
+
+    private void Subscribe()
+    {
         if (bossHealth != null)
         {
             bossHealth.OnHealthChanged.AddListener(UpdateFill);
@@ -35,7 +61,7 @@ public class BossHealthUI : MonoBehaviour
         }
     }
 
-    private void OnDisable()
+    private void Unsubscribe()
     {
         if (bossHealth != null)
         {
@@ -43,10 +69,6 @@ public class BossHealthUI : MonoBehaviour
             bossHealth.OnDied.RemoveListener(Hide);
         }
     }
-
-    // =========================
-    // FUNCTIONS
-    // =========================
 
     public void Show()
     {

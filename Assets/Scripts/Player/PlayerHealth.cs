@@ -51,6 +51,15 @@ public class PlayerHealth : MonoBehaviour
     // FUNCTIONS
     // =========================
 
+    // Re-fires OnHealthChanged with the current values, unprompted by any
+    // actual damage. Used when a health UI binds to this PlayerHealth after
+    // the fact (e.g. after a mid-fight scene transition) so it shows the
+    // real value immediately instead of a stale default until the next hit.
+    public void RepublishHealth()
+    {
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
+    }
+
     public void TakeDamage(float amount, Vector2 hitSourcePosition)
     {
         // Ignore damage while dead or during the brief invulnerability

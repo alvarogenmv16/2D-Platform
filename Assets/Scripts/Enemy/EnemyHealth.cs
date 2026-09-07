@@ -48,6 +48,16 @@ public class EnemyHealth : MonoBehaviour
     // FUNCTIONS
     // =========================
 
+    // Re-fires OnHealthChanged with the current values, unprompted by any
+    // actual damage. Used when a health bar binds to this EnemyHealth after
+    // the fact (e.g. the Eye's Phase 2 UI, bound once it arrives in a scene
+    // it wasn't originally part of) so it shows the real value immediately
+    // instead of a stale default until the next hit lands.
+    public void RepublishHealth()
+    {
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
+    }
+
     public void TakeDamage(float amount, Vector2 hitSourcePosition)
     {
         if (isDead) return;
