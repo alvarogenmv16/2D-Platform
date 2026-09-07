@@ -1,0 +1,1092 @@
+fileFormatVersion: 2
+guid: 1ad2118793b5da940b5444e43d9044fb
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2257859144639292504
+    second: beast_floor_0
+  - first:
+      213: -7939306080341103854
+    second: beast_floor_1
+  - first:
+      213: 2478877931954730446
+    second: beast_floor_2
+  - first:
+      213: -70989815846965645
+    second: beast_floor_3
+  - first:
+      213: -2626294115477210802
+    second: beast_floor_4
+  - first:
+      213: 8363147031694249928
+    second: beast_floor_5
+  - first:
+      213: 5364221881205664853
+    second: beast_floor_6
+  - first:
+      213: 4697698484682987362
+    second: beast_floor_7
+  - first:
+      213: 3212908230427460111
+    second: beast_floor_8
+  - first:
+      213: 2750008051281393922
+    second: beast_floor_9
+  - first:
+      213: 7443801137999618973
+    second: beast_floor_10
+  - first:
+      213: 8251967337949180711
+    second: beast_floor_11
+  - first:
+      213: -2732941614447758793
+    second: beast_floor_12
+  - first:
+      213: -4098638900939463701
+    second: beast_floor_13
+  - first:
+      213: 3743508445520368503
+    second: beast_floor_14
+  - first:
+      213: -7670086783294499485
+    second: beast_floor_15
+  - first:
+      213: 5500719658934129664
+    second: beast_floor_16
+  - first:
+      213: -3543132129471779353
+    second: beast_floor_17
+  - first:
+      213: 6929743872541438747
+    second: beast_floor_18
+  - first:
+      213: -3175936401031044530
+    second: beast_floor_19
+  - first:
+      213: 1214980331101270126
+    second: beast_floor_20
+  - first:
+      213: -5068911047952217169
+    second: beast_floor_21
+  - first:
+      213: -5649100103944179644
+    second: beast_floor_22
+  - first:
+      213: -4965572875737722572
+    second: beast_floor_23
+  - first:
+      213: -6433036161129389856
+    second: beast_floor_24
+  - first:
+      213: -6811832332228100005
+    second: beast_floor_25
+  - first:
+      213: 1752699706221602330
+    second: beast_floor_26
+  - first:
+      213: 3018332482059820534
+    second: beast_floor_27
+  - first:
+      213: -8079865370234822005
+    second: beast_floor_28
+  - first:
+      213: 1450499916551685087
+    second: beast_floor_29
+  - first:
+      213: -5905485229418718897
+    second: beast_floor_30
+  - first:
+      213: 3126817963853632812
+    second: beast_floor_31
+  - first:
+      213: -4638701976239531283
+    second: beast_floor_32
+  - first:
+      213: 1723691522213866467
+    second: beast_floor_33
+  - first:
+      213: 1011146458911141362
+    second: beast_floor_34
+  - first:
+      213: 8538996154240061490
+    second: beast_floor_35
+  - first:
+      213: 5829775447980778202
+    second: beast_floor_36
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: beast_floor_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 865
+        width: 1121
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ab58e212197aa0e0800000000000000
+      internalID: -2257859144639292504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_1
+      rect:
+        serializedVersion: 2
+        x: 1132
+        y: 843
+        width: 307
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21b6b262f2be1d190800000000000000
+      internalID: -7939306080341103854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_2
+      rect:
+        serializedVersion: 2
+        x: 1240
+        y: 1008
+        width: 19
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec577bf685eb66220800000000000000
+      internalID: 2478877931954730446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_3
+      rect:
+        serializedVersion: 2
+        x: 1446
+        y: 947
+        width: 69
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37e65cb732bc30ff0800000000000000
+      internalID: -70989815846965645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_4
+      rect:
+        serializedVersion: 2
+        x: 1486
+        y: 965
+        width: 25
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e49384baa678d8bd0800000000000000
+      internalID: -2626294115477210802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_5
+      rect:
+        serializedVersion: 2
+        x: 1510
+        y: 967
+        width: 26
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8cf8f7c5aeddf0470800000000000000
+      internalID: 8363147031694249928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_6
+      rect:
+        serializedVersion: 2
+        x: 1462
+        y: 885
+        width: 72
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55c24ad416b817a40800000000000000
+      internalID: 5364221881205664853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_7
+      rect:
+        serializedVersion: 2
+        x: 1520
+        y: 919
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2679b61e1e3913140800000000000000
+      internalID: 4697698484682987362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_8
+      rect:
+        serializedVersion: 2
+        x: 458
+        y: 861
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f02ce8a430b869c20800000000000000
+      internalID: 3212908230427460111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_9
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 859
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2097712a0cdf92620800000000000000
+      internalID: 2750008051281393922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_10
+      rect:
+        serializedVersion: 2
+        x: 646
+        y: 853
+        width: 13
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d93ad1132b1bd4760800000000000000
+      internalID: 7443801137999618973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_11
+      rect:
+        serializedVersion: 2
+        x: 808
+        y: 863
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7233694b290e48270800000000000000
+      internalID: 8251967337949180711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_12
+      rect:
+        serializedVersion: 2
+        x: 886
+        y: 861
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73275f6d414a21ad0800000000000000
+      internalID: -2732941614447758793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_13
+      rect:
+        serializedVersion: 2
+        x: 908
+        y: 847
+        width: 23
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be3e7e692a5be17c0800000000000000
+      internalID: -4098638900939463701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_14
+      rect:
+        serializedVersion: 2
+        x: 1180
+        y: 869
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7739ae4e81d93f330800000000000000
+      internalID: 3743508445520368503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_15
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 699
+        width: 1089
+        height: 169
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 365105d55b06e8590800000000000000
+      internalID: -7670086783294499485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_16
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 849
+        width: 21
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 004d6cfb26b765c40800000000000000
+      internalID: 5500719658934129664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_17
+      rect:
+        serializedVersion: 2
+        x: 706
+        y: 857
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7edaf8eb91444dec0800000000000000
+      internalID: -3543132129471779353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_18
+      rect:
+        serializedVersion: 2
+        x: 1108
+        y: 399
+        width: 415
+        height: 459
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b13b54336556b2060800000000000000
+      internalID: 6929743872541438747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_19
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 531
+        width: 1109
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e42ef4b8baecce3d0800000000000000
+      internalID: -3175936401031044530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_20
+      rect:
+        serializedVersion: 2
+        x: 1147
+        y: 537
+        width: 318
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e60b0648c2a7cd010800000000000000
+      internalID: 1214980331101270126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_21
+      rect:
+        serializedVersion: 2
+        x: 1478
+        y: 581
+        width: 9
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fab41c4124c97a9b0800000000000000
+      internalID: -5068911047952217169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_22
+      rect:
+        serializedVersion: 2
+        x: 1498
+        y: 583
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 440f8cbb26d5a91b0800000000000000
+      internalID: -5649100103944179644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_23
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 542
+        width: 17
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 431965b37cdb61bb0800000000000000
+      internalID: -4965572875737722572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_24
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 549
+        width: 7
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e0e3a4f1b349b6a0800000000000000
+      internalID: -6433036161129389856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 620
+        height: 545
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b500600a5928771a0800000000000000
+      internalID: -6811832332228100005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_26
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 531
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a16254bb817d25810800000000000000
+      internalID: 1752699706221602330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_27
+      rect:
+        serializedVersion: 2
+        x: 598
+        y: 17
+        width: 238
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6fdd23f866543e920800000000000000
+      internalID: 3018332482059820534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_28
+      rect:
+        serializedVersion: 2
+        x: 834
+        y: 0
+        width: 397
+        height: 528
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b826c26314d8edf80800000000000000
+      internalID: -8079865370234822005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_29
+      rect:
+        serializedVersion: 2
+        x: 1230
+        y: 481
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd30cc03df5312410800000000000000
+      internalID: 1450499916551685087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_30
+      rect:
+        serializedVersion: 2
+        x: 1236
+        y: 17
+        width: 295
+        height: 498
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f495e22f8708b0ea0800000000000000
+      internalID: -5905485229418718897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_31
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 281
+        width: 75
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c255ecc1f50b46b20800000000000000
+      internalID: 3126817963853632812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_32
+      rect:
+        serializedVersion: 2
+        x: 1216
+        y: 401
+        width: 7
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dea1757212500afb0800000000000000
+      internalID: -4638701976239531283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_33
+      rect:
+        serializedVersion: 2
+        x: 1214
+        y: 233
+        width: 55
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ebe8e39e48cbe710800000000000000
+      internalID: 1723691522213866467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_34
+      rect:
+        serializedVersion: 2
+        x: 1248
+        y: 135
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fdea4bd850580e00800000000000000
+      internalID: 1011146458911141362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_35
+      rect:
+        serializedVersion: 2
+        x: 830
+        y: 79
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 230d7efb2cb908670800000000000000
+      internalID: 8538996154240061490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_36
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 27
+        width: 13
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad22039e1e587e050800000000000000
+      internalID: 5829775447980778202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      beast_floor_0: -2257859144639292504
+      beast_floor_1: -7939306080341103854
+      beast_floor_10: 7443801137999618973
+      beast_floor_11: 8251967337949180711
+      beast_floor_12: -2732941614447758793
+      beast_floor_13: -4098638900939463701
+      beast_floor_14: 3743508445520368503
+      beast_floor_15: -7670086783294499485
+      beast_floor_16: 5500719658934129664
+      beast_floor_17: -3543132129471779353
+      beast_floor_18: 6929743872541438747
+      beast_floor_19: -3175936401031044530
+      beast_floor_2: 2478877931954730446
+      beast_floor_20: 1214980331101270126
+      beast_floor_21: -5068911047952217169
+      beast_floor_22: -5649100103944179644
+      beast_floor_23: -4965572875737722572
+      beast_floor_24: -6433036161129389856
+      beast_floor_25: -6811832332228100005
+      beast_floor_26: 1752699706221602330
+      beast_floor_27: 3018332482059820534
+      beast_floor_28: -8079865370234822005
+      beast_floor_29: 1450499916551685087
+      beast_floor_3: -70989815846965645
+      beast_floor_30: -5905485229418718897
+      beast_floor_31: 3126817963853632812
+      beast_floor_32: -4638701976239531283
+      beast_floor_33: 1723691522213866467
+      beast_floor_34: 1011146458911141362
+      beast_floor_35: 8538996154240061490
+      beast_floor_36: 5829775447980778202
+      beast_floor_4: -2626294115477210802
+      beast_floor_5: 8363147031694249928
+      beast_floor_6: 5364221881205664853
+      beast_floor_7: 4697698484682987362
+      beast_floor_8: 3212908230427460111
+      beast_floor_9: 2750008051281393922
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

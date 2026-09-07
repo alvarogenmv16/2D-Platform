@@ -1,0 +1,806 @@
+fileFormatVersion: 2
+guid: 7873d504bcf4f3c4090bd4024ccb1b24
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6537465385517653375
+    second: floor_eye_0
+  - first:
+      213: -7353392307490602227
+    second: floor_eye_1
+  - first:
+      213: -1261567143669103323
+    second: floor_eye_2
+  - first:
+      213: 1430783221947617036
+    second: floor_eye_3
+  - first:
+      213: 2188097353162308879
+    second: floor_eye_4
+  - first:
+      213: 6856184822305520210
+    second: floor_eye_5
+  - first:
+      213: 8326342634156052266
+    second: floor_eye_6
+  - first:
+      213: 3879126284496570462
+    second: floor_eye_7
+  - first:
+      213: 1955118431689679223
+    second: floor_eye_8
+  - first:
+      213: 4629264130899817801
+    second: floor_eye_9
+  - first:
+      213: 6593355616868594923
+    second: floor_eye_10
+  - first:
+      213: -607546749806597054
+    second: floor_eye_11
+  - first:
+      213: -8845592274943050302
+    second: floor_eye_12
+  - first:
+      213: 3960148256037782897
+    second: floor_eye_13
+  - first:
+      213: 2363819043801715642
+    second: floor_eye_14
+  - first:
+      213: 5012993601125299117
+    second: floor_eye_15
+  - first:
+      213: -4848217066238424419
+    second: floor_eye_16
+  - first:
+      213: 4628026648199879822
+    second: floor_eye_17
+  - first:
+      213: 4418146395385383316
+    second: floor_eye_18
+  - first:
+      213: 922349563139683021
+    second: floor_eye_19
+  - first:
+      213: 4577237002388812756
+    second: floor_eye_20
+  - first:
+      213: 3918805258865076513
+    second: floor_eye_21
+  - first:
+      213: 9156523892041441383
+    second: floor_eye_22
+  - first:
+      213: -8241024499983040876
+    second: floor_eye_23
+  - first:
+      213: -7355541049753272657
+    second: floor_eye_24
+  - first:
+      213: 4947740105928055589
+    second: floor_eye_25
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: floor_eye_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 821
+        width: 162
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 182eecc6ed14645a0800000000000000
+      internalID: -6537465385517653375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_eye_1
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 807
+        width: 246
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d03cee108a083f990800000000000000
+      internalID: -7353392307490602227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_eye_2
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 813
+        width: 150
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5258c4ded530e7ee0800000000000000
+      internalID: -1261567143669103323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_eye_3
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 858
+        width: 52
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0fc6ce72c92bd310800000000000000
+      internalID: 1430783221947617036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_eye_4
+      rect:
+        serializedVersion: 2
+        x: 875
+        y: 836
+        width: 70
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0d363d13fead5e10800000000000000
+      internalID: 2188097353162308879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_eye_5
+      rect:
+        serializedVersion: 2
+        x: 1044
+        y: 856
+        width: 36
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25af1ff25cf062f50800000000000000
+      internalID: 6856184822305520210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_eye_6
+      rect:
+        serializedVersion: 2
+        x: 1070
+        y: 846
+        width: 26
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2fcf0bc28c1d8370800000000000000
+      internalID: 8326342634156052266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_eye_7
+      rect:
+        serializedVersion: 2
+        x: 1151
+        y: 821
+        width: 27
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e588c42adcc65d530800000000000000
+      internalID: 3879126284496570462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_eye_8
+      rect:
+        serializedVersion: 2
+        x: 1274
+        y: 862
+        width: 21
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 771aeaedad9f12b10800000000000000
+      internalID: 1955118431689679223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_eye_9
+      rect:
+        serializedVersion: 2
+        x: 1417
+        y: 789
+        width: 161
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 945bdbd33337e3040800000000000000
+      internalID: 4629264130899817801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_eye_10
+      rect:
+        serializedVersion: 2
+        x: 1667
+        y: 838
+        width: 86
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be4774d100e408b50800000000000000
+      internalID: 6593355616868594923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_eye_11
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 523
+        width: 1714
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24ca551337f8197f0800000000000000
+      internalID: -607546749806597054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_eye_12
+      rect:
+        serializedVersion: 2
+        x: 1718
+        y: 627
+        width: 31
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cd741021b42e3580800000000000000
+      internalID: -8845592274943050302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_eye_13
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 305
+        width: 448
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 175c30b6bd545f630800000000000000
+      internalID: 3960148256037782897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_eye_14
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 311
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab3da1375e8fdc020800000000000000
+      internalID: 2363819043801715642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_eye_15
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 299
+        width: 515
+        height: 231
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da33168ce1bb19540800000000000000
+      internalID: 5012993601125299117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_eye_16
+      rect:
+        serializedVersion: 2
+        x: 1064
+        y: 313
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9a4fd4e34ca7bcb0800000000000000
+      internalID: -4848217066238424419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_eye_17
+      rect:
+        serializedVersion: 2
+        x: 1064
+        y: 296
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8cdef857bd0a3040800000000000000
+      internalID: 4628026648199879822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_eye_18
+      rect:
+        serializedVersion: 2
+        x: 1084
+        y: 100
+        width: 679
+        height: 436
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4994e9efcb8605d30800000000000000
+      internalID: 4418146395385383316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_eye_19
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 0
+        width: 1098
+        height: 276
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc27da57a08dccc00800000000000000
+      internalID: 922349563139683021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_eye_20
+      rect:
+        serializedVersion: 2
+        x: 1157
+        y: 0
+        width: 461
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d3b82c6dcc958f30800000000000000
+      internalID: 4577237002388812756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_eye_21
+      rect:
+        serializedVersion: 2
+        x: 1597
+        y: 168
+        width: 25
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 129e596ce94626630800000000000000
+      internalID: 3918805258865076513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_eye_22
+      rect:
+        serializedVersion: 2
+        x: 1701
+        y: 71
+        width: 24
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 760e18a67f1821f70800000000000000
+      internalID: 9156523892041441383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_eye_23
+      rect:
+        serializedVersion: 2
+        x: 1653
+        y: 0
+        width: 41
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49e383d41eff1ad80800000000000000
+      internalID: -8241024499983040876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_eye_24
+      rect:
+        serializedVersion: 2
+        x: 1699
+        y: 47
+        width: 16
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: faef6a6f26edbe990800000000000000
+      internalID: -7355541049753272657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_eye_25
+      rect:
+        serializedVersion: 2
+        x: 705
+        y: 21
+        width: 16
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52b9bce7967e9a440800000000000000
+      internalID: 4947740105928055589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      floor_eye_0: -6537465385517653375
+      floor_eye_1: -7353392307490602227
+      floor_eye_10: 6593355616868594923
+      floor_eye_11: -607546749806597054
+      floor_eye_12: -8845592274943050302
+      floor_eye_13: 3960148256037782897
+      floor_eye_14: 2363819043801715642
+      floor_eye_15: 5012993601125299117
+      floor_eye_16: -4848217066238424419
+      floor_eye_17: 4628026648199879822
+      floor_eye_18: 4418146395385383316
+      floor_eye_19: 922349563139683021
+      floor_eye_2: -1261567143669103323
+      floor_eye_20: 4577237002388812756
+      floor_eye_21: 3918805258865076513
+      floor_eye_22: 9156523892041441383
+      floor_eye_23: -8241024499983040876
+      floor_eye_24: -7355541049753272657
+      floor_eye_25: 4947740105928055589
+      floor_eye_3: 1430783221947617036
+      floor_eye_4: 2188097353162308879
+      floor_eye_5: 6856184822305520210
+      floor_eye_6: 8326342634156052266
+      floor_eye_7: 3879126284496570462
+      floor_eye_8: 1955118431689679223
+      floor_eye_9: 4629264130899817801
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
