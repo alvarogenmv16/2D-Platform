@@ -131,155 +131,243 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Background2_0
+      name: Floor0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 341
-        width: 1397
-        height: 683
+        x: 102
+        y: 883
+        width: 189
+        height: 129
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: db2f18a2300801560800000000000000
-      internalID: 7282461348544508605
+      spriteID: 46820626e0296584d89b7b9ce43d54ff
+      internalID: 815765149
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Background2_1
+      name: Floor1
       rect:
         serializedVersion: 2
-        x: 540
-        y: 0
-        width: 982
-        height: 794
+        x: 372
+        y: 703
+        width: 333
+        height: 141
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: bf6e7444f0e427810800000000000000
-      internalID: 1761556231732324091
+      spriteID: bf5d934532e367e418ab2f60dd77d66f
+      internalID: 748737364
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Background2_2
+      name: Column0
       rect:
         serializedVersion: 2
-        x: 1392
-        y: 685
-        width: 131
-        height: 326
+        x: 18
+        y: 364
+        width: 70
+        height: 652
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: b01186f84ea5aacd0800000000000000
-      internalID: -2546122701619588853
+      spriteID: 39f7a79e1ae256841bff337e54547fe0
+      internalID: -1264539162
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Background2_3
+      name: Column1
       rect:
         serializedVersion: 2
-        x: 12
-        y: 0
-        width: 349
-        height: 337
+        x: 762
+        y: 442
+        width: 97
+        height: 572
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 37bf760621fc56ec0800000000000000
-      internalID: -3574223051414832269
+      spriteID: d8c5a9f42dbc0ae48a4f8be83355f71c
+      internalID: 1767837592
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Background2_4
+      name: Spikes
       rect:
         serializedVersion: 2
-        x: 162
-        y: 0
-        width: 29
-        height: 28
+        x: 1113
+        y: 837
+        width: 281
+        height: 173
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 1c75aa014fa638340800000000000000
-      internalID: 4864849618974431169
+      spriteID: 5b40810daf7fa164e854577af0267cc4
+      internalID: -149583038
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Background2_5
+      name: SpikesV0
       rect:
         serializedVersion: 2
-        x: 360
-        y: 27
-        width: 201
-        height: 313
+        x: 1407
+        y: 704
+        width: 113
+        height: 299
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 8305da65c66833a90800000000000000
-      internalID: -7335371568187617224
+      spriteID: d058ef01015dfca42a856494fbfd9752
+      internalID: 408382244
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Background2_6
+      name: SpikesV1
       rect:
         serializedVersion: 2
-        x: 1400
-        y: 15
-        width: 117
-        height: 217
+        x: 898
+        y: 628
+        width: 137
+        height: 191
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87cd10ee022bd944d9b20a69fcb9da79
+      internalID: 298742734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rock
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 292
+        width: 175
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80207c4e7bef64e47b7420df917ebaec
+      internalID: -1219535347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plant0
+      rect:
+        serializedVersion: 2
+        x: 876
+        y: 36
+        width: 169
+        height: 147
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7fe0fb651912214d882e48b1f4b2b47
+      internalID: -1606220618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plant1
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 28
+        width: 323
+        height: 197
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eac74b31f8eadaf429c6df6b4130194c
+      internalID: 2130971711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plant2
+      rect:
+        serializedVersion: 2
+        x: 890
+        y: 247
+        width: 137
+        height: 150
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2f487586d8b0ac980800000000000000
-      internalID: -8517983043249011470
+      spriteID: 2bf2f715dfe469147b38632c4a3b23df
+      internalID: -637932248
       vertices: []
       indices: 
       edges: []
@@ -288,7 +376,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: b38227e7d01a85e48898ada9121cd937
     internalID: 0
     vertices: []
     indices: 
@@ -298,13 +386,23 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Background2_0: 7282461348544508605
       Background2_1: 1761556231732324091
       Background2_2: -2546122701619588853
       Background2_3: -3574223051414832269
       Background2_4: 4864849618974431169
       Background2_5: -7335371568187617224
       Background2_6: -8517983043249011470
+      Column0: -1264539162
+      Column1: 1767837592
+      Floor0: 7282461348544508605
+      Floor1: 748737364
+      Plant0: -1606220618
+      Plant1: 2130971711
+      Plant2: -637932248
+      Rock: -1219535347
+      Spikes: -149583038
+      SpikesV0: 408382244
+      SpikesV1: 298742734
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

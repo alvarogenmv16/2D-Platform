@@ -158,23 +158,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: beast_extras_0
+      name: beast_floor_extra0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1533
-        height: 1024
+        x: 41
+        y: 74
+        width: 896
+        height: 180
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7daaf9bf909c1d780800000000000000
-      internalID: -8659919563743319337
+      spriteID: 1a6ad50288367b84ba208fd6e853ccee
+      internalID: 661875148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_extras_1
+      rect:
+        serializedVersion: 2
+        x: 984
+        y: 75
+        width: 298
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea8d73f9be4347e468713e2ffa0c030c
+      internalID: 1713556668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_floor_extras_3
+      rect:
+        serializedVersion: 2
+        x: 1311
+        y: 41
+        width: 187
+        height: 285
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a794a35f6222b3c4cb1f83f1e4c3de44
+      internalID: -842932458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beast_extras_0
+      rect:
+        serializedVersion: 2
+        x: 503
+        y: 533
+        width: 193
+        height: 153
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93b1c665f1120ae4abebc48d5ad8f869
+      internalID: 1260846669
       vertices: []
       indices: 
       edges: []
@@ -183,19 +249,19 @@ TextureImporter:
       name: beast_extras_1
       rect:
         serializedVersion: 2
-        x: 342
-        y: 1017
-        width: 9
-        height: 7
+        x: 310
+        y: 813
+        width: 136
+        height: 113
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2fbe73b1452f611c0800000000000000
+      spriteID: 16be5bb29086e4746bfcae3628e845e7
       internalID: -4533169531854001166
       vertices: []
       indices: 
@@ -205,19 +271,19 @@ TextureImporter:
       name: beast_extras_2
       rect:
         serializedVersion: 2
-        x: 238
-        y: 996
-        width: 9
-        height: 12
+        x: 1359
+        y: 788
+        width: 118
+        height: 157
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 4deebc907b5a2f740800000000000000
+      spriteID: 6b36b6d4f7aca7748b62fa689d26a95d
       internalID: 5184388326618820308
       vertices: []
       indices: 
@@ -227,19 +293,19 @@ TextureImporter:
       name: beast_extras_3
       rect:
         serializedVersion: 2
-        x: 656
-        y: 999
-        width: 7
-        height: 7
+        x: 1245
+        y: 350
+        width: 239
+        height: 89
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 1b889359c7fe5eac0800000000000000
+      spriteID: 37566d32747d6e14dba10790fc62b721
       internalID: -3826388990022809423
       vertices: []
       indices: 
@@ -249,19 +315,19 @@ TextureImporter:
       name: beast_extras_4
       rect:
         serializedVersion: 2
-        x: 34
-        y: 0
-        width: 118
-        height: 56
+        x: 664
+        y: 343
+        width: 137
+        height: 150
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 34837aa11a624d040800000000000000
+      spriteID: e97d3da1137e2364fb515604abf24b22
       internalID: 4671401186868803651
       vertices: []
       indices: 
@@ -271,240 +337,20 @@ TextureImporter:
       name: beast_extras_5
       rect:
         serializedVersion: 2
-        x: 301
-        y: 15
-        width: 14
-        height: 22
+        x: 881
+        y: 758
+        width: 176
+        height: 203
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 765f2c7c2ffedaee0800000000000000
+      spriteID: 1273bf37a0be10e44af0c5df46faa4d9
       internalID: -1248077695699192473
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: beast_extras_6
-      rect:
-        serializedVersion: 2
-        x: 515
-        y: 13
-        width: 8
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ebc3ad821313f8560800000000000000
-      internalID: 7318122006708894910
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: beast_extras_7
-      rect:
-        serializedVersion: 2
-        x: 518
-        y: 11
-        width: 11
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d57bbe2c9fd7bf260800000000000000
-      internalID: 7132432946541868893
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: beast_extras_8
-      rect:
-        serializedVersion: 2
-        x: 598
-        y: 0
-        width: 137
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a4cab321aa8f60a30800000000000000
-      internalID: 4181302713394113610
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: beast_extras_9
-      rect:
-        serializedVersion: 2
-        x: 763
-        y: 0
-        width: 232
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 494d9cb75116b4760800000000000000
-      internalID: 7443149554058908820
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: beast_extras_10
-      rect:
-        serializedVersion: 2
-        x: 838
-        y: 13
-        width: 25
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8a9ea9ad105a44cd0800000000000000
-      internalID: -2574751659567945304
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: beast_extras_11
-      rect:
-        serializedVersion: 2
-        x: 868
-        y: 15
-        width: 7
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 16aa8be697305cd70800000000000000
-      internalID: 9062653645236513377
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: beast_extras_12
-      rect:
-        serializedVersion: 2
-        x: 872
-        y: 15
-        width: 7
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0399f1bbf5b5327c0800000000000000
-      internalID: -4097330769257588432
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: beast_extras_13
-      rect:
-        serializedVersion: 2
-        x: 996
-        y: 13
-        width: 17
-        height: 26
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7709ada69d93f03f0800000000000000
-      internalID: -932462991879008137
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: beast_extras_14
-      rect:
-        serializedVersion: 2
-        x: 1012
-        y: 11
-        width: 27
-        height: 27
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5b3110130ae9c5e90800000000000000
-      internalID: -7035574107005447243
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: beast_extras_15
-      rect:
-        serializedVersion: 2
-        x: 368
-        y: 0
-        width: 68
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 419a6032e9ef675c0800000000000000
-      internalID: -4217904045839963884
       vertices: []
       indices: 
       edges: []
@@ -513,7 +359,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: a6892de146fe76546b17a3bd5ec62de1
     internalID: 0
     vertices: []
     indices: 
@@ -523,7 +369,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      beast_extras_0: -8659919563743319337
+      beast_extras_0: 1260846669
       beast_extras_1: -4533169531854001166
       beast_extras_10: -2574751659567945304
       beast_extras_11: 9062653645236513377
@@ -539,6 +385,9 @@ TextureImporter:
       beast_extras_7: 7132432946541868893
       beast_extras_8: 4181302713394113610
       beast_extras_9: 7443149554058908820
+      beast_floor_extra0: -8659919563743319337
+      beast_floor_extras_1: 1713556668
+      beast_floor_extras_3: -842932458
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

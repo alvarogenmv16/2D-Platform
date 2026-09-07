@@ -218,20 +218,64 @@ TextureImporter:
       name: eye_extras_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 586
-        width: 225
-        height: 437
+        x: 251
+        y: 652
+        width: 133
+        height: 309
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 8e55f6ec19af45040800000000000000
+      spriteID: 151ec8057ad422741b815b1baf7e12f5
       internalID: 4635605420611687912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: eye_pant0
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 241
+        width: 223
+        height: 399
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0196243f4ae82a646852b13c92c55bd0
+      internalID: 626718419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: eye_plant1
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 250
+        width: 200
+        height: 369
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c17dd6612d60e57489bdcb02b013038d
+      internalID: 1933613101
       vertices: []
       indices: 
       edges: []
@@ -240,746 +284,42 @@ TextureImporter:
       name: eye_extras_1
       rect:
         serializedVersion: 2
-        x: 208
-        y: 997
-        width: 17
-        height: 20
+        x: 452
+        y: 655
+        width: 133
+        height: 325
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 5464ee006e3444dc0800000000000000
-      internalID: -3655722342380845499
+      spriteID: 4c72833cd631e83468cbe807aa1155c2
+      internalID: 1250874829
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: eye_extras_2
+      name: eye_plant2
       rect:
         serializedVersion: 2
-        x: 232
-        y: 639
-        width: 167
-        height: 385
+        x: 829
+        y: 255
+        width: 171
+        height: 254
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: bb9805f65d4217500800000000000000
-      internalID: 392135141672126907
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_3
-      rect:
-        serializedVersion: 2
-        x: 412
-        y: 611
-        width: 251
-        height: 405
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f4664ee5e11c72310800000000000000
-      internalID: 1380284146997552719
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_4
-      rect:
-        serializedVersion: 2
-        x: 663
-        y: 929
-        width: 152
-        height: 88
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: dc9f5747f67b95d20800000000000000
-      internalID: 3267844693957147085
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_5
-      rect:
-        serializedVersion: 2
-        x: 792
-        y: 1009
-        width: 14
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 360175c3708b745a0800000000000000
-      internalID: -6537053992888364957
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_6
-      rect:
-        serializedVersion: 2
-        x: 824
-        y: 601
-        width: 269
-        height: 415
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a59ef8d600d24dcc0800000000000000
-      internalID: -3687272715048195750
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_7
-      rect:
-        serializedVersion: 2
-        x: 1092
-        y: 488
-        width: 179
-        height: 536
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 83125161f9e1a5280800000000000000
-      internalID: -9053890432255844040
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_8
-      rect:
-        serializedVersion: 2
-        x: 1262
-        y: 993
-        width: 19
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8ec34ce42af2317e0800000000000000
-      internalID: -1796039452238005016
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_9
-      rect:
-        serializedVersion: 2
-        x: 1268
-        y: 541
-        width: 268
-        height: 481
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 00e483abb3c7d8cf0800000000000000
-      internalID: -248405808466342400
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_10
-      rect:
-        serializedVersion: 2
-        x: 822
-        y: 959
-        width: 13
-        height: 18
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7f34054d4bed87950800000000000000
-      internalID: 6447147734818374647
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_11
-      rect:
-        serializedVersion: 2
-        x: 188
-        y: 897
-        width: 21
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: dd7f5f86cbbb589f0800000000000000
-      internalID: -466760568473782307
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_12
-      rect:
-        serializedVersion: 2
-        x: 614
-        y: 921
-        width: 13
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d4b039e659ea66360800000000000000
-      internalID: 7162604214207843149
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_13
-      rect:
-        serializedVersion: 2
-        x: 616
-        y: 615
-        width: 257
-        height: 315
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4ebb33492c5b131a0800000000000000
-      internalID: -6831479312429630492
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_14
-      rect:
-        serializedVersion: 2
-        x: 606
-        y: 878
-        width: 17
-        height: 25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b983fd74126afc800800000000000000
-      internalID: 634908734352472219
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_15
-      rect:
-        serializedVersion: 2
-        x: 1088
-        y: 835
-        width: 7
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 08ef89f9f6cad0e80800000000000000
-      internalID: -8210716950207594880
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_16
-      rect:
-        serializedVersion: 2
-        x: 1272
-        y: 801
-        width: 7
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: fb52c0d861b6980a0800000000000000
-      internalID: -6878849211231885889
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_17
-      rect:
-        serializedVersion: 2
-        x: 184
-        y: 723
-        width: 13
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a0973d11ad45023b0800000000000000
-      internalID: -5539334246087034614
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_18
-      rect:
-        serializedVersion: 2
-        x: 872
-        y: 728
-        width: 7
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: eb55d0700f64d4690800000000000000
-      internalID: -7616353398089230914
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_19
-      rect:
-        serializedVersion: 2
-        x: 298
-        y: 228
-        width: 235
-        height: 462
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 33080762dcf91f3b0800000000000000
-      internalID: -5480423568071163853
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_20
-      rect:
-        serializedVersion: 2
-        x: 590
-        y: 657
-        width: 17
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a4a2517f1d55f3300800000000000000
-      internalID: 234000065928440394
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_21
-      rect:
-        serializedVersion: 2
-        x: 258
-        y: 625
-        width: 13
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ecf93ae64c92fc6f0800000000000000
-      internalID: -662264696553627698
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_22
-      rect:
-        serializedVersion: 2
-        x: 270
-        y: 627
-        width: 9
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a9cc5a07144c48950800000000000000
-      internalID: 6450496351643225242
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_23
-      rect:
-        serializedVersion: 2
-        x: 278
-        y: 622
-        width: 15
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 01d20df94320fb020800000000000000
-      internalID: 2359607154808204560
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_24
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1536
-        height: 609
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c704344935e615480800000000000000
-      internalID: -8912220882340724612
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_25
-      rect:
-        serializedVersion: 2
-        x: 62
-        y: 223
-        width: 206
-        height: 403
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e16b955b9d1e9ce80800000000000000
-      internalID: -8157740924838234594
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_26
-      rect:
-        serializedVersion: 2
-        x: 622
-        y: 581
-        width: 25
-        height: 29
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 82fb5042d15405b90800000000000000
-      internalID: -7255223008233144536
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_27
-      rect:
-        serializedVersion: 2
-        x: 1106
-        y: 607
-        width: 13
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 93c114b47d9df5ba0800000000000000
-      internalID: -6097915851732607943
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_28
-      rect:
-        serializedVersion: 2
-        x: 1476
-        y: 565
-        width: 52
-        height: 50
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6cbbcc5ad28a5a970800000000000000
-      internalID: 8765597163755191238
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_29
-      rect:
-        serializedVersion: 2
-        x: 1478
-        y: 246
-        width: 58
-        height: 44
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4e913b08f636e9c50800000000000000
-      internalID: 6673881028361394660
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_30
-      rect:
-        serializedVersion: 2
-        x: 566
-        y: 15
-        width: 11
-        height: 19
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7a8836c9c3757cd40800000000000000
-      internalID: 5604544179119294631
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_31
-      rect:
-        serializedVersion: 2
-        x: 680
-        y: 15
-        width: 7
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 67d7f1911e703dd60800000000000000
-      internalID: 7913677633590623606
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_32
-      rect:
-        serializedVersion: 2
-        x: 714
-        y: 18
-        width: 13
-        height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4efa7f391cf2d7450800000000000000
-      internalID: 6088074779732455396
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_33
-      rect:
-        serializedVersion: 2
-        x: 1390
-        y: 15
-        width: 13
-        height: 18
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 02d2db85bdfae2240800000000000000
-      internalID: 4768942412053425440
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_extras_34
-      rect:
-        serializedVersion: 2
-        x: 1374
-        y: 7
-        width: 11
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4223140c978e8d220800000000000000
-      internalID: 2511012401873236516
+      spriteID: b08ce4f8fb6899642bad3b42e744e179
+      internalID: -119738588
       vertices: []
       indices: 
       edges: []
@@ -988,7 +328,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 321d09cdbffb7d3439d181fbada19ce2
     internalID: 0
     vertices: []
     indices: 
@@ -999,7 +339,7 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       eye_extras_0: 4635605420611687912
-      eye_extras_1: -3655722342380845499
+      eye_extras_1: 1250874829
       eye_extras_10: 6447147734818374647
       eye_extras_11: -466760568473782307
       eye_extras_12: 7162604214207843149
@@ -1010,7 +350,6 @@ TextureImporter:
       eye_extras_17: -5539334246087034614
       eye_extras_18: -7616353398089230914
       eye_extras_19: -5480423568071163853
-      eye_extras_2: 392135141672126907
       eye_extras_20: 234000065928440394
       eye_extras_21: -662264696553627698
       eye_extras_22: 6450496351643225242
@@ -1033,6 +372,9 @@ TextureImporter:
       eye_extras_7: -9053890432255844040
       eye_extras_8: -1796039452238005016
       eye_extras_9: -248405808466342400
+      eye_pant0: -3655722342380845499
+      eye_plant1: 1933613101
+      eye_plant2: -119738588
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
