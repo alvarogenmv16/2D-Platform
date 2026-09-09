@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     // Jump settings
     // One entry per jump in the chain: index 0 = first (grounded) jump,
     // index 1 = second (air) jump, etc. Size this array to match maxJumps.
-    [SerializeField] private float[] jumpForces = { 5f, 4f };
+    [SerializeField] private float[] jumpForces = { 7f, 5f };
     [SerializeField] private float jumpHoldForce = 0.5f;
     [SerializeField] private float maxJumpHoldTime = 0.25f;
 

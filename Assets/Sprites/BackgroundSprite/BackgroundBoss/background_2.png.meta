@@ -265,45 +265,23 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: edge0
+      name: spikes_2
       rect:
         serializedVersion: 2
-        x: 960
-        y: 718
-        width: 97
-        height: 95
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 890
+        y: 459
+        width: 141
+        height: 164
+      alignment: 9
+      pivot: {x: 0.52942544, y: 0.23285991}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec755450dca0ca54aa6f7fdd362e539e
-      internalID: 995896498
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: edge1
-      rect:
-        serializedVersion: 2
-        x: 1265
-        y: 718
-        width: 93
-        height: 94
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 074e6f9b672b7cd41bfd8788dd441def
-      internalID: 1143291374
+      spriteID: 06ac84f0b99827c4db171b40daf1adfa
+      internalID: -1101202249
       vertices: []
       indices: 
       edges: []
@@ -340,6 +318,7 @@ TextureImporter:
       edge1: 1143291374
       floor2_0: 446039808
       floor_2_1: -529057673
+      spikes_2: -1101202249
       wall_2_0: 14523135
       wall_2_1: 719713665
   mipmapLimitGroupName: 
