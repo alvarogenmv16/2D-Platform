@@ -83,6 +83,29 @@ public class SceneFader : MonoBehaviour
         yield return StartCoroutine(Fade(1f, 0f));
     }
 
+    // Fades to black, snaps the player back to their last safe ground
+    // position, then fades back in. Same fadeCanvasGroup as FadeToScene,
+    // just without any scene load - used for the hazard bump-back.
+    public static void FlashAndTeleport(PlayerRespawnPoint respawnPoint)
+    {
+        if (instance == null || respawnPoint == null) return;
+
+        instance.StartCoroutine(instance.FlashSequence(respawnPoint));
+    }
+
+    private IEnumerator FlashSequence(PlayerRespawnPoint respawnPoint)
+    {
+        respawnPoint.SetMovementEnabled(false);
+
+        yield return StartCoroutine(Fade(0f, 1f));
+
+        respawnPoint.SnapToLastSafePosition();
+
+        yield return StartCoroutine(Fade(1f, 0f));
+
+        respawnPoint.SetMovementEnabled(true);
+    }
+
     private IEnumerator Fade(float from, float to)
     {
         fadeCanvasGroup.blocksRaycasts = to > 0f;

@@ -52,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded = false;
     private bool wasGroundedLastFrame = true;
     public InputSystem_Actions InputActions => inputActions;    // Public getter for inputActions
+    public bool IsGrounded => isGrounded;
 
     // =========================
     // START
