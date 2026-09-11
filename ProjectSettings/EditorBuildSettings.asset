@@ -17,5 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EyePhase2.unity
     guid: 56a4a11aafe414146846116f61cda56b
+  - enabled: 1
+    path: Assets/Scenes/TutorialScene.unity
+    guid: 891d8b16cb25db04d9bcc7c95aa2109c
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
