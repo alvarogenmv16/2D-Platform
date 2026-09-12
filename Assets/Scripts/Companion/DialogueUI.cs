@@ -10,7 +10,7 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] private GameObject panel;
     [SerializeField] private TMP_Text lineText;
 
-    public bool IsOpen => panel.activeSelf;
+    public bool IsOpen => panel != null && panel.activeSelf;
 
     private void Awake()
     {
@@ -19,12 +19,19 @@ public class DialogueUI : MonoBehaviour
 
     public void Show(string line)
     {
+        if (panel == null) return;
+
         panel.SetActive(true);
         lineText.text = line;
     }
 
     public void Hide()
     {
+        // panel can already be destroyed here if this fires while the scene
+        // is tearing down (e.g. stopping Play mode) - OnTriggerExit2D can
+        // still run mid-teardown, after panel's GameObject is gone.
+        if (panel == null) return;
+
         panel.SetActive(false);
     }
 }

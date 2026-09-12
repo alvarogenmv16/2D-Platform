@@ -38,6 +38,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Decoratives
+    uniqueID: 2602109045
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
@@ -46,9 +49,6 @@ TagManager:
     locked: 0
   - name: Hazard
     uniqueID: 4046531519
-    locked: 0
-  - name: Decoratives
-    uniqueID: 2602109045
     locked: 0
   m_RenderingLayers:
   - Default
