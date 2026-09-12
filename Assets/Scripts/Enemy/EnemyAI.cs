@@ -36,6 +36,13 @@ public class EnemyAI : MonoBehaviour
     // Loops while actively chasing; a separate AudioSource (not sfxPlayer)
     // because it needs Play()/Stop() toggling, not a one-shot.
     [SerializeField] private AudioSource chargeAudioSource; // Loop on, Play On Awake off
+    // Default (false) keeps the existing behavior: stops as soon as the
+    // enemy loses the player and returns to Idle. Enable this instead for
+    // enemies whose charge sound should latch on at first detection and
+    // keep playing regardless of range changes, only stopping when the
+    // enemy is destroyed (e.g. the tutorial enemies' movement sound).
+    [SerializeField] private bool chargeLoopsUntilDeath = false;
+    private bool hasStartedCharging = false;
 
     private EnemyMovement movement;
     private EnemyAttack attack;
@@ -174,12 +181,24 @@ public class EnemyAI : MonoBehaviour
 
         // Charge: loops for as long as the player is in range at all
         // (Chasing or Attacking) — only stops once it fully loses the
-        // player and returns to Idle.
+        // player and returns to Idle. Unless chargeLoopsUntilDeath is set,
+        // in which case it latches on at first detection and keeps playing
+        // no matter what state follows - EnemyHealth destroying the object
+        // on death is what finally silences it.
         if (chargeAudioSource != null)
         {
             bool shouldCharge = currentState != EnemyState.Idle && Time.time >= chargeAllowedTime;
 
-            if (shouldCharge && !chargeAudioSource.isPlaying)
+            if (chargeLoopsUntilDeath)
+            {
+                if (shouldCharge) hasStartedCharging = true;
+
+                if (hasStartedCharging && !chargeAudioSource.isPlaying)
+                {
+                    chargeAudioSource.Play();
+                }
+            }
+            else if (shouldCharge && !chargeAudioSource.isPlaying)
             {
                 chargeAudioSource.Play();
             }
