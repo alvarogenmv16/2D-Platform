@@ -1,0 +1,288 @@
+fileFormatVersion: 2
+guid: 50c1a0e68fe0fc643ace10537c8ae4a8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5263551204737335403
+    second: companion_UI_0
+  - first:
+      213: 6688644222271021082
+    second: companion_UI_1
+  - first:
+      213: -425401651571043998
+    second: companion_UI_2
+  - first:
+      213: 7947956157358567691
+    second: companion_UI_3
+  - first:
+      213: -598995580831651657
+    second: companion_UI_4
+  - first:
+      213: 104568448230374448
+    second: companion_UI_5
+  - first:
+      213: -992616515569085362
+    second: companion_UI_6
+  - first:
+      213: 2806422312835768864
+    second: companion_UI_7
+  - first:
+      213: -6904027931913633779
+    second: companion_UI_8
+  - first:
+      213: -6345448322256701457
+    second: companion_UI_9
+  - first:
+      213: -21881643821166876
+    second: companion_UI_10
+  - first:
+      213: -7583303505028610498
+    second: companion_UI_11
+  - first:
+      213: -5874868658932212731
+    second: companion_UI_12
+  - first:
+      213: -770876405785327226
+    second: companion_UI_13
+  - first:
+      213: 2179848768396646547
+    second: companion_UI_14
+  - first:
+      213: -1849257475960804989
+    second: companion_UI_15
+  - first:
+      213: 215598043599522606
+    second: companion_UI_16
+  - first:
+      213: -4712700700806177807
+    second: companion_UI_17
+  - first:
+      213: 4154494782311453344
+    second: companion_UI_18
+  - first:
+      213: -4652248329336050595
+    second: companion_UI_19
+  - first:
+      213: -704099099565547711
+    second: companion_UI_20
+  - first:
+      213: 5516969857134265730
+    second: companion_UI_21
+  - first:
+      213: 8115092426417236593
+    second: companion_UI_22
+  - first:
+      213: 7520232926712740830
+    second: companion_UI_23
+  - first:
+      213: 2340314932163785823
+    second: companion_UI_24
+  - first:
+      213: -2766628203627232912
+    second: companion_UI_25
+  - first:
+      213: -1373417671413356450
+    second: companion_UI_26
+  - first:
+      213: -8112040029276988500
+    second: companion_UI_27
+  - first:
+      213: 6769396672554124097
+    second: companion_UI_28
+  - first:
+      213: 3569217286586962731
+    second: companion_UI_29
+  - first:
+      213: -4540740378640907979
+    second: companion_UI_30
+  - first:
+      213: -3111391294149893552
+    second: companion_UI_31
+  - first:
+      213: -479841283043650057
+    second: companion_UI_32
+  - first:
+      213: -4975523451259002476
+    second: companion_UI_33
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: companion_UI_0
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 136
+        width: 1506
+        height: 615
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53bca1f0d3ed8744e9800d53d21297c5
+      internalID: -5263551204737335403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 4bc64286b77ed80449b16724e63e5cb3
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      companion_UI_0: -5263551204737335403
+      companion_UI_1: 6688644222271021082
+      companion_UI_10: -21881643821166876
+      companion_UI_11: -7583303505028610498
+      companion_UI_12: -5874868658932212731
+      companion_UI_13: -770876405785327226
+      companion_UI_14: 2179848768396646547
+      companion_UI_15: -1849257475960804989
+      companion_UI_16: 215598043599522606
+      companion_UI_17: -4712700700806177807
+      companion_UI_18: 4154494782311453344
+      companion_UI_19: -4652248329336050595
+      companion_UI_2: -425401651571043998
+      companion_UI_20: -704099099565547711
+      companion_UI_21: 5516969857134265730
+      companion_UI_22: 8115092426417236593
+      companion_UI_23: 7520232926712740830
+      companion_UI_24: 2340314932163785823
+      companion_UI_25: -2766628203627232912
+      companion_UI_26: -1373417671413356450
+      companion_UI_27: -8112040029276988500
+      companion_UI_28: 6769396672554124097
+      companion_UI_29: 3569217286586962731
+      companion_UI_3: 7947956157358567691
+      companion_UI_30: -4540740378640907979
+      companion_UI_31: -3111391294149893552
+      companion_UI_32: -479841283043650057
+      companion_UI_33: -4975523451259002476
+      companion_UI_4: -598995580831651657
+      companion_UI_5: 104568448230374448
+      companion_UI_6: -992616515569085362
+      companion_UI_7: 2806422312835768864
+      companion_UI_8: -6904027931913633779
+      companion_UI_9: -6345448322256701457
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
