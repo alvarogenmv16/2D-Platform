@@ -8,11 +8,12 @@ using UnityEngine;
 public class LevelExit : MonoBehaviour
 {
     [SerializeField] private string nextSceneName = "SampleScene";
-    // Name of an empty GameObject placed in nextSceneName marking where the
-    // player should land. Looked up by name (same pattern SceneFader already
-    // uses for the health UI) since the incoming player isn't part of that
-    // scene's saved data.
-    [SerializeField] private string entryPointName = "PlayerEntryPoint";
+    // Id of the LevelEntryPoint in nextSceneName marking where the player
+    // should land. Defaults to "Default" to match LevelEntryPoint's own
+    // default id, so a scene with a single entrance needs zero extra setup -
+    // only give this (and the entry point) a matching custom id when a scene
+    // has more than one incoming connection to tell apart.
+    [SerializeField] private string entryPointId = "Default";
 
     private Collider2D triggerCollider;
     private bool hasTriggered = false;
@@ -32,6 +33,6 @@ public class LevelExit : MonoBehaviour
         // One-shot: never fire again, same convention as the boss/eye arena triggers.
         triggerCollider.enabled = false;
 
-        SceneFader.FadeToScene(nextSceneName, entryPointName);
+        SceneFader.FadeToScene(nextSceneName, entryPointId);
     }
 }

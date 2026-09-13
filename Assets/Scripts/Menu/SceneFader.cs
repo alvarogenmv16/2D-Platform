@@ -18,17 +18,6 @@ public class SceneFader : MonoBehaviour
     [SerializeField] private CanvasGroup fadeCanvasGroup;
     [SerializeField] private float fadeDuration = 0.6f;
 
-    // Name of the GameObject holding PlayerHealthUI in any scene this fader
-    // loads into. Rebound at runtime because the surviving Player isn't
-    // part of that scene's saved data, so it can't be wired via Inspector.
-    [SerializeField] private string playerHealthUIObjectName = "HealthMaskContainer";
-
-    // Name of the GameObject holding the level's CinemachineCamera. Rebound
-    // at runtime for the same reason as playerHealthUIObjectName: its Follow
-    // target is normally wired in the Inspector to that scene's own local
-    // Player, which gets destroyed in favor of the surviving one below.
-    [SerializeField] private string cinemachineCameraObjectName = "CinemachineCamera";
-
     // =========================
     // START
     // =========================
@@ -54,18 +43,18 @@ public class SceneFader : MonoBehaviour
     // Eye, mid-fight) must call DontDestroyOnLoad on their own GameObject
     // before calling this.
     //
-    // entryPointName is optional: when given, the player is moved to the
-    // position of a GameObject with that name found in the newly loaded
-    // scene, right before fading back in. Left null/empty, the player just
-    // keeps whatever world position they carried over (the old behavior).
-    public static void FadeToScene(string sceneName, string entryPointName = null)
+    // entryPointId is optional: when given, the player is moved to whichever
+    // LevelEntryPoint in the newly loaded scene has a matching Id, right
+    // before fading back in. Left null/empty, the player just keeps
+    // whatever world position they carried over (the old behavior).
+    public static void FadeToScene(string sceneName, string entryPointId = null)
     {
         if (instance == null) return;
 
-        instance.StartCoroutine(instance.FadeSequence(sceneName, entryPointName));
+        instance.StartCoroutine(instance.FadeSequence(sceneName, entryPointId));
     }
 
-    private IEnumerator FadeSequence(string sceneName, string entryPointName)
+    private IEnumerator FadeSequence(string sceneName, string entryPointId)
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
@@ -98,17 +87,18 @@ public class SceneFader : MonoBehaviour
             // Point the level's camera at the surviving player - its Follow
             // target was wired in the Inspector to the local Player instance
             // just destroyed above, so left alone it would track nothing.
-            GameObject cameraObject = GameObject.Find(cinemachineCameraObjectName);
-            CinemachineCamera cinemachineCamera = cameraObject != null ? cameraObject.GetComponent<CinemachineCamera>() : null;
+            // Found by type rather than by name: every gameplay scene has
+            // exactly one, so no naming convention is needed.
+            CinemachineCamera cinemachineCamera = Object.FindFirstObjectByType<CinemachineCamera>();
 
             if (cinemachineCamera != null)
             {
                 cinemachineCamera.Follow = player.transform;
             }
 
-            if (!string.IsNullOrEmpty(entryPointName))
+            if (!string.IsNullOrEmpty(entryPointId))
             {
-                GameObject entryPoint = GameObject.Find(entryPointName);
+                LevelEntryPoint entryPoint = FindEntryPoint(entryPointId);
 
                 if (entryPoint != null)
                 {
@@ -124,12 +114,14 @@ public class SceneFader : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogWarning($"SceneFader: entry point '{entryPointName}' not found in scene '{sceneName}'.");
+                    Debug.LogWarning($"SceneFader: no LevelEntryPoint with id '{entryPointId}' found in scene '{sceneName}'.");
                 }
             }
 
-            GameObject healthUIObject = GameObject.Find(playerHealthUIObjectName);
-            PlayerHealthUI healthUI = healthUIObject != null ? healthUIObject.GetComponent<PlayerHealthUI>() : null;
+            // Found by type instead of a fixed GameObject name - every
+            // gameplay scene just needs one PlayerHealthUI, no naming
+            // convention to remember (or get wrong) per scene.
+            PlayerHealthUI healthUI = Object.FindFirstObjectByType<PlayerHealthUI>();
             PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
 
             if (healthUI != null && playerHealth != null)
@@ -139,6 +131,16 @@ public class SceneFader : MonoBehaviour
         }
 
         yield return StartCoroutine(Fade(1f, 0f));
+    }
+
+    private static LevelEntryPoint FindEntryPoint(string id)
+    {
+        foreach (LevelEntryPoint candidate in Object.FindObjectsByType<LevelEntryPoint>(FindObjectsSortMode.None))
+        {
+            if (candidate.Id == id) return candidate;
+        }
+
+        return null;
     }
 
     // Fades to black, snaps the player back to their last safe ground
