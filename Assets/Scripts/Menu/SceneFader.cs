@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -21,6 +22,12 @@ public class SceneFader : MonoBehaviour
     // loads into. Rebound at runtime because the surviving Player isn't
     // part of that scene's saved data, so it can't be wired via Inspector.
     [SerializeField] private string playerHealthUIObjectName = "HealthMaskContainer";
+
+    // Name of the GameObject holding the level's CinemachineCamera. Rebound
+    // at runtime for the same reason as playerHealthUIObjectName: its Follow
+    // target is normally wired in the Inspector to that scene's own local
+    // Player, which gets destroyed in favor of the surviving one below.
+    [SerializeField] private string cinemachineCameraObjectName = "CinemachineCamera";
 
     // =========================
     // START
@@ -46,14 +53,19 @@ public class SceneFader : MonoBehaviour
     // fades back in. Callers that also need to persist themselves (e.g. the
     // Eye, mid-fight) must call DontDestroyOnLoad on their own GameObject
     // before calling this.
-    public static void FadeToScene(string sceneName)
+    //
+    // entryPointName is optional: when given, the player is moved to the
+    // position of a GameObject with that name found in the newly loaded
+    // scene, right before fading back in. Left null/empty, the player just
+    // keeps whatever world position they carried over (the old behavior).
+    public static void FadeToScene(string sceneName, string entryPointName = null)
     {
         if (instance == null) return;
 
-        instance.StartCoroutine(instance.FadeSequence(sceneName));
+        instance.StartCoroutine(instance.FadeSequence(sceneName, entryPointName));
     }
 
-    private IEnumerator FadeSequence(string sceneName)
+    private IEnumerator FadeSequence(string sceneName, string entryPointName)
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
@@ -70,6 +82,52 @@ public class SceneFader : MonoBehaviour
 
         if (player != null)
         {
+            // The destination scene may have its own Player instance placed
+            // by hand (so it can still be opened and playtested on its own).
+            // Now that a real player has survived the transition, that local
+            // one is just a duplicate sitting wherever the scene put it -
+            // remove it so only the surviving instance remains.
+            foreach (GameObject taggedPlayer in GameObject.FindGameObjectsWithTag("Player"))
+            {
+                if (taggedPlayer != player)
+                {
+                    Destroy(taggedPlayer);
+                }
+            }
+
+            // Point the level's camera at the surviving player - its Follow
+            // target was wired in the Inspector to the local Player instance
+            // just destroyed above, so left alone it would track nothing.
+            GameObject cameraObject = GameObject.Find(cinemachineCameraObjectName);
+            CinemachineCamera cinemachineCamera = cameraObject != null ? cameraObject.GetComponent<CinemachineCamera>() : null;
+
+            if (cinemachineCamera != null)
+            {
+                cinemachineCamera.Follow = player.transform;
+            }
+
+            if (!string.IsNullOrEmpty(entryPointName))
+            {
+                GameObject entryPoint = GameObject.Find(entryPointName);
+
+                if (entryPoint != null)
+                {
+                    player.transform.position = entryPoint.transform.position;
+
+                    // Clear any velocity carried over from the previous scene
+                    // (e.g. still moving/falling when the trigger was hit),
+                    // same reasoning as PlayerRespawnPoint.SnapToLastSafePosition.
+                    if (player.TryGetComponent(out Rigidbody2D playerRb))
+                    {
+                        playerRb.linearVelocity = Vector2.zero;
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning($"SceneFader: entry point '{entryPointName}' not found in scene '{sceneName}'.");
+                }
+            }
+
             GameObject healthUIObject = GameObject.Find(playerHealthUIObjectName);
             PlayerHealthUI healthUI = healthUIObject != null ? healthUIObject.GetComponent<PlayerHealthUI>() : null;
             PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
