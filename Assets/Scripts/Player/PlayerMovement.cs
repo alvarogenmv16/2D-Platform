@@ -51,8 +51,13 @@ public class PlayerMovement : MonoBehaviour
     private bool isJumpHeld = false; // true only while extending the CURRENT jump
     private bool isGrounded = false;
     private bool wasGroundedLastFrame = true;
+    private Collider2D groundedCollider;
     public InputSystem_Actions InputActions => inputActions;    // Public getter for inputActions
     public bool IsGrounded => isGrounded;
+    // The specific ground collider currently under groundCheck (null when
+    // airborne). Lets callers tell solid ground apart from a moving
+    // platform, e.g. PlayerRespawnPoint excluding it from safe positions.
+    public Collider2D GroundedCollider => groundedCollider;
 
     // =========================
     // START
@@ -113,7 +118,8 @@ public class PlayerMovement : MonoBehaviour
     private void CheckGrounded()
     {
         // Check for ground overlap at the groundCheck position
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        groundedCollider = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        isGrounded = groundedCollider != null;
 
         // Only reset the jump counter on the frame the player actually LANDS
         // (transition from airborne to grounded), not on every grounded frame.

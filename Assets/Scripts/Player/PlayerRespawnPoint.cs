@@ -34,8 +34,13 @@ public class PlayerRespawnPoint : MonoBehaviour
     {
         // isGrounded only ever comes from the Ground layer (hazards are a
         // separate trigger layer), so this can never record a position
-        // inside/above a hazard.
-        if (playerMovement.IsGrounded)
+        // inside/above a hazard. But a MovingPlatform is also on that
+        // layer and can carry the player right next to (or through) a
+        // hazard, so standing on one must not update the safe position -
+        // it just stays frozen at the solid ground the player last stood
+        // on before boarding, which is exactly where a hazard hit should
+        // send them back to.
+        if (playerMovement.IsGrounded && playerMovement.GroundedCollider.GetComponent<MovingPlatform>() == null)
         {
             groundedHistory.Enqueue((Time.time, (Vector2)transform.position));
         }
