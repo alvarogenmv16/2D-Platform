@@ -10,7 +10,7 @@ public class PlayerAttackHitbox : MonoBehaviour
     [SerializeField] private float attackOffsetX = 1.75f;
     [SerializeField] private float attackOffsetY = 1f;
     [SerializeField] private Vector2 attackUpSize = new Vector2(2f, 2f);
-    [SerializeField] private float attackUpOffsetY = 2f;
+    [SerializeField] private float attackUpOffsetY = 3f;
     [SerializeField] private float damage = 1f;
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private SfxPlayer sfxPlayer;

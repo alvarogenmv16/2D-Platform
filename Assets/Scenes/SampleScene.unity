@@ -37800,7 +37800,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -40628,6 +40628,18 @@ PrefabInstance:
       propertyPath: fadeOverlay
       value: 
       objectReference: {fileID: 1782598955}
+    - target: {fileID: 2224274585891868886, guid: 0c8dc06251cc7b242a370780b08f282a, type: 3}
+      propertyPath: attackUpSize.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2224274585891868886, guid: 0c8dc06251cc7b242a370780b08f282a, type: 3}
+      propertyPath: attackUpSize.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2224274585891868886, guid: 0c8dc06251cc7b242a370780b08f282a, type: 3}
+      propertyPath: attackUpOffsetY
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
