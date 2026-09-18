@@ -40,7 +40,15 @@ public class PlayerRespawnPoint : MonoBehaviour
         // it just stays frozen at the solid ground the player last stood
         // on before boarding, which is exactly where a hazard hit should
         // send them back to.
-        if (playerMovement.IsGrounded && playerMovement.GroundedCollider.GetComponent<MovingPlatform>() == null)
+        //
+        // GroundedCollider is also checked for null (Unity's overloaded
+        // ==null, which is true for a destroyed object too) because a
+        // scene transition can destroy the old scene's ground collider
+        // mid-flight, between one FixedUpdate refreshing it and the next -
+        // the player survives the load via DontDestroyOnLoad, but a
+        // collider it was standing on in the old scene does not.
+        if (playerMovement.IsGrounded && playerMovement.GroundedCollider != null
+            && playerMovement.GroundedCollider.GetComponent<MovingPlatform>() == null)
         {
             groundedHistory.Enqueue((Time.time, (Vector2)transform.position));
         }
