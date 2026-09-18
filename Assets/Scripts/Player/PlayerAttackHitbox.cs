@@ -9,6 +9,8 @@ public class PlayerAttackHitbox : MonoBehaviour
     [SerializeField] private Vector2 attackSize = new Vector2(2f, 2f);
     [SerializeField] private float attackOffsetX = 1.75f;
     [SerializeField] private float attackOffsetY = 1f;
+    [SerializeField] private Vector2 attackUpSize = new Vector2(2f, 2f);
+    [SerializeField] private float attackUpOffsetY = 2f;
     [SerializeField] private float damage = 1f;
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private SfxPlayer sfxPlayer;
@@ -36,12 +38,23 @@ public class PlayerAttackHitbox : MonoBehaviour
     public void OnAttackHit()
     {
         sfxPlayer?.Play(swingSound, swingVolume);
+        PerformAttack(GetAttackPointPosition(), attackSize);
+    }
 
-        Vector2 attackPointPosition = GetAttackPointPosition();
-        // Box instead of circle: a circle centered on the attack point misses
-        // enemies standing very close (just outside its near edge) — a box
-        // covers the whole front arc uniformly, closer to the actual swing shape.
-        Collider2D[] hits = Physics2D.OverlapBoxAll(attackPointPosition, attackSize, 0f, enemyLayer);
+    // Called via an Animation Event on the PlayerAttackUp clip, the same
+    // way OnAttackHit is driven by PlayerAttack's clip.
+    public void OnAttackUpHit()
+    {
+        sfxPlayer?.Play(swingSound, swingVolume);
+        PerformAttack(GetAttackUpPointPosition(), attackUpSize);
+    }
+
+    // Box instead of circle: a circle centered on the attack point misses
+    // enemies standing very close (just outside its near edge) — a box
+    // covers the whole front arc uniformly, closer to the actual swing shape.
+    private void PerformAttack(Vector2 attackPointPosition, Vector2 size)
+    {
+        Collider2D[] hits = Physics2D.OverlapBoxAll(attackPointPosition, size, 0f, enemyLayer);
 
         foreach (Collider2D hit in hits)
         {
@@ -64,6 +77,13 @@ public class PlayerAttackHitbox : MonoBehaviour
         return (Vector2)transform.position + new Vector2(attackOffsetX * direction, attackOffsetY);
     }
 
+    // Straight up, so it doesn't need to mirror with flipX like the
+    // horizontal attack point does.
+    private Vector2 GetAttackUpPointPosition()
+    {
+        return (Vector2)transform.position + new Vector2(0f, attackUpOffsetY);
+    }
+
     // =========================
     // DEBUG
     // =========================
@@ -76,5 +96,8 @@ public class PlayerAttackHitbox : MonoBehaviour
 
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireCube(GetAttackPointPosition(), attackSize);
+
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireCube(GetAttackUpPointPosition(), attackUpSize);
     }
 }

@@ -955,7 +955,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -50}
+  m_AnchoredPosition: {x: 0, y: -50}
   m_SizeDelta: {x: 600, y: 150}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &380501196
@@ -37784,7 +37784,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 200, y: 0}
   m_SizeDelta: {x: 1200, y: 450}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1022792851
@@ -39663,6 +39663,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1d629b77ec7f4343a5dcc302d97b727, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+--- !u!114 &1318698847 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5566778899112233, guid: 0c8dc06251cc7b242a370780b08f282a, type: 3}
+  m_PrefabInstance: {fileID: 3159264835854229482}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aafeb613a843664889ae9b0f6e20dc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerPower
 --- !u!1 &1414171241
 GameObject:
   m_ObjectHideFlags: 0
@@ -40192,6 +40203,7 @@ GameObject:
   - component: {fileID: 1889519060}
   - component: {fileID: 1889519059}
   - component: {fileID: 1889519061}
+  - component: {fileID: 1889519062}
   m_Layer: 5
   m_Name: PowerBarFill
   m_TagString: Untagged
@@ -40270,10 +40282,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerPower
   playerHealth: {fileID: 1318698830}
   playerMovement: {fileID: 1318698843}
+  animator: {fileID: 0}
   hitsToFillBar: 6
   OnPowerChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1889519062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1889519057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e1441f8d475a54a8e79ab70cf572a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerPowerUI
+  playerPower: {fileID: 1318698847}
+  fillImage: {fileID: 1889519059}
 --- !u!1 &1907343509
 GameObject:
   m_ObjectHideFlags: 0

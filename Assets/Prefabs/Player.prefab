@@ -711,6 +711,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerPower
   playerHealth: {fileID: 6602373768474145768}
   playerMovement: {fileID: 102499189860425364}
+  animator: {fileID: 449159012133179020}
   hitsToFillBar: 6
   OnPowerChanged:
     m_PersistentCalls:
