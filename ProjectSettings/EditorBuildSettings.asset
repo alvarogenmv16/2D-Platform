@@ -23,5 +23,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BossArenaScene.unity
     guid: f1ef97204e4e4de7ae4899dfda772e69
+  - enabled: 1
+    path: Assets/Scenes/Level2.unity
+    guid: d2c721a72c134c95a3a6d72464338eb7
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

@@ -14,6 +14,7 @@ public class PlayerAttackHitbox : MonoBehaviour
     [SerializeField] private SfxPlayer sfxPlayer;
     [SerializeField] private AudioClip swingSound; // plays on every attack, connects or not
     [SerializeField, Range(0f, 1f)] private float swingVolume = 1f;
+    [SerializeField] private PlayerPower playerPower;
 
     private SpriteRenderer spriteRenderer;
 
@@ -48,6 +49,7 @@ public class PlayerAttackHitbox : MonoBehaviour
             if (enemyHealth != null)
             {
                 enemyHealth.TakeDamage(damage, attackPointPosition);
+                playerPower?.AddPower(1f);
             }
         }
     }
