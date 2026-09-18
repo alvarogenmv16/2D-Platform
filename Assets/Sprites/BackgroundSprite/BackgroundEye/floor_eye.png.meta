@@ -1,0 +1,344 @@
+fileFormatVersion: 2
+guid: 7873d504bcf4f3c4090bd4024ccb1b24
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6537465385517653375
+    second: floor_eye_0
+  - first:
+      213: -7353392307490602227
+    second: floor_eye_1
+  - first:
+      213: -1261567143669103323
+    second: floor_eye_2
+  - first:
+      213: 1430783221947617036
+    second: floor_eye_3
+  - first:
+      213: 2188097353162308879
+    second: floor_eye_4
+  - first:
+      213: 6856184822305520210
+    second: floor_eye_5
+  - first:
+      213: 8326342634156052266
+    second: floor_eye_6
+  - first:
+      213: 3879126284496570462
+    second: floor_eye_7
+  - first:
+      213: 1955118431689679223
+    second: floor_eye_8
+  - first:
+      213: 4629264130899817801
+    second: floor_eye_9
+  - first:
+      213: 6593355616868594923
+    second: floor_eye_10
+  - first:
+      213: -607546749806597054
+    second: floor_eye_11
+  - first:
+      213: -8845592274943050302
+    second: floor_eye_12
+  - first:
+      213: 3960148256037782897
+    second: floor_eye_13
+  - first:
+      213: 2363819043801715642
+    second: floor_eye_14
+  - first:
+      213: 5012993601125299117
+    second: floor_eye_15
+  - first:
+      213: -4848217066238424419
+    second: floor_eye_16
+  - first:
+      213: 4628026648199879822
+    second: floor_eye_17
+  - first:
+      213: 4418146395385383316
+    second: floor_eye_18
+  - first:
+      213: 922349563139683021
+    second: floor_eye_19
+  - first:
+      213: 4577237002388812756
+    second: floor_eye_20
+  - first:
+      213: 3918805258865076513
+    second: floor_eye_21
+  - first:
+      213: 9156523892041441383
+    second: floor_eye_22
+  - first:
+      213: -8241024499983040876
+    second: floor_eye_23
+  - first:
+      213: -7355541049753272657
+    second: floor_eye_24
+  - first:
+      213: 4947740105928055589
+    second: floor_eye_25
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: floor_eye_0
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 58
+        width: 1099
+        height: 201
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1713f115f6698524d9d803edf92e5f0c
+      internalID: -6537465385517653375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_eye_1
+      rect:
+        serializedVersion: 2
+        x: 1173
+        y: 56
+        width: 408
+        height: 187
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55479a36898689245a9781eb29a467f0
+      internalID: -7353392307490602227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_eye_2
+      rect:
+        serializedVersion: 2
+        x: 564
+        y: 333
+        width: 488
+        height: 187
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e942da4731d25f48bfe238802b288f6
+      internalID: -1261567143669103323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_eye_3
+      rect:
+        serializedVersion: 2
+        x: 1115
+        y: 274
+        width: 619
+        height: 258
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f18c16f8cef4ba54db7ced885157c050
+      internalID: 1430783221947617036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_eye_4
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 343
+        width: 455
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 473986568e82283439c1205054acd12c
+      internalID: 2188097353162308879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: deac9c3b7b91df1488a58516882653cc
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      floor_eye_0: -6537465385517653375
+      floor_eye_1: -7353392307490602227
+      floor_eye_10: 6593355616868594923
+      floor_eye_11: -607546749806597054
+      floor_eye_12: -8845592274943050302
+      floor_eye_13: 3960148256037782897
+      floor_eye_14: 2363819043801715642
+      floor_eye_15: 5012993601125299117
+      floor_eye_16: -4848217066238424419
+      floor_eye_17: 4628026648199879822
+      floor_eye_18: 4418146395385383316
+      floor_eye_19: 922349563139683021
+      floor_eye_2: -1261567143669103323
+      floor_eye_20: 4577237002388812756
+      floor_eye_21: 3918805258865076513
+      floor_eye_22: 9156523892041441383
+      floor_eye_23: -8241024499983040876
+      floor_eye_24: -7355541049753272657
+      floor_eye_25: 4947740105928055589
+      floor_eye_3: 1430783221947617036
+      floor_eye_4: 2188097353162308879
+      floor_eye_5: 6856184822305520210
+      floor_eye_6: 8326342634156052266
+      floor_eye_7: 3879126284496570462
+      floor_eye_8: 1955118431689679223
+      floor_eye_9: 4629264130899817801
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

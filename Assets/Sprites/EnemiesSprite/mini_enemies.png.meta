@@ -1,0 +1,629 @@
+fileFormatVersion: 2
+guid: 55e83d0c65deedf4696efc0f1e9d42a6
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 301063190819146215
+    second: mini_enemies_0
+  - first:
+      213: 7270242733815812326
+    second: mini_enemies_1
+  - first:
+      213: 4988878196762272033
+    second: mini_enemies_2
+  - first:
+      213: -2651665280795720645
+    second: mini_enemies_3
+  - first:
+      213: -1664753899197647795
+    second: mini_enemies_4
+  - first:
+      213: -1760870842986554544
+    second: mini_enemies_5
+  - first:
+      213: -8622890190492388713
+    second: mini_enemies_6
+  - first:
+      213: 4263900483676622471
+    second: mini_enemies_7
+  - first:
+      213: -2767181965189287548
+    second: mini_enemies_8
+  - first:
+      213: -6435140238116049125
+    second: mini_enemies_9
+  - first:
+      213: -1723096182578131530
+    second: mini_enemies_10
+  - first:
+      213: 1993172871871189633
+    second: mini_enemies_11
+  - first:
+      213: -8012199964466384983
+    second: mini_enemies_12
+  - first:
+      213: 8203670544861292132
+    second: mini_enemies_13
+  - first:
+      213: -5829275431230496418
+    second: mini_enemies_14
+  - first:
+      213: -8956942416953475361
+    second: mini_enemies_15
+  - first:
+      213: -8993001837487903495
+    second: mini_enemies_16
+  - first:
+      213: -1295726865392421196
+    second: mini_enemies_17
+  - first:
+      213: 8850326365177366410
+    second: mini_enemies_18
+  - first:
+      213: -3312043448164506662
+    second: mini_enemies_19
+  - first:
+      213: 6645556107905928376
+    second: mini_enemies_20
+  - first:
+      213: -7564525401101537278
+    second: mini_enemies_21
+  - first:
+      213: 201377299035773142
+    second: mini_enemies_22
+  - first:
+      213: 5761334105760768529
+    second: mini_enemies_23
+  - first:
+      213: -7023657497190864536
+    second: mini_enemies_24
+  - first:
+      213: -4347897764976999756
+    second: mini_enemies_25
+  - first:
+      213: -6228426999483001933
+    second: mini_enemies_26
+  - first:
+      213: -7579884011198269444
+    second: mini_enemies_27
+  - first:
+      213: -9101613916740880979
+    second: mini_enemies_28
+  - first:
+      213: -2814384182905479755
+    second: mini_enemies_29
+  - first:
+      213: -7736743867600526481
+    second: mini_enemies_30
+  - first:
+      213: -4857487957181492495
+    second: mini_enemies_31
+  - first:
+      213: -699746372732417239
+    second: mini_enemies_32
+  - first:
+      213: -6852912345756249985
+    second: mini_enemies_33
+  - first:
+      213: 2016008762404390291
+    second: mini_enemies_34
+  - first:
+      213: 2531548615891560039
+    second: mini_enemies_35
+  - first:
+      213: -8881595188909606449
+    second: mini_enemies_36
+  - first:
+      213: -4581460844115409773
+    second: mini_enemies_37
+  - first:
+      213: -881250938057062869
+    second: mini_enemies_38
+  - first:
+      213: 1176880699485495205
+    second: mini_enemies_39
+  - first:
+      213: -1538214328288731604
+    second: mini_enemies_40
+  - first:
+      213: -4786757700385675828
+    second: mini_enemies_41
+  - first:
+      213: -7390904338609890715
+    second: mini_enemies_42
+  - first:
+      213: 2249147610077113403
+    second: mini_enemies_43
+  - first:
+      213: 8765617277304821713
+    second: mini_enemies_44
+  - first:
+      213: -1244158220737841026
+    second: mini_enemies_45
+  - first:
+      213: -7418332106738677023
+    second: mini_enemies_46
+  - first:
+      213: -5901446668782445836
+    second: mini_enemies_47
+  - first:
+      213: -2556766318625825044
+    second: mini_enemies_48
+  - first:
+      213: -8852767068816805485
+    second: mini_enemies_49
+  - first:
+      213: -2490249220966950138
+    second: mini_enemies_50
+  - first:
+      213: 1316475923659915191
+    second: mini_enemies_51
+  - first:
+      213: 2610149532851159468
+    second: mini_enemies_52
+  - first:
+      213: 200973615381672480
+    second: mini_enemies_53
+  - first:
+      213: -1508141776768605905
+    second: mini_enemies_54
+  - first:
+      213: 2293211511694875116
+    second: mini_enemies_55
+  - first:
+      213: -424167636991884058
+    second: mini_enemies_56
+  - first:
+      213: -1161018029408282158
+    second: mini_enemies_57
+  - first:
+      213: 6655908922891615836
+    second: mini_enemies_58
+  - first:
+      213: -6016865711359838483
+    second: mini_enemies_59
+  - first:
+      213: -3898169621164534318
+    second: mini_enemies_60
+  - first:
+      213: 7118615187754791854
+    second: mini_enemies_61
+  - first:
+      213: 2869667339695730220
+    second: mini_enemies_62
+  - first:
+      213: -9029580808217454498
+    second: mini_enemies_63
+  - first:
+      213: -6583346061067232487
+    second: mini_enemies_64
+  - first:
+      213: 873545714996814099
+    second: mini_enemies_65
+  - first:
+      213: -2082917265337260040
+    second: mini_enemies_66
+  - first:
+      213: 8902231462053424753
+    second: mini_enemies_67
+  - first:
+      213: -794374232066273022
+    second: mini_enemies_68
+  - first:
+      213: 8616936676173062460
+    second: mini_enemies_69
+  - first:
+      213: -7154806424668212883
+    second: mini_enemies_70
+  - first:
+      213: -3324077324584361917
+    second: mini_enemies_71
+  - first:
+      213: -8646888333747268984
+    second: mini_enemies_72
+  - first:
+      213: 914099067049256722
+    second: mini_enemies_73
+  - first:
+      213: 2666723596618925458
+    second: mini_enemies_74
+  - first:
+      213: 1361352973903850087
+    second: mini_enemies_75
+  - first:
+      213: 5636572313149646251
+    second: mini_enemies_76
+  - first:
+      213: 4346441089443366258
+    second: mini_enemies_77
+  - first:
+      213: 4267306288294769305
+    second: mini_enemies_78
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: walker_tutorial
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 549
+        width: 221
+        height: 217
+      alignment: 9
+      pivot: {x: 0.5054946, y: 0.0019787203}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4aa72305c04b5fe4495a5e12eef49bbf
+      internalID: 841809170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flyer_tutorial
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 86
+        width: 248
+        height: 217
+      alignment: 9
+      pivot: {x: 0.50000006, y: -0.0036171416}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ff1b6ab3bc26fa4687dd030a70822c1
+      internalID: -52103235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walker_mini_death0
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 541
+        width: 221
+        height: 210
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b81008b91b9427c429bcd83d6100e261
+      internalID: 1320194354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walker_mini_death
+      rect:
+        serializedVersion: 2
+        x: 835
+        y: 532
+        width: 286
+        height: 177
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3417794793f48b648bb330f622fd2a2a
+      internalID: 272534212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walker_mini_death2
+      rect:
+        serializedVersion: 2
+        x: 1195
+        y: 531
+        width: 261
+        height: 218
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6382840af9a72a47a8d7ffd9e6c1220
+      internalID: -410449348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flyer_death0
+      rect:
+        serializedVersion: 2
+        x: 549
+        y: 74
+        width: 220
+        height: 231
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de86a761b0be7a54aaf48ea53a679341
+      internalID: -2077668653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flyer_death1
+      rect:
+        serializedVersion: 2
+        x: 837
+        y: 58
+        width: 228
+        height: 224
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c006be4f3166b74e95401235a235cfd
+      internalID: -165085215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flyer_death2
+      rect:
+        serializedVersion: 2
+        x: 1165
+        y: 49
+        width: 244
+        height: 231
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5d6af3540278d04c9d55d6881f5dd52
+      internalID: -1280309031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 78d77dac6828a464eaf85e941ef52c5e
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      flyer_death0: -2077668653
+      flyer_death1: -165085215
+      flyer_death2: -1280309031
+      flyer_tutorial: -52103235
+      mini_enemies_1: 7270242733815812326
+      mini_enemies_10: -1723096182578131530
+      mini_enemies_11: 1993172871871189633
+      mini_enemies_12: -8012199964466384983
+      mini_enemies_13: 8203670544861292132
+      mini_enemies_14: -5829275431230496418
+      mini_enemies_15: -8956942416953475361
+      mini_enemies_16: -8993001837487903495
+      mini_enemies_17: -1295726865392421196
+      mini_enemies_18: 8850326365177366410
+      mini_enemies_19: -3312043448164506662
+      mini_enemies_2: 4988878196762272033
+      mini_enemies_20: 6645556107905928376
+      mini_enemies_21: -7564525401101537278
+      mini_enemies_22: 201377299035773142
+      mini_enemies_23: 5761334105760768529
+      mini_enemies_24: -7023657497190864536
+      mini_enemies_25: -4347897764976999756
+      mini_enemies_26: -6228426999483001933
+      mini_enemies_27: -7579884011198269444
+      mini_enemies_28: -9101613916740880979
+      mini_enemies_29: -2814384182905479755
+      mini_enemies_3: -2651665280795720645
+      mini_enemies_30: -7736743867600526481
+      mini_enemies_31: -4857487957181492495
+      mini_enemies_32: -699746372732417239
+      mini_enemies_33: -6852912345756249985
+      mini_enemies_34: 2016008762404390291
+      mini_enemies_35: 2531548615891560039
+      mini_enemies_36: -8881595188909606449
+      mini_enemies_37: -4581460844115409773
+      mini_enemies_38: -881250938057062869
+      mini_enemies_39: 1176880699485495205
+      mini_enemies_4: -1664753899197647795
+      mini_enemies_40: -1538214328288731604
+      mini_enemies_41: -4786757700385675828
+      mini_enemies_42: -7390904338609890715
+      mini_enemies_43: 2249147610077113403
+      mini_enemies_44: 8765617277304821713
+      mini_enemies_45: -1244158220737841026
+      mini_enemies_46: -7418332106738677023
+      mini_enemies_47: -5901446668782445836
+      mini_enemies_48: -2556766318625825044
+      mini_enemies_49: -8852767068816805485
+      mini_enemies_5: -1760870842986554544
+      mini_enemies_50: -2490249220966950138
+      mini_enemies_51: 1316475923659915191
+      mini_enemies_52: 2610149532851159468
+      mini_enemies_53: 200973615381672480
+      mini_enemies_54: -1508141776768605905
+      mini_enemies_55: 2293211511694875116
+      mini_enemies_56: -424167636991884058
+      mini_enemies_57: -1161018029408282158
+      mini_enemies_58: 6655908922891615836
+      mini_enemies_59: -6016865711359838483
+      mini_enemies_6: -8622890190492388713
+      mini_enemies_60: -3898169621164534318
+      mini_enemies_61: 7118615187754791854
+      mini_enemies_62: 2869667339695730220
+      mini_enemies_63: -9029580808217454498
+      mini_enemies_64: -6583346061067232487
+      mini_enemies_65: 873545714996814099
+      mini_enemies_66: -2082917265337260040
+      mini_enemies_67: 8902231462053424753
+      mini_enemies_68: -794374232066273022
+      mini_enemies_69: 8616936676173062460
+      mini_enemies_7: 4263900483676622471
+      mini_enemies_70: -7154806424668212883
+      mini_enemies_71: -3324077324584361917
+      mini_enemies_72: -8646888333747268984
+      mini_enemies_73: 914099067049256722
+      mini_enemies_74: 2666723596618925458
+      mini_enemies_75: 1361352973903850087
+      mini_enemies_76: 5636572313149646251
+      mini_enemies_77: 4346441089443366258
+      mini_enemies_78: 4267306288294769305
+      mini_enemies_8: -2767181965189287548
+      mini_enemies_9: -6435140238116049125
+      walker_mini_death: 272534212
+      walker_mini_death0: 1320194354
+      walker_mini_death2: -410449348
+      walker_tutorial: 301063190819146215
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
