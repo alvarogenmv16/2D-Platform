@@ -40628,6 +40628,14 @@ PrefabInstance:
       propertyPath: fadeOverlay
       value: 
       objectReference: {fileID: 1782598955}
+    - target: {fileID: 2167132271123184834, guid: 0c8dc06251cc7b242a370780b08f282a, type: 3}
+      propertyPath: m_Size.x
+      value: 1.9733334
+      objectReference: {fileID: 0}
+    - target: {fileID: 2167132271123184834, guid: 0c8dc06251cc7b242a370780b08f282a, type: 3}
+      propertyPath: m_Size.y
+      value: 2.5266666
+      objectReference: {fileID: 0}
     - target: {fileID: 2224274585891868886, guid: 0c8dc06251cc7b242a370780b08f282a, type: 3}
       propertyPath: attackUpSize.x
       value: 2

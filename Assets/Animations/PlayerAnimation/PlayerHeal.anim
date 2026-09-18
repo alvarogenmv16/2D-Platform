@@ -3,6 +3,9 @@
 --- !u!74 &7400000
 AnimationClip:
   m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: PlayerHeal
   serializedVersion: 8
   m_Legacy: 0
@@ -18,19 +21,21 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 6194298428493134007, guid: 99be0db4be3571f49929c5c78d481bc5, type: 3}
+      value: {fileID: -2078138933, guid: 99be0db4be3571f49929c5c78d481bc5, type: 3}
     - time: 0.4
       value: {fileID: 2097572758, guid: 99be0db4be3571f49929c5c78d481bc5, type: 3}
     - time: 0.8
       value: {fileID: -157383673, guid: 99be0db4be3571f49929c5c78d481bc5, type: 3}
     attribute: m_Sprite
-    path:
+    path: 
     classID: 212
     script: {fileID: 0}
     flags: 2
   m_SampleRate: 60
   m_WrapMode: 0
-  m_Bounds: {m_Center: {x: 0, y: 0, z: 0}, m_Extent: {x: 0, y: 0, z: 0}}
+  m_Bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
@@ -44,7 +49,7 @@ AnimationClip:
       isSerializeReferenceCurve: 0
       metaData: 0
     pptrCurveMapping:
-    - {fileID: 6194298428493134007, guid: 99be0db4be3571f49929c5c78d481bc5, type: 3}
+    - {fileID: -2078138933, guid: 99be0db4be3571f49929c5c78d481bc5, type: 3}
     - {fileID: 2097572758, guid: 99be0db4be3571f49929c5c78d481bc5, type: 3}
     - {fileID: -157383673, guid: 99be0db4be3571f49929c5c78d481bc5, type: 3}
   m_AnimationClipSettings:
@@ -52,7 +57,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1
+    m_StopTime: 0.81666666
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -74,7 +79,7 @@ AnimationClip:
   m_Events:
   - time: 0.8
     functionName: ApplyHeal
-    data:
+    data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0

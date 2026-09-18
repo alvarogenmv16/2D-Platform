@@ -20,8 +20,6 @@ AnimationClip:
   m_PPtrCurves:
   - serializedVersion: 2
     curve:
-    - time: 0
-      value: {fileID: -1487222940, guid: 9efcd51428d598843b54254ba1520a8e, type: 3}
     - time: 0.083333336
       value: {fileID: -1487222940, guid: 9efcd51428d598843b54254ba1520a8e, type: 3}
     attribute: m_Sprite
@@ -47,7 +45,6 @@ AnimationClip:
       isSerializeReferenceCurve: 0
       metaData: 0
     pptrCurveMapping:
-    - {fileID: -1487222940, guid: 9efcd51428d598843b54254ba1520a8e, type: 3}
     - {fileID: -1487222940, guid: 9efcd51428d598843b54254ba1520a8e, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
@@ -76,7 +73,7 @@ AnimationClip:
   m_Events:
   - time: 0.083333336
     functionName: OnAttackHit
-    data:
+    data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
