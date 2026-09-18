@@ -57,6 +57,28 @@ public class PlayerHealthUI : MonoBehaviour
     // FUNCTIONS
     // =========================
 
+    // Points this UI at a different PlayerHealth after the fact — needed
+    // after a mid-fight scene transition, where the surviving Player isn't
+    // part of the new scene's saved data and can't be wired via Inspector.
+    public void Bind(PlayerHealth health)
+    {
+        if (playerHealth != null)
+        {
+            playerHealth.OnHealthChanged.RemoveListener(UpdateMasks);
+        }
+
+        playerHealth = health;
+        // Forget the previous fight's mask state so the first update after
+        // binding just paints the real health instead of animating a break.
+        previousRemainingMasks = -1;
+
+        if (playerHealth != null)
+        {
+            playerHealth.OnHealthChanged.AddListener(UpdateMasks);
+            playerHealth.RepublishHealth();
+        }
+    }
+
     private void UpdateMasks(float currentHealth, float maxHealth)
     {
         // Normalize health against how many mask icons we actually have

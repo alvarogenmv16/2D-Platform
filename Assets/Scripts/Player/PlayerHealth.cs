@@ -51,12 +51,25 @@ public class PlayerHealth : MonoBehaviour
     // FUNCTIONS
     // =========================
 
-    public void TakeDamage(float amount, Vector2 hitSourcePosition)
+    // Re-fires OnHealthChanged with the current values, unprompted by any
+    // actual damage. Used when a health UI binds to this PlayerHealth after
+    // the fact (e.g. after a mid-fight scene transition) so it shows the
+    // real value immediately instead of a stale default until the next hit.
+    public void RepublishHealth()
+    {
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
+    }
+
+    // Returns true if the damage actually landed (false if it was ignored
+    // because the player is dead or currently invulnerable). Callers that
+    // need to react only to a real hit - like the hazard bump-back - use
+    // this instead of assuming every call connects.
+    public bool TakeDamage(float amount, Vector2 hitSourcePosition)
     {
         // Ignore damage while dead or during the brief invulnerability
         // window right after getting hit. Without this, standing inside
         // an enemy's attack range would drain health every single frame.
-        if (isDead || isInvulnerable) return;
+        if (isDead || isInvulnerable) return false;
 
         currentHealth -= amount;
         currentHealth = Mathf.Max(currentHealth, 0f);
@@ -80,6 +93,8 @@ public class PlayerHealth : MonoBehaviour
             OnDamaged?.Invoke(amount, hitSourcePosition);
             StartCoroutine(InvulnerabilityWindow());
         }
+
+        return true;
     }
     private IEnumerator InvulnerabilityWindow()
     {
