@@ -60,6 +60,17 @@ public class PlayerHealth : MonoBehaviour
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
     }
 
+    // Restores the player to full health. Used by the power-bar heal
+    // ability. Ignored while dead, since reviving through a heal call
+    // would leave isDead/OnDied out of sync with currentHealth.
+    public void FullHeal()
+    {
+        if (isDead) return;
+
+        currentHealth = maxHealth;
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
+    }
+
     // Returns true if the damage actually landed (false if it was ignored
     // because the player is dead or currently invulnerable). Callers that
     // need to react only to a real hit - like the hazard bump-back - use

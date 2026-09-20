@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 8012962715797277990}
   - component: {fileID: 6465971433042138573}
   - component: {fileID: 7716706258335186380}
+  - component: {fileID: 5566778899112233}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -385,6 +386,7 @@ MonoBehaviour:
   sfxPlayer: {fileID: 6465971433042138573}
   swingSound: {fileID: 8300000, guid: 65faff34bb88c1643b95a607ab8d65d1, type: 3}
   swingVolume: 0.568
+  playerPower: {fileID: 5566778899112233}
 --- !u!114 &9060920260775209687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -695,3 +697,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5566778899112233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760844655741871444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aafeb613a843664889ae9b0f6e20dc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerPower
+  playerHealth: {fileID: 6602373768474145768}
+  playerMovement: {fileID: 102499189860425364}
+  animator: {fileID: 449159012133179020}
+  hitsToFillBar: 6
+  OnPowerChanged:
+    m_PersistentCalls:
+      m_Calls: []
