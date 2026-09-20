@@ -1,10 +1,34 @@
 fileFormatVersion: 2
-guid: b5b7faa80c79d5841bb18adaf1520cba
+guid: c7df9dbf39b21b34c8429f33c908686c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8241293141625589842
-    second: background_eye_0
+      213: -2249957500588320743
+    second: companion2_stuff_0
+  - first:
+      213: -1179602503697869575
+    second: companion2_stuff_1
+  - first:
+      213: -7976351546149297169
+    second: companion2_stuff_2
+  - first:
+      213: -7196669396756470017
+    second: companion2_stuff_3
+  - first:
+      213: 223311232712962718
+    second: companion2_stuff_4
+  - first:
+      213: -9190166443085111572
+    second: companion2_stuff_5
+  - first:
+      213: -815095073468959055
+    second: companion2_stuff_6
+  - first:
+      213: -8563519969718224
+    second: companion2_stuff_7
+  - first:
+      213: 4759684361280265782
+    second: companion2_stuff_8
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +137,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: background_eye_0
+      name: companion2_stuff_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1672
-        height: 941
+        x: 53
+        y: 86
+        width: 903
+        height: 818
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9d3ad31113692f4cb219a48a393921e
+      internalID: -2249957500588320743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: companion2_stuff_1
+      rect:
+        serializedVersion: 2
+        x: 989
+        y: 89
+        width: 478
+        height: 333
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: eaf2b8b4d8b01ad80800000000000000
-      internalID: -8241293141625589842
+      spriteID: 3b68cedcb508e074e84d87da300c8495
+      internalID: -1179602503697869575
       vertices: []
       indices: 
       edges: []
@@ -138,7 +184,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 79486114767dbfa43b950080551936c8
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +194,15 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      background_eye_0: -8241293141625589842
+      companion2_stuff_0: -2249957500588320743
+      companion2_stuff_1: -1179602503697869575
+      companion2_stuff_2: -7976351546149297169
+      companion2_stuff_3: -7196669396756470017
+      companion2_stuff_4: 223311232712962718
+      companion2_stuff_5: -9190166443085111572
+      companion2_stuff_6: -815095073468959055
+      companion2_stuff_7: -8563519969718224
+      companion2_stuff_8: 4759684361280265782
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
