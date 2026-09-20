@@ -32,6 +32,14 @@ public class PlayerAttackHitbox : MonoBehaviour
     // FUNCTIONS
     // =========================
 
+    // Permanently raises the player's attack damage - called by pickups
+    // like DamageUpgradePickup. Not clamped: whoever grants the upgrade is
+    // responsible for only doing it once.
+    public void IncreaseDamage(float amount)
+    {
+        damage += amount;
+    }
+
     // Called via an Animation Event placed on the Player_Attack clip,
     // at the exact frame the hit should register — not on the frame the
     // attack begins, so the damage is tied to the visual impact.
