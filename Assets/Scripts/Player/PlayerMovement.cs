@@ -39,6 +39,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private SfxPlayer sfxPlayer;
     [SerializeField] private AudioClip dashSound;
     [SerializeField] private AudioSource walkAudioSource; // separate looping source: Loop on, Play On Awake off
+    [SerializeField] private AudioClip wallHitSound;
+    // How horizontal a contact normal must be to count as a wall instead of
+    // floor/ceiling. 1 = perfectly horizontal, 0 = perfectly vertical - 0.7
+    // is roughly a 45 degree cutoff either side.
+    [SerializeField, Range(0f, 1f)] private float wallHitNormalThreshold = 0.7f;
+    // Minimum time between wall-hit sounds, so grinding along a wall or a
+    // jittery physics contact can't machine-gun the same clip.
+    [SerializeField] private float wallHitCooldown = 0.15f;
+    private float wallHitCooldownTimer = 0f;
 
     // Components
     private Rigidbody2D rb;
@@ -105,6 +114,11 @@ public class PlayerMovement : MonoBehaviour
         HandleJump();
         HandleDash();
         UpdateAnimatorParameters();
+
+        if (wallHitCooldownTimer > 0f)
+        {
+            wallHitCooldownTimer -= Time.fixedDeltaTime;
+        }
 
         // Consume the buffered jump press after processing it
         jumpPressedThisFrame = false;
@@ -295,6 +309,25 @@ public class PlayerMovement : MonoBehaviour
         animator.SetInteger("JumpCount", jumpCount);
         animator.SetFloat("VerticalVelocity", rb.linearVelocity.y);
         animator.SetBool("IsDashing", isDashing);
+    }
+
+    // Plays a sound whenever the player physically bumps into a vertical
+    // surface - a wall, not the floor or a ceiling. Distinguished purely by
+    // the contact normal's angle, since walls share the same groundLayer as
+    // everything else solid in the level.
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (((1 << collision.gameObject.layer) & groundLayer) == 0) return;
+        if (wallHitCooldownTimer > 0f) return;
+
+        foreach (ContactPoint2D contact in collision.contacts)
+        {
+            if (Mathf.Abs(contact.normal.x) < wallHitNormalThreshold) continue;
+
+            sfxPlayer?.Play(wallHitSound);
+            wallHitCooldownTimer = wallHitCooldown;
+            break;
+        }
     }
 
     private void OnDestroy()
