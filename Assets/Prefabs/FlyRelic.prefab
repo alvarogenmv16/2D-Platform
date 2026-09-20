@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b9ec3da9a50772ae7a801be6a2731db4, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlyRelicAI
   currentState: 0
   player: {fileID: 0}
@@ -137,8 +137,8 @@ MonoBehaviour:
   attackDuration: 0.6
   returnSpeed: 6
   sfxPlayer: {fileID: 200009}
-  awakeSound: {fileID: 0}
-  beamSound: {fileID: 0}
+  awakeSound: {fileID: 8300000, guid: f37e30546a3d23e46a1e6d65e23ee086, type: 3}
+  beamSound: {fileID: 8300000, guid: 776b233ae1aadf048ac1c57202c054ad, type: 3}
   hoverAudioSource: {fileID: 200011}
 --- !u!114 &200006
 MonoBehaviour:
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f161156ce968e6499447c5f341e4d7e, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlyingEnemyMovement
 --- !u!114 &200008
 MonoBehaviour:
@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6880f022588ee7241a2fa22acbe1025f, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 3
   animator: {fileID: 200023}
@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d3c41c8a28dd6b8408fd929ba786f519, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SfxPlayer
   pitchVariation: 0.05
 --- !u!82 &200010
@@ -504,7 +504,7 @@ Animator:
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
-  m_WarningMessage:
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -519,7 +519,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0304d354f0cdbbf43294811ab66b56cb, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlyRelicAttackRelay
   flyRelicAI: {fileID: 200005}
 --- !u!1 &200025
@@ -564,7 +564,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac138832995df05479eebf64f15600ec, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyWeapon
   damage: 1
   attackSize: {x: 6, y: 1.5}

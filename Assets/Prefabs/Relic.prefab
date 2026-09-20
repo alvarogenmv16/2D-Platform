@@ -142,8 +142,8 @@ MonoBehaviour:
   weapon: {fileID: 100007}
   animator: {fileID: 100023}
   sfxPlayer: {fileID: 100009}
-  awakeSound: {fileID: 0}
-  impactSound: {fileID: 0}
+  awakeSound: {fileID: 8300000, guid: cc8d0c96012d51d4d811227b24f6c216, type: 3}
+  impactSound: {fileID: 8300000, guid: 8f3bfa6b1145b024d9c2efd8cce4f913, type: 3}
   hoverAudioSource: {fileID: 100011}
 --- !u!114 &100006
 MonoBehaviour:
