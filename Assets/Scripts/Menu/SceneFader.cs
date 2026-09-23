@@ -102,15 +102,12 @@ public class SceneFader : MonoBehaviour
 
                 if (entryPoint != null)
                 {
+                    // Only the position is teleported - velocity (speed and
+                    // direction) is left untouched on purpose, so momentum
+                    // from the old scene (e.g. still rising from a jump when
+                    // the exit trigger was hit) carries straight into the
+                    // new one instead of getting cut to a dead stop.
                     player.transform.position = entryPoint.transform.position;
-
-                    // Clear any velocity carried over from the previous scene
-                    // (e.g. still moving/falling when the trigger was hit),
-                    // same reasoning as PlayerRespawnPoint.SnapToLastSafePosition.
-                    if (player.TryGetComponent(out Rigidbody2D playerRb))
-                    {
-                        playerRb.linearVelocity = Vector2.zero;
-                    }
                 }
                 else
                 {

@@ -1,28 +1,22 @@
 fileFormatVersion: 2
-guid: db395c3238b73b34fbbf590ee82eb708
+guid: 7a246be93333b134bbefc04c4923b27a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1613849603020893307
-    second: eye_columns_0
+      213: -8579777673790764244
+    second: eye_UI_0
   - first:
-      213: -3504089929499672267
-    second: eye_columns_1
+      213: 6817206296395289685
+    second: eye_UI_1
   - first:
-      213: -3617118831051988663
-    second: eye_columns_2
+      213: 941736513925407006
+    second: eye_UI_2
   - first:
-      213: 3317121768793149664
-    second: eye_columns_3
+      213: 4693130016730193762
+    second: eye_UI_3
   - first:
-      213: -1103756879424117867
-    second: eye_columns_4
-  - first:
-      213: -7451593560995847261
-    second: eye_columns_5
-  - first:
-      213: 8630734061490037881
-    second: eye_columns_6
+      213: -5735879798140828036
+    second: eye_UI_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -131,89 +125,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: eye_columns_0
+      name: eye_UI_0
       rect:
         serializedVersion: 2
-        x: 36
-        y: 318
-        width: 975
-        height: 495
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7a23339084cba95458bb006eba947377
-      internalID: -1613849603020893307
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_columns_1
-      rect:
-        serializedVersion: 2
-        x: 1370
-        y: 60
-        width: 132
-        height: 677
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: deac02fedf6977c459e383979ab593df
-      internalID: -3504089929499672267
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_columns_2
-      rect:
-        serializedVersion: 2
-        x: 1600
-        y: 54
-        width: 134
-        height: 500
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 31c32cab88c6f3e4796b7d5dc7a5647c
-      internalID: -3617118831051988663
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eye_columns_3
-      rect:
-        serializedVersion: 2
-        x: 31
-        y: 51
-        width: 979
-        height: 209
+        x: 19
+        y: 25
+        width: 2140
+        height: 661
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 2c623dd862f0ef844bdfd18f19fe9c44
-      internalID: 3317121768793149664
+      spriteID: c2bcfddc9a18ee880800000000000000
+      internalID: -8579777673790764244
       vertices: []
       indices: 
       edges: []
@@ -222,7 +150,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 680ba3011ffc1b5468cbbd4068eb1e6f
+    spriteID: 588b4bfae93b86842ba7a4467ff1fffa
     internalID: 0
     vertices: []
     indices: 
@@ -232,13 +160,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      eye_columns_0: -1613849603020893307
-      eye_columns_1: -3504089929499672267
-      eye_columns_2: -3617118831051988663
-      eye_columns_3: 3317121768793149664
-      eye_columns_4: -1103756879424117867
-      eye_columns_5: -7451593560995847261
-      eye_columns_6: 8630734061490037881
+      eye_UI_0: -8579777673790764244
+      eye_UI_1: 6817206296395289685
+      eye_UI_2: 941736513925407006
+      eye_UI_3: 4693130016730193762
+      eye_UI_4: -5735879798140828036
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
