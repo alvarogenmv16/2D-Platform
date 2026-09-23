@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 
 // Eye boss state machine. Sits Dormant until something (EyeArenaController)
 // calls Activate(). Phase 1 (portal/projectile attacks, plus wandering
@@ -29,11 +28,6 @@ public class EyeAI : MonoBehaviour
     [SerializeField] private EnemyHealth health;
     [SerializeField] private EyeArenaController arena;
     [SerializeField] private EyeFloorCrumble arenaFloor;
-    // Name of the dedicated Phase 2 scene (must be added to Build Settings).
-    [SerializeField] private string phase2SceneName = "EyePhase2";
-    // Name of the GameObject holding BossHealthUI in that scene — rebound at
-    // runtime because the Eye isn't part of that scene's saved data.
-    [SerializeField] private string phase2HealthBarObjectName = "BossHealthBar";
     // Hidden until the summon actually starts — otherwise the Animator's
     // default Idle state (holding the fully-grown sprite) is visible from
     // the moment the scene loads, well before Activate() is ever called.
@@ -88,8 +82,6 @@ public class EyeAI : MonoBehaviour
         {
             health.OnHealthChanged.AddListener(HandleHealthChanged);
         }
-
-        SceneManager.sceneLoaded += HandleSceneLoaded;
     }
 
     private void OnDisable()
@@ -97,25 +89,6 @@ public class EyeAI : MonoBehaviour
         if (health != null)
         {
             health.OnHealthChanged.RemoveListener(HandleHealthChanged);
-        }
-
-        SceneManager.sceneLoaded -= HandleSceneLoaded;
-    }
-
-    // Runs after EVERY scene load while the Eye is alive, not just the
-    // Phase 2 one — the name check is what makes this a no-op the rest of
-    // the time (e.g. if the player later reaches a game-over/menu scene).
-    private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (scene.name != phase2SceneName) return;
-
-        GameObject healthBarObject = GameObject.Find(phase2HealthBarObjectName);
-        BossHealthUI healthUI = healthBarObject != null ? healthBarObject.GetComponent<BossHealthUI>() : null;
-
-        if (healthUI != null)
-        {
-            healthUI.Bind(health);
-            healthUI.Show();
         }
     }
 
@@ -245,21 +218,16 @@ public class EyeAI : MonoBehaviour
     {
         // Phase1Loop/WanderLoop stop on their own next iteration (both check
         // currentState == Phase1, already false by the time this runs).
+        // No scene change: the arena floor just drops out from under the
+        // player (and, later, the Eye) into the room below, within this
+        // same scene.
         if (arenaFloor != null)
         {
             yield return StartCoroutine(arenaFloor.Crumble());
         }
 
-        // Survive the upcoming scene load carrying the current health value
-        // along (same instance, same accumulated damage) — DontDestroyOnLoad
-        // only works on root GameObjects, hence the detach first.
-        transform.SetParent(null);
-        DontDestroyOnLoad(gameObject);
-
-        SceneFader.FadeToScene(phase2SceneName);
-
-        // TODO: once EyePhase2Arena has real perch points, move the Eye to
-        // the first one here instead of just sitting wherever it lands.
+        // TODO: once the room below has real perch points, move the Eye to
+        // the first one here instead of just sitting wherever it was.
         currentState = EyeState.Phase2;
     }
 
