@@ -128,6 +128,15 @@ public class SceneFader : MonoBehaviour
             {
                 healthUI.Bind(playerHealth);
             }
+
+            // Same rebind, for scenes that also carry a power bar.
+            PlayerPowerUI powerUI = Object.FindFirstObjectByType<PlayerPowerUI>();
+            PlayerPower playerPower = player.GetComponent<PlayerPower>();
+
+            if (powerUI != null && playerPower != null)
+            {
+                powerUI.Bind(playerPower);
+            }
         }
 
         yield return StartCoroutine(Fade(1f, 0f));
