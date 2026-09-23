@@ -2492,7 +2492,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7917131634714319560, guid: 41f4f5157e46e304a9badf34942fa298, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 17.58
+      value: 26.95
       objectReference: {fileID: 0}
     - target: {fileID: 7917131634714319560, guid: 41f4f5157e46e304a9badf34942fa298, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2526,6 +2526,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8130852524224455234, guid: 41f4f5157e46e304a9badf34942fa298, type: 3}
+      propertyPath: maxHealth
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 8133231677275394959, guid: 41f4f5157e46e304a9badf34942fa298, type: 3}
       propertyPath: arena
       value: 
@@ -2534,6 +2538,26 @@ PrefabInstance:
       propertyPath: arenaFloor
       value: 
       objectReference: {fileID: 1690720233}
+    - target: {fileID: 8133231677275394959, guid: 41f4f5157e46e304a9badf34942fa298, type: 3}
+      propertyPath: wanderSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8133231677275394959, guid: 41f4f5157e46e304a9badf34942fa298, type: 3}
+      propertyPath: maxWanderPause
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8133231677275394959, guid: 41f4f5157e46e304a9badf34942fa298, type: 3}
+      propertyPath: minWanderPause
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8133231677275394959, guid: 41f4f5157e46e304a9badf34942fa298, type: 3}
+      propertyPath: maxHeightAboveFloor
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8133231677275394959, guid: 41f4f5157e46e304a9badf34942fa298, type: 3}
+      propertyPath: minHeightAboveFloor
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7049,7 +7073,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -8579777673790764244, guid: 7a246be93333b134bbefc04c4923b27a, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7915,7 +7939,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2313838572340273266, guid: 455befddf07c4744e9da8336edba5696, type: 3}
+  m_Sprite: {fileID: -8579777673790764244, guid: 7a246be93333b134bbefc04c4923b27a, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
