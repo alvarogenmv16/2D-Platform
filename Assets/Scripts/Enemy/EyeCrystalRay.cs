@@ -35,7 +35,7 @@ public class EyeCrystalRay : MonoBehaviour
     [SerializeField] private LayerMask playerLayer;
 
     [Header("Timing")]
-    [SerializeField] private float telegraphDuration = 0.75f; // harmless warning window, at the spawn edge, before it starts sliding
+    [SerializeField] private float telegraphDuration = 2f; // harmless warning window, at the spawn edge, before it starts sliding — give the player real time to relocate
     [SerializeField] private Color telegraphColor = new Color(1f, 1f, 1f, 0.35f);
 
     private SpriteRenderer spriteRenderer;

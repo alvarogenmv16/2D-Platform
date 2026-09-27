@@ -111,5 +111,5 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  telegraphDuration: 0.75
-  telegraphColor: {r: 1, g: 1, b: 1, a: 0.35}
+  telegraphDuration: 2
+  telegraphColor: {r: 1, g: 0, b: 0, a: 0.35}

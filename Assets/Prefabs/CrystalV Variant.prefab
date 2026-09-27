@@ -72,6 +72,18 @@ PrefabInstance:
       propertyPath: hitboxOffset.x
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 7842224146122422693, guid: cb7a865a5bc18ea42be909e70b5837ff, type: 3}
+      propertyPath: telegraphColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7842224146122422693, guid: cb7a865a5bc18ea42be909e70b5837ff, type: 3}
+      propertyPath: telegraphColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7842224146122422693, guid: cb7a865a5bc18ea42be909e70b5837ff, type: 3}
+      propertyPath: telegraphColor.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

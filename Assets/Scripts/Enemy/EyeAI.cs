@@ -76,26 +76,22 @@ public class EyeAI : MonoBehaviour
     [SerializeField] private GameObject[] phase2Platforms;
 
     [Header("Phase 2 - crystal ray")]
-    // One horizontal segment; a full attack lines several of these up floor
-    // to ceiling (blocking every height but one), each sliding sideways
-    // wall-to-wall.
+    // One horizontal segment, launched to slide rightward until it exits
+    // past the right wall.
     [SerializeField] private GameObject horizontalRayPrefab;
+    // Hand-placed spawn points along the left wall, one per height a
+    // horizontal wave can threaten — place them yourself in the scene so you
+    // control exactly where each one sits and how much room is between them.
+    // One is skipped at random each wave as the gap.
+    [SerializeField] private Transform[] horizontalSpawnPoints;
     // One vertical segment (its sprite pre-rotated 90 degrees on the
-    // prefab); a full attack lines several of these up wall to wall
-    // (blocking every X position but one), each sliding floor-to-ceiling.
+    // prefab), launched to slide upward until it exits past the ceiling.
     [SerializeField] private GameObject verticalRayPrefab;
-    // Spacing between segment centers along the perpendicular (non-moving)
-    // axis — tune to each segment's own rendered size so a full row/column
-    // reads as one solid wall, not overlapping or gapped between segments
-    // (the one intentional gap is a whole segment).
-    [SerializeField] private float rowSpacing = 2f;
-    [SerializeField] private float columnSpacing = 2f;
+    // Hand-placed spawn points along the floor, one per X position a
+    // vertical wave can threaten. One is skipped at random each wave as the gap.
+    [SerializeField] private Transform[] verticalSpawnPoints;
     [SerializeField] private float raySpeed = 4f; // how fast each segment slides across the room
-    // Pause between wall attacks. Needs to be at least as long as a wave
-    // takes to fully cross the room (room width or height / raySpeed),
-    // otherwise the next wave starts while the previous one is still
-    // sliding through and they pile up on top of each other.
-    [SerializeField] private float rayInterval = 6f;
+    [SerializeField] private float rayInterval = 5f; // pause between wall attacks — tune by eye against how long a wave takes to cross
 
     [Header("Sound")]
     [SerializeField] private SfxPlayer sfxPlayer;
@@ -124,6 +120,7 @@ public class EyeAI : MonoBehaviour
         if (health != null)
         {
             health.OnHealthChanged.AddListener(HandleHealthChanged);
+            health.OnDied.AddListener(HandleDied);
         }
 
         if (phase2FloorTrigger != null)
@@ -137,6 +134,7 @@ public class EyeAI : MonoBehaviour
         if (health != null)
         {
             health.OnHealthChanged.RemoveListener(HandleHealthChanged);
+            health.OnDied.RemoveListener(HandleDied);
         }
 
         if (phase2FloorTrigger != null)
@@ -254,6 +252,15 @@ public class EyeAI : MonoBehaviour
         }
     }
 
+    // EnemyHealth disables this component on death (aiComponentsToDisable),
+    // but disabling a MonoBehaviour does NOT stop coroutines already running
+    // on it — Phase2CrystalRayLoop would otherwise keep spawning walls
+    // forever after the Eye is dead. Stop everything explicitly instead.
+    private void HandleDied()
+    {
+        StopAllCoroutines();
+    }
+
     // Fires on every hit (EnemyHealth.OnHealthChanged), not just the one that
     // crosses the threshold — hasEnteredPhase2 keeps this a one-shot switch.
     private void HandleHealthChanged(float currentHealth, float maxHealth)
@@ -367,13 +374,11 @@ public class EyeAI : MonoBehaviour
     // Alternates at random between a wall of horizontal segments (blocks
     // every height, gap is a height the player reaches via the platforms)
     // and a wall of vertical segments (blocks every X position, gap is a
-    // spot to run to) — never both axes on the same wall, and which segment
-    // is left as the gap is picked fresh each time, so the safe spot is
-    // never in a predictable place.
+    // spot to run to) — never both axes on the same wall, and which spawn
+    // point is left as the gap is picked fresh each time, so the safe spot
+    // is never in a predictable place.
     private void SpawnCrystalWall()
     {
-        if (arena == null) return;
-
         bool blockHeights = Random.Range(0, 2) == 0;
 
         if (blockHeights)
@@ -386,60 +391,43 @@ public class EyeAI : MonoBehaviour
         }
     }
 
-    // Lines horizontal segments up floor-to-ceiling, evenly spaced same as
-    // BossAI.SpawnSpikeRow, skipping one random row as the gap. All of them
-    // always start from the left wall and slide together to the right one,
-    // so the row sweeps the room's full width over time instead of needing
-    // each segment's own size to already span it.
+    // Launches one segment from every horizontalSpawnPoint except a random
+    // gap, all sliding right until they pass the right wall.
     private void SpawnHorizontalRowWall()
     {
-        if (horizontalRayPrefab == null) return;
+        if (horizontalRayPrefab == null || arena == null) return;
+        if (horizontalSpawnPoints.Length == 0) return;
 
-        float height = arena.Phase2CeilingY - arena.Phase2FloorY;
-        int rowCount = Mathf.Max(2, Mathf.RoundToInt(height / rowSpacing));
-        int gapIndex = Random.Range(0, rowCount);
+        int gapIndex = Random.Range(0, horizontalSpawnPoints.Length);
+        Quaternion rotation = horizontalRayPrefab.transform.rotation;
 
-        float startX = arena.Phase2LeftBoundX;
-        float endX = arena.Phase2RightBoundX;
-        Vector2 moveDirection = Vector2.right;
-
-        for (int i = 0; i < rowCount; i++)
+        for (int i = 0; i < horizontalSpawnPoints.Length; i++)
         {
             if (i == gapIndex) continue;
+            if (horizontalSpawnPoints[i] == null) continue;
 
-            float t = rowCount == 1 ? 0.5f : i / (float)(rowCount - 1);
-            float y = Mathf.Lerp(arena.Phase2FloorY, arena.Phase2CeilingY, t);
-
-            GameObject rayObject = Instantiate(horizontalRayPrefab, new Vector2(startX, y), horizontalRayPrefab.transform.rotation);
-            rayObject.GetComponent<EyeCrystalRay>()?.Launch(moveDirection, raySpeed, endX);
+            GameObject rayObject = Instantiate(horizontalRayPrefab, horizontalSpawnPoints[i].position, rotation);
+            rayObject.GetComponent<EyeCrystalRay>()?.Launch(Vector2.right, raySpeed, arena.Phase2RightBoundX);
         }
     }
 
-    // Lines vertical segments up wall-to-wall, evenly spaced same as
-    // BossAI.SpawnSpikeRow, skipping one random column as the gap. All of
-    // them always start from the floor (easiest place to actually see them
-    // appear) and slide together up to the ceiling.
+    // Launches one segment from every verticalSpawnPoint except a random
+    // gap, all sliding up until they pass the ceiling.
     private void SpawnVerticalColumnWall()
     {
-        if (verticalRayPrefab == null) return;
+        if (verticalRayPrefab == null || arena == null) return;
+        if (verticalSpawnPoints.Length == 0) return;
 
-        float width = arena.Phase2RightBoundX - arena.Phase2LeftBoundX;
-        int columnCount = Mathf.Max(2, Mathf.RoundToInt(width / columnSpacing));
-        int gapIndex = Random.Range(0, columnCount);
+        int gapIndex = Random.Range(0, verticalSpawnPoints.Length);
+        Quaternion rotation = verticalRayPrefab.transform.rotation;
 
-        float startY = arena.Phase2FloorY;
-        float endY = arena.Phase2CeilingY;
-        Vector2 moveDirection = Vector2.up;
-
-        for (int i = 0; i < columnCount; i++)
+        for (int i = 0; i < verticalSpawnPoints.Length; i++)
         {
             if (i == gapIndex) continue;
+            if (verticalSpawnPoints[i] == null) continue;
 
-            float t = columnCount == 1 ? 0.5f : i / (float)(columnCount - 1);
-            float x = Mathf.Lerp(arena.Phase2LeftBoundX, arena.Phase2RightBoundX, t);
-
-            GameObject rayObject = Instantiate(verticalRayPrefab, new Vector2(x, startY), verticalRayPrefab.transform.rotation);
-            rayObject.GetComponent<EyeCrystalRay>()?.Launch(moveDirection, raySpeed, endY);
+            GameObject rayObject = Instantiate(verticalRayPrefab, verticalSpawnPoints[i].position, rotation);
+            rayObject.GetComponent<EyeCrystalRay>()?.Launch(Vector2.up, raySpeed, arena.Phase2CeilingY);
         }
     }
 
