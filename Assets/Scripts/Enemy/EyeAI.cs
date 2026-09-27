@@ -28,6 +28,7 @@ public class EyeAI : MonoBehaviour
     [SerializeField] private EnemyHealth health;
     [SerializeField] private EyeArenaController arena;
     [SerializeField] private EyeFloorCrumble arenaFloor;
+    [SerializeField] private EyePhase2FloorTrigger phase2FloorTrigger;
     // Hidden until the summon actually starts — otherwise the Animator's
     // default Idle state (holding the fully-grown sprite) is visible from
     // the moment the scene loads, well before Activate() is ever called.
@@ -56,6 +57,11 @@ public class EyeAI : MonoBehaviour
     [SerializeField] private float minHeightAboveFloor = 1.5f;
     [SerializeField] private float maxHeightAboveFloor = 3.5f;
 
+    [Header("Phase 2 - platforms")]
+    // Kept inactive (and therefore collision-free) until the player actually
+    // reaches phase2FloorTrigger — see the comment on that class for why.
+    [SerializeField] private GameObject[] phase2Platforms;
+
     [Header("Sound")]
     [SerializeField] private SfxPlayer sfxPlayer;
     [SerializeField] private AudioClip summonSound;
@@ -66,6 +72,7 @@ public class EyeAI : MonoBehaviour
     public UnityEvent OnSummonComplete;
 
     private bool hasEnteredPhase2 = false;
+    private bool phase2FloorReached = false;
     private FlyingEnemyMovement movement;
 
     // =========================
@@ -74,6 +81,7 @@ public class EyeAI : MonoBehaviour
     private void Start()
     {
         movement = GetComponent<FlyingEnemyMovement>();
+        SetPhase2PlatformsActive(false);
     }
 
     private void OnEnable()
@@ -82,6 +90,11 @@ public class EyeAI : MonoBehaviour
         {
             health.OnHealthChanged.AddListener(HandleHealthChanged);
         }
+
+        if (phase2FloorTrigger != null)
+        {
+            phase2FloorTrigger.OnPlayerReachedFloor.AddListener(HandlePlayerReachedPhase2Floor);
+        }
     }
 
     private void OnDisable()
@@ -89,6 +102,11 @@ public class EyeAI : MonoBehaviour
         if (health != null)
         {
             health.OnHealthChanged.RemoveListener(HandleHealthChanged);
+        }
+
+        if (phase2FloorTrigger != null)
+        {
+            phase2FloorTrigger.OnPlayerReachedFloor.RemoveListener(HandlePlayerReachedPhase2Floor);
         }
     }
 
@@ -226,9 +244,34 @@ public class EyeAI : MonoBehaviour
             yield return StartCoroutine(arenaFloor.Crumble());
         }
 
+        // Platforms only appear once the player has actually landed on the
+        // Phase 2 floor, not the moment they fall through — otherwise they'd
+        // exist in time to catch the player mid-fall instead of the floor.
+        if (phase2FloorTrigger != null)
+        {
+            yield return new WaitUntil(() => phase2FloorReached);
+        }
+
         // TODO: once the room below has real perch points, move the Eye to
         // the first one here instead of just sitting wherever it was.
+        SetPhase2PlatformsActive(true);
         currentState = EyeState.Phase2;
+    }
+
+    private void HandlePlayerReachedPhase2Floor()
+    {
+        phase2FloorReached = true;
+    }
+
+    private void SetPhase2PlatformsActive(bool active)
+    {
+        foreach (GameObject platform in phase2Platforms)
+        {
+            if (platform != null)
+            {
+                platform.SetActive(active);
+            }
+        }
     }
 
     // Same "wait for the animator to actually reach this state, then wait its
