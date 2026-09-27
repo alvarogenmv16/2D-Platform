@@ -3,9 +3,11 @@ using UnityEngine;
 using UnityEngine.Events;
 
 // Eye boss state machine. Sits Dormant until something (EyeArenaController)
-// calls Activate(). Phase 1 (portal/projectile attacks, plus wandering
-// between spots in the arena) and Phase 2 (platforming + light-burst
-// attacks) hook into their respective states once fully designed.
+// calls Activate(). Phase 1 (portal/rock barrage, plus wandering between
+// spots in the arena) plays out in the upper room; once its floor crumbles,
+// Phase 2 (platforming + sweeping crystal ray beams, in the room below)
+// takes over as the only other attack the fight has, on purpose — each
+// phase reads as a distinct kind of danger instead of a reskin of the other.
 [RequireComponent(typeof(FlyingEnemyMovement))]
 public class EyeAI : MonoBehaviour
 {
@@ -57,10 +59,43 @@ public class EyeAI : MonoBehaviour
     [SerializeField] private float minHeightAboveFloor = 1.5f;
     [SerializeField] private float maxHeightAboveFloor = 3.5f;
 
+    [Header("Phase 2 - wandering")]
+    // Same drift-pause-drift idea as Phase 1's wandering, just slower and
+    // with longer pauses to suit the smaller Phase 2 room — and using
+    // Phase2FloorY/Phase2CeilingY directly instead of an estimated height
+    // band, since Phase 2 has both markers already (Phase 1 only has a floor).
+    [SerializeField] private float phase2WanderSpeed = 1.5f;
+    [SerializeField] private float phase2MinWanderPause = 3f;
+    [SerializeField] private float phase2MaxWanderPause = 6f;
+    [SerializeField] private float phase2WanderMarginX = 2f;
+    [SerializeField] private float phase2WanderMarginY = 1.5f;
+
     [Header("Phase 2 - platforms")]
     // Kept inactive (and therefore collision-free) until the player actually
     // reaches phase2FloorTrigger — see the comment on that class for why.
     [SerializeField] private GameObject[] phase2Platforms;
+
+    [Header("Phase 2 - crystal ray")]
+    // One horizontal segment; a full attack lines several of these up floor
+    // to ceiling (blocking every height but one), each sliding sideways
+    // wall-to-wall.
+    [SerializeField] private GameObject horizontalRayPrefab;
+    // One vertical segment (its sprite pre-rotated 90 degrees on the
+    // prefab); a full attack lines several of these up wall to wall
+    // (blocking every X position but one), each sliding floor-to-ceiling.
+    [SerializeField] private GameObject verticalRayPrefab;
+    // Spacing between segment centers along the perpendicular (non-moving)
+    // axis — tune to each segment's own rendered size so a full row/column
+    // reads as one solid wall, not overlapping or gapped between segments
+    // (the one intentional gap is a whole segment).
+    [SerializeField] private float rowSpacing = 2f;
+    [SerializeField] private float columnSpacing = 2f;
+    [SerializeField] private float raySpeed = 4f; // how fast each segment slides across the room
+    // Pause between wall attacks. Needs to be at least as long as a wave
+    // takes to fully cross the room (room width or height / raySpeed),
+    // otherwise the next wave starts while the previous one is still
+    // sliding through and they pile up on top of each other.
+    [SerializeField] private float rayInterval = 6f;
 
     [Header("Sound")]
     [SerializeField] private SfxPlayer sfxPlayer;
@@ -244,23 +279,64 @@ public class EyeAI : MonoBehaviour
             yield return StartCoroutine(arenaFloor.Crumble());
         }
 
-        // Platforms only appear once the player has actually landed on the
-        // Phase 2 floor, not the moment they fall through — otherwise they'd
-        // exist in time to catch the player mid-fall instead of the floor.
+        // Set before waiting on the floor trigger, not after — Phase2WanderLoop
+        // reads this state, so the Eye starts drifting around the room below
+        // as soon as it exists, instead of sitting still until the player lands.
+        currentState = EyeState.Phase2;
+        StartCoroutine(Phase2WanderLoop());
+
+        // Platforms/attacks only start once the player has actually landed on
+        // the Phase 2 floor, not the moment they fall through — otherwise
+        // they'd exist in time to catch the player mid-fall instead of the floor.
         if (phase2FloorTrigger != null)
         {
             yield return new WaitUntil(() => phase2FloorReached);
         }
 
-        // TODO: once the room below has real perch points, move the Eye to
-        // the first one here instead of just sitting wherever it was.
         SetPhase2PlatformsActive(true);
-        currentState = EyeState.Phase2;
+        StartCoroutine(Phase2CrystalRayLoop());
     }
 
     private void HandlePlayerReachedPhase2Floor()
     {
         phase2FloorReached = true;
+    }
+
+    // Drifts to a random spot in the Phase 2 room, sits there a while, then
+    // picks a new one — same pattern as WanderLoop, kept as its own loop
+    // (rather than reused) since it runs on different speed/pause/bounds.
+    private IEnumerator Phase2WanderLoop()
+    {
+        while (currentState == EyeState.Phase2)
+        {
+            Vector2 target = PickPhase2WanderTarget();
+
+            bool arrived = false;
+            while (currentState == EyeState.Phase2 && !arrived)
+            {
+                arrived = movement.MoveTowards(target, phase2WanderSpeed);
+                yield return new WaitForFixedUpdate();
+            }
+
+            if (currentState != EyeState.Phase2) yield break;
+
+            yield return new WaitForSeconds(Random.Range(phase2MinWanderPause, phase2MaxWanderPause));
+        }
+    }
+
+    private Vector2 PickPhase2WanderTarget()
+    {
+        if (arena == null) return transform.position;
+
+        float minX = Mathf.Min(arena.Phase2LeftBoundX + phase2WanderMarginX, arena.Phase2RightBoundX - phase2WanderMarginX);
+        float maxX = Mathf.Max(arena.Phase2RightBoundX - phase2WanderMarginX, arena.Phase2LeftBoundX + phase2WanderMarginX);
+
+        float minY = Mathf.Min(arena.Phase2FloorY + phase2WanderMarginY, arena.Phase2CeilingY - phase2WanderMarginY);
+        float maxY = Mathf.Max(arena.Phase2CeilingY - phase2WanderMarginY, arena.Phase2FloorY + phase2WanderMarginY);
+
+        float x = Random.Range(minX, maxX);
+        float y = Random.Range(minY, maxY);
+        return new Vector2(x, y);
     }
 
     private void SetPhase2PlatformsActive(bool active)
@@ -271,6 +347,99 @@ public class EyeAI : MonoBehaviour
             {
                 platform.SetActive(active);
             }
+        }
+    }
+
+    // Repeats for as long as Phase2 stays current, same "state check ends the
+    // loop" idea as Phase1Loop.
+    private IEnumerator Phase2CrystalRayLoop()
+    {
+        while (currentState == EyeState.Phase2)
+        {
+            yield return new WaitForSeconds(rayInterval);
+
+            if (currentState != EyeState.Phase2) yield break;
+
+            SpawnCrystalWall();
+        }
+    }
+
+    // Alternates at random between a wall of horizontal segments (blocks
+    // every height, gap is a height the player reaches via the platforms)
+    // and a wall of vertical segments (blocks every X position, gap is a
+    // spot to run to) — never both axes on the same wall, and which segment
+    // is left as the gap is picked fresh each time, so the safe spot is
+    // never in a predictable place.
+    private void SpawnCrystalWall()
+    {
+        if (arena == null) return;
+
+        bool blockHeights = Random.Range(0, 2) == 0;
+
+        if (blockHeights)
+        {
+            SpawnHorizontalRowWall();
+        }
+        else
+        {
+            SpawnVerticalColumnWall();
+        }
+    }
+
+    // Lines horizontal segments up floor-to-ceiling, evenly spaced same as
+    // BossAI.SpawnSpikeRow, skipping one random row as the gap. All of them
+    // always start from the left wall and slide together to the right one,
+    // so the row sweeps the room's full width over time instead of needing
+    // each segment's own size to already span it.
+    private void SpawnHorizontalRowWall()
+    {
+        if (horizontalRayPrefab == null) return;
+
+        float height = arena.Phase2CeilingY - arena.Phase2FloorY;
+        int rowCount = Mathf.Max(2, Mathf.RoundToInt(height / rowSpacing));
+        int gapIndex = Random.Range(0, rowCount);
+
+        float startX = arena.Phase2LeftBoundX;
+        float endX = arena.Phase2RightBoundX;
+        Vector2 moveDirection = Vector2.right;
+
+        for (int i = 0; i < rowCount; i++)
+        {
+            if (i == gapIndex) continue;
+
+            float t = rowCount == 1 ? 0.5f : i / (float)(rowCount - 1);
+            float y = Mathf.Lerp(arena.Phase2FloorY, arena.Phase2CeilingY, t);
+
+            GameObject rayObject = Instantiate(horizontalRayPrefab, new Vector2(startX, y), horizontalRayPrefab.transform.rotation);
+            rayObject.GetComponent<EyeCrystalRay>()?.Launch(moveDirection, raySpeed, endX);
+        }
+    }
+
+    // Lines vertical segments up wall-to-wall, evenly spaced same as
+    // BossAI.SpawnSpikeRow, skipping one random column as the gap. All of
+    // them always start from the floor (easiest place to actually see them
+    // appear) and slide together up to the ceiling.
+    private void SpawnVerticalColumnWall()
+    {
+        if (verticalRayPrefab == null) return;
+
+        float width = arena.Phase2RightBoundX - arena.Phase2LeftBoundX;
+        int columnCount = Mathf.Max(2, Mathf.RoundToInt(width / columnSpacing));
+        int gapIndex = Random.Range(0, columnCount);
+
+        float startY = arena.Phase2FloorY;
+        float endY = arena.Phase2CeilingY;
+        Vector2 moveDirection = Vector2.up;
+
+        for (int i = 0; i < columnCount; i++)
+        {
+            if (i == gapIndex) continue;
+
+            float t = columnCount == 1 ? 0.5f : i / (float)(columnCount - 1);
+            float x = Mathf.Lerp(arena.Phase2LeftBoundX, arena.Phase2RightBoundX, t);
+
+            GameObject rayObject = Instantiate(verticalRayPrefab, new Vector2(x, startY), verticalRayPrefab.transform.rotation);
+            rayObject.GetComponent<EyeCrystalRay>()?.Launch(moveDirection, raySpeed, endY);
         }
     }
 

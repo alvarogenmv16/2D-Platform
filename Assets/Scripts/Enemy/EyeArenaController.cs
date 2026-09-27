@@ -23,6 +23,12 @@ public class EyeArenaController : MonoBehaviour
     [SerializeField] private Transform floorReference;
     [SerializeField] private Transform ceilingReference; // where Phase 1's portals spawn along
 
+    [Header("Phase 2 arena bounds (room below — place these markers there)")]
+    [SerializeField] private Transform phase2LeftBound;
+    [SerializeField] private Transform phase2RightBound;
+    [SerializeField] private Transform phase2FloorReference;
+    [SerializeField] private Transform phase2CeilingReference;
+
     [Header("Music")]
     [SerializeField] private AudioSource musicSource; // one source, clip swapped per phase
     [SerializeField] private AudioClip battleMusic;
@@ -44,6 +50,11 @@ public class EyeArenaController : MonoBehaviour
     public float RightBoundX => rightBound != null ? rightBound.position.x : transform.position.x;
     public float FloorY => floorReference != null ? floorReference.position.y : transform.position.y;
     public float CeilingY => ceilingReference != null ? ceilingReference.position.y : transform.position.y;
+
+    public float Phase2LeftBoundX => phase2LeftBound != null ? phase2LeftBound.position.x : transform.position.x;
+    public float Phase2RightBoundX => phase2RightBound != null ? phase2RightBound.position.x : transform.position.x;
+    public float Phase2FloorY => phase2FloorReference != null ? phase2FloorReference.position.y : transform.position.y;
+    public float Phase2CeilingY => phase2CeilingReference != null ? phase2CeilingReference.position.y : transform.position.y;
 
     // =========================
     // START
