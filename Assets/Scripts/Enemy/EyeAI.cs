@@ -1,12 +1,13 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 
 // Eye boss state machine. Sits Dormant until something (EyeArenaController)
-// calls Activate(). Phase 1 (portal/projectile attacks, plus wandering
-// between spots in the arena) and Phase 2 (platforming + light-burst
-// attacks) hook into their respective states once fully designed.
+// calls Activate(). Phase 1 (portal/rock barrage, plus wandering between
+// spots in the arena) plays out in the upper room; once its floor crumbles,
+// Phase 2 (platforming + sweeping crystal ray beams, in the room below)
+// takes over as the only other attack the fight has, on purpose — each
+// phase reads as a distinct kind of danger instead of a reskin of the other.
 [RequireComponent(typeof(FlyingEnemyMovement))]
 public class EyeAI : MonoBehaviour
 {
@@ -29,11 +30,7 @@ public class EyeAI : MonoBehaviour
     [SerializeField] private EnemyHealth health;
     [SerializeField] private EyeArenaController arena;
     [SerializeField] private EyeFloorCrumble arenaFloor;
-    // Name of the dedicated Phase 2 scene (must be added to Build Settings).
-    [SerializeField] private string phase2SceneName = "EyePhase2";
-    // Name of the GameObject holding BossHealthUI in that scene — rebound at
-    // runtime because the Eye isn't part of that scene's saved data.
-    [SerializeField] private string phase2HealthBarObjectName = "BossHealthBar";
+    [SerializeField] private EyePhase2FloorTrigger phase2FloorTrigger;
     // Hidden until the summon actually starts — otherwise the Animator's
     // default Idle state (holding the fully-grown sprite) is visible from
     // the moment the scene loads, well before Activate() is ever called.
@@ -62,6 +59,40 @@ public class EyeAI : MonoBehaviour
     [SerializeField] private float minHeightAboveFloor = 1.5f;
     [SerializeField] private float maxHeightAboveFloor = 3.5f;
 
+    [Header("Phase 2 - wandering")]
+    // Same drift-pause-drift idea as Phase 1's wandering, just slower and
+    // with longer pauses to suit the smaller Phase 2 room — and using
+    // Phase2FloorY/Phase2CeilingY directly instead of an estimated height
+    // band, since Phase 2 has both markers already (Phase 1 only has a floor).
+    [SerializeField] private float phase2WanderSpeed = 1.5f;
+    [SerializeField] private float phase2MinWanderPause = 3f;
+    [SerializeField] private float phase2MaxWanderPause = 6f;
+    [SerializeField] private float phase2WanderMarginX = 2f;
+    [SerializeField] private float phase2WanderMarginY = 1.5f;
+
+    [Header("Phase 2 - platforms")]
+    // Kept inactive (and therefore collision-free) until the player actually
+    // reaches phase2FloorTrigger — see the comment on that class for why.
+    [SerializeField] private GameObject[] phase2Platforms;
+
+    [Header("Phase 2 - crystal ray")]
+    // One horizontal segment, launched to slide rightward until it exits
+    // past the right wall.
+    [SerializeField] private GameObject horizontalRayPrefab;
+    // Hand-placed spawn points along the left wall, one per height a
+    // horizontal wave can threaten — place them yourself in the scene so you
+    // control exactly where each one sits and how much room is between them.
+    // One is skipped at random each wave as the gap.
+    [SerializeField] private Transform[] horizontalSpawnPoints;
+    // One vertical segment (its sprite pre-rotated 90 degrees on the
+    // prefab), launched to slide upward until it exits past the ceiling.
+    [SerializeField] private GameObject verticalRayPrefab;
+    // Hand-placed spawn points along the floor, one per X position a
+    // vertical wave can threaten. One is skipped at random each wave as the gap.
+    [SerializeField] private Transform[] verticalSpawnPoints;
+    [SerializeField] private float raySpeed = 4f; // how fast each segment slides across the room
+    [SerializeField] private float rayInterval = 5f; // pause between wall attacks — tune by eye against how long a wave takes to cross
+
     [Header("Sound")]
     [SerializeField] private SfxPlayer sfxPlayer;
     [SerializeField] private AudioClip summonSound;
@@ -72,6 +103,7 @@ public class EyeAI : MonoBehaviour
     public UnityEvent OnSummonComplete;
 
     private bool hasEnteredPhase2 = false;
+    private bool phase2FloorReached = false;
     private FlyingEnemyMovement movement;
 
     // =========================
@@ -80,6 +112,7 @@ public class EyeAI : MonoBehaviour
     private void Start()
     {
         movement = GetComponent<FlyingEnemyMovement>();
+        SetPhase2PlatformsActive(false);
     }
 
     private void OnEnable()
@@ -87,9 +120,13 @@ public class EyeAI : MonoBehaviour
         if (health != null)
         {
             health.OnHealthChanged.AddListener(HandleHealthChanged);
+            health.OnDied.AddListener(HandleDied);
         }
 
-        SceneManager.sceneLoaded += HandleSceneLoaded;
+        if (phase2FloorTrigger != null)
+        {
+            phase2FloorTrigger.OnPlayerReachedFloor.AddListener(HandlePlayerReachedPhase2Floor);
+        }
     }
 
     private void OnDisable()
@@ -97,25 +134,12 @@ public class EyeAI : MonoBehaviour
         if (health != null)
         {
             health.OnHealthChanged.RemoveListener(HandleHealthChanged);
+            health.OnDied.RemoveListener(HandleDied);
         }
 
-        SceneManager.sceneLoaded -= HandleSceneLoaded;
-    }
-
-    // Runs after EVERY scene load while the Eye is alive, not just the
-    // Phase 2 one — the name check is what makes this a no-op the rest of
-    // the time (e.g. if the player later reaches a game-over/menu scene).
-    private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (scene.name != phase2SceneName) return;
-
-        GameObject healthBarObject = GameObject.Find(phase2HealthBarObjectName);
-        BossHealthUI healthUI = healthBarObject != null ? healthBarObject.GetComponent<BossHealthUI>() : null;
-
-        if (healthUI != null)
+        if (phase2FloorTrigger != null)
         {
-            healthUI.Bind(health);
-            healthUI.Show();
+            phase2FloorTrigger.OnPlayerReachedFloor.RemoveListener(HandlePlayerReachedPhase2Floor);
         }
     }
 
@@ -228,6 +252,15 @@ public class EyeAI : MonoBehaviour
         }
     }
 
+    // EnemyHealth disables this component on death (aiComponentsToDisable),
+    // but disabling a MonoBehaviour does NOT stop coroutines already running
+    // on it — Phase2CrystalRayLoop would otherwise keep spawning walls
+    // forever after the Eye is dead. Stop everything explicitly instead.
+    private void HandleDied()
+    {
+        StopAllCoroutines();
+    }
+
     // Fires on every hit (EnemyHealth.OnHealthChanged), not just the one that
     // crosses the threshold — hasEnteredPhase2 keeps this a one-shot switch.
     private void HandleHealthChanged(float currentHealth, float maxHealth)
@@ -245,22 +278,157 @@ public class EyeAI : MonoBehaviour
     {
         // Phase1Loop/WanderLoop stop on their own next iteration (both check
         // currentState == Phase1, already false by the time this runs).
+        // No scene change: the arena floor just drops out from under the
+        // player (and, later, the Eye) into the room below, within this
+        // same scene.
         if (arenaFloor != null)
         {
             yield return StartCoroutine(arenaFloor.Crumble());
         }
 
-        // Survive the upcoming scene load carrying the current health value
-        // along (same instance, same accumulated damage) — DontDestroyOnLoad
-        // only works on root GameObjects, hence the detach first.
-        transform.SetParent(null);
-        DontDestroyOnLoad(gameObject);
-
-        SceneFader.FadeToScene(phase2SceneName);
-
-        // TODO: once EyePhase2Arena has real perch points, move the Eye to
-        // the first one here instead of just sitting wherever it lands.
+        // Set before waiting on the floor trigger, not after — Phase2WanderLoop
+        // reads this state, so the Eye starts drifting around the room below
+        // as soon as it exists, instead of sitting still until the player lands.
         currentState = EyeState.Phase2;
+        StartCoroutine(Phase2WanderLoop());
+
+        // Platforms/attacks only start once the player has actually landed on
+        // the Phase 2 floor, not the moment they fall through — otherwise
+        // they'd exist in time to catch the player mid-fall instead of the floor.
+        if (phase2FloorTrigger != null)
+        {
+            yield return new WaitUntil(() => phase2FloorReached);
+        }
+
+        SetPhase2PlatformsActive(true);
+        StartCoroutine(Phase2CrystalRayLoop());
+    }
+
+    private void HandlePlayerReachedPhase2Floor()
+    {
+        phase2FloorReached = true;
+    }
+
+    // Drifts to a random spot in the Phase 2 room, sits there a while, then
+    // picks a new one — same pattern as WanderLoop, kept as its own loop
+    // (rather than reused) since it runs on different speed/pause/bounds.
+    private IEnumerator Phase2WanderLoop()
+    {
+        while (currentState == EyeState.Phase2)
+        {
+            Vector2 target = PickPhase2WanderTarget();
+
+            bool arrived = false;
+            while (currentState == EyeState.Phase2 && !arrived)
+            {
+                arrived = movement.MoveTowards(target, phase2WanderSpeed);
+                yield return new WaitForFixedUpdate();
+            }
+
+            if (currentState != EyeState.Phase2) yield break;
+
+            yield return new WaitForSeconds(Random.Range(phase2MinWanderPause, phase2MaxWanderPause));
+        }
+    }
+
+    private Vector2 PickPhase2WanderTarget()
+    {
+        if (arena == null) return transform.position;
+
+        float minX = Mathf.Min(arena.Phase2LeftBoundX + phase2WanderMarginX, arena.Phase2RightBoundX - phase2WanderMarginX);
+        float maxX = Mathf.Max(arena.Phase2RightBoundX - phase2WanderMarginX, arena.Phase2LeftBoundX + phase2WanderMarginX);
+
+        float minY = Mathf.Min(arena.Phase2FloorY + phase2WanderMarginY, arena.Phase2CeilingY - phase2WanderMarginY);
+        float maxY = Mathf.Max(arena.Phase2CeilingY - phase2WanderMarginY, arena.Phase2FloorY + phase2WanderMarginY);
+
+        float x = Random.Range(minX, maxX);
+        float y = Random.Range(minY, maxY);
+        return new Vector2(x, y);
+    }
+
+    private void SetPhase2PlatformsActive(bool active)
+    {
+        foreach (GameObject platform in phase2Platforms)
+        {
+            if (platform != null)
+            {
+                platform.SetActive(active);
+            }
+        }
+    }
+
+    // Repeats for as long as Phase2 stays current, same "state check ends the
+    // loop" idea as Phase1Loop.
+    private IEnumerator Phase2CrystalRayLoop()
+    {
+        while (currentState == EyeState.Phase2)
+        {
+            yield return new WaitForSeconds(rayInterval);
+
+            if (currentState != EyeState.Phase2) yield break;
+
+            SpawnCrystalWall();
+        }
+    }
+
+    // Alternates at random between a wall of horizontal segments (blocks
+    // every height, gap is a height the player reaches via the platforms)
+    // and a wall of vertical segments (blocks every X position, gap is a
+    // spot to run to) — never both axes on the same wall, and which spawn
+    // point is left as the gap is picked fresh each time, so the safe spot
+    // is never in a predictable place.
+    private void SpawnCrystalWall()
+    {
+        bool blockHeights = Random.Range(0, 2) == 0;
+
+        if (blockHeights)
+        {
+            SpawnHorizontalRowWall();
+        }
+        else
+        {
+            SpawnVerticalColumnWall();
+        }
+    }
+
+    // Launches one segment from every horizontalSpawnPoint except a random
+    // gap, all sliding right until they pass the right wall.
+    private void SpawnHorizontalRowWall()
+    {
+        if (horizontalRayPrefab == null || arena == null) return;
+        if (horizontalSpawnPoints.Length == 0) return;
+
+        int gapIndex = Random.Range(0, horizontalSpawnPoints.Length);
+        Quaternion rotation = horizontalRayPrefab.transform.rotation;
+
+        for (int i = 0; i < horizontalSpawnPoints.Length; i++)
+        {
+            if (i == gapIndex) continue;
+            if (horizontalSpawnPoints[i] == null) continue;
+
+            GameObject rayObject = Instantiate(horizontalRayPrefab, horizontalSpawnPoints[i].position, rotation);
+            rayObject.GetComponent<EyeCrystalRay>()?.Launch(Vector2.right, raySpeed, arena.Phase2RightBoundX);
+        }
+    }
+
+    // Launches one segment from every verticalSpawnPoint except a random
+    // gap, all sliding up until they pass the ceiling.
+    private void SpawnVerticalColumnWall()
+    {
+        if (verticalRayPrefab == null || arena == null) return;
+        if (verticalSpawnPoints.Length == 0) return;
+
+        int gapIndex = Random.Range(0, verticalSpawnPoints.Length);
+        Quaternion rotation = verticalRayPrefab.transform.rotation;
+
+        for (int i = 0; i < verticalSpawnPoints.Length; i++)
+        {
+            if (i == gapIndex) continue;
+            if (verticalSpawnPoints[i] == null) continue;
+
+            GameObject rayObject = Instantiate(verticalRayPrefab, verticalSpawnPoints[i].position, rotation);
+            rayObject.GetComponent<EyeCrystalRay>()?.Launch(Vector2.up, raySpeed, arena.Phase2CeilingY);
+        }
     }
 
     // Same "wait for the animator to actually reach this state, then wait its
