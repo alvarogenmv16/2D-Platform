@@ -7,7 +7,7 @@ using UnityEngine;
 // state machine and fall-before-death logic meant for combatants, none of
 // which applies to a one-shot breakable block.
 [RequireComponent(typeof(Collider2D))]
-public class KeyBlock : MonoBehaviour
+public class KeyBlock : MonoBehaviour, IBreakable
 {
     [SerializeField] private SfxPlayer sfxPlayer;
     [SerializeField] private AudioClip breakSound;

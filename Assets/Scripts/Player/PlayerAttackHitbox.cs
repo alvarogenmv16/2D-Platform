@@ -75,10 +75,10 @@ public class PlayerAttackHitbox : MonoBehaviour
                 continue;
             }
 
-            KeyBlock keyBlock = hit.GetComponent<KeyBlock>();
-            if (keyBlock != null)
+            IBreakable breakable = hit.GetComponent<IBreakable>();
+            if (breakable != null)
             {
-                keyBlock.Break();
+                breakable.Break();
             }
         }
     }
