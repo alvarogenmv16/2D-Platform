@@ -246,6 +246,9 @@ MonoBehaviour:
   sfxPlayer: {fileID: 6465971433042138573}
   dashSound: {fileID: 8300000, guid: aec8bebcb6e6d354e8b3f1f4a8da2ff1, type: 3}
   walkAudioSource: {fileID: 7716706258335186380}
+  wallHitSound: {fileID: 0}
+  wallHitNormalThreshold: 0.7
+  wallHitCooldown: 0.15
 --- !u!114 &8622265315803261211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379,10 +382,15 @@ MonoBehaviour:
   attackSize: {x: 2, y: 2}
   attackOffsetX: 1.75
   attackOffsetY: 1
+  attackUpSize: {x: 2, y: 2}
+  attackUpOffsetY: 3
   damage: 1
   enemyLayer:
     serializedVersion: 2
     m_Bits: 256
+  breakableLayer:
+    serializedVersion: 2
+    m_Bits: 512
   sfxPlayer: {fileID: 6465971433042138573}
   swingSound: {fileID: 8300000, guid: 65faff34bb88c1643b95a607ab8d65d1, type: 3}
   swingVolume: 0.568
@@ -402,6 +410,7 @@ MonoBehaviour:
   playerMovement: {fileID: 102499189860425364}
   animator: {fileID: 449159012133179020}
   attackCooldown: 0.4
+  upInputThreshold: 0.5
 --- !u!95 &449159012133179020
 Animator:
   serializedVersion: 7

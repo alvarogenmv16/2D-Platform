@@ -13,6 +13,7 @@ public class PlayerAttackHitbox : MonoBehaviour
     [SerializeField] private float attackUpOffsetY = 3f;
     [SerializeField] private float damage = 1f;
     [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private LayerMask breakableLayer; // KeyBlocks and other one-hit breakables
     [SerializeField] private SfxPlayer sfxPlayer;
     [SerializeField] private AudioClip swingSound; // plays on every attack, connects or not
     [SerializeField, Range(0f, 1f)] private float swingVolume = 1f;
@@ -62,7 +63,7 @@ public class PlayerAttackHitbox : MonoBehaviour
     // covers the whole front arc uniformly, closer to the actual swing shape.
     private void PerformAttack(Vector2 attackPointPosition, Vector2 size)
     {
-        Collider2D[] hits = Physics2D.OverlapBoxAll(attackPointPosition, size, 0f, enemyLayer);
+        Collider2D[] hits = Physics2D.OverlapBoxAll(attackPointPosition, size, 0f, enemyLayer | breakableLayer);
 
         foreach (Collider2D hit in hits)
         {
@@ -71,6 +72,13 @@ public class PlayerAttackHitbox : MonoBehaviour
             {
                 enemyHealth.TakeDamage(damage, attackPointPosition);
                 playerPower?.AddPower(1f);
+                continue;
+            }
+
+            KeyBlock keyBlock = hit.GetComponent<KeyBlock>();
+            if (keyBlock != null)
+            {
+                keyBlock.Break();
             }
         }
     }
