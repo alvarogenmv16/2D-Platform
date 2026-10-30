@@ -794,8 +794,8 @@ PrefabInstance:
       objectReference: {fileID: 188813552}
     - target: {fileID: 8282435382529470039, guid: 864fbbe3ac0a1ad4ab85979a09fba319, type: 3}
       propertyPath: closingLine.text
-      value: 'I shall say only this: never cease moving. You shall find it considerably
-        easier to survive if you keep yourself in motion.'
+      value: The beast I fled from... Fast, it is. From the darkness, it stalks.
+        Careful, you must be.
       objectReference: {fileID: 0}
     - target: {fileID: 8282435382529470039, guid: 864fbbe3ac0a1ad4ab85979a09fba319, type: 3}
       propertyPath: lines.Array.size
@@ -803,26 +803,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8282435382529470039, guid: 864fbbe3ac0a1ad4ab85979a09fba319, type: 3}
       propertyPath: lines.Array.data[1].text
-      value: A very good day to you, traveller. I do hope your journey has been a
-        most pleasant one. There are rather a great many monsters lurking in these
-        parts, you know
+      value: Who's there...? A visitor, hmm. Not so bad... Without my brothers, company
+        is welcome. If hostile, you are not.
       objectReference: {fileID: 0}
     - target: {fileID: 8282435382529470039, guid: 864fbbe3ac0a1ad4ab85979a09fba319, type: 3}
       propertyPath: lines.Array.data[2].text
-      value: Pardon me? You say you have met someone akin to myself? Surely you cannot
-        mean my brother?
+      value: Brothers alive? Still out there, they are...? Hope, I had almost lost.Life,
+        you have brought back to me... Grateful, I am. In return, give tip I will..
       objectReference: {fileID: 0}
     - target: {fileID: 8282435382529470039, guid: 864fbbe3ac0a1ad4ab85979a09fba319, type: 3}
       propertyPath: lines.Array.data[3].text
-      value: 'Oh, I am positively beside myself with joy! What splendid tidings you
-        bring me!. Then that means the Crimson Beast has been vanquished! I must
-        depart at once in search of my long-lost kin. '
+      value: Powerful, the beasts here are. Shatter pillars, they can. Avoid them,
+        you must. Mercy, they know not. Faster than you, they are. Running... pointless,
+        it is.
       objectReference: {fileID: 0}
     - target: {fileID: 8282435382529470039, guid: 864fbbe3ac0a1ad4ab85979a09fba319, type: 3}
       propertyPath: lines.Array.data[4].text
-      value: However, before I do, I should very much like to offer you a word of
-        advice.. There is a great beast here as well, you see. A crystalline monstrosity,
-        possessed of the dreadful power to summon countless perilous crystals.
+      value: The gate, your way out, it is. Four keys, you need. One, I have. Take
+        it, you should. Greater need of it, you have. My brothers... I must find
       objectReference: {fileID: 0}
     - target: {fileID: 8282435382529470039, guid: 864fbbe3ac0a1ad4ab85979a09fba319, type: 3}
       propertyPath: lines.Array.data[3].sound
