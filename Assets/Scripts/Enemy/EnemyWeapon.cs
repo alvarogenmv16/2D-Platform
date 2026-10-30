@@ -26,7 +26,7 @@ public class EnemyWeapon : MonoBehaviour
     // if found. Called by EnemyAttack at the moment the attack lands.
     public void TryHitPlayer()
     {
-        Collider2D hit = Physics2D.OverlapBox(AttackPointPosition, attackSize, 0f, playerLayer);
+        Collider2D hit = FindPlayerInRange();
 
         if (hit == null) return;
 
@@ -36,6 +36,18 @@ public class EnemyWeapon : MonoBehaviour
         {
             playerHealth.TakeDamage(damage, AttackPointPosition);
         }
+    }
+
+    // Same area TryHitPlayer checks, without applying damage - lets an AI
+    // decide to START an attack exactly when the player is inside the hitbox.
+    public bool IsPlayerInRange()
+    {
+        return FindPlayerInRange() != null;
+    }
+
+    private Collider2D FindPlayerInRange()
+    {
+        return Physics2D.OverlapBox(AttackPointPosition, attackSize, 0f, playerLayer);
     }
 
     // =========================
