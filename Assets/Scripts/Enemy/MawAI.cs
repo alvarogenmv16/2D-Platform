@@ -43,12 +43,14 @@ public class MawAI : MonoBehaviour
 
     [Header("Chasing")]
     [SerializeField] private float chaseSpeed = 3.5f;
-    // The Maw doesn't fly INTO the player - it aims for a spot this far in
-    // front of them (on its own side), so the mouth ends up over the player
-    // when it bites instead of the skull overlapping them. This only steers
-    // the movement - the bite itself starts as soon as the player is inside
-    // the weapon's hitbox, wherever the Maw happens to be.
-    [SerializeField] private float biteDistance = 1.4f;
+    // The Maw doesn't fly INTO the player - it aims for a spot in front of
+    // them (on its own side), so the mouth ends up over the player when it
+    // bites instead of the skull overlapping them. X = horizontal distance,
+    // Y = height above the player's center, so it bites from slightly above
+    // instead of dropping to the player's height and scraping the floor.
+    // This only steers the movement - the bite itself starts as soon as the
+    // player is inside the weapon's hitbox, wherever the Maw happens to be.
+    [SerializeField] private Vector2 biteOffset = new Vector2(1.4f, 0.8f);
 
     [Header("Attack (bite)")]
     [SerializeField] private EnemyWeapon weapon;
@@ -203,7 +205,7 @@ public class MawAI : MonoBehaviour
             return;
         }
 
-        Vector2 biteSpot = (Vector2)player.position + new Vector2(-facingDirection * biteDistance, 0f);
+        Vector2 biteSpot = (Vector2)player.position + new Vector2(-facingDirection * biteOffset.x, biteOffset.y);
         movement.MoveTowards(biteSpot, chaseSpeed);
     }
 

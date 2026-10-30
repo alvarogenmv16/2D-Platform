@@ -133,7 +133,7 @@ MonoBehaviour:
   animator: {fileID: 200023}
   alertDuration: 0.6
   chaseSpeed: 3.5
-  biteDistance: 1.4
+  biteOffset: {x: 1.4, y: 0.8}
   weapon: {fileID: 200027}
   attackDuration: 0.6
   attackCooldown: 0.8
