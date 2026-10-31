@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 
 // Ground beast enemy (Level3). Same attack philosophy as FlyingEnemyAI -
@@ -60,12 +61,21 @@ public class HoundAI : MonoBehaviour
     [Header("Recover (player's attack window)")]
     [SerializeField] private float recoverDuration = 1f;
 
+    [Header("Wall impact (puzzle variant)")]
+    // When on, charging into a HoundBreakableWall breaks it and kills this
+    // hound outright - meant for a variant with huge maxHealth that the
+    // player can't realistically kill with the sword. Off = normal hound.
+    [SerializeField] private bool diesOnWallImpact = false;
+    [SerializeField] private AudioClip wallImpactSound;
+    [SerializeField] private CinemachineImpulseSource impulseSource; // optional screen shake on impact
+
     [Header("Sound")]
     [SerializeField] private SfxPlayer sfxPlayer;
     [SerializeField] private AudioClip alertSound; // plays once, entering Alert (howl)
     [SerializeField] private AudioClip chargeSound; // plays once, when the charge starts
 
     private EnemyMovement movement;
+    private EnemyHealth health;
     private Collider2D col;
     private float stateTimer;
     private float chargeDirection;
@@ -82,6 +92,7 @@ public class HoundAI : MonoBehaviour
     private void Start()
     {
         movement = GetComponent<EnemyMovement>();
+        health = GetComponent<EnemyHealth>();
         col = GetComponent<Collider2D>();
 
         if (visuals != null)
@@ -198,13 +209,36 @@ public class HoundAI : MonoBehaviour
             hasDealtDamageThisCharge = true;
         }
 
+        Collider2D wall = GetWallAhead();
+
+        // Puzzle variant: slamming into a HoundBreakableWall at full charge
+        // breaks the wall AND kills the hound. Plain walls still just stop it.
+        if (diesOnWallImpact && wall != null && wall.TryGetComponent(out HoundBreakableWall breakableWall))
+        {
+            CrashIntoWall(breakableWall);
+            return;
+        }
+
         bool passedTarget = (transform.position.x - chargeTargetX) * chargeDirection >= 0f;
         bool timedOut = stateTimer >= maxChargeDuration;
 
-        if (passedTarget || timedOut || IsBlockedAhead())
+        if (passedTarget || timedOut || wall != null || !HasGroundAhead())
         {
             EndCharge();
         }
+    }
+
+    private void CrashIntoWall(HoundBreakableWall breakableWall)
+    {
+        EndCharge();
+
+        breakableWall.Break();
+        sfxPlayer?.Play(wallImpactSound);
+        impulseSource?.GenerateImpulse();
+
+        // Same death sequence as any other enemy (animation, AI disabled,
+        // destroyed after EnemyDeath), just not reachable through damage.
+        health?.Kill();
     }
 
     private void EndCharge()
@@ -237,24 +271,35 @@ public class HoundAI : MonoBehaviour
         }
     }
 
-    // Stops the charge at walls and at platform edges, so it never runs off
-    // a ledge. Looks one physics step ahead, since at chargeSpeed it covers
-    // a big distance every FixedUpdate.
-    private bool IsBlockedAhead()
+    // The charge stops at walls and at platform edges, so it never runs off
+    // a ledge. Both probes look one physics step ahead, since at chargeSpeed
+    // it covers a big distance every FixedUpdate.
+
+    // Returns the wall's collider (not just true/false) so the caller can
+    // tell a HoundBreakableWall apart from regular level geometry.
+    private Collider2D GetWallAhead()
     {
-        if (col == null) return false;
+        if (col == null) return null;
 
+        Vector2 front = GetChargeFront(out float lookAhead);
+        RaycastHit2D hit = Physics2D.Raycast(front, new Vector2(chargeDirection, 0f), lookAhead, groundLayer);
+        return hit.collider;
+    }
+
+    private bool HasGroundAhead()
+    {
+        if (col == null) return true;
+
+        Vector2 front = GetChargeFront(out float lookAhead);
+        Vector2 ledgeProbe = new Vector2(front.x + chargeDirection * lookAhead, col.bounds.min.y + 0.1f);
+        return Physics2D.Raycast(ledgeProbe, Vector2.down, 0.5f, groundLayer);
+    }
+
+    private Vector2 GetChargeFront(out float lookAhead)
+    {
         Bounds bounds = col.bounds;
-        float lookAhead = chargeSpeed * Time.fixedDeltaTime + 0.05f;
-        Vector2 direction = new Vector2(chargeDirection, 0f);
-        Vector2 front = new Vector2(bounds.center.x + chargeDirection * bounds.extents.x, bounds.center.y);
-
-        bool wallAhead = Physics2D.Raycast(front, direction, lookAhead, groundLayer);
-
-        Vector2 ledgeProbe = new Vector2(front.x + chargeDirection * lookAhead, bounds.min.y + 0.1f);
-        bool groundAhead = Physics2D.Raycast(ledgeProbe, Vector2.down, 0.5f, groundLayer);
-
-        return wallAhead || !groundAhead;
+        lookAhead = chargeSpeed * Time.fixedDeltaTime + 0.05f;
+        return new Vector2(bounds.center.x + chargeDirection * bounds.extents.x, bounds.center.y);
     }
 
     private float DistanceToPlayer()
