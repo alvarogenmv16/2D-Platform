@@ -5,8 +5,14 @@ using UnityEngine.Events;
 // sequence lights that chalice's flame. A wrong strike snuffs every flame
 // lit so far and the sequence starts over from the first chalice. Lighting
 // the last one solves it, fires OnSolved (wire it in the Inspector, e.g. to
-// activate the reward key - same UnityEvent wiring as KeyManager/BossDoor)
-// and locks the puzzle so the flames stay lit.
+// light a flame on the level's door - same UnityEvent wiring as
+// KeyManager/BossDoor) and locks the puzzle so the flames stay lit and
+// further strikes do nothing.
+//
+// One swing = one chalice: if the sword box overlaps several chalices in
+// the same swing, only the one closest to the player counts. Without this
+// a single swing between two chalices would light one and snuff everything
+// with the other, depending on overlap order.
 //
 // Setup: put the ChaliceFlame objects as children of this one, then drag
 // them into correctOrder in the order they must be struck. Their position
@@ -30,11 +36,40 @@ public class ChaliceSequence : MonoBehaviour
     private int progress;
     private bool isSolved;
 
+    // Strike collected during this frame's swing, resolved in LateUpdate
+    // once every chalice the swing touched has reported in.
+    private ChaliceFlame pendingStrike;
+    private float pendingDistance;
+    private Transform player;
+
     // =========================
     // FUNCTIONS
     // =========================
 
+    // Called by ChaliceFlame.Break (the sword hit). Only queues the strike -
+    // the closest chalice of this swing is the one that actually counts.
     public void OnChaliceStruck(ChaliceFlame chalice)
+    {
+        if (isSolved) return;
+
+        float distance = DistanceToPlayer(chalice);
+        if (pendingStrike == null || distance < pendingDistance)
+        {
+            pendingStrike = chalice;
+            pendingDistance = distance;
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if (pendingStrike == null) return;
+
+        ChaliceFlame chalice = pendingStrike;
+        pendingStrike = null;
+        ResolveStrike(chalice);
+    }
+
+    private void ResolveStrike(ChaliceFlame chalice)
     {
         if (isSolved || correctOrder == null || correctOrder.Length == 0) return;
 
@@ -76,5 +111,19 @@ public class ChaliceSequence : MonoBehaviour
 
         progress = 0;
         sfxPlayer?.Play(wrongSound);
+    }
+
+    private float DistanceToPlayer(ChaliceFlame chalice)
+    {
+        // Looked up lazily (and again if lost): the Player that survives a
+        // scene transition replaces this scene's local one.
+        if (player == null)
+        {
+            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+            if (playerObject == null) return 0f;
+            player = playerObject.transform;
+        }
+
+        return Vector2.Distance(player.position, chalice.transform.position);
     }
 }
