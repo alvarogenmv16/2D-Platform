@@ -24,6 +24,13 @@ public class KeyManager : MonoBehaviour
 
     private int collectedKeys = 0;
 
+    // Read by listeners that subscribe late (in their own Start, possibly
+    // after this Start already fired the initial OnKeyCountChanged), so
+    // they can sync to the current progress instead of waiting for a key.
+    public int CollectedKeys => collectedKeys;
+    public int TotalKeys => totalKeys;
+    public bool AllKeysCollected => collectedKeys >= totalKeys;
+
     private void Awake()
     {
         Instance = this;
