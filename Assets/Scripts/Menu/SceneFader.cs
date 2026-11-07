@@ -172,6 +172,33 @@ public class SceneFader : MonoBehaviour
         respawnPoint.SetMovementEnabled(true);
     }
 
+    // Generic version of FlashAndTeleport: fades to black, runs atBlack while
+    // the screen is fully covered (teleports, resets...), fades back in, then
+    // runs onDone. Used by RisingFlameSea to restart its section. Without a
+    // fader in the scene, both callbacks just run immediately.
+    public static void FadeOutAndIn(System.Action atBlack, System.Action onDone = null)
+    {
+        if (instance == null)
+        {
+            atBlack?.Invoke();
+            onDone?.Invoke();
+            return;
+        }
+
+        instance.StartCoroutine(instance.FadeOutAndInSequence(atBlack, onDone));
+    }
+
+    private IEnumerator FadeOutAndInSequence(System.Action atBlack, System.Action onDone)
+    {
+        yield return StartCoroutine(Fade(0f, 1f));
+
+        atBlack?.Invoke();
+
+        yield return StartCoroutine(Fade(1f, 0f));
+
+        onDone?.Invoke();
+    }
+
     private IEnumerator Fade(float from, float to)
     {
         fadeCanvasGroup.blocksRaycasts = to > 0f;

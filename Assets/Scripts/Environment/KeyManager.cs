@@ -53,4 +53,19 @@ public class KeyManager : MonoBehaviour
             OnAllKeysCollected?.Invoke();
         }
     }
+
+    // Undoes one CollectKey - for a key that gets put back in the level
+    // (KeyBlock.Restore, e.g. when RisingFlameSea resets its section to
+    // "just before the key"), so taking it again doesn't count it twice.
+    // Listeners like KeyChalice snuff the matching flame through
+    // OnKeyCountChanged. A door already opened by OnAllKeysCollected stays
+    // open (BossDoor has no Close) - re-collecting just calls Open() again,
+    // which it ignores.
+    public void ReturnKey()
+    {
+        if (collectedKeys <= 0) return;
+
+        collectedKeys--;
+        OnKeyCountChanged?.Invoke(collectedKeys, totalKeys);
+    }
 }

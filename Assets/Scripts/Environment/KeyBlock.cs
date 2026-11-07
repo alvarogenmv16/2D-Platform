@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 // A single key block for a Level3-style key-gate puzzle: a block that
@@ -12,7 +13,22 @@ public class KeyBlock : MonoBehaviour, IBreakable
     [SerializeField] private SfxPlayer sfxPlayer;
     [SerializeField] private AudioClip breakSound;
 
+    // Fired right after the key is counted. Plain C# event (subscribed from
+    // code, e.g. by RisingFlameSea on the key that starts it), not a
+    // UnityEvent, so nothing extra shows up on every Key in the Inspector.
+    public event Action OnBroken;
+
     private bool isBroken = false;
+
+    // Set by whoever may need to put this key back later (KeepAfterBreak).
+    // Instead of destroying itself, the block just hides, so Restore() can
+    // bring it back exactly where it was.
+    private bool keepAfterBreak = false;
+
+    public void KeepAfterBreak()
+    {
+        keepAfterBreak = true;
+    }
 
     // Called by PlayerAttackHitbox when its attack overlap box hits this
     // block's collider - same calling convention as EnemyHealth.TakeDamage.
@@ -47,6 +63,41 @@ public class KeyBlock : MonoBehaviour, IBreakable
             KeyManager.Instance.CollectKey();
         }
 
-        Destroy(gameObject, delay);
+        if (keepAfterBreak)
+        {
+            // Hidden, not destroyed: the AudioSource keeps playing the break
+            // sound, and Restore() can show it again later.
+            SetVisible(false);
+        }
+        else
+        {
+            Destroy(gameObject, delay);
+        }
+
+        OnBroken?.Invoke();
+    }
+
+    // Puts a broken key back (only possible after KeepAfterBreak) and
+    // un-counts it in the KeyManager, so it can be collected again.
+    public void Restore()
+    {
+        if (!isBroken || !keepAfterBreak) return;
+        isBroken = false;
+
+        GetComponent<Collider2D>().enabled = true;
+        SetVisible(true);
+
+        if (KeyManager.Instance != null)
+        {
+            KeyManager.Instance.ReturnKey();
+        }
+    }
+
+    private void SetVisible(bool visible)
+    {
+        foreach (Renderer keyRenderer in GetComponentsInChildren<Renderer>())
+        {
+            keyRenderer.enabled = visible;
+        }
     }
 }
