@@ -45,7 +45,10 @@ public class RisingFlameSea : MonoBehaviour
     [Header("Rise")]
     // The sea's base line stops at this height.
     [SerializeField] private Transform stopPoint;
-    // Beat between taking the key and the sea starting to move, so the
+    // Silence between hitting the key and the flames erupting (music +
+    // camera shake), so the key's own sound plays on its own first.
+    [SerializeField] private float eruptionDelay = 1f;
+    // Beat between the eruption and the sea starting to move, so the
     // player hears/feels the warning before having to run.
     [SerializeField] private float warningDelay = 1f;
     [SerializeField] private float riseSpeed = 2.5f;
@@ -78,6 +81,7 @@ public class RisingFlameSea : MonoBehaviour
     private float stopY;
     private Vector2 respawnPosition;
     private float stateTimer;
+    private bool hasErupted;
 
     // =========================
     // START
@@ -127,7 +131,13 @@ public class RisingFlameSea : MonoBehaviour
         {
             case SeaState.Warning:
                 stateTimer += Time.fixedDeltaTime;
-                if (stateTimer >= warningDelay)
+
+                if (!hasErupted && stateTimer >= eruptionDelay)
+                {
+                    Erupt();
+                }
+
+                if (stateTimer >= eruptionDelay + warningDelay)
                 {
                     currentState = SeaState.Rising;
                 }
@@ -148,7 +158,15 @@ public class RisingFlameSea : MonoBehaviour
         if (currentState != SeaState.Waiting) return;
 
         stateTimer = 0f;
+        hasErupted = false;
         currentState = SeaState.Warning;
+    }
+
+    // The flames "wake up": shake and music land together, eruptionDelay
+    // after the key was hit.
+    private void Erupt()
+    {
+        hasErupted = true;
 
         if (impulseSource != null) impulseSource.GenerateImpulse();
         if (music != null) music.Play();
