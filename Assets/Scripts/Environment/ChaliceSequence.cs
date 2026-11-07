@@ -31,6 +31,13 @@ public class ChaliceSequence : MonoBehaviour
     [SerializeField] private AudioClip wrongSound; // every flame goes out
     [SerializeField] private AudioClip solvedSound; // last flame lit
 
+    [Header("Reward")]
+    // Objects switched on the moment the puzzle is solved - e.g. a Key left
+    // INACTIVE in the scene, so the key only appears once the sequence is
+    // done. Plain field instead of an OnSolved listener so it can't be
+    // forgotten; OnSolved stays available for anything else.
+    [SerializeField] private GameObject[] revealOnSolved;
+
     public UnityEvent OnSolved;
 
     private int progress;
@@ -86,6 +93,7 @@ public class ChaliceSequence : MonoBehaviour
             {
                 isSolved = true;
                 sfxPlayer?.Play(solvedSound);
+                RevealRewards();
                 OnSolved?.Invoke();
             }
             else
@@ -96,6 +104,19 @@ public class ChaliceSequence : MonoBehaviour
         else
         {
             ResetSequence();
+        }
+    }
+
+    private void RevealRewards()
+    {
+        if (revealOnSolved == null) return;
+
+        foreach (GameObject reward in revealOnSolved)
+        {
+            if (reward != null)
+            {
+                reward.SetActive(true);
+            }
         }
     }
 

@@ -1,42 +1,48 @@
 using UnityEngine;
 
 // Decorative chalice next to the boss door that shows the key-gate progress:
-// one flame lights up for every key collected. Purely visual - it has no
-// collider and is NOT an IBreakable, so (unlike the puzzle's ChaliceFlame)
-// the player's sword does nothing to it.
+// its flame lights up once the key with this chalice's keyNumber has been
+// collected. Place one per key (e.g. 4 chalices for 4 keys) and number them
+// 1, 2, 3, 4 - the first key broken lights chalice 1, the second chalice 2,
+// and so on, whichever KeyBlock in the level it was.
 //
-// Subscribes itself to KeyManager.Instance, same as BossDoor, so the prefab
-// works when dropped into a scene without any Inspector wiring.
-//
-// Setup: each flame is a child GameObject (sprite + flicker Animator),
-// dragged into "flames" in the order they should light. Keep its length
-// equal to KeyManager's totalKeys - extra keys light nothing, extra flames
-// never light.
+// Purely visual - no collider and NOT an IBreakable, so (unlike the puzzle's
+// ChaliceFlame) the player's sword does nothing to it. Subscribes itself to
+// KeyManager.Instance, same as BossDoor, so the prefab works when dropped
+// into a scene without any Inspector wiring besides keyNumber.
 public class KeyChalice : MonoBehaviour
 {
-    [SerializeField] private GameObject[] flames;
+    // 1-based: lit while KeyManager's collected count is >= this.
+    [SerializeField, Min(1)] private int keyNumber = 1;
+    [SerializeField] private GameObject flame;
 
     [Header("Sound (optional)")]
     // Empty by default: KeyBlock already plays its own break sound.
     [SerializeField] private SfxPlayer sfxPlayer;
     [SerializeField] private AudioClip lightSound;
 
-    private int litCount = -1; // -1 = not synced yet, so the first sync is silent
+    private bool isLit;
+    private bool hasSynced;
 
     private void Start()
     {
         if (KeyManager.Instance == null)
         {
             Debug.LogWarning($"{name}: KeyChalice found no KeyManager in the scene.", this);
-            SetLitCount(0);
+            SetLit(false);
             return;
+        }
+
+        if (keyNumber > KeyManager.Instance.TotalKeys)
+        {
+            Debug.LogWarning($"{name}: keyNumber {keyNumber} is higher than KeyManager's totalKeys ({KeyManager.Instance.TotalKeys}), it will never light.", this);
         }
 
         KeyManager.Instance.OnKeyCountChanged.AddListener(HandleKeyCountChanged);
 
         // Read the current count directly: KeyManager.Start may already have
         // fired its initial OnKeyCountChanged before this subscribed.
-        SetLitCount(KeyManager.Instance.CollectedKeys);
+        SetLit(KeyManager.Instance.CollectedKeys >= keyNumber);
     }
 
     private void OnDestroy()
@@ -49,26 +55,24 @@ public class KeyChalice : MonoBehaviour
 
     private void HandleKeyCountChanged(int collected, int total)
     {
-        SetLitCount(collected);
+        SetLit(collected >= keyNumber);
     }
 
-    private void SetLitCount(int count)
+    private void SetLit(bool lit)
     {
-        bool isFirstSync = litCount < 0;
-        bool gainedFlame = !isFirstSync && count > litCount;
+        // First sync is silent: a chalice that starts lit shouldn't play the sound.
+        bool justLit = hasSynced && lit && !isLit;
 
-        for (int i = 0; i < flames.Length; i++)
+        isLit = lit;
+        hasSynced = true;
+
+        if (flame != null)
         {
-            if (flames[i] != null)
-            {
-                flames[i].SetActive(i < count);
-            }
+            flame.SetActive(lit);
         }
 
-        litCount = count;
-
         // Explicit null check instead of ?. (Unity fake-null, see KeyBlock).
-        if (gainedFlame && sfxPlayer != null)
+        if (justLit && sfxPlayer != null)
         {
             sfxPlayer.Play(lightSound);
         }
