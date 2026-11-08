@@ -61,6 +61,12 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded = false;
     private bool wasGroundedLastFrame = true;
     private Collider2D groundedCollider;
+    // Ground check ignores trigger colliders: hazard tilemaps are triggers and
+    // in some scenes sit on the Ground layer, and with "Queries Hit Triggers"
+    // on, a plain OverlapCircle counted touching fire/spikes as standing on
+    // ground (refilling jumps and recording "safe" positions inside hazards).
+    private ContactFilter2D groundFilter;
+    private readonly System.Collections.Generic.List<Collider2D> groundHits = new();
     public InputSystem_Actions InputActions => inputActions;    // Public getter for inputActions
     public bool IsGrounded => isGrounded;
     // The specific ground collider currently under groundCheck (null when
@@ -81,6 +87,10 @@ public class PlayerMovement : MonoBehaviour
 
         // Enable the input actions
         inputActions.Enable();
+
+        groundFilter = new ContactFilter2D();
+        groundFilter.SetLayerMask(groundLayer);
+        groundFilter.useTriggers = false;
     }
 
     // =========================
@@ -132,7 +142,9 @@ public class PlayerMovement : MonoBehaviour
     private void CheckGrounded()
     {
         // Check for ground overlap at the groundCheck position
-        groundedCollider = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        // Solid colliders only - see groundFilter.
+        int hitCount = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundFilter, groundHits);
+        groundedCollider = hitCount > 0 ? groundHits[0] : null;
         isGrounded = groundedCollider != null;
 
         // Only reset the jump counter on the frame the player actually LANDS

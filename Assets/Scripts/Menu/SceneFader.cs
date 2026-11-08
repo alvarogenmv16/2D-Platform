@@ -161,6 +161,7 @@ public class SceneFader : MonoBehaviour
 
     private IEnumerator FlashSequence(PlayerRespawnPoint respawnPoint)
     {
+        respawnPoint.BeginRespawn();
         respawnPoint.SetMovementEnabled(false);
 
         yield return StartCoroutine(Fade(0f, 1f));

@@ -4,7 +4,7 @@ using UnityEngine;
 // a trigger - a single spike, or a whole Hazards Tilemap covering many
 // painted spike tiles at once.
 [RequireComponent(typeof(Collider2D))]
-public class HazardDamage : MonoBehaviour
+public class HazardDamage : MonoBehaviour, IHazard
 {
     [SerializeField] private float damage = 1f;
 

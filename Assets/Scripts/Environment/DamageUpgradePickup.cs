@@ -23,6 +23,24 @@ public class DamageUpgradePickup : MonoBehaviour
     private bool playerInRange;
     private bool hasBeenClaimed = false;
 
+    private void Start()
+    {
+        // A Prefab Asset can't hold a reference to the scene's DialogueUI, so
+        // an instance whose field was never set in the scene would throw on
+        // Claim/Hide. Fall back to the scene's one (there's only ever one
+        // dialogue box per scene) - found by type, same as SceneFader does
+        // for the health/power UI.
+        if (dialogueUI == null)
+        {
+            dialogueUI = FindFirstObjectByType<DialogueUI>(FindObjectsInactive.Include);
+
+            if (dialogueUI == null)
+            {
+                Debug.LogWarning($"{name}: DamageUpgradePickup found no DialogueUI in the scene - the reward still works, just without the message.", this);
+            }
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
@@ -49,7 +67,7 @@ public class DamageUpgradePickup : MonoBehaviour
         // Walking away closes the box, same as CompanionInteraction -
         // nothing left to advance to here since it's a single line, but
         // it shouldn't linger open once the player leaves.
-        dialogueUI.Hide();
+        if (dialogueUI != null) dialogueUI.Hide();
     }
 
     private void Update()
@@ -75,7 +93,8 @@ public class DamageUpgradePickup : MonoBehaviour
             playerAttackHitbox.IncreaseDamage(damageIncrease);
         }
 
-        sfxPlayer?.Play(claimSound);
-        dialogueUI.Show(message);
+        // Explicit null checks instead of ?. (Unity fake-null, see KeyBlock).
+        if (sfxPlayer != null) sfxPlayer.Play(claimSound);
+        if (dialogueUI != null) dialogueUI.Show(message);
     }
 }

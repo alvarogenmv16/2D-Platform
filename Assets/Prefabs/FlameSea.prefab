@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IntroLoopAudio
   clip: {fileID: 8300000, guid: 739d66b5f6712e44da9348adf5ea1210, type: 3}
-  loopStartTime: 7
+  loopStartTime: 7.45
   volume: 1
 --- !u!114 &600006
 MonoBehaviour:

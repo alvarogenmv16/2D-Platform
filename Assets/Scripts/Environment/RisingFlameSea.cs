@@ -19,7 +19,7 @@ using UnityEngine;
 // position only matters on Y for StopPoint.
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
-public class RisingFlameSea : MonoBehaviour
+public class RisingFlameSea : MonoBehaviour, IHazard
 {
     // =========================
     // VARIABLES
@@ -247,6 +247,12 @@ public class RisingFlameSea : MonoBehaviour
     {
         player.position = respawnPosition;
         if (playerRb != null) playerRb.linearVelocity = Vector2.zero;
+
+        // Forget safe positions recorded up the shaft before the restart.
+        if (player.TryGetComponent(out PlayerRespawnPoint safeGround))
+        {
+            safeGround.ResetSafePosition(respawnPosition);
+        }
 
         // Teleport, not MovePosition - MovePosition would sweep the trigger
         // back down through everything in between.

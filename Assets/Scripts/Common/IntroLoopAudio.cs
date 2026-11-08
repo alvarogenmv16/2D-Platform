@@ -14,7 +14,11 @@ using UnityEngine;
 public class IntroLoopAudio : MonoBehaviour
 {
     [SerializeField] private AudioClip clip;
-    [SerializeField] private float loopStartTime = 7f; // seconds into the clip where the loop begins
+    // Seconds into the clip where the loop begins. Put it in the quiet gap
+    // right before the looping part's first hit, not on a round number -
+    // otherwise the tail of the intro's last note gets looped too
+    // (fire_area.mp3: last intro hit fades out by ~7.3s, loop kicks in at 7.48s -> 7.45).
+    [SerializeField] private float loopStartTime = 7f;
     [SerializeField, Range(0f, 1f)] private float volume = 1f;
 
     private AudioSource introSource;
