@@ -28,6 +28,9 @@ public class BossDoor : MonoBehaviour
 
     private bool isOpen = false;
 
+    // Read by DoorEntrance, so the "Enter" prompt only works once it's open.
+    public bool IsOpen => isOpen;
+
     private void Start()
     {
         if (!opensWhenAllKeysCollected) return;

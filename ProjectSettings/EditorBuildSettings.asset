@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Level3.unity
     guid: 4a2cf769e09442c291b8f228d8ecbc50
   - enabled: 1
+    path: Assets/Scenes/TempleScene.unity
+    guid: 84a9ec08cf004b19884a92ed79447ff7
+  - enabled: 1
     path: Assets/Scenes/SceneBoss2.unity
     guid: f2bcf2f87819499bb03ab9aa15f5eb71
   m_configObjects:
