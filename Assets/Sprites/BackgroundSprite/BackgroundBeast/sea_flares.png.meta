@@ -1,0 +1,322 @@
+fileFormatVersion: 2
+guid: 8e6bfb9fc68d95c4bab8434f39a76cc2
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 216309237709037202
+    second: sea_flares_0
+  - first:
+      213: 7777379664263045022
+    second: sea_flares_1
+  - first:
+      213: -8751502319273706643
+    second: sea_flares_2
+  - first:
+      213: -166822755045413391
+    second: sea_flares_3
+  - first:
+      213: 3184763102739232413
+    second: sea_flares_4
+  - first:
+      213: -5104794676068525881
+    second: sea_flares_5
+  - first:
+      213: -4777164243192056287
+    second: sea_flares_6
+  - first:
+      213: 6763974621528627870
+    second: sea_flares_7
+  - first:
+      213: 5220392496232884791
+    second: sea_flares_8
+  - first:
+      213: -2785727987629868453
+    second: sea_flares_9
+  - first:
+      213: 6350063716364432398
+    second: sea_flares_10
+  - first:
+      213: -6748189048890146130
+    second: sea_flares_11
+  - first:
+      213: -5343630523386606639
+    second: sea_flares_12
+  - first:
+      213: -1710771032014545426
+    second: sea_flares_13
+  - first:
+      213: 4722932420167697726
+    second: sea_flares_14
+  - first:
+      213: 5456387926361323640
+    second: sea_flares_15
+  - first:
+      213: -227896110288083983
+    second: sea_flares_16
+  - first:
+      213: 3748902342043679524
+    second: sea_flares_17
+  - first:
+      213: -2943258454934492987
+    second: sea_flares_18
+  - first:
+      213: 7343936041583907105
+    second: sea_flares_19
+  - first:
+      213: 7761911175247656282
+    second: sea_flares_20
+  - first:
+      213: -7317602649685307163
+    second: sea_flares_21
+  - first:
+      213: 6566950666412889363
+    second: sea_flares_22
+  - first:
+      213: -7056837031380905018
+    second: sea_flares_23
+  - first:
+      213: -1090344106977192622
+    second: sea_flares_24
+  - first:
+      213: 5220705960537139696
+    second: sea_flares_25
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: sea_flares_23
+      rect:
+        serializedVersion: 2
+        x: 747
+        y: 15
+        width: 8
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c318b2db14111e90800000000000000
+      internalID: -7056837031380905018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sea_flares_24
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 17
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2551fa4cfc15ed0f0800000000000000
+      internalID: -1090344106977192622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sea_flares_25
+      rect:
+        serializedVersion: 2
+        x: 1340
+        y: 21
+        width: 20
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f9a49e196ca37840800000000000000
+      internalID: 5220705960537139696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sea_flares_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 50
+        width: 1666
+        height: 804
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7081875f2e4725c4684733244b040bd1
+      internalID: 216309237709037202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 3a4a377a1eecf1e47b0e21743d194a03
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      sea_flares_0: 216309237709037202
+      sea_flares_1: 7777379664263045022
+      sea_flares_10: 6350063716364432398
+      sea_flares_11: -6748189048890146130
+      sea_flares_12: -5343630523386606639
+      sea_flares_13: -1710771032014545426
+      sea_flares_14: 4722932420167697726
+      sea_flares_15: 5456387926361323640
+      sea_flares_16: -227896110288083983
+      sea_flares_17: 3748902342043679524
+      sea_flares_18: -2943258454934492987
+      sea_flares_19: 7343936041583907105
+      sea_flares_2: -8751502319273706643
+      sea_flares_20: 7761911175247656282
+      sea_flares_21: -7317602649685307163
+      sea_flares_22: 6566950666412889363
+      sea_flares_23: -7056837031380905018
+      sea_flares_24: -1090344106977192622
+      sea_flares_25: 5220705960537139696
+      sea_flares_3: -166822755045413391
+      sea_flares_4: 3184763102739232413
+      sea_flares_5: -5104794676068525881
+      sea_flares_6: -4777164243192056287
+      sea_flares_7: 6763974621528627870
+      sea_flares_8: 5220392496232884791
+      sea_flares_9: -2785727987629868453
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

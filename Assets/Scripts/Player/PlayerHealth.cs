@@ -35,6 +35,11 @@ public class PlayerHealth : MonoBehaviour
     private bool isDead = false;
     private bool isInvulnerable = false;
 
+    // Lets callers that deal damage and then do their own follow-up (e.g.
+    // RisingFlameSea's section reset) skip it when that hit was lethal and
+    // the death sequence is taking over.
+    public bool IsDead => isDead;
+
     // =========================
     // START
     // =========================

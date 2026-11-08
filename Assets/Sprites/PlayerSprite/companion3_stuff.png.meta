@@ -1,0 +1,298 @@
+fileFormatVersion: 2
+guid: 49308b44c9b81264f89c8bb718e6ea2f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1109815402055377096
+    second: companion3_stuff_0
+  - first:
+      213: -2791154089546115379
+    second: companion3_stuff_1
+  - first:
+      213: -3181900098333707676
+    second: companion3_stuff_2
+  - first:
+      213: -990463140760098791
+    second: companion3_stuff_3
+  - first:
+      213: 4904378938183402585
+    second: companion3_stuff_4
+  - first:
+      213: 4016987133496783862
+    second: companion3_stuff_5
+  - first:
+      213: -6228241827670825260
+    second: companion3_stuff_6
+  - first:
+      213: -9076511739993615261
+    second: companion3_stuff_7
+  - first:
+      213: -6343734432518460578
+    second: companion3_stuff_8
+  - first:
+      213: 3244433936493260615
+    second: companion3_stuff_9
+  - first:
+      213: -2715378443720969293
+    second: companion3_stuff_10
+  - first:
+      213: 2694955892301684354
+    second: companion3_stuff_11
+  - first:
+      213: 3703768486943073074
+    second: companion3_stuff_12
+  - first:
+      213: 6011177183341975339
+    second: companion3_stuff_13
+  - first:
+      213: -352392737735179006
+    second: companion3_stuff_14
+  - first:
+      213: -8659992654707739472
+    second: companion3_stuff_15
+  - first:
+      213: 7191087221598578329
+    second: companion3_stuff_16
+  - first:
+      213: -7262452539994728669
+    second: companion3_stuff_17
+  - first:
+      213: -8759885643173443275
+    second: companion3_stuff_18
+  - first:
+      213: -1840060671242414716
+    second: companion3_stuff_19
+  - first:
+      213: 6911761137700218056
+    second: companion3_stuff_20
+  - first:
+      213: 1547247739926637886
+    second: companion3_stuff_21
+  - first:
+      213: -8402861407775174279
+    second: companion3_stuff_22
+  - first:
+      213: 1348622631537718528
+    second: companion3_stuff_23
+  - first:
+      213: 6665695447853222973
+    second: companion3_stuff_24
+  - first:
+      213: 4492684762352011704
+    second: companion3_stuff_25
+  - first:
+      213: -8449511994173988496
+    second: companion3_stuff_26
+  - first:
+      213: -1821232713431628523
+    second: companion3_stuff_27
+  - first:
+      213: -3643838530748243673
+    second: companion3_stuff_28
+  - first:
+      213: 179669739200642681
+    second: companion3_stuff_29
+  - first:
+      213: -8364580807700762894
+    second: companion3_stuff_30
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: companion3_stuff_0
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 130
+        width: 1153
+        height: 674
+      alignment: 9
+      pivot: {x: 0.5052659, y: 0.6675488}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca38538e1d1e0704188e6dede39bb8de
+      internalID: -1109815402055377096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: companion3_stuff_1
+      rect:
+        serializedVersion: 2
+        x: 1189
+        y: 96
+        width: 316
+        height: 767
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3782745bd7b63ad4a8e75158881e664d
+      internalID: -2791154089546115379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 837a14e825a074f4c988e50217a363fa
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      companion3_stuff_0: -1109815402055377096
+      companion3_stuff_1: -2791154089546115379
+      companion3_stuff_10: -2715378443720969293
+      companion3_stuff_11: 2694955892301684354
+      companion3_stuff_12: 3703768486943073074
+      companion3_stuff_13: 6011177183341975339
+      companion3_stuff_14: -352392737735179006
+      companion3_stuff_15: -8659992654707739472
+      companion3_stuff_16: 7191087221598578329
+      companion3_stuff_17: -7262452539994728669
+      companion3_stuff_18: -8759885643173443275
+      companion3_stuff_19: -1840060671242414716
+      companion3_stuff_2: -3181900098333707676
+      companion3_stuff_20: 6911761137700218056
+      companion3_stuff_21: 1547247739926637886
+      companion3_stuff_22: -8402861407775174279
+      companion3_stuff_23: 1348622631537718528
+      companion3_stuff_24: 6665695447853222973
+      companion3_stuff_25: 4492684762352011704
+      companion3_stuff_26: -8449511994173988496
+      companion3_stuff_27: -1821232713431628523
+      companion3_stuff_28: -3643838530748243673
+      companion3_stuff_29: 179669739200642681
+      companion3_stuff_3: -990463140760098791
+      companion3_stuff_30: -8364580807700762894
+      companion3_stuff_4: 4904378938183402585
+      companion3_stuff_5: 4016987133496783862
+      companion3_stuff_6: -6228241827670825260
+      companion3_stuff_7: -9076511739993615261
+      companion3_stuff_8: -6343734432518460578
+      companion3_stuff_9: 3244433936493260615
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

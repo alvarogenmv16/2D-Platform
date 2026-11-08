@@ -28,8 +28,15 @@ public class EnemyMovement : MonoBehaviour
     // fractional values will scale speed unintentionally.
     public void Move(float direction)
     {
+        Move(direction, moveSpeed);
+    }
+
+    // Same as Move(direction), but at an explicit speed instead of
+    // moveSpeed - for enemies that switch between speeds (e.g. a charge).
+    public void Move(float direction, float speed)
+    {
         rb.linearVelocity = new Vector2(
-            direction * moveSpeed,
+            direction * speed,
             rb.linearVelocity.y
         );
     }

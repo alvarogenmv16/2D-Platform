@@ -1,55 +1,10 @@
 fileFormatVersion: 2
-guid: 5b1268a88e5a9524fa8ab4515efbbadb
+guid: 935d73cb25345ff4883fbd64c4d67339
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8659919563743319337
-    second: beast_extras_0
-  - first:
-      213: -4533169531854001166
-    second: beast_extras_1
-  - first:
-      213: 5184388326618820308
-    second: beast_extras_2
-  - first:
-      213: -3826388990022809423
-    second: beast_extras_3
-  - first:
-      213: 4671401186868803651
-    second: beast_extras_4
-  - first:
-      213: -1248077695699192473
-    second: beast_extras_5
-  - first:
-      213: 7318122006708894910
-    second: beast_extras_6
-  - first:
-      213: 7132432946541868893
-    second: beast_extras_7
-  - first:
-      213: 4181302713394113610
-    second: beast_extras_8
-  - first:
-      213: 7443149554058908820
-    second: beast_extras_9
-  - first:
-      213: -2574751659567945304
-    second: beast_extras_10
-  - first:
-      213: 9062653645236513377
-    second: beast_extras_11
-  - first:
-      213: -4097330769257588432
-    second: beast_extras_12
-  - first:
-      213: -932462991879008137
-    second: beast_extras_13
-  - first:
-      213: -7035574107005447243
-    second: beast_extras_14
-  - first:
-      213: -4217904045839963884
-    second: beast_extras_15
+      213: 8183545111303203703
+    second: hound_level3_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -158,13 +113,113 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: beast_floor_extra0
+      name: hound_idle
       rect:
         serializedVersion: 2
-        x: 41
-        y: 74
-        width: 896
-        height: 180
+        x: 68
+        y: 636
+        width: 455
+        height: 219
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 227.5, y: 27.5}
+        - {x: 165.5, y: 109.5}
+        - {x: -108.5, y: 109.5}
+        - {x: -227.5, y: 25.5}
+        - {x: -227.5, y: -109.5}
+        - {x: 227.5, y: -109.5}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77bac92abeac19170800000000000000
+      internalID: 8183545111303203703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hound_0
+      rect:
+        serializedVersion: 2
+        x: 693
+        y: 612
+        width: 483
+        height: 308
+      alignment: 9
+      pivot: {x: 0.5, y: 0.35551947}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 236, y: 120}
+        - {x: 123.5, y: 154}
+        - {x: -36.5, y: 97}
+        - {x: -236, y: -5}
+        - {x: -241.5, y: -150}
+        - {x: 241.5, y: -143}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58ab35f20fb6ac04d8fa41208d6f2e07
+      internalID: -738984728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hound_charge0
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 331
+        width: 628
+        height: 210
+      alignment: 9
+      pivot: {x: 0.6380041, y: 0.526455}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e967479a47687844e9bab90fbe7e638c
+      internalID: 1217225647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hound_charge1
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 331
+        width: 901
+        height: 214
+      alignment: 9
+      pivot: {x: 0.7639041, y: 0.49999985}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89800827bc762d84caaeb7fedf7fe181
+      internalID: 1994843842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hound_death0
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 39
+        width: 500
+        height: 211
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,20 +228,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1a6ad50288367b84ba208fd6e853ccee
-      internalID: 661875148
+      spriteID: 728bb7a4a9894ba4c9c9fcb0eadc6774
+      internalID: -496431469
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: beast_floor_extras_1
+      name: hound_death1
       rect:
         serializedVersion: 2
-        x: 984
-        y: 75
-        width: 298
-        height: 181
+        x: 581
+        y: 32
+        width: 527
+        height: 225
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,152 +250,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ea8d73f9be4347e468713e2ffa0c030c
-      internalID: 1713556668
+      spriteID: 6331aa115a7180548b3074884a01f0e8
+      internalID: -142304225
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: beast_floor_extras_3
+      name: hound_death2
       rect:
         serializedVersion: 2
-        x: 1311
-        y: 41
-        width: 187
-        height: 285
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a794a35f6222b3c4cb1f83f1e4c3de44
-      internalID: -842932458
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: beast_extras_0
-      rect:
-        serializedVersion: 2
-        x: 503
-        y: 533
-        width: 193
-        height: 153
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 93b1c665f1120ae4abebc48d5ad8f869
-      internalID: 1260846669
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: beast_extras_1
-      rect:
-        serializedVersion: 2
-        x: 310
-        y: 813
-        width: 136
-        height: 113
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 16be5bb29086e4746bfcae3628e845e7
-      internalID: -4533169531854001166
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: beast_extras_2
-      rect:
-        serializedVersion: 2
-        x: 1359
-        y: 788
-        width: 118
-        height: 157
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6b36b6d4f7aca7748b62fa689d26a95d
-      internalID: 5184388326618820308
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: beast_extras_3
-      rect:
-        serializedVersion: 2
-        x: 1245
-        y: 350
-        width: 239
-        height: 89
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 37566d32747d6e14dba10790fc62b721
-      internalID: -3826388990022809423
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: beast_extras_4
-      rect:
-        serializedVersion: 2
-        x: 664
-        y: 343
-        width: 137
-        height: 150
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e97d3da1137e2364fb515604abf24b22
-      internalID: 4671401186868803651
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: beast_extras_5
-      rect:
-        serializedVersion: 2
-        x: 881
-        y: 758
-        width: 176
-        height: 203
+        x: 1162
+        y: 31
+        width: 484
+        height: 225
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -349,8 +272,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1273bf37a0be10e44af0c5df46faa4d9
-      internalID: -1248077695699192473
+      spriteID: adb19d032e715ab419a0ecfee024a928
+      internalID: -942472285
       vertices: []
       indices: 
       edges: []
@@ -359,7 +282,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: a6892de146fe76546b17a3bd5ec62de1
+    spriteID: 45a9e6cca1f7bdf4c8fef887406d5b74
     internalID: 0
     vertices: []
     indices: 
@@ -369,25 +292,13 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      beast_extras_0: 1260846669
-      beast_extras_1: -4533169531854001166
-      beast_extras_10: -2574751659567945304
-      beast_extras_11: 9062653645236513377
-      beast_extras_12: -4097330769257588432
-      beast_extras_13: -932462991879008137
-      beast_extras_14: -7035574107005447243
-      beast_extras_15: -4217904045839963884
-      beast_extras_2: 5184388326618820308
-      beast_extras_3: -3826388990022809423
-      beast_extras_4: 4671401186868803651
-      beast_extras_5: -1248077695699192473
-      beast_extras_6: 7318122006708894910
-      beast_extras_7: 7132432946541868893
-      beast_extras_8: 4181302713394113610
-      beast_extras_9: 7443149554058908820
-      beast_floor_extra0: -8659919563743319337
-      beast_floor_extras_1: 1713556668
-      beast_floor_extras_3: -842932458
+      hound_0: -738984728
+      hound_charge0: 1217225647
+      hound_charge1: 1994843842
+      hound_death0: -496431469
+      hound_death1: -142304225
+      hound_death2: -942472285
+      hound_idle: 8183545111303203703
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
