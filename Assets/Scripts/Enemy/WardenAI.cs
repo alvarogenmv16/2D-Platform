@@ -123,6 +123,7 @@ public class WardenAI : MonoBehaviour
     private Transform player;
     private EnemyHealth health;
     private WardenHelmet weakPoint;
+    private GameObject fallenHelmet; // the one knocked off at the phase change
     private float stateTimer;
     private WardenAttack lastAttack;
     private WardenAttack currentAttack;
@@ -218,15 +219,7 @@ public class WardenAI : MonoBehaviour
 
         if (fallenHelmetPrefab != null)
         {
-            GameObject helmetObject = Instantiate(fallenHelmetPrefab, helmetPosition, Quaternion.identity);
-            if (helmetObject.TryGetComponent(out WardenFallenHelmet fallenHelmet))
-            {
-                // Flies away from the player, towards open floor.
-                float side = player != null && player.position.x > transform.position.x ? -1f : 1f;
-                // Same size it had on the Warden's head (the Warden is scaled
-                // up in the scene; the prefab is at the unscaled size).
-                fallenHelmet.Launch(side, Mathf.Abs(transform.lossyScale.x));
-            }
+            fallenHelmet = SpawnFallenHelmet(helmetPosition);
         }
 
         WardenIntro intro = FindAnyObjectByType<WardenIntro>();
@@ -234,6 +227,20 @@ public class WardenAI : MonoBehaviour
 
         stateTimer = 0f;
         currentState = WardenState.ChangingPhase;
+    }
+
+    private GameObject SpawnFallenHelmet(Vector2 position)
+    {
+        GameObject helmetObject = Instantiate(fallenHelmetPrefab, position, Quaternion.identity);
+        if (helmetObject.TryGetComponent(out WardenFallenHelmet helmet))
+        {
+            // Flies away from the player, towards open floor.
+            float side = player != null && player.position.x > transform.position.x ? -1f : 1f;
+            // Same size it had on the Warden's head (the Warden is scaled up
+            // in the scene; the prefab is at the unscaled size).
+            helmet.Launch(side, Mathf.Abs(transform.lossyScale.x));
+        }
+        return helmetObject;
     }
 
     private void HandleChangingPhase()
@@ -493,6 +500,18 @@ public class WardenAI : MonoBehaviour
 
         WardenIntro intro = FindAnyObjectByType<WardenIntro>();
         if (intro != null) intro.ChangeMusic(victoryMusic, 0.6f, false);
+
+        // The ending: the fallen helmet offers the "Escape" once the Warden
+        // has faded away. (If it somehow never lost it, the helmet drops now.)
+        if (fallenHelmet == null && fallenHelmetPrefab != null)
+        {
+            Vector2 helmetPosition = weakPoint != null ? weakPoint.WeakPointCenter : (Vector2)transform.position + Vector2.up * 2.3f;
+            fallenHelmet = SpawnFallenHelmet(helmetPosition);
+        }
+        if (fallenHelmet != null && fallenHelmet.TryGetComponent(out WardenEscape escape))
+        {
+            escape.EnableEscape(deathFadeDelay + deathFadeTime + 0.5f);
+        }
 
         if (animator != null && animator.TryGetComponent(out SpriteRenderer body)) StartCoroutine(FadeOut(body));
     }
