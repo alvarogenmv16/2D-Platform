@@ -23,6 +23,13 @@ using UnityEngine.Serialization;
 // be: standing, at the top of a (powered-up) jump, and at the top of a
 // double jump. Each volley fills 2 lanes and leaves 1 free - a different one
 // from the previous volley - so there's always somewhere safe to be.
+//
+// Phase 2 (helmet off, below phase2HealthRatio) is frantic: shorter pauses,
+// faster sweep volleys and warnings, and a chance to chain the next attack
+// almost straight away (combo). The fists-up punch has two variants, picked
+// at random: the portals, or diagonal spears - parallel diagonal lines
+// falling from above the screen to the floor, in 2 volleys, the second
+// shifted half a gap so the player has to move to the next safe corridor.
 public class WardenAI : MonoBehaviour
 {
     private enum WardenState
@@ -37,6 +44,7 @@ public class WardenAI : MonoBehaviour
     {
         Punch,
         Sweep,
+        PunchDiagonal, // phase 2 only: same animation as Punch, diagonal spears
     }
 
     [SerializeField] private WardenState currentState = WardenState.Inactive; // debug
@@ -84,6 +92,26 @@ public class WardenAI : MonoBehaviour
     // How soon after the phase change the first phase-2 attack comes.
     [SerializeField] private float phase2FirstAttackDelay = 1f;
 
+    [Header("Phase 2 - frantic pace")]
+    [SerializeField] private float phase2AttackCooldown = 1.6f;
+    // Chance that, right after an attack, the next one starts almost at once.
+    [SerializeField, Range(0f, 1f)] private float phase2ComboChance = 0.35f;
+    [SerializeField] private float phase2ComboDelay = 0.3f;
+    [SerializeField] private float phase2VolleyInterval = 1f;
+    [SerializeField] private float phase2SweepWarningTime = 0.65f;
+
+    [Header("Phase 2 - diagonal spears (punch variant)")]
+    // Chance that a phase-2 punch is the diagonal variant instead of portals.
+    [SerializeField, Range(0f, 1f)] private float diagonalPunchChance = 0.5f;
+    // Angle of the lines below the horizontal.
+    [SerializeField, Range(20f, 70f)] private float diagonalAngle = 45f;
+    // Horizontal gap between two lines where they meet the floor.
+    [SerializeField] private float diagonalSpacing = 6f;
+    [SerializeField] private int diagonalVolleys = 2;
+    [SerializeField] private float diagonalVolleyInterval = 1f;
+    [SerializeField] private float diagonalWarningTime = 0.7f;
+    [SerializeField] private float diagonalSpeed = 20f;
+
     [Header("Death")]
     [SerializeField] private AudioClip victoryMusic;
     // The death pose holds still for deathFadeDelay, then fades out over
@@ -97,6 +125,7 @@ public class WardenAI : MonoBehaviour
     private WardenHelmet weakPoint;
     private float stateTimer;
     private WardenAttack lastAttack;
+    private WardenAttack currentAttack;
     private int sameAttackStreak;
     private int lastSafeLane = -1;
     private ContactFilter2D solidGroundFilter;
@@ -218,38 +247,47 @@ public class WardenAI : MonoBehaviour
         if (!done && stateTimer < maxChangePhaseDuration) return;
 
         if (weakPoint != null) weakPoint.SetVulnerable(true);
-        stateTimer = attackCooldown - phase2FirstAttackDelay;
+        stateTimer = CurrentCooldown - phase2FirstAttackDelay;
         currentState = WardenState.Idle;
     }
+
+    private bool IsPhase2 => currentPhase >= 2;
+    private float CurrentCooldown => IsPhase2 ? phase2AttackCooldown : attackCooldown;
 
     private void HandleIdle()
     {
         stateTimer += Time.deltaTime;
-        if (stateTimer < attackCooldown || player == null) return;
+        if (stateTimer < CurrentCooldown || player == null) return;
 
         StartAttack(PickAttack());
     }
 
     private WardenAttack PickAttack()
     {
-        WardenAttack attack = Random.value < 0.5f ? WardenAttack.Punch : WardenAttack.Sweep;
+        bool punch = Random.value < 0.5f;
 
-        // Never the same attack 3 times in a row.
-        if (sameAttackStreak >= 2 && attack == lastAttack)
+        // Never the same kind (punch / sweep) 3 times in a row.
+        bool lastWasPunch = lastAttack != WardenAttack.Sweep;
+        if (sameAttackStreak >= 2 && punch == lastWasPunch) punch = !punch;
+
+        sameAttackStreak = punch == lastWasPunch ? sameAttackStreak + 1 : 1;
+
+        WardenAttack attack = WardenAttack.Sweep;
+        if (punch)
         {
-            attack = attack == WardenAttack.Punch ? WardenAttack.Sweep : WardenAttack.Punch;
+            attack = IsPhase2 && Random.value < diagonalPunchChance ? WardenAttack.PunchDiagonal : WardenAttack.Punch;
         }
 
-        sameAttackStreak = attack == lastAttack ? sameAttackStreak + 1 : 1;
         lastAttack = attack;
         return attack;
     }
 
     private void StartAttack(WardenAttack attack)
     {
+        currentAttack = attack;
         stateTimer = 0f;
         currentState = WardenState.Attacking;
-        if (animator != null) animator.SetTrigger(attack == WardenAttack.Punch ? "PunchTrigger" : "SweepTrigger");
+        if (animator != null) animator.SetTrigger(attack == WardenAttack.Sweep ? "SweepTrigger" : "PunchTrigger");
     }
 
     private void HandleAttacking()
@@ -265,7 +303,9 @@ public class WardenAI : MonoBehaviour
 
         if (backToIdle || stateTimer >= maxAttackDuration)
         {
-            stateTimer = 0f;
+            // Phase 2 combo: sometimes the next attack comes almost at once.
+            bool combo = IsPhase2 && Random.value < phase2ComboChance;
+            stateTimer = combo ? CurrentCooldown - phase2ComboDelay : 0f;
             currentState = WardenState.Idle;
         }
     }
@@ -278,6 +318,12 @@ public class WardenAI : MonoBehaviour
     public void OnPunch()
     {
         if (currentState != WardenState.Attacking) return;
+
+        if (currentAttack == WardenAttack.PunchDiagonal)
+        {
+            if (sweepSpearPrefab != null) StartCoroutine(DiagonalVolleys());
+            return;
+        }
 
         if (portalPrefab != null && player != null) StartCoroutine(OpenPortals(player.position));
     }
@@ -331,10 +377,11 @@ public class WardenAI : MonoBehaviour
 
     private IEnumerator SweepVolleys()
     {
+        float interval = IsPhase2 ? phase2VolleyInterval : volleyInterval;
         for (int v = 0; v < sweepVolleys; v++)
         {
             LaunchVolley();
-            if (v < sweepVolleys - 1) yield return new WaitForSeconds(volleyInterval);
+            if (v < sweepVolleys - 1) yield return new WaitForSeconds(interval);
         }
     }
 
@@ -364,7 +411,68 @@ public class WardenAI : MonoBehaviour
             GameObject spearObject = Instantiate(sweepSpearPrefab, new Vector3(cam.transform.position.x, floorY + laneHeights[lane], 0f), Quaternion.identity);
             if (spearObject.TryGetComponent(out WardenSweepSpear spear))
             {
-                spear.Launch(direction, leftX, rightX, sweepWarningTime);
+                spear.Launch(direction, leftX, rightX, IsPhase2 ? phase2SweepWarningTime : sweepWarningTime);
+            }
+        }
+    }
+
+    // =========================
+    // DIAGONAL SPEARS (phase 2 punch variant)
+    // =========================
+
+    private IEnumerator DiagonalVolleys()
+    {
+        // Same slant for the whole attack; random offset, then each volley
+        // shifted half a gap so the safe corridors move.
+        float side = Random.value < 0.5f ? 1f : -1f;
+        float offset = Random.Range(0f, diagonalSpacing);
+
+        for (int v = 0; v < diagonalVolleys; v++)
+        {
+            LaunchDiagonalVolley(side, offset + v * diagonalSpacing * 0.5f);
+            if (v < diagonalVolleys - 1) yield return new WaitForSeconds(diagonalVolleyInterval);
+        }
+    }
+
+    // side: +1 = lines fall down-and-right, -1 = down-and-left.
+    // offset: where the first line meets the floor, within one gap.
+    private void LaunchDiagonalVolley(float side, float offset)
+    {
+        Camera cam = Camera.main;
+        if (cam == null || diagonalSpacing <= 0.1f) return;
+
+        float rad = diagonalAngle * Mathf.Deg2Rad;
+        Vector2 dir = new Vector2(Mathf.Cos(rad) * side, -Mathf.Sin(rad));
+
+        float halfWidth = cam.orthographicSize * cam.aspect;
+        float camX = cam.transform.position.x;
+        float topY = cam.transform.position.y + cam.orthographicSize + 1f;
+        float floorY = transform.position.y;
+
+        // Each line: from above the top of the screen down to just under the
+        // floor. Lines whose floor point is off-screen still cross the view
+        // higher up, so the range is widened by the slant's horizontal reach.
+        float height = Mathf.Max(1f, topY - floorY);
+        float reach = height / Mathf.Tan(rad);
+        // The line ends right at the floor (the beam's bright end must be
+        // visible there); the spear itself flies on a bit into the ground,
+        // hidden by the Ground tiles, before it's destroyed.
+        float lengthToFloor = height / Mathf.Sin(rad);
+
+        float minX = camX - halfWidth - (side > 0f ? 0f : reach) - diagonalSpacing;
+        float maxX = camX + halfWidth + (side > 0f ? reach : 0f) + diagonalSpacing;
+        float firstX = minX + Mathf.Repeat(offset - minX, diagonalSpacing);
+
+        for (float groundX = firstX; groundX <= maxX; groundX += diagonalSpacing)
+        {
+            Vector2 floorPoint = new Vector2(groundX, floorY);
+            Vector2 start = floorPoint - dir * lengthToFloor;
+
+            GameObject spearObject = Instantiate(sweepSpearPrefab, start, Quaternion.identity);
+            if (spearObject.TryGetComponent(out WardenSweepSpear spear))
+            {
+                // Beam brightest at the floor end, where the player is.
+                spear.LaunchAlong(dir, start, lengthToFloor, diagonalWarningTime, true, diagonalSpeed);
             }
         }
     }

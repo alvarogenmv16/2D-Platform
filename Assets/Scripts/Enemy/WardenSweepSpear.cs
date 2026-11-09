@@ -1,16 +1,20 @@
 using UnityEngine;
 
-// One spear of the Warden's sweep attack: crosses the whole screen along a
-// horizontal lane. Spawned (and set up through Launch) by WardenAI.
+// One flying spear of the Warden: crosses the screen along a straight line.
+// Spawned (and set up through Launch / LaunchAlong) by WardenAI.
+//   - Sweep: horizontal lanes, from one screen edge to the other.
+//   - Phase 2 diagonal punch: diagonal lines falling from above the screen
+//     down to the floor.
 //
-//   1. Aim: the spear's tip peeks in at the screen edge it comes from, and a
-//      turquoise beam lights up along its lane, pulsing - the warning.
-//   2. Flight: it shoots across to the other edge, hurting the player on
-//      contact, and the beam fades out behind it.
-//   3. Destroys itself once it's off the other side.
+//   1. Aim: the spear's tip peeks in at the start of its line and a
+//      turquoise beam lights up along the line, pulsing - the warning.
+//   2. Flight: it shoots along the line, hurting the player on contact, and
+//      the beam fades out.
+//   3. Destroys itself once it has gone past the end of the line.
 //
-// Children: Spear (moves; WardenSpear1 points right) and Lane (static beam,
-// the portal column sprite turned on its side).
+// Children: Spear (moves; WardenSpear1 points along +x, so it's rotated to
+// the flight direction) and Lane (static beam, the portal column sprite
+// turned to lie along the line).
 public class WardenSweepSpear : MonoBehaviour
 {
     [SerializeField] private Transform spear;
@@ -38,8 +42,9 @@ public class WardenSweepSpear : MonoBehaviour
     [SerializeField] private SfxPlayer sfxPlayer;
     [SerializeField] private AudioClip launchSound;
 
-    private float direction = 1f;   // +1 travels right, -1 left
-    private float endX;
+    private Vector2 direction = Vector2.right;
+    private float travelLength;     // from the line's start to its end
+    private float travelled;
     private float aimTime;
     private float timer;
     private bool flying;
@@ -51,33 +56,44 @@ public class WardenSweepSpear : MonoBehaviour
         if (lane != null) laneBaseScale = lane.transform.localScale;
     }
 
-    // dir: +1 = from the left edge to the right, -1 = the other way.
-    // leftX/rightX: the visible screen edges at that moment.
+    // Horizontal sweep. dir: +1 = from the left edge to the right, -1 = the
+    // other way. leftX/rightX: the visible screen edges at that moment.
     public void Launch(float dir, float leftX, float rightX, float warningTime)
     {
-        direction = dir >= 0f ? 1f : -1f;
-        aimTime = warningTime;
+        float d = dir >= 0f ? 1f : -1f;
+        Vector2 start = new Vector2(d > 0f ? leftX : rightX, transform.position.y);
+        LaunchAlong(new Vector2(d, 0f), start, Mathf.Abs(rightX - leftX), warningTime, false, -1f);
+    }
 
-        float startEdge = direction > 0f ? leftX : rightX;
-        endX = (direction > 0f ? rightX : leftX) + direction * (spearLength + 1f);
+    // Any straight line: from lineStart along lineDirection for lineLength.
+    // beamFromEnd: the warning beam is brightest at the end of the line
+    // instead of the start (diagonal spears: bright where they hit the floor,
+    // where the player is). flightSpeed < 0 keeps the prefab's speed.
+    public void LaunchAlong(Vector2 lineDirection, Vector2 lineStart, float lineLength, float warningTime,
+                            bool beamFromEnd, float flightSpeed)
+    {
+        direction = lineDirection.sqrMagnitude > 0f ? lineDirection.normalized : Vector2.right;
+        travelLength = lineLength + spearLength + 1f;
+        aimTime = warningTime;
+        if (flightSpeed > 0f) speed = flightSpeed;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         if (spear != null)
         {
-            Vector3 s = spear.localScale;
-            s.x = Mathf.Abs(s.x) * direction; // the sprite points right
-            spear.localScale = s;
-            // Only the tip inside the screen.
-            spear.position = new Vector3(startEdge - direction * (spearLength * 0.5f - peekLength), transform.position.y, 0f);
+            // Only the tip inside the line's start.
+            spear.position = lineStart - direction * (spearLength * 0.5f - peekLength);
+            spear.rotation = Quaternion.Euler(0f, 0f, angle);
         }
 
         if (lane != null)
         {
-            // The column sprite grows "up" from its base: turned so its base
-            // sits on the start edge and it stretches across the screen.
-            lane.transform.position = new Vector3(startEdge, transform.position.y, 0f);
-            lane.transform.rotation = Quaternion.Euler(0f, 0f, direction > 0f ? -90f : 90f);
-            float width = Mathf.Abs(rightX - leftX);
-            lane.transform.localScale = new Vector3(laneBaseScale.x, width / 4f, laneBaseScale.z); // sprite is 4 units long
+            // The column sprite grows "up" from its base: turned so it lies
+            // along the line, base at whichever end should be brightest.
+            Vector2 baseEnd = beamFromEnd ? lineStart + direction * lineLength : lineStart;
+            float beamAngle = beamFromEnd ? angle + 90f : angle - 90f;
+            lane.transform.SetPositionAndRotation(baseEnd, Quaternion.Euler(0f, 0f, beamAngle));
+            lane.transform.localScale = new Vector3(laneBaseScale.x, lineLength / 4f, laneBaseScale.z); // sprite is 4 units long
             SetLaneAlpha(0f);
         }
     }
@@ -105,18 +121,18 @@ public class WardenSweepSpear : MonoBehaviour
 
         if (spear == null) { Destroy(gameObject); return; }
 
-        spear.position += new Vector3(direction * speed * Time.deltaTime, 0f, 0f);
+        float step = speed * Time.deltaTime;
+        spear.position += (Vector3)(direction * step);
+        travelled += step;
 
-        bool pastEnd = direction > 0f ? spear.position.x >= endX : spear.position.x <= endX;
-        if (pastEnd) Destroy(gameObject);
+        if (travelled >= travelLength) Destroy(gameObject);
     }
 
     private void FixedUpdate()
     {
         if (!flying || spear == null) return;
 
-        Vector2 size = new Vector2(hitBoxSize.x * Mathf.Abs(spear.lossyScale.x), hitBoxSize.y * Mathf.Abs(spear.lossyScale.y));
-        Collider2D hit = Physics2D.OverlapBox(spear.position, size, 0f, playerLayer);
+        Collider2D hit = Physics2D.OverlapBox(spear.position, HitSize, spear.eulerAngles.z, playerLayer);
         if (hit == null) return;
 
         // PlayerHealth's own invulnerability window keeps this to one hit.
@@ -125,6 +141,8 @@ public class WardenSweepSpear : MonoBehaviour
             playerHealth.TakeDamage(damage, spear.position);
         }
     }
+
+    private Vector2 HitSize => new Vector2(hitBoxSize.x * Mathf.Abs(spear.lossyScale.x), hitBoxSize.y * Mathf.Abs(spear.lossyScale.y));
 
     private void SetLaneAlpha(float alpha)
     {
@@ -140,6 +158,7 @@ public class WardenSweepSpear : MonoBehaviour
         if (spear == null) return;
 
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(spear.position, new Vector3(hitBoxSize.x * Mathf.Abs(spear.lossyScale.x), hitBoxSize.y * Mathf.Abs(spear.lossyScale.y), 0f));
+        Gizmos.matrix = Matrix4x4.TRS(spear.position, spear.rotation, Vector3.one);
+        Gizmos.DrawWireCube(Vector3.zero, HitSize);
     }
 }
