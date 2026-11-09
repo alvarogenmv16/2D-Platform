@@ -4773,8 +4773,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CompanionGathering
   jumpForceMultiplier: 1.35
-  rewardMessage: Your companions lend you their strength. Your jump is now much more
-    powerful!
+  dashDurationMultiplier: 1.4
+  rewardMessage: Your companions lend you their strength. Your jump and dash are now
+    much more powerful!
   messageDelay: 2
   messageDuration: 4
   rewardSound: {fileID: 8300000, guid: 988cb9b5fa3ebdd48917e70f8281eeec, type: 3}

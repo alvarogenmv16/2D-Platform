@@ -158,6 +158,18 @@ public class PlayerMovement : MonoBehaviour
         jumpHoldForce *= forceMultiplier;
     }
 
+    // Longer dash, same reward. Stretches the duration, not the speed, so
+    // it feels just as fast and simply goes further. One-time only.
+    public bool HasDashUpgrade { get; private set; }
+
+    public void UpgradeDash(float durationMultiplier)
+    {
+        if (HasDashUpgrade) return;
+        HasDashUpgrade = true;
+
+        dashDuration *= durationMultiplier;
+    }
+
     private void CheckGrounded()
     {
         // Check for ground overlap at the groundCheck position

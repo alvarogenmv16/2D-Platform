@@ -14,9 +14,11 @@ public class CompanionGathering : MonoBehaviour
     // x1.35 impulse: first jump ~2.5 -> ~4.5 units high, double jump ~3.8 ->
     // ~6.9 - clears the Beast (~5 units tall) and its bite/charge hitbox.
     [SerializeField] private float jumpForceMultiplier = 1.35f;
+    // x1.4 duration: dash ~2.25 -> ~3.15 units long, same speed.
+    [SerializeField] private float dashDurationMultiplier = 1.4f;
 
     [Header("Message")]
-    [SerializeField] private string rewardMessage = "Your companions lend you their strength. Your jump is now much more powerful!";
+    [SerializeField] private string rewardMessage = "Your companions lend you their strength. Your jump and dash are now much more powerful!";
     // Lets the last companion's closing line be read before it's replaced.
     [SerializeField] private float messageDelay = 2f;
     [SerializeField] private float messageDuration = 4f;
@@ -62,6 +64,7 @@ public class CompanionGathering : MonoBehaviour
         if (player != null && player.TryGetComponent(out PlayerMovement movement))
         {
             movement.UpgradeJump(jumpForceMultiplier);
+            movement.UpgradeDash(dashDurationMultiplier);
         }
 
         StartCoroutine(ShowRewardMessage());
