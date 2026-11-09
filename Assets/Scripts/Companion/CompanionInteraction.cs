@@ -29,6 +29,12 @@ public class CompanionInteraction : MonoBehaviour
     [SerializeField] private DialogueLine closingLine;
     [SerializeField] private SfxPlayer sfxPlayer;
 
+    // Fired once, the first time the player has gone through every line
+    // (the moment the closing line shows). Used by CompanionGathering.
+    public UnityEngine.Events.UnityEvent OnConversationCompleted;
+
+    public bool HasCompletedConversation => hasCompletedConversation;
+
     private InputSystem_Actions inputActions;
     private bool playerInRange;
 
@@ -41,6 +47,16 @@ public class CompanionInteraction : MonoBehaviour
     // From then on, a fresh conversation skips straight to closingLine instead
     // of replaying the whole greeting again.
     private bool hasCompletedConversation = false;
+
+    private void Start()
+    {
+        // Same fallback as DamageUpgradePickup: an instance whose field was
+        // never set in the scene uses the scene's only dialogue box.
+        if (dialogueUI == null)
+        {
+            dialogueUI = FindFirstObjectByType<DialogueUI>(FindObjectsInactive.Include);
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -96,14 +112,19 @@ public class CompanionInteraction : MonoBehaviour
             currentLineIndex = isStartingConversation ? 0 : currentLineIndex + 1;
         }
 
-        if (currentLineIndex >= lines.Length)
+        bool justCompleted = false;
+        if (currentLineIndex >= lines.Length && !hasCompletedConversation)
         {
             hasCompletedConversation = true;
+            justCompleted = true;
         }
 
         DialogueLine currentLine = currentLineIndex < lines.Length ? lines[currentLineIndex] : closingLine;
         sfxPlayer?.Play(currentLine.sound);
-        dialogueUI.Show(currentLine.text);
+        if (dialogueUI != null) dialogueUI.Show(currentLine.text);
+
+        // After the line is shown, so a listener can replace it if it wants.
+        if (justCompleted && OnConversationCompleted != null) OnConversationCompleted.Invoke();
     }
 
     private void EndConversation()
@@ -111,6 +132,6 @@ public class CompanionInteraction : MonoBehaviour
         if (currentLineIndex == -1) return;
 
         currentLineIndex = -1;
-        dialogueUI.Hide();
+        if (dialogueUI != null) dialogueUI.Hide();
     }
 }

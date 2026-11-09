@@ -139,6 +139,25 @@ public class PlayerMovement : MonoBehaviour
     // =========================
     // FUNCTIONS
     // =========================
+
+    // Permanent jump boost (TempleScene: reward for talking to the three
+    // companions). Multiplies every jump's impulse; height grows with the
+    // square of it (x1.35 = ~1.8x as high). One-time only: the Player
+    // survives scene loads, so replaying the scene mustn't stack it.
+    public bool HasJumpUpgrade { get; private set; }
+
+    public void UpgradeJump(float forceMultiplier)
+    {
+        if (HasJumpUpgrade) return;
+        HasJumpUpgrade = true;
+
+        for (int i = 0; i < jumpForces.Length; i++)
+        {
+            jumpForces[i] *= forceMultiplier;
+        }
+        jumpHoldForce *= forceMultiplier;
+    }
+
     private void CheckGrounded()
     {
         // Check for ground overlap at the groundCheck position
