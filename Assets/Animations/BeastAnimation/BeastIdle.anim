@@ -20,14 +20,8 @@ AnimationClip:
   m_PPtrCurves:
   - serializedVersion: 2
     curve:
-    - time: 0.0
-      value: {fileID: -6348806237195144154, guid: 5d4727768c17e4a4a9001cf532fd2e66, type: 3}
-    - time: 0.35
+    - time: 0
       value: {fileID: -7514184835542634023, guid: 5d4727768c17e4a4a9001cf532fd2e66, type: 3}
-    - time: 0.7
-      value: {fileID: -8794075270684163454, guid: 5d4727768c17e4a4a9001cf532fd2e66, type: 3}
-    - time: 1.05
-      value: {fileID: -8794075270684163454, guid: 5d4727768c17e4a4a9001cf532fd2e66, type: 3}
     attribute: m_Sprite
     path:
     classID: 212
@@ -51,15 +45,13 @@ AnimationClip:
       isSerializeReferenceCurve: 0
       metaData: 0
     pptrCurveMapping:
-    - {fileID: -6348806237195144154, guid: 5d4727768c17e4a4a9001cf532fd2e66, type: 3}
     - {fileID: -7514184835542634023, guid: 5d4727768c17e4a4a9001cf532fd2e66, type: 3}
-    - {fileID: -8794075270684163454, guid: 5d4727768c17e4a4a9001cf532fd2e66, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.05
+    m_StopTime: 0
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -78,11 +70,4 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events:
-  - time: 0.7
-    functionName: OnRoar
-    data:
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
+  m_Events: []
