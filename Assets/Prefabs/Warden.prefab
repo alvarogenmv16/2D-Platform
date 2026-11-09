@@ -200,7 +200,7 @@ MonoBehaviour:
   animator: {fileID: 400013}
   firstAttackDelay: 2.5
   attackCooldown: 3
-  maxAttackDuration: 3.5
+  maxAttackDuration: 4
   portalPrefab: {fileID: 4761976939355454828, guid: 73e01b0f70c148598aff98f888f0070c, type: 3}
   portalCount: 5
   portalSpacing: 4.5
@@ -217,9 +217,15 @@ MonoBehaviour:
   sweepVolleys: 2
   volleyInterval: 1.4
   sweepWarningTime: 0.8
-  sfxPlayer: {fileID: 0}
-  punchSound: {fileID: 0}
-  sweepSound: {fileID: 0}
+  currentPhase: 1
+  phase2HealthRatio: 0.5
+  fallenHelmetPrefab: {fileID: 9100001, guid: 9e3d344b3e02433e91b2e779c7e03bd9, type: 3}
+  phase2Music: {fileID: 8300000, guid: e9ca32496c52a3048af01feb69cadfd4, type: 3}
+  maxChangePhaseDuration: 3
+  phase2FirstAttackDelay: 1
+  victoryMusic: {fileID: 8300000, guid: 2ded2958233436e47b13f3acafc8229d, type: 3}
+  deathFadeDelay: 1.2
+  deathFadeTime: 1.6
 --- !u!114 &400014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -310,6 +316,18 @@ MonoBehaviour:
     offset: {x: -0.0, y: 1.891}
     size: {x: 0.75, y: 1.2}
     flash: {fileID: 21300000, guid: a5ba6f84b0ef4ae0be9392bf49971796, type: 3}
+  - pose: {fileID: -371518187, guid: bb4223c80836243469aa2c2af9da6de3, type: 3}
+    offset: {x: 0.0, y: 1.059}
+    size: {x: 0.938, y: 0.984}
+    flash: {fileID: 21300000, guid: aa6cb5d53fc74e669d14b36755ba02ad, type: 3}
+  - pose: {fileID: 2109479777, guid: bb4223c80836243469aa2c2af9da6de3, type: 3}
+    offset: {x: 0.0, y: 2.241}
+    size: {x: 0.938, y: 0.984}
+    flash: {fileID: 21300000, guid: 380648a8922b450bbf2be8d41cc7b3e7, type: 3}
+  - pose: {fileID: -314039205, guid: bb4223c80836243469aa2c2af9da6de3, type: 3}
+    offset: {x: 0.0, y: 2.119}
+    size: {x: 0.938, y: 0.984}
+    flash: {fileID: 21300000, guid: ffbcebb0ae6841e693c8599858b7c247, type: 3}
   flashAlpha: 0.9
   flashTime: 0.15
 --- !u!1 &400020

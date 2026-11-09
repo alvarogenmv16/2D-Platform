@@ -62,6 +62,36 @@ public class WardenIntro : MonoBehaviour
         if (challenge != null) challenge.OnChallengeAccepted.RemoveListener(Play);
     }
 
+    // Fades the current track out and starts another one (looping) - the
+    // phase 2 music (WardenAI).
+    // loop = false for a one-off track (the victory music when it dies).
+    public void ChangeMusic(AudioClip clip, float fadeTime = 0.8f, bool loop = true)
+    {
+        if (clip == null || musicSource == null) return;
+        if (musicSwap != null) StopCoroutine(musicSwap);
+        musicSwap = StartCoroutine(SwapMusic(clip, fadeTime, loop));
+    }
+
+    private Coroutine musicSwap;
+
+    private IEnumerator SwapMusic(AudioClip clip, float fadeTime, bool loop)
+    {
+        float startVolume = musicSource.volume;
+        if (musicSource.isPlaying)
+        {
+            for (float t = 0f; t < fadeTime; t += Time.deltaTime)
+            {
+                musicSource.volume = Mathf.Lerp(startVolume, 0f, t / fadeTime);
+                yield return null;
+            }
+        }
+
+        musicSource.clip = clip;
+        musicSource.volume = musicVolume;
+        musicSource.loop = loop;
+        musicSource.Play();
+    }
+
     public void Play()
     {
         if (IsPlaying) return;

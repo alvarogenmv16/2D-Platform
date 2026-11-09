@@ -182,7 +182,7 @@ TextureImporter:
       name: Warden_Spikes
       rect:
         serializedVersion: 2
-        x: 37
+        x: 36
         y: 63
         width: 445
         height: 226
@@ -240,28 +240,6 @@ TextureImporter:
       bones: []
       spriteID: adbc96a3f5959484fbec4fc9e2f4f0a9
       internalID: 1887131632
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WardenDeath
-      rect:
-        serializedVersion: 2
-        x: 562
-        y: 46
-        width: 392
-        height: 241
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: eff0e9c56acad1d4cb0d6346127cb0bd
-      internalID: 1785510637
       vertices: []
       indices: 
       edges: []

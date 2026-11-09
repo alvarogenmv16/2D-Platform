@@ -30,6 +30,7 @@ public class WardenAI : MonoBehaviour
         Inactive,
         Idle,
         Attacking,
+        ChangingPhase,
     }
 
     private enum WardenAttack
@@ -47,7 +48,7 @@ public class WardenAI : MonoBehaviour
     [SerializeField] private float attackCooldown = 3f;
     // Safety net: back to Idle even if the attack clip's end is never seen.
     [FormerlySerializedAs("maxPunchDuration")]
-    [SerializeField] private float maxAttackDuration = 3.5f;
+    [SerializeField] private float maxAttackDuration = 4f;
 
     [Header("Punch - portals")]
     [SerializeField] private GameObject portalPrefab;
@@ -72,13 +73,28 @@ public class WardenAI : MonoBehaviour
     // How long each spear peeks in (with its lane lit) before it flies.
     [SerializeField] private float sweepWarningTime = 0.8f;
 
-    [Header("Sound (optional)")]
-    [SerializeField] private SfxPlayer sfxPlayer;
-    [SerializeField] private AudioClip punchSound;
-    [SerializeField] private AudioClip sweepSound;
+    [Header("Phase 2 - the helmet falls off")]
+    [SerializeField] private int currentPhase = 1; // debug
+    // Phase 2 starts once health drops to this fraction of the max.
+    [SerializeField, Range(0.05f, 0.95f)] private float phase2HealthRatio = 0.5f;
+    [SerializeField] private GameObject fallenHelmetPrefab;
+    [SerializeField] private AudioClip phase2Music;
+    // Safety net: back to fighting even if WardenIdle2 is never seen.
+    [SerializeField] private float maxChangePhaseDuration = 3f;
+    // How soon after the phase change the first phase-2 attack comes.
+    [SerializeField] private float phase2FirstAttackDelay = 1f;
+
+    [Header("Death")]
+    [SerializeField] private AudioClip victoryMusic;
+    // The death pose holds still for deathFadeDelay, then fades out over
+    // deathFadeTime - together a bit shorter than WardenDeath.anim, after
+    // which EnemyHealth destroys the Warden.
+    [SerializeField] private float deathFadeDelay = 1.2f;
+    [SerializeField] private float deathFadeTime = 1.6f;
 
     private Transform player;
     private EnemyHealth health;
+    private WardenHelmet weakPoint;
     private float stateTimer;
     private WardenAttack lastAttack;
     private int sameAttackStreak;
@@ -90,7 +106,12 @@ public class WardenAI : MonoBehaviour
     private void Awake()
     {
         health = GetComponent<EnemyHealth>();
-        if (health != null) health.OnDied.AddListener(OnDied);
+        if (health != null)
+        {
+            health.OnDied.AddListener(OnDied);
+            health.OnHealthChanged.AddListener(OnHealthChanged);
+        }
+        weakPoint = GetComponent<WardenHelmet>();
 
         // "Queries hit triggers" is on in this project: only real ground.
         solidGroundFilter = new ContactFilter2D();
@@ -100,7 +121,11 @@ public class WardenAI : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (health != null) health.OnDied.RemoveListener(OnDied);
+        if (health != null)
+        {
+            health.OnDied.RemoveListener(OnDied);
+            health.OnHealthChanged.RemoveListener(OnHealthChanged);
+        }
     }
 
     // Called by WardenIntro once the intro is over.
@@ -125,7 +150,76 @@ public class WardenAI : MonoBehaviour
         {
             case WardenState.Idle: HandleIdle(); break;
             case WardenState.Attacking: HandleAttacking(); break;
+            case WardenState.ChangingPhase: HandleChangingPhase(); break;
         }
+    }
+
+    // =========================
+    // PHASE CHANGE
+    // =========================
+
+    private void OnHealthChanged(float current, float max)
+    {
+        if (currentPhase != 1 || current <= 0f || max <= 0f) return;
+        if (currentState == WardenState.Inactive) return;
+        if (current / max > phase2HealthRatio) return;
+
+        StartPhaseChange();
+    }
+
+    // The helmet is knocked off: Warden_ChangePhase pose (helmetless), the
+    // helmet flies off its head and falls to the floor, the music changes.
+    // Invulnerable until it's over; whatever attack was being prepared is
+    // cancelled (spears already out keep going).
+    private void StartPhaseChange()
+    {
+        currentPhase = 2;
+        StopAllCoroutines();
+
+        // Where the helmet is right now, before the pose (and the box) changes.
+        Vector2 helmetPosition = weakPoint != null ? weakPoint.WeakPointCenter : (Vector2)transform.position + Vector2.up * 2.3f;
+        if (weakPoint != null) weakPoint.SetVulnerable(false);
+
+        if (animator != null)
+        {
+            animator.ResetTrigger("PunchTrigger");
+            animator.ResetTrigger("SweepTrigger");
+            animator.SetTrigger("ChangePhaseTrigger");
+        }
+
+        if (fallenHelmetPrefab != null)
+        {
+            GameObject helmetObject = Instantiate(fallenHelmetPrefab, helmetPosition, Quaternion.identity);
+            if (helmetObject.TryGetComponent(out WardenFallenHelmet fallenHelmet))
+            {
+                // Flies away from the player, towards open floor.
+                float side = player != null && player.position.x > transform.position.x ? -1f : 1f;
+                // Same size it had on the Warden's head (the Warden is scaled
+                // up in the scene; the prefab is at the unscaled size).
+                fallenHelmet.Launch(side, Mathf.Abs(transform.lossyScale.x));
+            }
+        }
+
+        WardenIntro intro = FindAnyObjectByType<WardenIntro>();
+        if (intro != null) intro.ChangeMusic(phase2Music);
+
+        stateTimer = 0f;
+        currentState = WardenState.ChangingPhase;
+    }
+
+    private void HandleChangingPhase()
+    {
+        stateTimer += Time.deltaTime;
+
+        bool done = stateTimer > 0.2f && animator != null
+            && animator.GetCurrentAnimatorStateInfo(0).IsName("WardenIdle2")
+            && !animator.IsInTransition(0);
+
+        if (!done && stateTimer < maxChangePhaseDuration) return;
+
+        if (weakPoint != null) weakPoint.SetVulnerable(true);
+        stateTimer = attackCooldown - phase2FirstAttackDelay;
+        currentState = WardenState.Idle;
     }
 
     private void HandleIdle()
@@ -164,8 +258,9 @@ public class WardenAI : MonoBehaviour
 
         // The clip goes back to Idle on its own (exit time); once it's there
         // after the attack, the cooldown starts.
+        AnimatorStateInfo info = animator != null ? animator.GetCurrentAnimatorStateInfo(0) : default;
         bool backToIdle = stateTimer > 0.2f && animator != null
-            && animator.GetCurrentAnimatorStateInfo(0).IsName("WardenIdle")
+            && (info.IsName("WardenIdle") || info.IsName("WardenIdle2"))
             && !animator.IsInTransition(0);
 
         if (backToIdle || stateTimer >= maxAttackDuration)
@@ -184,7 +279,6 @@ public class WardenAI : MonoBehaviour
     {
         if (currentState != WardenState.Attacking) return;
 
-        if (sfxPlayer != null) sfxPlayer.Play(punchSound);
         if (portalPrefab != null && player != null) StartCoroutine(OpenPortals(player.position));
     }
 
@@ -232,7 +326,6 @@ public class WardenAI : MonoBehaviour
     {
         if (currentState != WardenState.Attacking) return;
 
-        if (sfxPlayer != null) sfxPlayer.Play(sweepSound);
         if (sweepSpearPrefab != null) StartCoroutine(SweepVolleys());
     }
 
@@ -276,10 +369,39 @@ public class WardenAI : MonoBehaviour
         }
     }
 
+    // =========================
+    // DEATH
+    // =========================
+
+    // EnemyHealth plays the death itself (DieTrigger -> EnemyDeath state,
+    // WardenDeath.anim: the helmetless body dissolving into flames) and
+    // destroys the Warden when the clip ends. Here: stop attacking, the
+    // victory music, and fade the body out over the end of the clip.
     private void OnDied()
     {
         StopAllCoroutines();
         currentState = WardenState.Inactive;
+        if (weakPoint != null) weakPoint.SetVulnerable(false);
+
+        WardenIntro intro = FindAnyObjectByType<WardenIntro>();
+        if (intro != null) intro.ChangeMusic(victoryMusic, 0.6f, false);
+
+        if (animator != null && animator.TryGetComponent(out SpriteRenderer body)) StartCoroutine(FadeOut(body));
+    }
+
+    private IEnumerator FadeOut(SpriteRenderer body)
+    {
+        yield return new WaitForSeconds(deathFadeDelay);
+
+        Color c = body.color;
+        for (float t = 0f; t < deathFadeTime; t += Time.deltaTime)
+        {
+            c.a = 1f - t / deathFadeTime;
+            body.color = c;
+            yield return null;
+        }
+        c.a = 0f;
+        body.color = c;
     }
 
     private void OnDrawGizmosSelected()

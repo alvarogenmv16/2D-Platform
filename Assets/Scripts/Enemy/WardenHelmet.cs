@@ -1,7 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-// The Warden's weak point: only its helmet can be hit. A trigger BoxCollider2D
+// The Warden's weak point: only its helmet can be hit (phase 2, once the
+// helmet has fallen off: its bare head - same component, the helmetless
+// poses just have their own entries). A trigger BoxCollider2D
 // on the root (where EnemyHealth lives - the player's attack looks for
 // EnemyHealth on the collider it hits) that follows the helmet as the pose
 // changes: each frame it looks up the sprite Visuals is showing and moves the
@@ -54,6 +56,15 @@ public class WardenHelmet : MonoBehaviour
     private void OnDestroy()
     {
         if (health != null) health.OnHealthChanged.RemoveListener(OnHealthChanged);
+    }
+
+    // World centre of the weak point right now (where the helmet is).
+    public Vector2 WeakPointCenter => (Vector2)transform.TransformPoint(helmetBox.offset);
+
+    // Off during the phase change: nothing can be hit until it's over.
+    public void SetVulnerable(bool vulnerable)
+    {
+        helmetBox.enabled = vulnerable;
     }
 
     private void LateUpdate()
