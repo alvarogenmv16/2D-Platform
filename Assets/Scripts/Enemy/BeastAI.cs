@@ -162,6 +162,10 @@ public class BeastAI : MonoBehaviour
     // looked up in the scene instead.
     [SerializeField] private BossHealthUI bossHealthUI;
 
+    // Fired once, the moment it starts waking up (the roar). BeastArena
+    // closes the arena walls on it.
+    public UnityEngine.Events.UnityEvent OnAwakened;
+
     private EnemyMovement movement;
     private EnemyHealth health;
     private Collider2D col;
@@ -348,6 +352,7 @@ public class BeastAI : MonoBehaviour
             stateTimer = 0f;
             if (animator != null) animator.SetBool("IsAwake", true);
             currentState = BeastState.WakingUp;
+            if (OnAwakened != null) OnAwakened.Invoke();
         }
     }
 
