@@ -146,7 +146,7 @@ public class BeastAI : MonoBehaviour
     [SerializeField] private float leapCooldown = 7f;
     // Grace time before the first leap once phase 3 starts.
     [SerializeField] private float firstLeapDelay = 1.5f;
-    [SerializeField] private Color shadowColor = new Color(0.12f, 0.02f, 0.2f, 0.75f);
+    [SerializeField] private Color shadowColor = new Color(0.02f, 0.14f, 0.16f, 0.75f);
     [SerializeField] private Color shadowLockedColor = new Color(0.75f, 0.05f, 0.1f, 0.85f);
 
     [Header("Sound")]
