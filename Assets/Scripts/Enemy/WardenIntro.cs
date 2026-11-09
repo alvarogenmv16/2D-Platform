@@ -128,6 +128,9 @@ public class WardenIntro : MonoBehaviour
 
         if (movement != null) movement.enabled = true;
 
+        // The fight starts.
+        if (warden != null && warden.TryGetComponent(out WardenAI wardenAI)) wardenAI.Activate();
+
         Destroy(blackImage.canvas.gameObject);
         IsPlaying = false;
     }

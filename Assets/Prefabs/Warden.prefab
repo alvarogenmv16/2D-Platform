@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 400002}
   - component: {fileID: 400003}
+  - component: {fileID: 400004}
   m_Layer: 8
   m_Name: Warden
   m_TagString: Untagged
@@ -44,6 +45,7 @@ GameObject:
   - component: {fileID: 400011}
   - component: {fileID: 400012}
   - component: {fileID: 400013}
+  - component: {fileID: 400014}
   m_Layer: 8
   m_Name: Visuals
   m_TagString: Untagged
@@ -60,7 +62,7 @@ Transform:
   m_GameObject: {fileID: 400010}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.37, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -113,7 +115,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -10
   m_MaskInteraction: 0
   m_Sprite: {fileID: 8997298359298468877, guid: cefe8e19a4e95564185ef070a3cc956a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -179,3 +181,52 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   fallGravityScale: 3
+--- !u!114 &400004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 247405ad9deb4834aa2e1044de0660bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WardenAI
+  currentState: 0
+  animator: {fileID: 400013}
+  firstAttackDelay: 2.5
+  attackCooldown: 3
+  maxAttackDuration: 3.5
+  portalPrefab: {fileID: 4761976939355454828, guid: 73e01b0f70c148598aff98f888f0070c, type: 3}
+  portalCount: 5
+  portalSpacing: 4.5
+  portalStagger: 0.15
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  floorSearchDepth: 8
+  sweepSpearPrefab: {fileID: 8100001, guid: 40f787b0f35d49329176f1a867434f99, type: 3}
+  laneHeights:
+  - 0.9
+  - 3.6
+  - 6.8
+  sweepVolleys: 2
+  volleyInterval: 1.4
+  sweepWarningTime: 0.8
+  sfxPlayer: {fileID: 0}
+  punchSound: {fileID: 0}
+  sweepSound: {fileID: 0}
+--- !u!114 &400014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 418e8b79066f4d79bd29cf3a9307b4d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WardenAttackRelay
+  wardenAI: {fileID: 400004}

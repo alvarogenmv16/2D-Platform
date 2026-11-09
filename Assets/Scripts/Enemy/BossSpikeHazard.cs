@@ -17,6 +17,13 @@ public class BossSpikeHazard : MonoBehaviour
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private float lifetimeSeconds = 2f; // safety net; destroys itself even if the Animation Event never fires
 
+    // Off (default, Level 1 spikes) = circle of hitRadius at the pivot.
+    // On = a box (hitBoxSize, centred hitBoxOffset above the pivot), for a
+    // tall hazard like the Warden's spears.
+    [SerializeField] private bool useHitBox = false;
+    [SerializeField] private Vector2 hitBoxSize = new Vector2(1f, 2f);
+    [SerializeField] private Vector2 hitBoxOffset = new Vector2(0f, 1f);
+
     [Header("Sound")]
     [SerializeField] private SfxPlayer sfxPlayer;
     [SerializeField] private AudioClip startSound; // plays on spawn, telegraph begins
@@ -44,7 +51,9 @@ public class BossSpikeHazard : MonoBehaviour
     {
         if (!isDangerous) return;
 
-        Collider2D hit = Physics2D.OverlapCircle(transform.position, hitRadius, playerLayer);
+        Collider2D hit = useHitBox
+            ? Physics2D.OverlapBox(HitBoxCenter, HitBoxSize, 0f, playerLayer)
+            : Physics2D.OverlapCircle(transform.position, hitRadius, playerLayer);
 
         if (hit == null) return;
 
@@ -77,12 +86,24 @@ public class BossSpikeHazard : MonoBehaviour
         sfxPlayer?.Play(retractSound);
     }
 
+    // Optional Animation Event: the hazard stops hurting before it's gone
+    // (e.g. the spear has sunk back and only the portal is left).
+    public void OnSpikeEnd()
+    {
+        isDangerous = false;
+    }
+
+    // Box scaled with the object, so a smaller/bigger instance stays right.
+    private Vector2 HitBoxCenter => (Vector2)transform.position + Vector2.Scale(hitBoxOffset, transform.lossyScale);
+    private Vector2 HitBoxSize => Vector2.Scale(hitBoxSize, new Vector2(Mathf.Abs(transform.lossyScale.x), Mathf.Abs(transform.lossyScale.y)));
+
     // =========================
     // DEBUG
     // =========================
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, hitRadius);
+        if (useHitBox) Gizmos.DrawWireCube(HitBoxCenter, HitBoxSize);
+        else Gizmos.DrawWireSphere(transform.position, hitRadius);
     }
 }
