@@ -143,182 +143,6 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: beast_death_0
-      rect:
-        serializedVersion: 2
-        x: 29
-        y: 544
-        width: 386
-        height: 305
-      alignment: 9
-      pivot: {x: 0.51554, y: 0.04590}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData:
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c994a41f127726670800000000000000
-      internalID: 8530511631858944412
-      vertices: []
-      indices:
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: beast_death_1
-      rect:
-        serializedVersion: 2
-        x: 479
-        y: 544
-        width: 368
-        height: 274
-      alignment: 9
-      pivot: {x: 0.50679, y: 0.05109}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData:
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5822686fcb83aa3b0800000000000000
-      internalID: -5500521610638646651
-      vertices: []
-      indices:
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: beast_death_2
-      rect:
-        serializedVersion: 2
-        x: 912
-        y: 544
-        width: 380
-        height: 250
-      alignment: 9
-      pivot: {x: 0.50132, y: 0.05200}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData:
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6db96f4f2da45fc4fb1a978222201519
-      internalID: -3553759080347265456
-      vertices: []
-      indices:
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: beast_death_3
-      rect:
-        serializedVersion: 2
-        x: 1366
-        y: 544
-        width: 362
-        height: 215
-      alignment: 9
-      pivot: {x: 0.48481, y: 0.03721}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData:
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d7a98ec847a5469fbd567eaed8482f11
-      internalID: -3497044116492715558
-      vertices: []
-      indices:
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: beast_death_4
-      rect:
-        serializedVersion: 2
-        x: 28
-        y: 286
-        width: 379
-        height: 215
-      alignment: 9
-      pivot: {x: 0.48153, y: 0.05581}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData:
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3e0b38d41a5d4e25b20c2666d443c786
-      internalID: 2293214301365486952
-      vertices: []
-      indices:
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: beast_death_5
-      rect:
-        serializedVersion: 2
-        x: 477
-        y: 284
-        width: 396
-        height: 205
-      alignment: 9
-      pivot: {x: 0.49747, y: 0.03415}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData:
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f474fad78d6845a1bad56a7499a5257e
-      internalID: -3134918850778860352
-      vertices: []
-      indices:
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: beast_death_6
-      rect:
-        serializedVersion: 2
-        x: 932
-        y: 285
-        width: 376
-        height: 202
-      alignment: 9
-      pivot: {x: 0.47739, y: 0.02970}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData:
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 39ba22190c604c38822d012f3b3462cb
-      internalID: 164120483160500442
-      vertices: []
-      indices:
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: beast_death_7
-      rect:
-        serializedVersion: 2
-        x: 1383
-        y: 273
-        width: 363
-        height: 189
-      alignment: 9
-      pivot: {x: 0.54270, y: 0.07937}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData:
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 52f5ac857cd247a7b1fd1da506c2e51c
-      internalID: 515370616624526981
-      vertices: []
-      indices:
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: beast_death_8
       rect:
         serializedVersion: 2
@@ -329,7 +153,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.54337, y: 0.07109}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData:
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -337,7 +161,7 @@ TextureImporter:
       spriteID: 53e87b92c3c64c82a1a5bb1579986438
       internalID: 2153775060352004298
       vertices: []
-      indices:
+      indices: 
       edges: []
       weights: []
     - serializedVersion: 2
@@ -351,7 +175,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.49735, y: 0.05854}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData:
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -359,7 +183,7 @@ TextureImporter:
       spriteID: ccc4beeba3074b86bfedb527a0040aa9
       internalID: 3116570865150057186
       vertices: []
-      indices:
+      indices: 
       edges: []
       weights: []
     - serializedVersion: 2
@@ -373,7 +197,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.35714, y: 0.04918}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData:
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -381,7 +205,7 @@ TextureImporter:
       spriteID: 78a385d1f3f54a609d691b261d5ca170
       internalID: 782692874281105946
       vertices: []
-      indices:
+      indices: 
       edges: []
       weights: []
     outline: []
@@ -400,6 +224,7 @@ TextureImporter:
     nameFileIdTable:
       beast_death_0: 8530511631858944412
       beast_death_1: -5500521610638646651
+      beast_death_10: 782692874281105946
       beast_death_2: -3553759080347265456
       beast_death_3: -3497044116492715558
       beast_death_4: 2293214301365486952
@@ -408,7 +233,6 @@ TextureImporter:
       beast_death_7: 515370616624526981
       beast_death_8: 2153775060352004298
       beast_death_9: 3116570865150057186
-      beast_death_10: 782692874281105946
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

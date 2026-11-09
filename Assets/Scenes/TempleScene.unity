@@ -4311,7 +4311,7 @@ MonoBehaviour:
   bossHealth: {fileID: 1900000002}
   barRoot: {fileID: 1910000001}
   fillImage: {fileID: 1910000014}
-  showOnStart: 1
+  showOnStart: 0
 --- !u!1 &1910000011
 GameObject:
   m_ObjectHideFlags: 0

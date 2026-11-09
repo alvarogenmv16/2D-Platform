@@ -156,6 +156,12 @@ public class BeastAI : MonoBehaviour
     [SerializeField] private AudioClip leapLandSound; // plays on landing
     [SerializeField] private BeastPhaseMusic phaseMusic;
 
+    [Header("UI")]
+    // Shown when the wake-up roar ends (it hides itself when the boss dies).
+    // Left empty in the prefab - a prefab can't point at scene objects - and
+    // looked up in the scene instead.
+    [SerializeField] private BossHealthUI bossHealthUI;
+
     private EnemyMovement movement;
     private EnemyHealth health;
     private Collider2D col;
@@ -191,12 +197,20 @@ public class BeastAI : MonoBehaviour
         // component for a moment on every hit, and no phase change may be
         // missed because of that.
         health = GetComponent<EnemyHealth>();
-        if (health != null) health.OnHealthChanged.AddListener(OnHealthChanged);
+        if (health != null)
+        {
+            health.OnHealthChanged.AddListener(OnHealthChanged);
+            health.OnDied.AddListener(OnDied);
+        }
     }
 
     private void OnDestroy()
     {
-        if (health != null) health.OnHealthChanged.RemoveListener(OnHealthChanged);
+        if (health != null)
+        {
+            health.OnHealthChanged.RemoveListener(OnHealthChanged);
+            health.OnDied.RemoveListener(OnDied);
+        }
         // The shadow was detached at Start, so it isn't destroyed with us.
         if (leapShadow != null) Destroy(leapShadow.gameObject);
     }
@@ -294,6 +308,29 @@ public class BeastAI : MonoBehaviour
         if (IsAwake && phaseMusic != null) phaseMusic.PlayPhase(currentPhase);
     }
 
+    // EnemyHealth disables this component and plays EnemyDeath (BeastDeath.anim:
+    // lying down, then dissolving into smoke) before destroying the Beast.
+    // This only tidies up what the AI itself left running.
+    private void OnDied()
+    {
+        if (phaseMusic != null) phaseMusic.PlayVictory(); // battle track fades out
+        if (walkBob != null) walkBob.SetWalking(false);
+        if (leapShadow != null) leapShadow.gameObject.SetActive(false);
+        SetBodyAlpha(1f);
+    }
+
+    private void ShowHealthBar()
+    {
+        if (bossHealthUI == null)
+        {
+            // Include inactive: the bar starts hidden (it may be its own
+            // barRoot, so the whole object is switched off).
+            bossHealthUI = FindFirstObjectByType<BossHealthUI>(FindObjectsInactive.Include);
+        }
+
+        if (bossHealthUI != null) bossHealthUI.Show();
+    }
+
     private bool CanCharge => currentPhase >= 2;
     private bool CanLeap => currentPhase >= 3;
 
@@ -322,8 +359,9 @@ public class BeastAI : MonoBehaviour
 
         if (stateTimer >= wakeUpDuration)
         {
-            // The roar is over: the fight (and its music) starts.
+            // The roar is over: the fight (its music and health bar) starts.
             if (phaseMusic != null) phaseMusic.PlayPhase(currentPhase);
+            ShowHealthBar();
             currentState = BeastState.Chasing;
         }
     }

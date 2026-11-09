@@ -12,6 +12,8 @@ public class BeastPhaseMusic : MonoBehaviour
 {
     // Index 0 = phase 1, 1 = phase 2, 2 = phase 3.
     [SerializeField] private AudioClip[] phaseMusic;
+    // Played once when the boss dies (boss_defeat.wav, same as the other bosses).
+    [SerializeField] private AudioClip victoryMusic;
     [SerializeField] private float volume = 0.7f;
     [SerializeField] private float fadeOutTime = 0.6f;
 
@@ -44,7 +46,19 @@ public class BeastPhaseMusic : MonoBehaviour
         swapRoutine = StartCoroutine(SwapTo(null));
     }
 
-    private IEnumerator SwapTo(AudioClip clip)
+    // Fades the battle track out and plays the victory music once. Detaches
+    // from the Beast first: the Beast is destroyed when its death animation
+    // ends, and the music has to outlive it.
+    public void PlayVictory()
+    {
+        playingPhase = 0;
+        transform.SetParent(null, true);
+
+        if (swapRoutine != null) StopCoroutine(swapRoutine);
+        swapRoutine = StartCoroutine(SwapTo(victoryMusic, false));
+    }
+
+    private IEnumerator SwapTo(AudioClip clip, bool loop = true)
     {
         if (source.isPlaying && fadeOutTime > 0f)
         {
@@ -60,6 +74,7 @@ public class BeastPhaseMusic : MonoBehaviour
         if (clip == null) yield break;
 
         source.clip = clip;
+        source.loop = loop;
         source.volume = volume;
         source.Play();
     }
