@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 8012962715797277990}
   - component: {fileID: 6465971433042138573}
   - component: {fileID: 7716706258335186380}
+  - component: {fileID: 5566778899112233}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -245,6 +246,9 @@ MonoBehaviour:
   sfxPlayer: {fileID: 6465971433042138573}
   dashSound: {fileID: 8300000, guid: aec8bebcb6e6d354e8b3f1f4a8da2ff1, type: 3}
   walkAudioSource: {fileID: 7716706258335186380}
+  wallHitSound: {fileID: 0}
+  wallHitNormalThreshold: 0.7
+  wallHitCooldown: 0.15
 --- !u!114 &8622265315803261211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,13 +382,19 @@ MonoBehaviour:
   attackSize: {x: 2, y: 2}
   attackOffsetX: 1.75
   attackOffsetY: 1
+  attackUpSize: {x: 2, y: 2}
+  attackUpOffsetY: 3
   damage: 1
   enemyLayer:
     serializedVersion: 2
     m_Bits: 256
+  breakableLayer:
+    serializedVersion: 2
+    m_Bits: 512
   sfxPlayer: {fileID: 6465971433042138573}
   swingSound: {fileID: 8300000, guid: 65faff34bb88c1643b95a607ab8d65d1, type: 3}
   swingVolume: 0.568
+  playerPower: {fileID: 5566778899112233}
 --- !u!114 &9060920260775209687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -400,6 +410,7 @@ MonoBehaviour:
   playerMovement: {fileID: 102499189860425364}
   animator: {fileID: 449159012133179020}
   attackCooldown: 0.4
+  upInputThreshold: 0.5
 --- !u!95 &449159012133179020
 Animator:
   serializedVersion: 7
@@ -695,3 +706,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5566778899112233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760844655741871444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aafeb613a843664889ae9b0f6e20dc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerPower
+  playerHealth: {fileID: 6602373768474145768}
+  playerMovement: {fileID: 102499189860425364}
+  animator: {fileID: 449159012133179020}
+  hitsToFillBar: 6
+  OnPowerChanged:
+    m_PersistentCalls:
+      m_Calls: []

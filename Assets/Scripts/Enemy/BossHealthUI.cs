@@ -14,6 +14,9 @@ public class BossHealthUI : MonoBehaviour
     [SerializeField] private EnemyHealth bossHealth;
     [SerializeField] private GameObject barRoot;
     [SerializeField] private Image fillImage; // Image.Type = Filled
+    // Off (default) = hidden until someone calls Show() (arena controllers).
+    // On = visible from the start, for a scene with no fight trigger yet.
+    [SerializeField] private bool showOnStart = false;
 
     // =========================
     // START
@@ -22,7 +25,7 @@ public class BossHealthUI : MonoBehaviour
     {
         if (barRoot != null)
         {
-            barRoot.SetActive(false);
+            barRoot.SetActive(showOnStart);
         }
     }
 

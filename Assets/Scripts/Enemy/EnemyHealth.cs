@@ -29,7 +29,16 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float fallGravityScale = 3f;
 
+    [Header("Hit sound (optional)")]
+    // Plays on every non-lethal hit - e.g. Hound1's laugh, telling the
+    // player their sword does nothing. Empty = silent, as before.
+    [SerializeField] private SfxPlayer sfxPlayer;
+    [SerializeField] private AudioClip hitSound;
+    // Minimum time between two hit sounds, so a combo doesn't stack them.
+    [SerializeField] private float hitSoundCooldown = 0.8f;
+
     private float currentHealth;
+    private float lastHitSoundTime = float.NegativeInfinity;
     private bool isDead = false;
     private Rigidbody2D rb;
     private Collider2D col;
@@ -73,8 +82,29 @@ public class EnemyHealth : MonoBehaviour
         }
         else
         {
+            PlayHitSound();
             StartCoroutine(KnockbackRoutine(hitSourcePosition));
         }
+    }
+
+    // Instant death regardless of remaining health - for deaths that don't
+    // come from damage (e.g. HoundAI slamming into a HoundBreakableWall).
+    public void Kill()
+    {
+        if (isDead) return;
+
+        currentHealth = 0f;
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
+        Die();
+    }
+
+    private void PlayHitSound()
+    {
+        if (sfxPlayer == null || hitSound == null) return;
+        if (Time.time - lastHitSoundTime < hitSoundCooldown) return;
+
+        lastHitSoundTime = Time.time;
+        sfxPlayer.Play(hitSound);
     }
 
     private IEnumerator KnockbackRoutine(Vector2 hitSourcePosition)

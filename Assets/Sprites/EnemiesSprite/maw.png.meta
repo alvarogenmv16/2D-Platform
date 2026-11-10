@@ -1,0 +1,296 @@
+fileFormatVersion: 2
+guid: d3f692bf2c3d3264aa5cac38065f4557
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6726123067989781883
+    second: maw_transparent_0
+  - first:
+      213: 4272492357866307606
+    second: maw_transparent_1
+  - first:
+      213: -432143447852880959
+    second: maw_transparent_2
+  - first:
+      213: -7752155400257460142
+    second: maw_transparent_3
+  - first:
+      213: 1991886084648050751
+    second: maw_transparent_4
+  - first:
+      213: -5497392894963329837
+    second: maw_transparent_5
+  - first:
+      213: 3588791654572951358
+    second: maw_transparent_6
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: maw_idle0
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 679
+        width: 402
+        height: 236
+      alignment: 9
+      pivot: {x: 0.7507092, y: 0.54116225}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2aa1c07abb37234f8a7a8a082abf723
+      internalID: 630331600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: maw_idle1
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 666
+        width: 447
+        height: 286
+      alignment: 9
+      pivot: {x: 0.54346424, y: 0.49575442}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f823f89ae93aba4fb32c2bff330b714
+      internalID: 1153094828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: maw_bite0
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 363
+        width: 652
+        height: 244
+      alignment: 9
+      pivot: {x: 0.54842234, y: 0.7239447}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e16748487bb0f1440868d12e39d60efb
+      internalID: 1981639754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: maw_death0
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 40
+        width: 347
+        height: 258
+      alignment: 9
+      pivot: {x: 0.6994636, y: 0.5235325}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed5f6a2d5dfccaa47b8253a2c3edc6ee
+      internalID: -111184260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: maw_death1
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 22
+        width: 438
+        height: 284
+      alignment: 9
+      pivot: {x: 0.63584393, y: 0.42303875}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9aa9b66d9bff344ba15dc9f0ba6b9a4
+      internalID: -1704429100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: maw_death2
+      rect:
+        serializedVersion: 2
+        x: 1069
+        y: 20
+        width: 400
+        height: 287
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02e30941fad2a784d90ceb9f55ec1849
+      internalID: -702348525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 02d4c25ad49e1194ea0385b703bd62ef
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      maw_bite0: 1981639754
+      maw_death0: -111184260
+      maw_death1: -1704429100
+      maw_death2: -702348525
+      maw_idle0: 630331600
+      maw_idle1: 1153094828
+      maw_transparent_0: 6726123067989781883
+      maw_transparent_1: 4272492357866307606
+      maw_transparent_2: -432143447852880959
+      maw_transparent_3: -7752155400257460142
+      maw_transparent_4: 1991886084648050751
+      maw_transparent_5: -5497392894963329837
+      maw_transparent_6: 3588791654572951358
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

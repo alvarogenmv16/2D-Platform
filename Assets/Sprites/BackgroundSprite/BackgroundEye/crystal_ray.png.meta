@@ -1,0 +1,280 @@
+fileFormatVersion: 2
+guid: 21f40b403e48da544836d8f732114c8c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8206987209125577470
+    second: crystal_ray_0
+  - first:
+      213: -7191648236652577031
+    second: crystal_ray_1
+  - first:
+      213: 5280912713820220398
+    second: crystal_ray_2
+  - first:
+      213: 8919121634208966723
+    second: crystal_ray_3
+  - first:
+      213: 1476686594657170686
+    second: crystal_ray_4
+  - first:
+      213: 1620305940992550387
+    second: crystal_ray_5
+  - first:
+      213: 1617172910809563618
+    second: crystal_ray_6
+  - first:
+      213: -6396634433501054876
+    second: crystal_ray_7
+  - first:
+      213: 2157650826156649146
+    second: crystal_ray_8
+  - first:
+      213: 601790330034401188
+    second: crystal_ray_9
+  - first:
+      213: -995742881559220991
+    second: crystal_ray_10
+  - first:
+      213: -708538201820352904
+    second: crystal_ray_11
+  - first:
+      213: -708117960632472472
+    second: crystal_ray_12
+  - first:
+      213: -9175920333976373019
+    second: crystal_ray_13
+  - first:
+      213: -8825825218887660406
+    second: crystal_ray_14
+  - first:
+      213: 9201019327086528068
+    second: crystal_ray_15
+  - first:
+      213: -6449505859585268433
+    second: crystal_ray_16
+  - first:
+      213: -104462204929034534
+    second: crystal_ray_17
+  - first:
+      213: -2016851843043092881
+    second: crystal_ray_18
+  - first:
+      213: 3256113142987069650
+    second: crystal_ray_19
+  - first:
+      213: 899271081239347582
+    second: crystal_ray_20
+  - first:
+      213: -8645864442948572779
+    second: crystal_ray_21
+  - first:
+      213: 9094408016896905998
+    second: crystal_ray_22
+  - first:
+      213: -6151248490286059024
+    second: crystal_ray_23
+  - first:
+      213: -1762236470998827448
+    second: crystal_ray_24
+  - first:
+      213: -5606602369429818429
+    second: crystal_ray_25
+  - first:
+      213: -5608722159134651462
+    second: crystal_ray_26
+  - first:
+      213: -1540992078526635481
+    second: crystal_ray_27
+  - first:
+      213: -8903062356870450609
+    second: crystal_ray_28
+  - first:
+      213: -57147786463796720
+    second: crystal_ray_29
+  - first:
+      213: 7978554970238002715
+    second: crystal_ray_30
+  - first:
+      213: -9162098537864869859
+    second: crystal_ray_31
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: crystal_ray_0
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 448
+        width: 1683
+        height: 375
+      alignment: 9
+      pivot: {x: 0.007717602, y: 0.44258773}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 322c530314bea034cb45cf5d78b37a1b
+      internalID: -8206987209125577470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 54df49ac77c93b84f929dc2a50c741ad
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      crystal_ray_0: -8206987209125577470
+      crystal_ray_1: -7191648236652577031
+      crystal_ray_10: -995742881559220991
+      crystal_ray_11: -708538201820352904
+      crystal_ray_12: -708117960632472472
+      crystal_ray_13: -9175920333976373019
+      crystal_ray_14: -8825825218887660406
+      crystal_ray_15: 9201019327086528068
+      crystal_ray_16: -6449505859585268433
+      crystal_ray_17: -104462204929034534
+      crystal_ray_18: -2016851843043092881
+      crystal_ray_19: 3256113142987069650
+      crystal_ray_2: 5280912713820220398
+      crystal_ray_20: 899271081239347582
+      crystal_ray_21: -8645864442948572779
+      crystal_ray_22: 9094408016896905998
+      crystal_ray_23: -6151248490286059024
+      crystal_ray_24: -1762236470998827448
+      crystal_ray_25: -5606602369429818429
+      crystal_ray_26: -5608722159134651462
+      crystal_ray_27: -1540992078526635481
+      crystal_ray_28: -8903062356870450609
+      crystal_ray_29: -57147786463796720
+      crystal_ray_3: 8919121634208966723
+      crystal_ray_30: 7978554970238002715
+      crystal_ray_31: -9162098537864869859
+      crystal_ray_4: 1476686594657170686
+      crystal_ray_5: 1620305940992550387
+      crystal_ray_6: 1617172910809563618
+      crystal_ray_7: -6396634433501054876
+      crystal_ray_8: 2157650826156649146
+      crystal_ray_9: 601790330034401188
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

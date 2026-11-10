@@ -102,15 +102,12 @@ public class SceneFader : MonoBehaviour
 
                 if (entryPoint != null)
                 {
+                    // Only the position is teleported - velocity (speed and
+                    // direction) is left untouched on purpose, so momentum
+                    // from the old scene (e.g. still rising from a jump when
+                    // the exit trigger was hit) carries straight into the
+                    // new one instead of getting cut to a dead stop.
                     player.transform.position = entryPoint.transform.position;
-
-                    // Clear any velocity carried over from the previous scene
-                    // (e.g. still moving/falling when the trigger was hit),
-                    // same reasoning as PlayerRespawnPoint.SnapToLastSafePosition.
-                    if (player.TryGetComponent(out Rigidbody2D playerRb))
-                    {
-                        playerRb.linearVelocity = Vector2.zero;
-                    }
                 }
                 else
                 {
@@ -127,6 +124,15 @@ public class SceneFader : MonoBehaviour
             if (healthUI != null && playerHealth != null)
             {
                 healthUI.Bind(playerHealth);
+            }
+
+            // Same rebind, for scenes that also carry a power bar.
+            PlayerPowerUI powerUI = Object.FindFirstObjectByType<PlayerPowerUI>();
+            PlayerPower playerPower = player.GetComponent<PlayerPower>();
+
+            if (powerUI != null && playerPower != null)
+            {
+                powerUI.Bind(playerPower);
             }
         }
 
@@ -155,6 +161,7 @@ public class SceneFader : MonoBehaviour
 
     private IEnumerator FlashSequence(PlayerRespawnPoint respawnPoint)
     {
+        respawnPoint.BeginRespawn();
         respawnPoint.SetMovementEnabled(false);
 
         yield return StartCoroutine(Fade(0f, 1f));
@@ -164,6 +171,33 @@ public class SceneFader : MonoBehaviour
         yield return StartCoroutine(Fade(1f, 0f));
 
         respawnPoint.SetMovementEnabled(true);
+    }
+
+    // Generic version of FlashAndTeleport: fades to black, runs atBlack while
+    // the screen is fully covered (teleports, resets...), fades back in, then
+    // runs onDone. Used by RisingFlameSea to restart its section. Without a
+    // fader in the scene, both callbacks just run immediately.
+    public static void FadeOutAndIn(System.Action atBlack, System.Action onDone = null)
+    {
+        if (instance == null)
+        {
+            atBlack?.Invoke();
+            onDone?.Invoke();
+            return;
+        }
+
+        instance.StartCoroutine(instance.FadeOutAndInSequence(atBlack, onDone));
+    }
+
+    private IEnumerator FadeOutAndInSequence(System.Action atBlack, System.Action onDone)
+    {
+        yield return StartCoroutine(Fade(0f, 1f));
+
+        atBlack?.Invoke();
+
+        yield return StartCoroutine(Fade(1f, 0f));
+
+        onDone?.Invoke();
     }
 
     private IEnumerator Fade(float from, float to)

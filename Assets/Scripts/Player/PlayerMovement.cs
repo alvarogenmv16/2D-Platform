@@ -39,6 +39,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private SfxPlayer sfxPlayer;
     [SerializeField] private AudioClip dashSound;
     [SerializeField] private AudioSource walkAudioSource; // separate looping source: Loop on, Play On Awake off
+    [SerializeField] private AudioClip wallHitSound;
+    // How horizontal a contact normal must be to count as a wall instead of
+    // floor/ceiling. 1 = perfectly horizontal, 0 = perfectly vertical - 0.7
+    // is roughly a 45 degree cutoff either side.
+    [SerializeField, Range(0f, 1f)] private float wallHitNormalThreshold = 0.7f;
+    // Minimum time between wall-hit sounds, so grinding along a wall or a
+    // jittery physics contact can't machine-gun the same clip.
+    [SerializeField] private float wallHitCooldown = 0.15f;
+    private float wallHitCooldownTimer = 0f;
 
     // Components
     private Rigidbody2D rb;
@@ -52,6 +61,12 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded = false;
     private bool wasGroundedLastFrame = true;
     private Collider2D groundedCollider;
+    // Ground check ignores trigger colliders: hazard tilemaps are triggers and
+    // in some scenes sit on the Ground layer, and with "Queries Hit Triggers"
+    // on, a plain OverlapCircle counted touching fire/spikes as standing on
+    // ground (refilling jumps and recording "safe" positions inside hazards).
+    private ContactFilter2D groundFilter;
+    private readonly System.Collections.Generic.List<Collider2D> groundHits = new();
     public InputSystem_Actions InputActions => inputActions;    // Public getter for inputActions
     public bool IsGrounded => isGrounded;
     // The specific ground collider currently under groundCheck (null when
@@ -72,6 +87,10 @@ public class PlayerMovement : MonoBehaviour
 
         // Enable the input actions
         inputActions.Enable();
+
+        groundFilter = new ContactFilter2D();
+        groundFilter.SetLayerMask(groundLayer);
+        groundFilter.useTriggers = false;
     }
 
     // =========================
@@ -106,6 +125,11 @@ public class PlayerMovement : MonoBehaviour
         HandleDash();
         UpdateAnimatorParameters();
 
+        if (wallHitCooldownTimer > 0f)
+        {
+            wallHitCooldownTimer -= Time.fixedDeltaTime;
+        }
+
         // Consume the buffered jump press after processing it
         jumpPressedThisFrame = false;
         // Consume the buffered dash after processing it
@@ -115,10 +139,43 @@ public class PlayerMovement : MonoBehaviour
     // =========================
     // FUNCTIONS
     // =========================
+
+    // Permanent jump boost (TempleScene: reward for talking to the three
+    // companions). Multiplies every jump's impulse; height grows with the
+    // square of it (x1.35 = ~1.8x as high). One-time only: the Player
+    // survives scene loads, so replaying the scene mustn't stack it.
+    public bool HasJumpUpgrade { get; private set; }
+
+    public void UpgradeJump(float forceMultiplier)
+    {
+        if (HasJumpUpgrade) return;
+        HasJumpUpgrade = true;
+
+        for (int i = 0; i < jumpForces.Length; i++)
+        {
+            jumpForces[i] *= forceMultiplier;
+        }
+        jumpHoldForce *= forceMultiplier;
+    }
+
+    // Longer dash, same reward. Stretches the duration, not the speed, so
+    // it feels just as fast and simply goes further. One-time only.
+    public bool HasDashUpgrade { get; private set; }
+
+    public void UpgradeDash(float durationMultiplier)
+    {
+        if (HasDashUpgrade) return;
+        HasDashUpgrade = true;
+
+        dashDuration *= durationMultiplier;
+    }
+
     private void CheckGrounded()
     {
         // Check for ground overlap at the groundCheck position
-        groundedCollider = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        // Solid colliders only - see groundFilter.
+        int hitCount = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundFilter, groundHits);
+        groundedCollider = hitCount > 0 ? groundHits[0] : null;
         isGrounded = groundedCollider != null;
 
         // Only reset the jump counter on the frame the player actually LANDS
@@ -295,6 +352,25 @@ public class PlayerMovement : MonoBehaviour
         animator.SetInteger("JumpCount", jumpCount);
         animator.SetFloat("VerticalVelocity", rb.linearVelocity.y);
         animator.SetBool("IsDashing", isDashing);
+    }
+
+    // Plays a sound whenever the player physically bumps into a vertical
+    // surface - a wall, not the floor or a ceiling. Distinguished purely by
+    // the contact normal's angle, since walls share the same groundLayer as
+    // everything else solid in the level.
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (((1 << collision.gameObject.layer) & groundLayer) == 0) return;
+        if (wallHitCooldownTimer > 0f) return;
+
+        foreach (ContactPoint2D contact in collision.contacts)
+        {
+            if (Mathf.Abs(contact.normal.x) < wallHitNormalThreshold) continue;
+
+            sfxPlayer?.Play(wallHitSound);
+            wallHitCooldownTimer = wallHitCooldown;
+            break;
+        }
     }
 
     private void OnDestroy()

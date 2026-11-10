@@ -1,0 +1,568 @@
+fileFormatVersion: 2
+guid: 807701c3be8f5b14fa2ee9faa9f94afe
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3002740266577848037
+    second: relic_0
+  - first:
+      213: -987778954908266354
+    second: relic_1
+  - first:
+      213: -6212235643859283658
+    second: relic_2
+  - first:
+      213: -159790783814648765
+    second: relic_3
+  - first:
+      213: 4777467072869672895
+    second: relic_4
+  - first:
+      213: -2790922891067980258
+    second: relic_5
+  - first:
+      213: 1198645642231191838
+    second: relic_6
+  - first:
+      213: 7366653519972397363
+    second: relic_7
+  - first:
+      213: 1748509245935523587
+    second: relic_8
+  - first:
+      213: -6422116160822532757
+    second: relic_9
+  - first:
+      213: -6600916141483217489
+    second: relic_10
+  - first:
+      213: -4463665945208525573
+    second: relic_11
+  - first:
+      213: -7293318616540491034
+    second: relic_12
+  - first:
+      213: 1028401235588545337
+    second: relic_13
+  - first:
+      213: 5328053256421126441
+    second: relic_14
+  - first:
+      213: 6496434482969400230
+    second: relic_15
+  - first:
+      213: 2953461803202490939
+    second: relic_16
+  - first:
+      213: 7380712917769426108
+    second: relic_17
+  - first:
+      213: -325469168818955997
+    second: relic_18
+  - first:
+      213: 5539213254891913894
+    second: relic_19
+  - first:
+      213: -1086681573223911952
+    second: relic_20
+  - first:
+      213: 3444446092469495777
+    second: relic_21
+  - first:
+      213: -3651662903412729013
+    second: relic_22
+  - first:
+      213: 3945000055465302981
+    second: relic_23
+  - first:
+      213: -391503720417377687
+    second: relic_24
+  - first:
+      213: -1600511659893630230
+    second: relic_25
+  - first:
+      213: 4110961741569132633
+    second: relic_26
+  - first:
+      213: -1033497858962757211
+    second: relic_27
+  - first:
+      213: 7421304890747543619
+    second: relic_28
+  - first:
+      213: -6863933332798152755
+    second: relic_29
+  - first:
+      213: -3503183876156442367
+    second: relic_30
+  - first:
+      213: 659941544864573634
+    second: relic_31
+  - first:
+      213: 4633972711191654645
+    second: relic_32
+  - first:
+      213: 8715946878187910711
+    second: relic_33
+  - first:
+      213: 7636771212194687724
+    second: relic_34
+  - first:
+      213: -8615906326249230465
+    second: relic_35
+  - first:
+      213: -2724960218158020365
+    second: relic_36
+  - first:
+      213: 6973131728344873273
+    second: relic_37
+  - first:
+      213: -3200076034586310465
+    second: relic_38
+  - first:
+      213: -7685354687876417421
+    second: relic_39
+  - first:
+      213: -6322351368797863847
+    second: relic_40
+  - first:
+      213: -9110611199759249945
+    second: relic_41
+  - first:
+      213: -4622182179176767485
+    second: relic_42
+  - first:
+      213: 4211435201854535322
+    second: relic_43
+  - first:
+      213: -5059703981548594179
+    second: relic_44
+  - first:
+      213: 3251824945425095477
+    second: relic_45
+  - first:
+      213: -2465234348235090410
+    second: relic_46
+  - first:
+      213: 2207341742797384268
+    second: relic_47
+  - first:
+      213: 727291660124668602
+    second: relic_48
+  - first:
+      213: 2605643629340125763
+    second: relic_49
+  - first:
+      213: 7113219172053149763
+    second: relic_50
+  - first:
+      213: 6560576491079962117
+    second: relic_51
+  - first:
+      213: -3582344619562414436
+    second: relic_52
+  - first:
+      213: -4551792992238742200
+    second: relic_53
+  - first:
+      213: -2586522673920151455
+    second: relic_54
+  - first:
+      213: 3402057887045333845
+    second: relic_55
+  - first:
+      213: 636796370773448763
+    second: relic_56
+  - first:
+      213: 7308355621469706251
+    second: relic_57
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: relic_idle
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 729
+        width: 130
+        height: 230
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a73c3c570f3860641b49dcb1f96d3c0c
+      internalID: 1066986096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: relic_attack0
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 383
+        width: 148
+        height: 199
+      alignment: 9
+      pivot: {x: 0.500001, y: 0.49389833}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b4d1e1345ae189498e11d5163456c0e
+      internalID: 72124327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: relic_attack1
+      rect:
+        serializedVersion: 2
+        x: 847
+        y: 309
+        width: 93
+        height: 290
+      alignment: 9
+      pivot: {x: 0.5130602, y: 0.3408882}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3d7ed5d66a045949a5ffffb1e6bd8a3
+      internalID: 342472057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: relic_attack2
+      rect:
+        serializedVersion: 2
+        x: 995
+        y: 294
+        width: 114
+        height: 319
+      alignment: 9
+      pivot: {x: 0.4680497, y: 0.25257716}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e5bc8feacb0b5c418b1c61f04fa22e2
+      internalID: 1487642700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: relic_attack3
+      rect:
+        serializedVersion: 2
+        x: 1149
+        y: 274
+        width: 125
+        height: 339
+      alignment: 9
+      pivot: {x: 0.4902871, y: 0.009274373}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc73ef1a7e0770b43bc8a035694958f3
+      internalID: -2069782441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: relic_attack4
+      rect:
+        serializedVersion: 2
+        x: 1284
+        y: 268
+        width: 243
+        height: 346
+      alignment: 9
+      pivot: {x: 0.46002474, y: 0.022711959}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1c8d1a0656dcb242b5be3a681d0165d
+      internalID: -312375464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: relic_death0
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 37
+        width: 119
+        height: 216
+      alignment: 9
+      pivot: {x: 0.5102049, y: 0.50000006}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00d1580c4f8da6e40ac78b2a73391b09
+      internalID: 1655594435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: relic_death1
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 43
+        width: 147
+        height: 213
+      alignment: 9
+      pivot: {x: 0.51652145, y: 0.48859853}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0484591398989504792db165de467c42
+      internalID: 1699659607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: relic_death2
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 40
+        width: 200
+        height: 218
+      alignment: 9
+      pivot: {x: 0.5060721, y: 0.4442992}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcd2e49eccad18f46aafb19119a3f88a
+      internalID: -1782423012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 21a4f8cac8dcc194ea23e6eac99c4e89
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      relic_1: -987778954908266354
+      relic_10: -6600916141483217489
+      relic_11: -4463665945208525573
+      relic_12: -7293318616540491034
+      relic_13: 1028401235588545337
+      relic_14: 5328053256421126441
+      relic_15: 6496434482969400230
+      relic_16: 2953461803202490939
+      relic_17: 7380712917769426108
+      relic_18: -325469168818955997
+      relic_19: 5539213254891913894
+      relic_2: -6212235643859283658
+      relic_20: -1086681573223911952
+      relic_21: 3444446092469495777
+      relic_22: -3651662903412729013
+      relic_23: 3945000055465302981
+      relic_24: -391503720417377687
+      relic_25: -1600511659893630230
+      relic_26: 4110961741569132633
+      relic_27: -1033497858962757211
+      relic_28: 7421304890747543619
+      relic_29: -6863933332798152755
+      relic_3: -159790783814648765
+      relic_30: -3503183876156442367
+      relic_31: 659941544864573634
+      relic_32: 4633972711191654645
+      relic_33: 8715946878187910711
+      relic_34: 7636771212194687724
+      relic_35: -8615906326249230465
+      relic_36: -2724960218158020365
+      relic_37: 6973131728344873273
+      relic_38: -3200076034586310465
+      relic_39: -7685354687876417421
+      relic_4: 4777467072869672895
+      relic_40: -6322351368797863847
+      relic_41: -9110611199759249945
+      relic_42: -4622182179176767485
+      relic_43: 4211435201854535322
+      relic_44: -5059703981548594179
+      relic_45: 3251824945425095477
+      relic_46: -2465234348235090410
+      relic_47: 2207341742797384268
+      relic_48: 727291660124668602
+      relic_49: 2605643629340125763
+      relic_5: -2790922891067980258
+      relic_50: 7113219172053149763
+      relic_51: 6560576491079962117
+      relic_52: -3582344619562414436
+      relic_53: -4551792992238742200
+      relic_54: -2586522673920151455
+      relic_55: 3402057887045333845
+      relic_56: 636796370773448763
+      relic_57: 7308355621469706251
+      relic_6: 1198645642231191838
+      relic_7: 7366653519972397363
+      relic_8: 1748509245935523587
+      relic_9: -6422116160822532757
+      relic_attack0: 72124327
+      relic_attack1: 342472057
+      relic_attack2: 1487642700
+      relic_attack3: -2069782441
+      relic_attack4: -312375464
+      relic_death0: 1655594435
+      relic_death1: 1699659607
+      relic_death2: -1782423012
+      relic_idle: 3002740266577848037
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

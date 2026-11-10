@@ -35,6 +35,11 @@ public class PlayerHealth : MonoBehaviour
     private bool isDead = false;
     private bool isInvulnerable = false;
 
+    // Lets callers that deal damage and then do their own follow-up (e.g.
+    // RisingFlameSea's section reset) skip it when that hit was lethal and
+    // the death sequence is taking over.
+    public bool IsDead => isDead;
+
     // =========================
     // START
     // =========================
@@ -57,6 +62,17 @@ public class PlayerHealth : MonoBehaviour
     // real value immediately instead of a stale default until the next hit.
     public void RepublishHealth()
     {
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
+    }
+
+    // Restores the player to full health. Used by the power-bar heal
+    // ability. Ignored while dead, since reviving through a heal call
+    // would leave isDead/OnDied out of sync with currentHealth.
+    public void FullHeal()
+    {
+        if (isDead) return;
+
+        currentHealth = maxHealth;
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
     }
 

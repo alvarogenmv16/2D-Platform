@@ -1,0 +1,286 @@
+fileFormatVersion: 2
+guid: 8728fb0a0b6243f4bb6f3523c29785a0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6157790325119125119
+    second: companion2_0
+  - first:
+      213: 8522794203786156196
+    second: companion2_1
+  - first:
+      213: -6878675158424353862
+    second: companion2_2
+  - first:
+      213: -6320681538857532687
+    second: companion2_3
+  - first:
+      213: 2130105432746083243
+    second: companion2_4
+  - first:
+      213: -6591348649668641029
+    second: companion2_5
+  - first:
+      213: 9097760501732810412
+    second: companion2_6
+  - first:
+      213: -6012613591283999967
+    second: companion2_7
+  - first:
+      213: -7939303820748959015
+    second: companion2_8
+  - first:
+      213: 2238904221367559849
+    second: companion2_9
+  - first:
+      213: -1995379166713642848
+    second: companion2_10
+  - first:
+      213: -6036257000624723502
+    second: companion2_11
+  - first:
+      213: -3923828954361557358
+    second: companion2_12
+  - first:
+      213: -2376216387107224335
+    second: companion2_13
+  - first:
+      213: 7314436490629478470
+    second: companion2_14
+  - first:
+      213: -3781412045977256757
+    second: companion2_15
+  - first:
+      213: -8176591514376873753
+    second: companion2_16
+  - first:
+      213: -8161355887683263241
+    second: companion2_17
+  - first:
+      213: 2631273537485836726
+    second: companion2_18
+  - first:
+      213: -2494780213796143479
+    second: companion2_19
+  - first:
+      213: 5679104478825188838
+    second: companion2_20
+  - first:
+      213: -5064368618847450886
+    second: companion2_21
+  - first:
+      213: 3174315549788789433
+    second: companion2_22
+  - first:
+      213: 2934080651395815763
+    second: companion2_23
+  - first:
+      213: -5339424011973255557
+    second: companion2_24
+  - first:
+      213: -6275754657827735473
+    second: companion2_25
+  - first:
+      213: 8142044754874017090
+    second: companion2_26
+  - first:
+      213: 4375161758451736968
+    second: companion2_27
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: companion2_0
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 103
+        width: 544
+        height: 661
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f760012ecadd47550800000000000000
+      internalID: 6157790325119125119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: companion2_1
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 104
+        width: 577
+        height: 647
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b791bc56134e1314181b205194c478b1
+      internalID: 8522794203786156196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: eae001419641c7f419b329bf9c7da65f
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      companion2_0: 6157790325119125119
+      companion2_1: 8522794203786156196
+      companion2_10: -1995379166713642848
+      companion2_11: -6036257000624723502
+      companion2_12: -3923828954361557358
+      companion2_13: -2376216387107224335
+      companion2_14: 7314436490629478470
+      companion2_15: -3781412045977256757
+      companion2_16: -8176591514376873753
+      companion2_17: -8161355887683263241
+      companion2_18: 2631273537485836726
+      companion2_19: -2494780213796143479
+      companion2_2: -6878675158424353862
+      companion2_20: 5679104478825188838
+      companion2_21: -5064368618847450886
+      companion2_22: 3174315549788789433
+      companion2_23: 2934080651395815763
+      companion2_24: -5339424011973255557
+      companion2_25: -6275754657827735473
+      companion2_26: 8142044754874017090
+      companion2_27: 4375161758451736968
+      companion2_3: -6320681538857532687
+      companion2_4: 2130105432746083243
+      companion2_5: -6591348649668641029
+      companion2_6: 9097760501732810412
+      companion2_7: -6012613591283999967
+      companion2_8: -7939303820748959015
+      companion2_9: 2238904221367559849
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
