@@ -16760,6 +16760,10 @@ PrefabInstance:
       propertyPath: diagonalSpacing
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: fb56fcee404b4546ba19fa8a9e35b116, type: 3}
+      propertyPath: phase2HealthRatio
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
