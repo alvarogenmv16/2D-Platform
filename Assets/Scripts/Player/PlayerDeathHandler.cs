@@ -129,7 +129,85 @@ public class PlayerDeathHandler : MonoBehaviour
     }
     private void ResetGame()
     {
+        // A player that arrived from another scene lives in DontDestroyOnLoad
+        // and would survive the reload as a dead, invisible duplicate - still
+        // tagged "Player", so enemies could target it - while the scene's own
+        // fresh copy (without the jump/dash/damage upgrades) took over.
+        // Instead, keep this one: reload, then revive it in place of the copy.
+        if (gameObject.scene.name == "DontDestroyOnLoad")
+        {
+            StartCoroutine(ReloadAndRevive());
+            return;
+        }
+
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.buildIndex);
+    }
+
+    private IEnumerator ReloadAndRevive()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        yield return null; // let the new scene run Awake/Start first (same as SceneFader)
+
+        // Land where the scene's own player starts, exactly where a
+        // non-persistent player would have respawned.
+        foreach (GameObject taggedPlayer in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            if (taggedPlayer != gameObject)
+            {
+                transform.position = taggedPlayer.transform.position;
+                break;
+            }
+        }
+
+        SceneFader.AdoptPersistentPlayer(gameObject);
+        Revive();
+    }
+
+    private void Revive()
+    {
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+            rb.position = transform.position;
+            rb.simulated = true;
+        }
+
+        if (playerSpriteRenderer != null)
+        {
+            playerSpriteRenderer.enabled = true;
+        }
+
+        if (animator != null)
+        {
+            // Back to the default state with every parameter cleared
+            // (DieTrigger, IsHit...).
+            animator.Rebind();
+            animator.Update(0f);
+        }
+
+        playerHealth?.Revive();
+
+        if (TryGetComponent(out PlayerRespawnPoint respawnPoint))
+        {
+            respawnPoint.ResetSafePosition(transform.position);
+            respawnPoint.SetMovementEnabled(true);
+        }
+
+        if (playerMovement != null)
+        {
+            playerMovement.enabled = true;
+        }
+    }
+
+    // Called by SceneFader.AdoptPersistentPlayer with the scene's local
+    // player about to be destroyed: its references point at this scene's
+    // objects, the ones this survivor carried point at the old scene's.
+    public void AdoptSceneReferences(PlayerDeathHandler local)
+    {
+        if (local.fadeOverlay != null)
+        {
+            fadeOverlay = local.fadeOverlay;
+        }
     }
 }

@@ -71,30 +71,7 @@ public class SceneFader : MonoBehaviour
 
         if (player != null)
         {
-            // The destination scene may have its own Player instance placed
-            // by hand (so it can still be opened and playtested on its own).
-            // Now that a real player has survived the transition, that local
-            // one is just a duplicate sitting wherever the scene put it -
-            // remove it so only the surviving instance remains.
-            foreach (GameObject taggedPlayer in GameObject.FindGameObjectsWithTag("Player"))
-            {
-                if (taggedPlayer != player)
-                {
-                    Destroy(taggedPlayer);
-                }
-            }
-
-            // Point the level's camera at the surviving player - its Follow
-            // target was wired in the Inspector to the local Player instance
-            // just destroyed above, so left alone it would track nothing.
-            // Found by type rather than by name: every gameplay scene has
-            // exactly one, so no naming convention is needed.
-            CinemachineCamera cinemachineCamera = Object.FindFirstObjectByType<CinemachineCamera>();
-
-            if (cinemachineCamera != null)
-            {
-                cinemachineCamera.Follow = player.transform;
-            }
+            AdoptPersistentPlayer(player);
 
             if (!string.IsNullOrEmpty(entryPointId))
             {
@@ -114,29 +91,76 @@ public class SceneFader : MonoBehaviour
                     Debug.LogWarning($"SceneFader: no LevelEntryPoint with id '{entryPointId}' found in scene '{sceneName}'.");
                 }
             }
-
-            // Found by type instead of a fixed GameObject name - every
-            // gameplay scene just needs one PlayerHealthUI, no naming
-            // convention to remember (or get wrong) per scene.
-            PlayerHealthUI healthUI = Object.FindFirstObjectByType<PlayerHealthUI>();
-            PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
-
-            if (healthUI != null && playerHealth != null)
-            {
-                healthUI.Bind(playerHealth);
-            }
-
-            // Same rebind, for scenes that also carry a power bar.
-            PlayerPowerUI powerUI = Object.FindFirstObjectByType<PlayerPowerUI>();
-            PlayerPower playerPower = player.GetComponent<PlayerPower>();
-
-            if (powerUI != null && playerPower != null)
-            {
-                powerUI.Bind(playerPower);
-            }
         }
 
         yield return StartCoroutine(Fade(1f, 0f));
+    }
+
+    // Makes the surviving (DontDestroyOnLoad) player the scene's one and
+    // only player, right after a scene load. Shared by FadeToScene and by
+    // PlayerDeathHandler's reload-after-death, so both wire it up the same.
+    // Call it at least one frame after LoadScene, so the new scene's UI has
+    // already run its own Start (which would otherwise bind to the local
+    // placeholder player again).
+    public static void AdoptPersistentPlayer(GameObject player)
+    {
+        PlayerDeathHandler deathHandler = player.GetComponent<PlayerDeathHandler>();
+
+        // The destination scene may have its own Player instance placed
+        // by hand (so it can still be opened and playtested on its own).
+        // Now that a real player has survived the transition, that local
+        // one is just a duplicate sitting wherever the scene put it -
+        // remove it so only the surviving instance remains.
+        foreach (GameObject taggedPlayer in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            if (taggedPlayer != player)
+            {
+                // Its scene references (death fade overlay) belong to this
+                // scene - hand them over before it goes.
+                if (deathHandler != null && taggedPlayer.TryGetComponent(out PlayerDeathHandler localHandler))
+                {
+                    deathHandler.AdoptSceneReferences(localHandler);
+                }
+
+                // Destroy is deferred to the end of the frame; untag it now
+                // so nothing calling FindGameObjectWithTag this same frame
+                // can still pick the duplicate.
+                taggedPlayer.tag = "Untagged";
+                Destroy(taggedPlayer);
+            }
+        }
+
+        // Point the level's camera at the surviving player - its Follow
+        // target was wired in the Inspector to the local Player instance
+        // just destroyed above, so left alone it would track nothing.
+        // Found by type rather than by name: every gameplay scene has
+        // exactly one, so no naming convention is needed.
+        CinemachineCamera cinemachineCamera = Object.FindFirstObjectByType<CinemachineCamera>();
+
+        if (cinemachineCamera != null)
+        {
+            cinemachineCamera.Follow = player.transform;
+        }
+
+        // Found by type instead of a fixed GameObject name - every
+        // gameplay scene just needs one PlayerHealthUI, no naming
+        // convention to remember (or get wrong) per scene.
+        PlayerHealthUI healthUI = Object.FindFirstObjectByType<PlayerHealthUI>();
+        PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
+
+        if (healthUI != null && playerHealth != null)
+        {
+            healthUI.Bind(playerHealth);
+        }
+
+        // Same rebind, for scenes that also carry a power bar.
+        PlayerPowerUI powerUI = Object.FindFirstObjectByType<PlayerPowerUI>();
+        PlayerPower playerPower = player.GetComponent<PlayerPower>();
+
+        if (powerUI != null && playerPower != null)
+        {
+            powerUI.Bind(playerPower);
+        }
     }
 
     private static LevelEntryPoint FindEntryPoint(string id)
