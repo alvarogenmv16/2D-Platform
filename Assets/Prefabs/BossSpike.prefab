@@ -140,6 +140,8 @@ MonoBehaviour:
   hitBoxSize: {x: 1, y: 2}
   hitBoxOffset: {x: 0, y: 1}
   useSpriteShape: 1
+  shapeWidthScale: 0.7
+  shapeHeightScale: 0.9
   sfxPlayer: {fileID: 2942552418814848521}
   startSound: {fileID: 8300000, guid: 8b3f9cb62818c3e43b1b3d3709425e17, type: 3}
   emergeSound: {fileID: 8300000, guid: 5d7a2300c64d8694e88786da67a2654a, type: 3}

@@ -211,6 +211,7 @@ public class WardenEscape : MonoBehaviour
 
         // Collected souls (and their total) belong to this run only.
         SoulScore.ResetAll();
+        GameProgress.ResetAll();
     }
 
     private CinemachineImpulseSource CreateShakeSource()
