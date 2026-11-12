@@ -44,6 +44,12 @@ public class EyeArenaController : MonoBehaviour
     [SerializeField] private bool playIntro = true;
     [SerializeField] private TitleCard.Settings intro = new TitleCard.Settings();
 
+    [Header("After the victory")]
+    // Remembered in GameProgress for the rest of the run (see BossArenaController).
+    [SerializeField] private string defeatedFlag = "Boss2Defeated";
+    // Inactive in the scene until the Eye is dead (e.g. the portal to Level3).
+    [SerializeField] private GameObject[] enableOnVictory;
+
     private Collider2D triggerCollider;
     private bool hasActivated = false;
 
@@ -64,10 +70,30 @@ public class EyeArenaController : MonoBehaviour
     // =========================
     // START
     // =========================
+    private void Awake()
+    {
+        // Reloaded after the Eye is already dead (e.g. dying before taking
+        // the portal): no Eye, no fight, the portal already open.
+        if (!GameProgress.Has(defeatedFlag)) return;
+
+        hasActivated = true;
+        if (eye != null) eye.gameObject.SetActive(false);
+        SetVictoryObjectsActive(true);
+    }
+
     private void Start()
     {
         triggerCollider = GetComponent<Collider2D>();
         triggerCollider.isTrigger = true;
+        if (hasActivated)
+        {
+            triggerCollider.enabled = false;
+
+            // The floor only breaks during the fight: open it again so the
+            // room below (and its portal) can still be reached.
+            EyeFloorCrumble floor = FindFirstObjectByType<EyeFloorCrumble>();
+            if (floor != null) floor.SetCrumbled();
+        }
 
         SetWallsActive(false);
     }
@@ -175,6 +201,8 @@ public class EyeArenaController : MonoBehaviour
 
     private void HandleEyeDied()
     {
+        GameProgress.Set(defeatedFlag);
+        SetVictoryObjectsActive(true);
         SetWallsActive(false);
 
         if (musicSource != null)
@@ -182,6 +210,16 @@ public class EyeArenaController : MonoBehaviour
             musicSource.loop = false;
             musicSource.clip = victoryMusic;
             musicSource.Play();
+        }
+    }
+
+    private void SetVictoryObjectsActive(bool active)
+    {
+        if (enableOnVictory == null) return;
+
+        foreach (GameObject go in enableOnVictory)
+        {
+            if (go != null) go.SetActive(active);
         }
     }
 
