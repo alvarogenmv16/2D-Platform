@@ -1,40 +1,22 @@
 fileFormatVersion: 2
-guid: 455befddf07c4744e9da8336edba5696
+guid: 87178af21159b0f4b8a61932ab4cfeef
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2313838572340273266
-    second: BossHealthBar_0
+      213: 5420669759281735582
+    second: boss_health_0
   - first:
-      213: 2557461980713412998
-    second: BossHealthBar_1
+      213: 6258774256692519306
+    second: boss_health_1
   - first:
-      213: -792899567622094532
-    second: BossHealthBar_2
+      213: 2721238918675114167
+    second: boss_health_2
   - first:
-      213: -2002048896002541865
-    second: BossHealthBar_3
+      213: 3799368517833177738
+    second: boss_health_3
   - first:
-      213: -7041644852017489511
-    second: BossHealthBar_4
-  - first:
-      213: -5116562397168951921
-    second: BossHealthBar_5
-  - first:
-      213: 8905429889941353751
-    second: BossHealthBar_6
-  - first:
-      213: -2421752935297088918
-    second: BossHealthBar_7
-  - first:
-      213: 949760446220722462
-    second: BossHealthBar_8
-  - first:
-      213: -4486680618672748921
-    second: BossHealthBar_9
-  - first:
-      213: -7475202423732886454
-    second: BossHealthBar_10
+      213: 1978287479419692403
+    second: boss_health_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -143,13 +125,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BossHealthBar_0
+      name: boss_health_0
       rect:
         serializedVersion: 2
-        x: 10
-        y: 72
-        width: 2152
-        height: 634
+        x: 2
+        y: 34
+        width: 2170
+        height: 684
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e8f9f04e31893efd0800000000000000
-      internalID: -2313838572340273266
+      spriteID: e97a0b61d661a3b40800000000000000
+      internalID: 5420669759281735582
       vertices: []
       indices: 
       edges: []
@@ -168,7 +150,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: e43c0d03819c97140ab72f74cf2a2a67
+    spriteID: 46e26f4431c683c4495376459999e3b3
     internalID: 0
     vertices: []
     indices: 
@@ -178,17 +160,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BossHealthBar_0: -2313838572340273266
-      BossHealthBar_1: 2557461980713412998
-      BossHealthBar_10: -7475202423732886454
-      BossHealthBar_2: -792899567622094532
-      BossHealthBar_3: -2002048896002541865
-      BossHealthBar_4: -7041644852017489511
-      BossHealthBar_5: -5116562397168951921
-      BossHealthBar_6: 8905429889941353751
-      BossHealthBar_7: -2421752935297088918
-      BossHealthBar_8: 949760446220722462
-      BossHealthBar_9: -4486680618672748921
+      boss_health_0: 5420669759281735582
+      boss_health_1: 6258774256692519306
+      boss_health_2: 2721238918675114167
+      boss_health_3: 3799368517833177738
+      boss_health_4: 1978287479419692403
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

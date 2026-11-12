@@ -142,24 +142,31 @@ public class SceneFader : MonoBehaviour
             cinemachineCamera.Follow = player.transform;
         }
 
-        // Found by type instead of a fixed GameObject name - every
-        // gameplay scene just needs one PlayerHealthUI, no naming
-        // convention to remember (or get wrong) per scene.
-        PlayerHealthUI healthUI = Object.FindFirstObjectByType<PlayerHealthUI>();
+        // Found by type instead of a fixed GameObject name, so no naming
+        // convention to remember (or get wrong) per scene. Every one in the
+        // scene is rebound, not just the first found: binding only one
+        // could pick a stray, empty PlayerHealthUI and leave the real mask
+        // bar stuck showing the destroyed placeholder player's full health
+        // instead of the surviving player's actual health.
         PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
 
-        if (healthUI != null && playerHealth != null)
+        if (playerHealth != null)
         {
-            healthUI.Bind(playerHealth);
+            foreach (PlayerHealthUI healthUI in Object.FindObjectsByType<PlayerHealthUI>(FindObjectsSortMode.None))
+            {
+                healthUI.Bind(playerHealth);
+            }
         }
 
         // Same rebind, for scenes that also carry a power bar.
-        PlayerPowerUI powerUI = Object.FindFirstObjectByType<PlayerPowerUI>();
         PlayerPower playerPower = player.GetComponent<PlayerPower>();
 
-        if (powerUI != null && playerPower != null)
+        if (playerPower != null)
         {
-            powerUI.Bind(playerPower);
+            foreach (PlayerPowerUI powerUI in Object.FindObjectsByType<PlayerPowerUI>(FindObjectsSortMode.None))
+            {
+                powerUI.Bind(playerPower);
+            }
         }
     }
 

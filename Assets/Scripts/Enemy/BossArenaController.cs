@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 // Owns the boss fight's entry trigger, arena bounds, and the wall/health-bar
@@ -25,6 +26,11 @@ public class BossArenaController : MonoBehaviour
     [SerializeField] private AudioSource musicSource; // one source, clip swapped per phase
     [SerializeField] private AudioClip battleMusic;
     [SerializeField] private AudioClip victoryMusic;
+
+    [Header("Intro (title card, same as the Warden's)")]
+    // Off, or with no title sprite: the fight starts right away on entry.
+    [SerializeField] private bool playIntro = true;
+    [SerializeField] private TitleCard.Settings intro = new TitleCard.Settings();
 
     private Collider2D triggerCollider;
     private bool hasActivated = false;
@@ -76,19 +82,60 @@ public class BossArenaController : MonoBehaviour
 
         hasActivated = true;
 
-        if (boss != null) boss.Activate();
-        if (bossHealthUI != null) bossHealthUI.Show();
+        // One-shot: never fire again once the fight has started.
+        triggerCollider.enabled = false;
+
+        // Walls close right away, so the player can't walk back out
+        // while the intro plays.
         SetWallsActive(true);
 
+        if (playIntro && intro.titleSprite != null)
+        {
+            StartCoroutine(IntroSequence(other.gameObject));
+        }
+        else
+        {
+            PlayBattleMusic();
+            StartFight();
+        }
+    }
+
+    // Same beats as the Warden's intro: player frozen, fade to black, the
+    // boss' title over the black while its music starts, back to the scene
+    // with the health bar up, then the fight starts.
+    private IEnumerator IntroSequence(GameObject player)
+    {
+        PlayerMovement movement = player.GetComponent<PlayerMovement>();
+        Rigidbody2D playerRb = player.GetComponent<Rigidbody2D>();
+
+        if (movement != null) movement.enabled = false;
+        if (playerRb != null) playerRb.linearVelocity = new Vector2(0f, playerRb.linearVelocity.y);
+
+        yield return TitleCard.Play(intro, () =>
+        {
+            PlayBattleMusic();
+            if (bossHealthUI != null) bossHealthUI.Show();
+        });
+
+        if (movement != null) movement.enabled = true;
+
+        StartFight();
+    }
+
+    private void StartFight()
+    {
+        if (boss != null) boss.Activate();
+        if (bossHealthUI != null) bossHealthUI.Show();
+    }
+
+    private void PlayBattleMusic()
+    {
         if (musicSource != null && battleMusic != null)
         {
             musicSource.clip = battleMusic;
             musicSource.loop = true;
             musicSource.Play();
         }
-
-        // One-shot: never fire again once the fight has started.
-        triggerCollider.enabled = false;
     }
 
     private void HandleBossDied()
