@@ -53,6 +53,8 @@ public class PlayerAttackHitbox : MonoBehaviour
     // Permanently raises the player's attack damage - called by pickups
     // like DamageUpgradePickup. Not clamped: whoever grants the upgrade is
     // responsible for only doing it once.
+    public float Damage => damage;
+
     public void IncreaseDamage(float amount)
     {
         damage += amount;

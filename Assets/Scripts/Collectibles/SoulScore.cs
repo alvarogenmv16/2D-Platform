@@ -38,6 +38,22 @@ public static class SoulScore
         OnChanged?.Invoke(Total);
     }
 
+    // For SaveSystem.
+    public static string[] ExportCollected()
+    {
+        string[] all = new string[collected.Count];
+        collected.CopyTo(all);
+        return all;
+    }
+
+    public static void Import(int total, string[] collectedIds)
+    {
+        collected.Clear();
+        if (collectedIds != null) collected.UnionWith(collectedIds);
+        Total = total;
+        OnChanged?.Invoke(Total);
+    }
+
     // Statics keep their values between Play sessions in the Editor when
     // Domain Reload is disabled - start every Play session from zero.
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]

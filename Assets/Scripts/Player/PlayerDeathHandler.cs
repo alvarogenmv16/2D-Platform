@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -129,39 +130,58 @@ public class PlayerDeathHandler : MonoBehaviour
     }
     private void ResetGame()
     {
-        // A player that arrived from another scene lives in DontDestroyOnLoad
-        // and would survive the reload as a dead, invisible duplicate - still
-        // tagged "Player", so enemies could target it - while the scene's own
-        // fresh copy (without the jump/dash/damage upgrades) took over.
-        // Instead, keep this one: reload, then revive it in place of the copy.
-        if (gameObject.scene.name == "DontDestroyOnLoad")
+        // This same player always comes back - never the scene's own fresh
+        // copy, which wouldn't have the damage/jump/dash upgrades. So it's
+        // kept alive through the load (DontDestroyOnLoad, like SceneFader
+        // does for scene changes) and revived in place of that copy.
+        transform.SetParent(null); // DontDestroyOnLoad only works on root objects
+        DontDestroyOnLoad(gameObject);
+
+        // Back to the last save point of this run (it may be in another
+        // scene); before the first save, to the start of this scene.
+        string sceneToLoad = SceneManager.GetActiveScene().name;
+        string savePointId = null;
+        if (SaveSystem.TryGetRespawnPoint(out string savedScene, out string savedId))
         {
-            StartCoroutine(ReloadAndRevive());
-            return;
+            sceneToLoad = savedScene;
+            savePointId = savedId;
         }
 
-        Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.buildIndex);
+        StartCoroutine(ReloadAndRevive(sceneToLoad, savePointId));
     }
 
-    private IEnumerator ReloadAndRevive()
+    private IEnumerator ReloadAndRevive(string sceneName, string savePointId)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(sceneName);
         yield return null; // let the new scene run Awake/Start first (same as SceneFader)
 
-        // Land where the scene's own player starts, exactly where a
-        // non-persistent player would have respawned.
-        foreach (GameObject taggedPlayer in GameObject.FindGameObjectsWithTag("Player"))
+        Vector3 from = transform.position;
+
+        SavePoint savePoint = string.IsNullOrEmpty(savePointId) ? null : SavePoint.Find(savePointId);
+        if (savePoint != null)
         {
-            if (taggedPlayer != gameObject)
+            transform.position = savePoint.SpawnPosition;
+        }
+        else
+        {
+            // No save yet (or it's missing): land where the scene's own
+            // player starts.
+            foreach (GameObject taggedPlayer in GameObject.FindGameObjectsWithTag("Player"))
             {
-                transform.position = taggedPlayer.transform.position;
-                break;
+                if (taggedPlayer != gameObject)
+                {
+                    transform.position = taggedPlayer.transform.position;
+                    break;
+                }
             }
         }
 
         SceneFader.AdoptPersistentPlayer(gameObject);
         Revive();
+
+        // Snap the camera to the respawn spot instead of panning there.
+        CinemachineCamera cam = FindFirstObjectByType<CinemachineCamera>();
+        if (cam != null) cam.OnTargetObjectWarped(transform, transform.position - from);
     }
 
     private void Revive()

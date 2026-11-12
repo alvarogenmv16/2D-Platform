@@ -26,6 +26,20 @@ public static class GameProgress
         flags.Clear();
     }
 
+    // For SaveSystem.
+    public static string[] Export()
+    {
+        string[] all = new string[flags.Count];
+        flags.CopyTo(all);
+        return all;
+    }
+
+    public static void Import(string[] saved)
+    {
+        flags.Clear();
+        if (saved != null) flags.UnionWith(saved);
+    }
+
     // Statics keep their values between Play sessions in the Editor when
     // Domain Reload is disabled - start every Play session clean.
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]

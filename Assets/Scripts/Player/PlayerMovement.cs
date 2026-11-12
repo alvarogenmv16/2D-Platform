@@ -146,10 +146,15 @@ public class PlayerMovement : MonoBehaviour
     // survives scene loads, so replaying the scene mustn't stack it.
     public bool HasJumpUpgrade { get; private set; }
 
+    // Kept so SaveSystem can re-apply exactly the same upgrades on Continue.
+    public float JumpUpgradeMultiplier { get; private set; } = 1f;
+    public float DashUpgradeMultiplier { get; private set; } = 1f;
+
     public void UpgradeJump(float forceMultiplier)
     {
         if (HasJumpUpgrade) return;
         HasJumpUpgrade = true;
+        JumpUpgradeMultiplier = forceMultiplier;
 
         for (int i = 0; i < jumpForces.Length; i++)
         {
@@ -166,6 +171,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (HasDashUpgrade) return;
         HasDashUpgrade = true;
+        DashUpgradeMultiplier = durationMultiplier;
 
         dashDuration *= durationMultiplier;
     }
