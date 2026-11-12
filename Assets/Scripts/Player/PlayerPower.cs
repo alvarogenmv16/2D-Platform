@@ -11,10 +11,11 @@ public class PlayerPower : MonoBehaviour
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private Animator animator;
 
-    // How many landed hits it takes to fill the bar from empty to full.
-    // Each confirmed hit adds 1 unit of power, and maxPower is derived
-    // from this so the bar always fills after exactly this many hits.
-    [SerializeField] private int hitsToFillBar = 6;
+    // How many landed hits it takes to fill the bar from empty to full
+    // with the starting damage. Each hit adds a bit more power per damage
+    // upgrade (see PlayerAttackHitbox.powerPerExtraDamage), so upgrades
+    // fill the bar faster.
+    [SerializeField] private int hitsToFillBar = 7;
 
     private float maxPower;
     private float currentPower;
@@ -65,7 +66,8 @@ public class PlayerPower : MonoBehaviour
     }
 
     // Adds power, clamped to maxPower. Called once per enemy hit that
-    // actually connects, from PlayerAttackHitbox.
+    // actually connects, from PlayerAttackHitbox (amount = damage relative
+    // to the starting damage).
     public void AddPower(float amount)
     {
         currentPower = Mathf.Clamp(currentPower + amount, 0f, maxPower);
