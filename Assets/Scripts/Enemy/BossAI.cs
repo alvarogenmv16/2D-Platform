@@ -96,7 +96,9 @@ public class BossAI : MonoBehaviour
     // =========================
     private void FixedUpdate()
     {
-        if (player == null) return;
+        // Re-found if lost: the player that survives a scene change
+        // replaces (and destroys) the one this scene started with.
+        if (!PlayerLocator.Refresh(ref player)) return;
 
         switch (currentState)
         {
