@@ -658,8 +658,30 @@ public class BeastAI : MonoBehaviour
     // Floor right under the shadow: cast down from the player's height
     // (solid colliders only), so it sits on whatever the player stands
     // above. Keeps the last floor found if there's none (e.g. over a pit).
+    //
+    // Cast with the body's full width, not a single ray from its centre:
+    // the Beast is ~10 units wide, and landing on the floor height found
+    // only under its middle sank the rest of the body into any higher bit
+    // of floor (a step, a slope) - it then jittered stuck in the ground
+    // and could slip down through it. The box finds the highest floor
+    // under the whole body, so it always lands on top.
     private void UpdateShadowGround()
     {
+        if (col is BoxCollider2D box)
+        {
+            Vector2 scale = transform.lossyScale;
+            float width = box.size.x * Mathf.Abs(scale.x);
+            float centreX = shadowX + box.offset.x * scale.x;
+            Vector2 boxOrigin = new Vector2(centreX, player.position.y + 0.5f);
+
+            if (Physics2D.BoxCast(boxOrigin, new Vector2(width, 0.05f), 0f, Vector2.down, solidGroundFilter, rayHits, 30f) > 0
+                && rayHits[0].distance > 0f) // 0 = started inside something (a wall): use the ray below
+            {
+                shadowGroundY = rayHits[0].point.y;
+                return;
+            }
+        }
+
         Vector2 origin = new Vector2(shadowX, player.position.y + 0.5f);
         if (Physics2D.Raycast(origin, Vector2.down, solidGroundFilter, rayHits, 30f) > 0)
         {
