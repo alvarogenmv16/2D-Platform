@@ -8,7 +8,7 @@ public class EnemyHealth : MonoBehaviour
     // VARIABLES
     // =========================
 
-    [SerializeField] private float maxHealth = 30f;
+    [SerializeField] private float maxHealth = 40f;
     [SerializeField] private Animator animator;
     [SerializeField] private MonoBehaviour[] aiComponentsToDisable;
 

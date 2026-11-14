@@ -17,6 +17,9 @@ public class EyePhase2FloorTrigger : MonoBehaviour
 
     private bool hasTriggered = false;
 
+    // Lets EyeAI check after the fact too, not only through the event.
+    public bool HasTriggered => hasTriggered;
+
     // =========================
     // START
     // =========================
