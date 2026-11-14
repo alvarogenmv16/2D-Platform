@@ -142,6 +142,14 @@ public static class SaveSystem
         SceneManager.LoadScene(firstScene);
     }
 
+    // Pause menu "Quit to Menu": drops the run in progress (the save file
+    // is untouched - Continue picks it up again from the last save).
+    public static void QuitToMenu(string menuScene)
+    {
+        ResetRun();
+        SceneManager.LoadScene(menuScene);
+    }
+
     // Returns false (and does nothing) if there's no readable save.
     public static bool Continue()
     {
