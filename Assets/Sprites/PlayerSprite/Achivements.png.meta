@@ -1,0 +1,676 @@
+fileFormatVersion: 2
+guid: f90e0f61f60a9d04d8a1163ec539f5ba
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 402389772465282151
+    second: Achievement_HeyListen
+  - first:
+      213: 4594644724837090386
+    second: Achievement_YouDied
+  - first:
+      213: 264476212967869470
+    second: Achievement_TheCakeIsALie
+  - first:
+      213: -7622082159286685610
+    second: Achievement_HereWeGoAgain
+  - first:
+      213: -3256715685237006177
+    second: Achievement_GottaGoFast
+  - first:
+      213: -2689834157352018978
+    second: Achievement_PraiseTheSun
+  - first:
+      213: 8327764994112016259
+    second: Achievement_NoRussian
+  - first:
+      213: -884426417288524850
+    second: Achievement_DangerousToGoAlone
+  - first:
+      213: -6724968372837348372
+    second: Achievement_AreYouNotEntertained
+  - first:
+      213: 294014996121747225
+    second: Achievement_MyPrecious
+  - first:
+      213: -3140751322332521538
+    second: Achievement_TheForceIsStrong
+  - first:
+      213: -3634535203245955149
+    second: Achievement_YouShallNotPass
+  - first:
+      213: -6272078433281259404
+    second: Achievement_FinishHim
+  - first:
+      213: 2034142747741531486
+    second: Achievement_Perfect
+  - first:
+      213: 6140189055602721932
+    second: Achievement_NextLevel
+  - first:
+      213: -5407712738000408330
+    second: Achievement_GottaCatchEmAll
+  - first:
+      213: 432400220590406726
+    second: Achievement_ThankYouForPlaying
+  - first:
+      213: -5802500414599803795
+    second: Achievement_WildEnemyAppeared
+  - first:
+      213: -3161601458095514294
+    second: Achievement_MammaMia
+  - first:
+      213: 584607821601049509
+    second: Achievement_Over9000
+  - first:
+      213: -7392338933464028169
+    second: Achievement_BackInTheFight
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Achievement_HeyListen
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 679
+        width: 206
+        height: 239
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94db9d4a5b2dc7443cf633e24e1e8fd0
+      internalID: 402389772465282151
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Achievement_YouDied
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 679
+        width: 202
+        height: 239
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f184ad871f65ba3e4c21261968d090c5
+      internalID: 4594644724837090386
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Achievement_TheCakeIsALie
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 679
+        width: 198
+        height: 239
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fd72e40472b0c6b71fdc00c45933897
+      internalID: 264476212967869470
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Achievement_HereWeGoAgain
+      rect:
+        serializedVersion: 2
+        x: 674
+        y: 679
+        width: 195
+        height: 239
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52e397dc538028d8197903b5c73627d1
+      internalID: -7622082159286685610
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Achievement_GottaGoFast
+      rect:
+        serializedVersion: 2
+        x: 886
+        y: 679
+        width: 201
+        height: 239
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0eff7ca05746a06f683d935cc895ccd0
+      internalID: -3256715685237006177
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Achievement_PraiseTheSun
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 679
+        width: 198
+        height: 239
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78523f1de03b699838a4ecd40e566a2e
+      internalID: -2689834157352018978
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Achievement_NoRussian
+      rect:
+        serializedVersion: 2
+        x: 1319
+        y: 679
+        width: 199
+        height: 239
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 776cdfc88f272f3cb19ead92bf05e9ed
+      internalID: 8327764994112016259
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Achievement_DangerousToGoAlone
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 397
+        width: 206
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef7948f85f176417179a0fd19999a162
+      internalID: -884426417288524850
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Achievement_AreYouNotEntertained
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 397
+        width: 201
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ce192a236d34213c5187801aa95db07
+      internalID: -6724968372837348372
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Achievement_MyPrecious
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 397
+        width: 198
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d18dd069341e3f8f9bd5712cf9b981f
+      internalID: 294014996121747225
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Achievement_TheForceIsStrong
+      rect:
+        serializedVersion: 2
+        x: 675
+        y: 397
+        width: 194
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df5238326f5c7bdc462d063d6bf4236b
+      internalID: -3140751322332521538
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Achievement_YouShallNotPass
+      rect:
+        serializedVersion: 2
+        x: 886
+        y: 397
+        width: 201
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ccc8f702c25c2a1e27a91e1131dd01f
+      internalID: -3634535203245955149
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Achievement_FinishHim
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 397
+        width: 198
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de7f676b6ffdc7a17dac2915c062f975
+      internalID: -6272078433281259404
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Achievement_Perfect
+      rect:
+        serializedVersion: 2
+        x: 1319
+        y: 397
+        width: 199
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86fb3ee95e960aac7a2aec8f40c635be
+      internalID: 2034142747741531486
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Achievement_NextLevel
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 121
+        width: 206
+        height: 252
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c279f683d9739695fb50250b95ace005
+      internalID: 6140189055602721932
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Achievement_GottaCatchEmAll
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 121
+        width: 202
+        height: 251
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60035f15bc61a0c270d1dc76eb14bb0c
+      internalID: -5407712738000408330
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Achievement_ThankYouForPlaying
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 121
+        width: 198
+        height: 252
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51496c1a8acc7799abbe9c8e99d7fc38
+      internalID: 432400220590406726
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Achievement_WildEnemyAppeared
+      rect:
+        serializedVersion: 2
+        x: 675
+        y: 121
+        width: 194
+        height: 252
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a997bf8c469470aa1827692b8052fc7
+      internalID: -5802500414599803795
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Achievement_MammaMia
+      rect:
+        serializedVersion: 2
+        x: 886
+        y: 121
+        width: 201
+        height: 251
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 135baea02f9936f22506af750603bc81
+      internalID: -3161601458095514294
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Achievement_Over9000
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 121
+        width: 198
+        height: 252
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0b49fba92751bd4563c849fa777710f
+      internalID: 584607821601049509
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Achievement_BackInTheFight
+      rect:
+        serializedVersion: 2
+        x: 1319
+        y: 121
+        width: 199
+        height: 251
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a9798351a92e8a17e582ab3b66c4036
+      internalID: -7392338933464028169
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Achievement_HeyListen: 402389772465282151
+      Achievement_YouDied: 4594644724837090386
+      Achievement_TheCakeIsALie: 264476212967869470
+      Achievement_HereWeGoAgain: -7622082159286685610
+      Achievement_GottaGoFast: -3256715685237006177
+      Achievement_PraiseTheSun: -2689834157352018978
+      Achievement_NoRussian: 8327764994112016259
+      Achievement_DangerousToGoAlone: -884426417288524850
+      Achievement_AreYouNotEntertained: -6724968372837348372
+      Achievement_MyPrecious: 294014996121747225
+      Achievement_TheForceIsStrong: -3140751322332521538
+      Achievement_YouShallNotPass: -3634535203245955149
+      Achievement_FinishHim: -6272078433281259404
+      Achievement_Perfect: 2034142747741531486
+      Achievement_NextLevel: 6140189055602721932
+      Achievement_GottaCatchEmAll: -5407712738000408330
+      Achievement_ThankYouForPlaying: 432400220590406726
+      Achievement_WildEnemyAppeared: -5802500414599803795
+      Achievement_MammaMia: -3161601458095514294
+      Achievement_Over9000: 584607821601049509
+      Achievement_BackInTheFight: -7392338933464028169
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

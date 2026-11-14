@@ -40,14 +40,17 @@ public static class Achievements
         OnUnlocked = null;
     }
 
-    public static AchievementDatabase.Entry[] All
+    public static AchievementDatabase Database
     {
         get
         {
             if (database == null) database = Resources.Load<AchievementDatabase>("Achievements");
-            return database != null && database.achievements != null ? database.achievements : new AchievementDatabase.Entry[0];
+            return database;
         }
     }
+
+    public static AchievementDatabase.Entry[] All =>
+        Database != null && Database.achievements != null ? Database.achievements : new AchievementDatabase.Entry[0];
 
     public static int Total => All.Length;
 
