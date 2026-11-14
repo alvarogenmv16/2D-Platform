@@ -157,10 +157,9 @@ public class PlayerDeathHandler : MonoBehaviour
 
         Vector3 from = transform.position;
 
-        SavePoint savePoint = string.IsNullOrEmpty(savePointId) ? null : SavePoint.Find(savePointId);
-        if (savePoint != null)
+        if (!string.IsNullOrEmpty(savePointId) && SaveSystem.TryGetRespawnPosition(savePointId, out Vector3 spawn))
         {
-            transform.position = savePoint.SpawnPosition;
+            transform.position = spawn;
         }
         else
         {

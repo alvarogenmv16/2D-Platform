@@ -65,6 +65,19 @@ public class SavePoint : MonoBehaviour
     {
         GetComponent<BoxCollider2D>().isTrigger = true;
 
+        // Two lamps with the same id in one scene would make Continue and
+        // respawning pick either of them.
+        // Only the lamps listed before this one are checked, so each clash
+        // is reported once (by the later lamp of the pair).
+        foreach (SavePoint other in FindObjectsByType<SavePoint>(FindObjectsSortMode.None))
+        {
+            if (other == this) break;
+            if (other.savePointId == savePointId)
+            {
+                Debug.LogError($"SavePoint: '{name}' and '{other.name}' share the id '{savePointId}' - give each lamp in the scene its own Save Point Id.", this);
+            }
+        }
+
         Transform glowAt = lantern != null ? lantern : transform;
         glow = glowAt.gameObject.AddComponent<Light2D>();
         glow.lightType = Light2D.LightType.Point;
@@ -133,7 +146,7 @@ public class SavePoint : MonoBehaviour
             health.FullHeal();
         }
 
-        SaveSystem.Save(savePointId, player);
+        SaveSystem.Save(savePointId, SpawnPosition, player);
 
         glowBoost = savedIntensity - idleIntensity;
         if (saveSound != null && TryGetComponent(out AudioSource source)) source.PlayOneShot(saveSound, saveVolume);

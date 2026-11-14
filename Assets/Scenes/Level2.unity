@@ -159,6 +159,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 523025824866663958, guid: 9a7ccb5448a144e6850dde666a303db1, type: 3}
+      propertyPath: savePointId
+      value: Level2_SavePoint2_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 523025824866663958, guid: 9a7ccb5448a144e6850dde666a303db1, type: 3}
       propertyPath: saveSound
       value: 
       objectReference: {fileID: 8300000, guid: a12dbe702b7181642a27de311865d11c, type: 3}
@@ -24614,6 +24618,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 523025824866663958, guid: 9a7ccb5448a144e6850dde666a303db1, type: 3}
+      propertyPath: savePointId
+      value: Level2_SavePoint2_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 523025824866663958, guid: 9a7ccb5448a144e6850dde666a303db1, type: 3}
       propertyPath: saveSound
       value: 
       objectReference: {fileID: 8300000, guid: a12dbe702b7181642a27de311865d11c, type: 3}
@@ -28752,6 +28760,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 523025824866663958, guid: 9a7ccb5448a144e6850dde666a303db1, type: 3}
+      propertyPath: savePointId
+      value: Level2_SavePoint2
+      objectReference: {fileID: 0}
     - target: {fileID: 523025824866663958, guid: 9a7ccb5448a144e6850dde666a303db1, type: 3}
       propertyPath: saveSound
       value: 
