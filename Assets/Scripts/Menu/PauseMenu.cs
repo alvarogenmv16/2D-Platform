@@ -39,6 +39,14 @@ public class PauseMenu : MonoBehaviour
 
     private static PauseMenu instance;
 
+    // No domain reload when entering Play Mode in this project: start clean.
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStatics()
+    {
+        instance = null;
+        IsPaused = false;
+    }
+
     private InputAction pauseAction;
     private GameObject root;
     private Button continueButton;

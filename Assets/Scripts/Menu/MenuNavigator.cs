@@ -32,6 +32,15 @@ public class MenuNavigator : MonoBehaviour
     [SerializeField, Range(0f, 0.2f)] private float silenceThreshold = 0.02f;
     private static readonly Dictionary<AudioClip, AudioClip> trimmedClips = new Dictionary<AudioClip, AudioClip>();
 
+    // Statics survive between Play sessions here (no domain reload), so the
+    // runtime-made clips of the previous session are forgotten on start.
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStatics()
+    {
+        trimmedClips.Clear();
+        generatedTick = null;
+    }
+
     // Used by PauseMenu, which builds its buttons in code.
     public void Setup(Selectable[] first, AudioClip sound, float volume)
     {
@@ -148,7 +157,10 @@ public class MenuNavigator : MonoBehaviour
     private static AudioClip TrimLeadingSilence(AudioClip clip, float threshold)
     {
         if (clip == null) return null;
-        if (trimmedClips.TryGetValue(clip, out AudioClip cached)) return cached;
+        // A cached copy may have been destroyed: this project enters Play
+        // Mode without a domain reload, so statics outlive the session while
+        // clips created at runtime don't.
+        if (trimmedClips.TryGetValue(clip, out AudioClip cached) && cached != null) return cached;
 
         AudioClip result = clip;
         if (clip.loadState != AudioDataLoadState.Loaded) clip.LoadAudioData();

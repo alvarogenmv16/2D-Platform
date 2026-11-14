@@ -203,8 +203,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -340,8 +340,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -508,7 +508,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -854402484, guid: f8ec7818bdd6fd64e907eca4aa0f9db6, type: 3}
+  m_Sprite: {fileID: -127864592, guid: bbaa1ccff0c84374cb2d869a50ea398a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -641,7 +641,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -854402484, guid: f8ec7818bdd6fd64e907eca4aa0f9db6, type: 3}
+  m_Sprite: {fileID: -127864592, guid: bbaa1ccff0c84374cb2d869a50ea398a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -863,8 +863,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1104,8 +1104,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1409,7 +1409,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -854402484, guid: f8ec7818bdd6fd64e907eca4aa0f9db6, type: 3}
+  m_Sprite: {fileID: -127864592, guid: bbaa1ccff0c84374cb2d869a50ea398a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1494,6 +1494,24 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &2008483375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008483372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b2d4f6a8c1e3b5d7f9a2c4e6b8d1f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstSelected:
+  - {fileID: 553030122}
+  - {fileID: 270037279}
+  moveSound: {fileID: 8300000, guid: d550619fa7eb7dd45a5739e99bbb7ea9, type: 3}
+  moveVolume: 0.5
+  silenceThreshold: 0.02
 --- !u!1 &2010214750
 GameObject:
   m_ObjectHideFlags: 0
@@ -1688,7 +1706,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -854402484, guid: f8ec7818bdd6fd64e907eca4aa0f9db6, type: 3}
+  m_Sprite: {fileID: -127864592, guid: bbaa1ccff0c84374cb2d869a50ea398a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1714,20 +1732,3 @@ SceneRoots:
   - {fileID: 2010214753}
   - {fileID: 949964579}
   - {fileID: 1261774968}
---- !u!114 &2008483375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2008483372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b2d4f6a8c1e3b5d7f9a2c4e6b8d1f35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firstSelected:
-  - {fileID: 553030122}
-  - {fileID: 270037279}
-  moveSound: {fileID: 8300000, guid: d550619fa7eb7dd45a5739e99bbb7ea9, type: 3}
-  moveVolume: 0.5

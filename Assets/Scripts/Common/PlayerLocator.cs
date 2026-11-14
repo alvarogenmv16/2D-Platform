@@ -19,6 +19,10 @@ public static class PlayerLocator
 {
     private static Transform current;
 
+    // No domain reload when entering Play Mode in this project: start clean.
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStatics() => current = null;
+
     public static Transform Current
     {
         get
