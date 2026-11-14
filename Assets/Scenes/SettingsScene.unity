@@ -2508,6 +2508,7 @@ GameObject:
   - component: {fileID: 1600720358}
   - component: {fileID: 1600720357}
   - component: {fileID: 1600720356}
+  - component: {fileID: 1600720360}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3239,6 +3240,7 @@ GameObject:
   - component: {fileID: 1742482088}
   - component: {fileID: 1742482087}
   - component: {fileID: 1742482086}
+  - component: {fileID: 1742482089}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -3682,3 +3684,31 @@ SceneRoots:
   - {fileID: 360989291}
   - {fileID: 2090054898}
   - {fileID: 1641589165}
+--- !u!114 &1742482089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742482084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f6b8d1a3c5e7f9b2d4a6c8e1b3d5f79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1600720360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600720355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b2d4f6a8c1e3b5d7f9a2c4e6b8d1f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstSelected:
+  - {fileID: 1742482086}
+  moveSound: {fileID: 8300000, guid: d550619fa7eb7dd45a5739e99bbb7ea9, type: 3}
+  moveVolume: 0.5

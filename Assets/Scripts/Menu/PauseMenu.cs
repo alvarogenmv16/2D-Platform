@@ -22,6 +22,10 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private Color overlayColor = new Color(0f, 0f, 0f, 0.75f);
     [SerializeField] private Color textColor = Color.white;
 
+    [Header("Sound")]
+    [SerializeField] private AudioClip moveSound; // moving between options; empty = generated tick
+    [SerializeField, Range(0f, 1f)] private float moveVolume = 0.5f;
+
     [Header("Text")]
     [SerializeField] private string title = "PAUSED";
     [SerializeField] private string continueLabel = "Continue";
@@ -138,10 +142,9 @@ public class PauseMenu : MonoBehaviour
             pausedPlayerInput.Player.Disable();
         }
 
-        root.SetActive(true);
+        // MenuNavigator (on the canvas) selects Continue when it's shown.
         EnsureEventSystem();
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(continueButton.gameObject);
+        root.SetActive(true);
     }
 
     private void Resume()
@@ -221,6 +224,8 @@ public class PauseMenu : MonoBehaviour
         nav.selectOnDown = continueButton;
         nav.selectOnUp = continueButton;
         quitButton.navigation = nav;
+
+        root.AddComponent<MenuNavigator>().Setup(new Selectable[] { continueButton }, moveSound, moveVolume);
     }
 
     private Button CreateButton(string name, string label, Vector2 position, UnityEngine.Events.UnityAction onClick)

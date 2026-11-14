@@ -48,6 +48,8 @@ MonoBehaviour:
   buttonSprite: {fileID: -854402484, guid: f8ec7818bdd6fd64e907eca4aa0f9db6, type: 3}
   overlayColor: {r: 0, g: 0, b: 0, a: 0.75}
   textColor: {r: 1, g: 1, b: 1, a: 1}
+  moveSound: {fileID: 8300000, guid: d550619fa7eb7dd45a5739e99bbb7ea9, type: 3}
+  moveVolume: 0.5
   title: PAUSED
   continueLabel: Continue
   quitLabel: Quit to Menu
