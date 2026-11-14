@@ -21,9 +21,26 @@ public class PlayerAttackHitbox : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
 
+    // The damage before any upgrade - what a "normal" hit is worth in heal
+    // power. Captured in Awake, before any DamageUpgradePickup can raise it.
+    private float baseDamage = 1f;
+
+    // Heal power per landed hit: 1 with the starting damage, plus this much
+    // for every point of damage gained from upgrades, so upgrades also fill
+    // the heal bar faster. With 0.5 and a 7-hit bar (PlayerPower):
+    // damage 1 = 7 hits, damage 2 = 5 hits, damage 3 = 4 hits.
+    [SerializeField] private float powerPerExtraDamage = 0.5f;
+
+    private float PowerPerHit => 1f + (damage / baseDamage - 1f) * powerPerExtraDamage;
+
     // =========================
     // START
     // =========================
+    private void Awake()
+    {
+        baseDamage = Mathf.Max(0.01f, damage);
+    }
+
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -36,6 +53,8 @@ public class PlayerAttackHitbox : MonoBehaviour
     // Permanently raises the player's attack damage - called by pickups
     // like DamageUpgradePickup. Not clamped: whoever grants the upgrade is
     // responsible for only doing it once.
+    public float Damage => damage;
+
     public void IncreaseDamage(float amount)
     {
         damage += amount;
@@ -71,7 +90,7 @@ public class PlayerAttackHitbox : MonoBehaviour
             if (enemyHealth != null)
             {
                 enemyHealth.TakeDamage(damage, attackPointPosition);
-                playerPower?.AddPower(1f);
+                playerPower?.AddPower(PowerPerHit);
                 continue;
             }
 

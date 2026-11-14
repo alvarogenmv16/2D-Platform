@@ -25,6 +25,8 @@ public class DamageUpgradePickup : MonoBehaviour
 
     private void Start()
     {
+        if (GameProgress.Has(ProgressFlag)) hasBeenClaimed = true;
+
         // A Prefab Asset can't hold a reference to the scene's DialogueUI, so
         // an instance whose field was never set in the scene would throw on
         // Claim/Hide. Fall back to the scene's one (there's only ever one
@@ -84,9 +86,15 @@ public class DamageUpgradePickup : MonoBehaviour
         }
     }
 
+    // Remembered for the whole run (and in save files) by scene + position,
+    // so reloading the level - after a death, or on Continue - doesn't hand
+    // the upgrade out a second time to a player who already has it.
+    private string ProgressFlag => $"Upgrade:{gameObject.scene.name}/{transform.position.x:F1},{transform.position.y:F1}";
+
     private void Claim()
     {
         hasBeenClaimed = true;
+        GameProgress.Set(ProgressFlag);
 
         if (playerAttackHitbox != null)
         {

@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -129,7 +130,104 @@ public class PlayerDeathHandler : MonoBehaviour
     }
     private void ResetGame()
     {
-        Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.buildIndex);
+        // This same player always comes back - never the scene's own fresh
+        // copy, which wouldn't have the damage/jump/dash upgrades. So it's
+        // kept alive through the load (DontDestroyOnLoad, like SceneFader
+        // does for scene changes) and revived in place of that copy.
+        transform.SetParent(null); // DontDestroyOnLoad only works on root objects
+        DontDestroyOnLoad(gameObject);
+
+        // Back to the last save point of this run (it may be in another
+        // scene); before the first save, to the start of this scene.
+        string sceneToLoad = SceneManager.GetActiveScene().name;
+        string savePointId = null;
+        if (SaveSystem.TryGetRespawnPoint(out string savedScene, out string savedId))
+        {
+            sceneToLoad = savedScene;
+            savePointId = savedId;
+        }
+
+        StartCoroutine(ReloadAndRevive(sceneToLoad, savePointId));
+    }
+
+    private IEnumerator ReloadAndRevive(string sceneName, string savePointId)
+    {
+        SceneManager.LoadScene(sceneName);
+        yield return null; // let the new scene run Awake/Start first (same as SceneFader)
+
+        Vector3 from = transform.position;
+
+        SavePoint savePoint = string.IsNullOrEmpty(savePointId) ? null : SavePoint.Find(savePointId);
+        if (savePoint != null)
+        {
+            transform.position = savePoint.SpawnPosition;
+        }
+        else
+        {
+            // No save yet (or it's missing): land where the scene's own
+            // player starts.
+            foreach (GameObject taggedPlayer in GameObject.FindGameObjectsWithTag("Player"))
+            {
+                if (taggedPlayer != gameObject)
+                {
+                    transform.position = taggedPlayer.transform.position;
+                    break;
+                }
+            }
+        }
+
+        SceneFader.AdoptPersistentPlayer(gameObject);
+        Revive();
+
+        // Snap the camera to the respawn spot instead of panning there.
+        CinemachineCamera cam = FindFirstObjectByType<CinemachineCamera>();
+        if (cam != null) cam.OnTargetObjectWarped(transform, transform.position - from);
+    }
+
+    private void Revive()
+    {
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+            rb.position = transform.position;
+            rb.simulated = true;
+        }
+
+        if (playerSpriteRenderer != null)
+        {
+            playerSpriteRenderer.enabled = true;
+        }
+
+        if (animator != null)
+        {
+            // Back to the default state with every parameter cleared
+            // (DieTrigger, IsHit...).
+            animator.Rebind();
+            animator.Update(0f);
+        }
+
+        playerHealth?.Revive();
+
+        if (TryGetComponent(out PlayerRespawnPoint respawnPoint))
+        {
+            respawnPoint.ResetSafePosition(transform.position);
+            respawnPoint.SetMovementEnabled(true);
+        }
+
+        if (playerMovement != null)
+        {
+            playerMovement.enabled = true;
+        }
+    }
+
+    // Called by SceneFader.AdoptPersistentPlayer with the scene's local
+    // player about to be destroyed: its references point at this scene's
+    // objects, the ones this survivor carried point at the old scene's.
+    public void AdoptSceneReferences(PlayerDeathHandler local)
+    {
+        if (local.fadeOverlay != null)
+        {
+            fadeOverlay = local.fadeOverlay;
+        }
     }
 }

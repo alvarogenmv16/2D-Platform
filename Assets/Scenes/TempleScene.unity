@@ -16062,10 +16062,6 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 1.712672
       objectReference: {fileID: 0}
-    - target: {fileID: 200008, guid: 66ec6196e2bc4953800087717621a16c, type: 3}
-      propertyPath: maxHealth
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 200012, guid: 66ec6196e2bc4953800087717621a16c, type: 3}
       propertyPath: chaseSpeed
       value: 3
@@ -16755,6 +16751,14 @@ PrefabInstance:
     - target: {fileID: 400002, guid: fb56fcee404b4546ba19fa8a9e35b116, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: fb56fcee404b4546ba19fa8a9e35b116, type: 3}
+      propertyPath: diagonalSpacing
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: fb56fcee404b4546ba19fa8a9e35b116, type: 3}
+      propertyPath: phase2HealthRatio
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

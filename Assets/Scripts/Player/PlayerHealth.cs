@@ -122,6 +122,19 @@ public class PlayerHealth : MonoBehaviour
         isInvulnerable = false;
         OnInvulnerabilityEnd?.Invoke();
     }
+    // Back to full health and alive again. Only used by PlayerDeathHandler
+    // when the player that died is the persistent one (it survived a scene
+    // transition), so the scene reload can't hand it a fresh copy.
+    public void Revive()
+    {
+        StopAllCoroutines();
+        isDead = false;
+        isInvulnerable = false;
+        currentHealth = maxHealth;
+        OnInvulnerabilityEnd?.Invoke();
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
+    }
+
     private void Die()
     {
         isDead = true;

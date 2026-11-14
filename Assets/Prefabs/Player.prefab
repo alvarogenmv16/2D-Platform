@@ -58,6 +58,7 @@ GameObject:
   - component: {fileID: 6465971433042138573}
   - component: {fileID: 7716706258335186380}
   - component: {fileID: 5566778899112233}
+  - component: {fileID: 1384648705975186167}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -721,7 +722,24 @@ MonoBehaviour:
   playerHealth: {fileID: 6602373768474145768}
   playerMovement: {fileID: 102499189860425364}
   animator: {fileID: 449159012133179020}
-  hitsToFillBar: 6
+  hitsToFillBar: 7
   OnPowerChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1384648705975186167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760844655741871444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3b8a9b89efd47a0b2a407d1a18df618, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCameraLook
+  playerMovement: {fileID: 102499189860425364}
+  lookDownDistance: 4
+  holdDelay: 0.25
+  panSpeed: 8
+  inputThreshold: 0.5
