@@ -5075,6 +5075,83 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 189650616918017074, guid: 61dcf7d840d60364ebf1d2c5ef34a747, type: 3}
   m_PrefabInstance: {fileID: 7716586201398143197}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &546900180
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1261150294198734900, guid: 1e714de648754b56a0d9e7ca4a76dbca, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1261150294198734900, guid: 1e714de648754b56a0d9e7ca4a76dbca, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1261150294198734900, guid: 1e714de648754b56a0d9e7ca4a76dbca, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 157.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 1261150294198734900, guid: 1e714de648754b56a0d9e7ca4a76dbca, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -41.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 1261150294198734900, guid: 1e714de648754b56a0d9e7ca4a76dbca, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1261150294198734900, guid: 1e714de648754b56a0d9e7ca4a76dbca, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1261150294198734900, guid: 1e714de648754b56a0d9e7ca4a76dbca, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1261150294198734900, guid: 1e714de648754b56a0d9e7ca4a76dbca, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1261150294198734900, guid: 1e714de648754b56a0d9e7ca4a76dbca, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1261150294198734900, guid: 1e714de648754b56a0d9e7ca4a76dbca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1261150294198734900, guid: 1e714de648754b56a0d9e7ca4a76dbca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1261150294198734900, guid: 1e714de648754b56a0d9e7ca4a76dbca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8097957922088123557, guid: 1e714de648754b56a0d9e7ca4a76dbca, type: 3}
+      propertyPath: m_Name
+      value: SavePoint2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8991799210155507122, guid: 1e714de648754b56a0d9e7ca4a76dbca, type: 3}
+      propertyPath: saveSound
+      value: 
+      objectReference: {fileID: 8300000, guid: a12dbe702b7181642a27de311865d11c, type: 3}
+    - target: {fileID: 8991799210155507122, guid: 1e714de648754b56a0d9e7ca4a76dbca, type: 3}
+      propertyPath: savedMessage
+      value: Game Saved!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8991799210155507122, guid: 1e714de648754b56a0d9e7ca4a76dbca, type: 3}
+      propertyPath: promptMessage
+      value: Save Game?
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1e714de648754b56a0d9e7ca4a76dbca, type: 3}
 --- !u!4 &552503559 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1636331885690190374, guid: 211011dcf19445e9be583d0e52834d2d, type: 3}
@@ -11832,6 +11909,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: SavePoint1
       objectReference: {fileID: 0}
+    - target: {fileID: 8991799210155507122, guid: 1e714de648754b56a0d9e7ca4a76dbca, type: 3}
+      propertyPath: saveSound
+      value: 
+      objectReference: {fileID: 8300000, guid: a12dbe702b7181642a27de311865d11c, type: 3}
+    - target: {fileID: 8991799210155507122, guid: 1e714de648754b56a0d9e7ca4a76dbca, type: 3}
+      propertyPath: savedMessage
+      value: Game Saved!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8991799210155507122, guid: 1e714de648754b56a0d9e7ca4a76dbca, type: 3}
+      propertyPath: promptMessage
+      value: Save Game?
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12907,3 +12996,4 @@ SceneRoots:
   - {fileID: 1147037492}
   - {fileID: 771812142}
   - {fileID: 1779645564}
+  - {fileID: 546900180}
