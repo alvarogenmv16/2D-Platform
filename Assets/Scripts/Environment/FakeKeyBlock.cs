@@ -75,7 +75,7 @@ public class FakeKeyBlock : MonoBehaviour, IBreakable
         {
             if (hit.TryGetComponent(out PlayerHealth playerHealth))
             {
-                playerHealth.TakeDamage(explosionDamage, transform.position);
+                playerHealth.TakeDamage(explosionDamage, transform.position, "Fake Key", true);
             }
         }
 

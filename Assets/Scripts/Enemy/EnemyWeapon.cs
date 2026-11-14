@@ -34,7 +34,7 @@ public class EnemyWeapon : MonoBehaviour
 
         if (playerHealth != null)
         {
-            playerHealth.TakeDamage(damage, AttackPointPosition);
+            playerHealth.TakeDamage(damage, AttackPointPosition, GetComponentInParent<EnemyHealth>() is EnemyHealth owner ? owner.gameObject.name : null);
         }
     }
 

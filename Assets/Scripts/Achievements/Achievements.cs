@@ -86,6 +86,8 @@ public static class Achievements
             return false;
         }
 
+        RunStats.AchievementEarned(id);
+
         Load();
         if (!unlocked.Add(id)) return false;
 

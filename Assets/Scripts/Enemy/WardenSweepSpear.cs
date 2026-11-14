@@ -138,7 +138,7 @@ public class WardenSweepSpear : MonoBehaviour
         // PlayerHealth's own invulnerability window keeps this to one hit.
         if (hit.TryGetComponent(out PlayerHealth playerHealth))
         {
-            playerHealth.TakeDamage(damage, spear.position);
+            playerHealth.TakeDamage(damage, spear.position, "Warden");
         }
     }
 

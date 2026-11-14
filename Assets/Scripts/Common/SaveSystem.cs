@@ -117,6 +117,8 @@ public static class SaveSystem
             }
         }
 
+        RunStats.Save();
+
         respawnScene = data.scene;
         respawnPointId = data.savePointId;
         respawnHasPosition = true;
@@ -139,6 +141,7 @@ public static class SaveSystem
     public static void NewGame(string firstScene)
     {
         ResetRun();
+        RunStats.StartNewRun();
         SceneManager.LoadScene(firstScene);
     }
 
@@ -146,6 +149,7 @@ public static class SaveSystem
     // is untouched - Continue picks it up again from the last save).
     public static void QuitToMenu(string menuScene)
     {
+        RunStats.Save();
         ResetRun();
         SceneManager.LoadScene(menuScene);
     }
@@ -157,6 +161,7 @@ public static class SaveSystem
         if (data == null || string.IsNullOrEmpty(data.scene)) return false;
 
         ResetRun();
+        RunStats.Load();
         SoulScore.Import(data.souls, data.collectedSouls);
         GameProgress.Import(data.progressFlags);
         respawnScene = data.scene;

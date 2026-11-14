@@ -23,7 +23,7 @@ public class HazardDamage : MonoBehaviour, IHazard
         // player, so knockback (driven by OnDamaged) pushes away from
         // wherever on the hazard shape was actually touched.
         Vector2 hitSourcePosition = hazardCollider.ClosestPoint(other.transform.position);
-        bool damageApplied = playerHealth.TakeDamage(damage, hitSourcePosition);
+        bool damageApplied = playerHealth.TakeDamage(damage, hitSourcePosition, "Spikes", true);
         if (damageApplied && playerHealth.IsDead) AchievementTracker.KilledByHazard();
 
         // Only bump the player back on a hit that actually landed - not on

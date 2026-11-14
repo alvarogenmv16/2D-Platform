@@ -96,7 +96,7 @@ public class BossSpikeHazard : MonoBehaviour
                 PlayerHealth health = overlaps[i].GetComponentInParent<PlayerHealth>();
                 if (health != null)
                 {
-                    health.TakeDamage(damage, transform.position);
+                    health.TakeDamage(damage, transform.position, "Boss");
                     return;
                 }
             }
@@ -117,7 +117,7 @@ public class BossSpikeHazard : MonoBehaviour
             // is what stops this from re-hitting every single physics step —
             // it just lands again the instant that window expires, as long
             // as the player is still standing in it.
-            playerHealth.TakeDamage(damage, transform.position);
+            playerHealth.TakeDamage(damage, transform.position, "Boss");
         }
     }
 

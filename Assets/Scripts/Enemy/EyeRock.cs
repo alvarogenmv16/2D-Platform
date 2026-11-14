@@ -36,7 +36,7 @@ public class EyeRock : MonoBehaviour
 
             if (playerHealth != null)
             {
-                playerHealth.TakeDamage(damage, transform.position);
+                playerHealth.TakeDamage(damage, transform.position, "Eye");
             }
 
             Destroy(gameObject);
