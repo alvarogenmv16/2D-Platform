@@ -180,7 +180,7 @@ public class PlayerDeathHandler : MonoBehaviour
         Revive();
 
         // Snap the camera to the respawn spot instead of panning there.
-        CinemachineCamera cam = FindFirstObjectByType<CinemachineCamera>();
+        CinemachineCamera cam = FindAnyObjectByType<CinemachineCamera>();
         if (cam != null) cam.OnTargetObjectWarped(transform, transform.position - from);
     }
 

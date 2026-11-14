@@ -16,7 +16,8 @@ public class FlyRelicAI : MonoBehaviour
     {
         Idle,
         Chasing,
-        Attacking,
+        Charging,   // locked in place and aim: the player's window to dodge
+        Firing,     // beam out
         Returning
     }
 
@@ -39,12 +40,18 @@ public class FlyRelicAI : MonoBehaviour
     [Header("Attack (stationary beam)")]
     [SerializeField] private EnemyWeapon weapon;
     [SerializeField] private Animator animator;
-    // Total time the attack animation is allowed to hold (charge + beam +
-    // a beat of the beam lingering) before it flips back to Idle. Keep this
-    // matched to FlyRelicAttack.anim's total length - the actual hit is
-    // fired separately, via an Animation Event (OnBeamFire), not by this
-    // timer, so only the RETURN timing needs to track the clip here.
-    [SerializeField] private float attackDuration = 0.6f;
+    // Once the chase ends the relic freezes - position and aim - and holds
+    // its charging pose this long before the beam goes off. This is the
+    // player's window to get out of the line.
+    [SerializeField] private float chargeDuration = 0.7f;
+    // FlyRelicAttack.anim is held on its charging frame from this time
+    // until the charge is over, then plays on to the beam frame (whose
+    // Animation Event, OnBeamFire, is what actually fires the beam).
+    [SerializeField] private float chargeHoldAt = 0.2f;
+    // How long the beam stays out and hurts after firing.
+    [SerializeField] private float beamDuration = 0.35f;
+    // Rest after an attack before it can notice the player again.
+    [SerializeField] private float cooldown = 1f;
 
     [Header("Return")]
     [SerializeField] private float returnSpeed = 6f;
@@ -58,6 +65,9 @@ public class FlyRelicAI : MonoBehaviour
     private FlyingEnemyMovement movement;
     private Vector2 originPosition;
     private float stateTimer;
+    private float cooldownTimer;
+
+    private static readonly int AttackState = Animator.StringToHash("FlyRelicAttack");
 
     // 1 = facing right, -1 = facing left. Frozen once the attack commits,
     // same reasoning as RelicAI freezing X at the start of the dive.
@@ -98,7 +108,8 @@ public class FlyRelicAI : MonoBehaviour
         {
             case FlyRelicState.Idle: HandleIdle(); break;
             case FlyRelicState.Chasing: HandleChasing(); break;
-            case FlyRelicState.Attacking: HandleAttacking(); break;
+            case FlyRelicState.Charging: HandleCharging(); break;
+            case FlyRelicState.Firing: HandleFiring(); break;
             case FlyRelicState.Returning: HandleReturning(); break;
         }
 
@@ -129,6 +140,12 @@ public class FlyRelicAI : MonoBehaviour
     {
         movement.Stop();
 
+        if (cooldownTimer > 0f)
+        {
+            cooldownTimer -= Time.fixedDeltaTime;
+            return;
+        }
+
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
         if (distanceToPlayer <= detectionRange)
         {
@@ -156,43 +173,88 @@ public class FlyRelicAI : MonoBehaviour
         }
     }
 
+    // The lock: from here on it doesn't move or turn - the beam goes
+    // wherever it was aimed at this moment, however the player moves.
     private void StartAttack()
     {
         stateTimer = 0f;
+        movement.Stop();
 
         if (animator != null) animator.SetBool("IsAttacking", true);
 
-        currentState = FlyRelicState.Attacking;
+        currentState = FlyRelicState.Charging;
     }
 
-    private void HandleAttacking()
+    private void HandleCharging()
     {
-        // Never moves while attacking - facing is already locked in from
-        // the last Chasing frame, so the beam fires wherever it was aimed.
         movement.Stop();
         stateTimer += Time.fixedDeltaTime;
 
-        if (stateTimer >= attackDuration)
+        if (animator == null)
         {
-            if (animator != null) animator.SetBool("IsAttacking", false);
-            currentState = FlyRelicState.Returning;
+            if (stateTimer >= chargeDuration) OnBeamFire();
+            return;
+        }
+
+        if (stateTimer < chargeDuration)
+        {
+            // Hold the charging pose.
+            AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
+            if (state.shortNameHash == AttackState && state.normalizedTime * state.length >= chargeHoldAt)
+            {
+                animator.speed = 0f;
+            }
+        }
+        else
+        {
+            // Release: the clip plays on to the beam frame, whose Animation
+            // Event calls OnBeamFire.
+            animator.speed = 1f;
+
+            // Safety net if the event never comes.
+            if (stateTimer >= chargeDuration + 0.5f) OnBeamFire();
         }
     }
 
     // Called via an Animation Event on FlyRelicAttack.anim (through
     // FlyRelicAttackRelay, since events can only reach components on the
     // same GameObject as the Animator), on the exact frame the beam sprite
-    // appears - same reasoning as RelicAI's OnAttackImpact.
+    // appears.
     public void OnBeamFire()
     {
-        if (currentState != FlyRelicState.Attacking) return;
+        if (currentState != FlyRelicState.Charging) return;
 
-        if (weapon != null)
-        {
-            weapon.TryHitPlayer();
-        }
-
+        if (animator != null) animator.speed = 1f;
         sfxPlayer?.Play(beamSound);
+
+        stateTimer = 0f;
+        currentState = FlyRelicState.Firing;
+        HandleFiring();
+    }
+
+    private void HandleFiring()
+    {
+        movement.Stop();
+
+        // The beam hurts for as long as it's out, not just on its first
+        // frame - but only along the line it was fired on. PlayerHealth's
+        // invulnerability keeps this to a single hit.
+        if (weapon != null) weapon.TryHitPlayer();
+
+        stateTimer += Time.fixedDeltaTime;
+        if (stateTimer >= beamDuration)
+        {
+            if (animator != null) animator.SetBool("IsAttacking", false);
+            cooldownTimer = cooldown;
+            currentState = FlyRelicState.Returning;
+        }
+    }
+
+    // EnemyHealth disables this on hit and on death: never leave the
+    // Animator frozen on the charging frame.
+    private void OnDisable()
+    {
+        if (animator != null) animator.speed = 1f;
     }
 
     private void HandleReturning()

@@ -969,7 +969,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 9f2112cc39054e2bada45ab280f381ae, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.99
+      value: 10.13
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 9f2112cc39054e2bada45ab280f381ae, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1028,10 +1028,6 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 100005, guid: 9f2112cc39054e2bada45ab280f381ae, type: 3}
-      propertyPath: diveDuration
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 100005, guid: 9f2112cc39054e2bada45ab280f381ae, type: 3}
       propertyPath: fallDistance
       value: 20
       objectReference: {fileID: 0}
@@ -1049,7 +1045,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100021, guid: 9f2112cc39054e2bada45ab280f381ae, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.56
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100022, guid: 9f2112cc39054e2bada45ab280f381ae, type: 3}
       propertyPath: m_Color.b
@@ -2760,10 +2756,6 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 100005, guid: 9f2112cc39054e2bada45ab280f381ae, type: 3}
-      propertyPath: diveDuration
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 100005, guid: 9f2112cc39054e2bada45ab280f381ae, type: 3}
       propertyPath: fallDistance
       value: 20
       objectReference: {fileID: 0}
@@ -3067,10 +3059,6 @@ PrefabInstance:
     - target: {fileID: 100005, guid: 9f2112cc39054e2bada45ab280f381ae, type: 3}
       propertyPath: diveSpeed
       value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 100005, guid: 9f2112cc39054e2bada45ab280f381ae, type: 3}
-      propertyPath: diveDuration
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 100005, guid: 9f2112cc39054e2bada45ab280f381ae, type: 3}
       propertyPath: fallDistance
@@ -24854,10 +24842,6 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 100005, guid: 9f2112cc39054e2bada45ab280f381ae, type: 3}
-      propertyPath: diveDuration
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 100005, guid: 9f2112cc39054e2bada45ab280f381ae, type: 3}
       propertyPath: fallDistance
       value: 20
       objectReference: {fileID: 0}
@@ -26528,10 +26512,6 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 100005, guid: 9f2112cc39054e2bada45ab280f381ae, type: 3}
-      propertyPath: diveDuration
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 100005, guid: 9f2112cc39054e2bada45ab280f381ae, type: 3}
       propertyPath: fallDistance
       value: 20
       objectReference: {fileID: 0}
@@ -28171,10 +28151,6 @@ PrefabInstance:
     - target: {fileID: 100005, guid: 9f2112cc39054e2bada45ab280f381ae, type: 3}
       propertyPath: diveSpeed
       value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 100005, guid: 9f2112cc39054e2bada45ab280f381ae, type: 3}
-      propertyPath: diveDuration
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 100005, guid: 9f2112cc39054e2bada45ab280f381ae, type: 3}
       propertyPath: fallDistance

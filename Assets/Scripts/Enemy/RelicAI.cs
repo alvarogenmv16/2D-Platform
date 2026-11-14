@@ -35,21 +35,25 @@ public class RelicAI : MonoBehaviour
 
     [Header("Dive (vertical only)")]
     [SerializeField] private float diveSpeed = 20f;
-    // X is frozen the instant the dive starts; only Y moves. Aimed well past
-    // where it will actually stop - diveDuration below is what ends the
-    // fall, not distance, so it never gets there.
+    // X is frozen the instant the dive starts; only Y moves. It falls until
+    // it actually touches the ground (groundLayer), up to this far.
     [SerializeField] private float fallDistance = 20f;
     // The crystal stays completely still for this long after committing -
     // RelicAttack.anim is already playing (so its warning frames show), but
     // physical movement doesn't start until this elapses. Without this the
     // warning frames flash by mid-fall instead of reading as a held pose.
     [SerializeField] private float anticipationDelay = 0.15f;
-    // Time from the start of the dive (anticipation included) to impact
-    // (damage + screen shake). Keep this matched to RelicAttack.anim's last
-    // keyframe - it's what makes the hit land exactly when the impact
-    // sprite appears. Must be greater than anticipationDelay, or there's no
-    // visible fall left between the hold and the impact.
-    [SerializeField] private float diveDuration = 0.35f;
+    // Safety net only: if no ground is found in this time, it slams anyway.
+    [SerializeField] private float diveDuration = 2f;
+    [SerializeField] private LayerMask groundLayer;
+
+    [Header("Attack animation timing (RelicAttack.anim)")]
+    // While falling, the clip holds on its last falling frame (it's frozen
+    // once it reaches this time) so it never shows the impact mid-air...
+    [SerializeField] private float holdFallFrameAt = 0.3f;
+    // ...and jumps to the impact frame the moment the ground is touched -
+    // together with the sound, the screen shake and the damage.
+    [SerializeField] private float impactFrameTime = 0.35f;
 
     [Header("Stuck (player's attack window)")]
     [SerializeField] private float stuckDuration = 1f;
@@ -67,10 +71,17 @@ public class RelicAI : MonoBehaviour
     [SerializeField] private AudioSource hoverAudioSource; // loops while Chasing; Loop on, Play On Awake off
 
     private FlyingEnemyMovement movement;
+    private Rigidbody2D rb;
+    private Collider2D body;
+    private RelicImpactShake impactShake;
     private Vector2 originPosition;
     private Vector2 diveTargetPosition;
     private float stateTimer;
     private bool hasDealtDamageThisDive;
+    private ContactFilter2D groundFilter;
+    private readonly RaycastHit2D[] groundHits = new RaycastHit2D[4];
+
+    private static readonly int AttackState = Animator.StringToHash("RelicAttack");
 
     // =========================
     // START
@@ -78,7 +89,15 @@ public class RelicAI : MonoBehaviour
     private void Start()
     {
         movement = GetComponent<FlyingEnemyMovement>();
+        rb = GetComponent<Rigidbody2D>();
+        body = GetComponent<Collider2D>();
+        impactShake = GetComponentInChildren<RelicImpactShake>();
         originPosition = transform.position;
+
+        // Solid ground only - hazard tilemaps are triggers on the Ground layer.
+        groundFilter = new ContactFilter2D();
+        groundFilter.SetLayerMask(groundLayer);
+        groundFilter.useTriggers = false;
 
         if (player == null)
         {
@@ -176,30 +195,85 @@ public class RelicAI : MonoBehaviour
     private void HandleDiving()
     {
         stateTimer += Time.fixedDeltaTime;
+        HoldFallFrameUntilImpact();
 
-        if (stateTimer >= anticipationDelay)
-        {
-            movement.MoveTowards(diveTargetPosition, diveSpeed);
-        }
-        else
+        if (stateTimer < anticipationDelay)
         {
             // Otherwise the leftover velocity from Chasing keeps carrying it
             // sideways during the hold, instead of a clean stationary pose.
             movement.Stop();
+            return;
         }
 
-        if (stateTimer >= diveDuration && !hasDealtDamageThisDive)
+        // Is the ground within this physics step's fall? Then land on it now.
+        float step = diveSpeed * Time.fixedDeltaTime;
+        if (TryFindGround(step + 0.05f, out float distance))
         {
-            if (weapon != null)
-            {
-                weapon.TryHitPlayer();
-            }
-
-            hasDealtDamageThisDive = true;
-            stateTimer = 0f;
-            currentState = RelicState.Stuck;
-            sfxPlayer?.Play(impactSound);
+            rb.position += Vector2.down * Mathf.Max(0f, distance - 0.01f);
+            Impact();
+            return;
         }
+
+        movement.MoveTowards(diveTargetPosition, diveSpeed);
+
+        // Fell all the way (or for too long) without finding ground.
+        if (stateTimer >= diveDuration || rb.position.y <= diveTargetPosition.y + 0.01f)
+        {
+            Impact();
+        }
+    }
+
+    // Box-casts the relic's own collider straight down.
+    private bool TryFindGround(float maxDistance, out float distance)
+    {
+        distance = 0f;
+        if (body == null) return false;
+
+        int count = body.Cast(Vector2.down, groundFilter, groundHits, maxDistance);
+        if (count == 0) return false;
+
+        distance = groundHits[0].distance;
+        for (int i = 1; i < count; i++) distance = Mathf.Min(distance, groundHits[i].distance);
+        return true;
+    }
+
+    // The slam: impact frame, sound, screen shake and damage, all on the
+    // same physics step the relic touches the ground.
+    private void Impact()
+    {
+        movement.Stop();
+
+        if (animator != null)
+        {
+            animator.speed = 1f;
+            AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
+            if (state.shortNameHash == AttackState && state.length > 0f)
+            {
+                animator.Play(AttackState, 0, Mathf.Clamp01(impactFrameTime / state.length));
+            }
+        }
+
+        if (!hasDealtDamageThisDive && weapon != null) weapon.TryHitPlayer();
+        hasDealtDamageThisDive = true;
+
+        sfxPlayer?.Play(impactSound);
+        if (impactShake != null) impactShake.OnImpactShake();
+
+        stateTimer = 0f;
+        currentState = RelicState.Stuck;
+    }
+
+    // RelicAttack.anim runs anticipation -> falling frames -> impact. Freeze
+    // it on the last falling frame while still in the air, so the impact
+    // frame only ever appears when Impact() jumps to it.
+    private void HoldFallFrameUntilImpact()
+    {
+        if (animator == null) return;
+
+        AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
+        if (state.shortNameHash != AttackState) return;
+
+        if (state.normalizedTime * state.length >= holdFallFrameAt) animator.speed = 0f;
     }
 
     private void HandleStuck()
@@ -212,6 +286,13 @@ public class RelicAI : MonoBehaviour
             if (animator != null) animator.SetBool("IsAttacking", false);
             currentState = RelicState.Returning;
         }
+    }
+
+    // EnemyHealth disables this on death: never leave the Animator frozen,
+    // or the death animation wouldn't play.
+    private void OnDisable()
+    {
+        if (animator != null) animator.speed = 1f;
     }
 
     private void HandleReturning()

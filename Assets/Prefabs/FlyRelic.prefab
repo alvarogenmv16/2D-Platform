@@ -134,7 +134,10 @@ MonoBehaviour:
   chaseDuration: 1.2
   weapon: {fileID: 200027}
   animator: {fileID: 200023}
-  attackDuration: 0.6
+  chargeDuration: 0.7
+  chargeHoldAt: 0.2
+  beamDuration: 0.35
+  cooldown: 1
   returnSpeed: 6
   sfxPlayer: {fileID: 200009}
   awakeSound: {fileID: 8300000, guid: f37e30546a3d23e46a1e6d65e23ee086, type: 3}
@@ -164,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6880f022588ee7241a2fa22acbe1025f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  maxHealth: 3
+  maxHealth: 4
   animator: {fileID: 200023}
   aiComponentsToDisable:
   - {fileID: 200005}
@@ -178,13 +181,16 @@ MonoBehaviour:
   knockbackForceX: 5
   knockbackForceY: 3
   knockbackDuration: 0.2
-  fallsBeforeDeath: 1
+  fallsBeforeDeath: 0
   groundCheck: {fileID: 200031}
   groundCheckRadius: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   fallGravityScale: 3
+  sfxPlayer: {fileID: 0}
+  hitSound: {fileID: 0}
+  hitSoundCooldown: 0.8
 --- !u!114 &200009
 MonoBehaviour:
   m_ObjectHideFlags: 0
