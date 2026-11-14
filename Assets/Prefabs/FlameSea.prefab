@@ -131,6 +131,7 @@ MonoBehaviour:
   triggerKey: {fileID: 0}
   respawnPoint: {fileID: 600051}
   stopPoint: {fileID: 600041}
+  eruptionDelay: 1
   warningDelay: 1
   riseSpeed: 2.5
   damage: 2
@@ -311,8 +312,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 4046531519
-  m_SortingLayer: 4
+  m_SortingLayerID: -248435777
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 216309237709037202, guid: 8e6bfb9fc68d95c4bab8434f39a76cc2, type: 3}
@@ -403,8 +404,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 4046531519
-  m_SortingLayer: 4
+  m_SortingLayerID: -248435777
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 74abf82341c94a5b8f8aeec3d47631ab, type: 3}
@@ -495,8 +496,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 4046531519
-  m_SortingLayer: 4
+  m_SortingLayerID: -248435777
+  m_SortingLayer: 2
   m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 216309237709037202, guid: 8e6bfb9fc68d95c4bab8434f39a76cc2, type: 3}

@@ -17,10 +17,14 @@ public static class Achievements
     private class SaveData
     {
         public string[] unlocked;
+        // Global progress towards achievements that build up over time
+        // (e.g. which bosses were beaten without taking damage).
+        public string[] progress;
     }
 
     private static AchievementDatabase database;
     private static HashSet<string> unlocked;
+    private static HashSet<string> progress;
 
     public static event Action<AchievementDatabase.Entry> OnUnlocked;
 
@@ -32,6 +36,7 @@ public static class Achievements
     {
         database = null;
         unlocked = null;
+        progress = null;
         OnUnlocked = null;
     }
 
@@ -87,6 +92,22 @@ public static class Achievements
         return true;
     }
 
+    // Global progress marks (kept with the achievements, never reset by New
+    // Game). Returns true the first time a mark is added.
+    public static bool MarkProgress(string key)
+    {
+        Load();
+        if (!progress.Add(key)) return false;
+        Save();
+        return true;
+    }
+
+    public static bool HasProgress(string key)
+    {
+        Load();
+        return progress.Contains(key);
+    }
+
     public static AchievementDatabase.Entry Find(string id)
     {
         foreach (AchievementDatabase.Entry entry in All)
@@ -101,6 +122,7 @@ public static class Achievements
     public static void ResetAll()
     {
         unlocked = new HashSet<string>();
+        progress = new HashSet<string>();
         Save();
     }
 #endif
@@ -110,12 +132,14 @@ public static class Achievements
         if (unlocked != null) return;
 
         unlocked = new HashSet<string>();
+        progress = new HashSet<string>();
         if (!File.Exists(FilePath)) return;
 
         try
         {
             SaveData data = JsonUtility.FromJson<SaveData>(File.ReadAllText(FilePath));
             if (data?.unlocked != null) unlocked.UnionWith(data.unlocked);
+            if (data?.progress != null) progress.UnionWith(data.progress);
         }
         catch (Exception e)
         {
@@ -127,7 +151,11 @@ public static class Achievements
     {
         try
         {
-            SaveData data = new SaveData { unlocked = new List<string>(unlocked).ToArray() };
+            SaveData data = new SaveData
+            {
+                unlocked = new List<string>(unlocked).ToArray(),
+                progress = new List<string>(progress).ToArray(),
+            };
             File.WriteAllText(FilePath, JsonUtility.ToJson(data, true));
         }
         catch (Exception e)

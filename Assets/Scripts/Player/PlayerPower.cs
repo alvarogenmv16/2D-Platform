@@ -129,5 +129,6 @@ public class PlayerPower : MonoBehaviour
     {
         playerHealth.FullHeal();
         isHealing = false;
+        AchievementTracker.Healed();
     }
 }

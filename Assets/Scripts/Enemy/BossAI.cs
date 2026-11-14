@@ -117,6 +117,7 @@ public class BossAI : MonoBehaviour
     {
         if (currentState != BossState.Dormant) return;
 
+        AchievementTracker.BossFightStarted(AchievementTracker.Boss1);
         currentState = BossState.Summoning;
         StartCoroutine(SummonSequence());
     }

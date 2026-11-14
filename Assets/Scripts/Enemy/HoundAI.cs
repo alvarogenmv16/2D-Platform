@@ -241,6 +241,7 @@ public class HoundAI : MonoBehaviour
         // Same death sequence as any other enemy (animation, AI disabled,
         // destroyed after EnemyDeath), just not reachable through damage.
         health?.Kill();
+        AchievementTracker.HoundBrokeWall();
     }
 
     private void EndCharge()

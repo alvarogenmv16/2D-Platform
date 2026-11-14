@@ -91,6 +91,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = Mathf.Max(currentHealth, 0f);
 
         Debug.Log($"Player took {amount} damage. Current health: {currentHealth}/{maxHealth}");
+        AchievementTracker.PlayerDamaged();
 
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
 
@@ -139,6 +140,7 @@ public class PlayerHealth : MonoBehaviour
     {
         isDead = true;
         Debug.Log("Player died!");
+        AchievementTracker.PlayerDied();
         OnDied?.Invoke();
     }
 }

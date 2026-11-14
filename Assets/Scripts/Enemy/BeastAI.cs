@@ -317,6 +317,7 @@ public class BeastAI : MonoBehaviour
     // This only tidies up what the AI itself left running.
     private void OnDied()
     {
+        AchievementTracker.BossDefeated(AchievementTracker.Beast);
         if (phaseMusic != null) phaseMusic.PlayVictory(); // battle track fades out
         if (walkBob != null) walkBob.SetWalking(false);
         if (leapShadow != null) leapShadow.gameObject.SetActive(false);
@@ -352,6 +353,7 @@ public class BeastAI : MonoBehaviour
             stateTimer = 0f;
             if (animator != null) animator.SetBool("IsAwake", true);
             currentState = BeastState.WakingUp;
+            AchievementTracker.BossFightStarted(AchievementTracker.Beast);
             if (OnAwakened != null) OnAwakened.Invoke();
         }
     }

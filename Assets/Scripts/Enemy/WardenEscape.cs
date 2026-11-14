@@ -119,6 +119,7 @@ public class WardenEscape : MonoBehaviour
     {
         escaping = true;
         SetPrompt(false);
+        AchievementTracker.GameFinished();
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)

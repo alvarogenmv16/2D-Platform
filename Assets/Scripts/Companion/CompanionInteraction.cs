@@ -100,6 +100,7 @@ public class CompanionInteraction : MonoBehaviour
         animator.SetTrigger("InteractTrigger");
 
         bool isStartingConversation = currentLineIndex == -1;
+        if (isStartingConversation) AchievementTracker.CompanionTalkedTo(gameObject.scene.name);
 
         if (isStartingConversation && hasCompletedConversation)
         {

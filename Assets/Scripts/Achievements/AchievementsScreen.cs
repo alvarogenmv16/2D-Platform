@@ -20,12 +20,14 @@ public class AchievementsScreen : MonoBehaviour
     [Header("Layout (1920x1080 canvas)")]
     [SerializeField] private float barTop = 230f;        // from the top of the screen
     [SerializeField] private Vector2 barSize = new Vector2(700f, 75f);
-    [SerializeField] private float listTop = 340f;       // from the top of the screen
-    [SerializeField] private float listBottom = 200f;    // from the bottom (clear of the Back button)
-    [SerializeField] private float columnWidth = 760f;
-    [SerializeField] private float columnGap = 40f;
-    [SerializeField] private float rowGap = 14f;
+    [SerializeField] private float listTop = 330f;       // from the top of the screen
+    [SerializeField] private float listBottom = 180f;    // from the bottom (clear of the Back button)
+    [SerializeField] private float listWidth = 1760f;    // all columns together
+    [SerializeField] private float columnGap = 30f;
+    [SerializeField] private float rowGap = 12f;
     [SerializeField] private float maxRowHeight = 100f;
+    // Rows any shorter than this and another column is added (up to 3).
+    [SerializeField] private float minRowHeight = 70f;
 
     [Header("Colours")]
     [SerializeField] private Color unlockedBackground = new Color(0.25f, 0.12f, 0.4f, 0.85f);
@@ -85,22 +87,39 @@ public class AchievementsScreen : MonoBehaviour
         AchievementDatabase.Entry[] all = Achievements.All;
         if (all.Length == 0) return;
 
-        int rows = Mathf.CeilToInt(all.Length / 2f);
         float available = 1080f - listTop - listBottom;
-        float rowHeight = Mathf.Min(maxRowHeight, (available - (rows - 1) * rowGap) / rows);
+
+        int columns = 1;
+        int rows = all.Length;
+        float rowHeight = RowHeight(rows, available);
+        while (rowHeight < minRowHeight && columns < 3)
+        {
+            columns++;
+            rows = Mathf.CeilToInt(all.Length / (float)columns);
+            rowHeight = RowHeight(rows, available);
+        }
+        rowHeight = Mathf.Min(maxRowHeight, rowHeight);
+
+        float columnWidth = (listWidth - (columns - 1) * columnGap) / columns;
 
         for (int i = 0; i < all.Length; i++)
         {
-            int column = i / rows;   // fill the left column first, then the right
+            int column = i / rows;   // fill the first column top to bottom, then the next
             int row = i % rows;
-            float x = (column == 0 ? -1f : 1f) * (columnWidth + columnGap) * 0.5f;
+            float x = -listWidth * 0.5f + column * (columnWidth + columnGap) + columnWidth * 0.5f;
             float y = -(listTop + row * (rowHeight + rowGap));
-            BuildRow(all[i], new Vector2(x, y), rowHeight);
+            BuildRow(all[i], new Vector2(x, y), new Vector2(columnWidth, rowHeight));
         }
     }
 
-    private void BuildRow(AchievementDatabase.Entry entry, Vector2 position, float height)
+    private float RowHeight(int rows, float available)
     {
+        return (available - (rows - 1) * rowGap) / Mathf.Max(1, rows);
+    }
+
+    private void BuildRow(AchievementDatabase.Entry entry, Vector2 position, Vector2 size)
+    {
+        float height = size.y;
         bool isUnlocked = Achievements.IsUnlocked(entry.id);
         bool masked = entry.hidden && !isUnlocked;
 
@@ -108,7 +127,7 @@ public class AchievementsScreen : MonoBehaviour
         row.anchorMin = row.anchorMax = new Vector2(0.5f, 1f);
         row.pivot = new Vector2(0.5f, 1f);
         row.anchoredPosition = position;
-        row.sizeDelta = new Vector2(columnWidth, height);
+        row.sizeDelta = size;
 
         Image background = row.gameObject.AddComponent<Image>();
         background.color = isUnlocked ? unlockedBackground : lockedBackground;
@@ -123,16 +142,24 @@ public class AchievementsScreen : MonoBehaviour
         TextMeshProUGUI title = CreateText("Title", row, masked ? "???" : entry.title,
             Mathf.Min(32f, height * 0.36f), isUnlocked ? unlockedTitle : lockedTitle, TextAlignmentOptions.MidlineLeft);
         title.fontStyle = FontStyles.Bold;
+        // Long titles shrink to fit instead of being cut off.
+        title.enableAutoSizing = true;
+        title.fontSizeMax = title.fontSize;
+        title.fontSizeMin = 14f;
         Place(title.rectTransform, 0.5f, 0.95f);
+        title.rectTransform.offsetMax = new Vector2(-Mathf.Min(150f, size.x * 0.25f), 0f); // room for the state tag
 
         TextMeshProUGUI description = CreateText("Description", row, masked ? "Hidden achievement" : entry.description,
             Mathf.Min(24f, height * 0.27f), isUnlocked ? unlockedDescription : lockedDescription, TextAlignmentOptions.MidlineLeft);
+        description.enableAutoSizing = true;
+        description.fontSizeMax = description.fontSize;
+        description.fontSizeMin = 12f;
         Place(description.rectTransform, 0.05f, 0.5f);
 
         TextMeshProUGUI state = CreateText("State", row, isUnlocked ? "UNLOCKED" : "LOCKED",
             Mathf.Min(20f, height * 0.22f), isUnlocked ? unlockedBorder : lockedDescription, TextAlignmentOptions.TopRight);
         RectTransform stateRect = state.rectTransform;
-        stateRect.anchorMin = new Vector2(0.6f, 0.5f);
+        stateRect.anchorMin = new Vector2(0.7f, 0.5f);
         stateRect.anchorMax = new Vector2(1f, 0.95f);
         stateRect.offsetMin = new Vector2(0f, 0f);
         stateRect.offsetMax = new Vector2(-18f, 0f);

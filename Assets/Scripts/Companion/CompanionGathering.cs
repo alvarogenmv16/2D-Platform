@@ -59,6 +59,7 @@ public class CompanionGathering : MonoBehaviour
         }
 
         rewarded = true;
+        AchievementTracker.CompanionsGathered();
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null && player.TryGetComponent(out PlayerMovement movement))

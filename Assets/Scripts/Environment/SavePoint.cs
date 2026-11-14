@@ -112,6 +112,7 @@ public class SavePoint : MonoBehaviour
 
         playerInRange = true;
         player = other.gameObject;
+        AchievementTracker.SavePointReached(gameObject.scene.name, gameObject.name);
         if (other.TryGetComponent(out PlayerMovement movement)) inputActions = movement.InputActions;
 
         if (!busy) ShowPrompt();

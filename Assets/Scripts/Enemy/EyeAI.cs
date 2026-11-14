@@ -159,6 +159,7 @@ public class EyeAI : MonoBehaviour
     {
         if (currentState != EyeState.Dormant) return;
 
+        AchievementTracker.BossFightStarted(AchievementTracker.Eye);
         currentState = EyeState.Summoning;
         StartCoroutine(SummonSequence());
     }
@@ -265,6 +266,7 @@ public class EyeAI : MonoBehaviour
     // forever after the Eye is dead. Stop everything explicitly instead.
     private void HandleDied()
     {
+        AchievementTracker.BossDefeated(AchievementTracker.Eye);
         StopAllCoroutines();
     }
 

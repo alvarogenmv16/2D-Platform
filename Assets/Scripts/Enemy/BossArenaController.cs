@@ -163,6 +163,7 @@ public class BossArenaController : MonoBehaviour
     private void HandleBossDied()
     {
         GameProgress.Set(defeatedFlag);
+        AchievementTracker.BossDefeated(AchievementTracker.Boss1);
         SetVictoryObjectsActive(true);
         SetWallsActive(false);
 
