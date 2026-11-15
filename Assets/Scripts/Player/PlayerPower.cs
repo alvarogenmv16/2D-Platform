@@ -59,7 +59,10 @@ public class PlayerPower : MonoBehaviour
 
         // Reuse PlayerMovement's InputSystem_Actions instance instead of
         // creating a second one, same convention as PlayerAttack.
-        if (playerMovement != null && playerMovement.InputActions.Player.Heal.WasPressedThisFrame())
+        // Not while dead, hit-stunned or in a cutscene (movement off) - same
+        // rule as attacking (PlayerAttack).
+        if (playerMovement != null && playerMovement.enabled
+            && playerMovement.InputActions.Player.Heal.WasPressedThisFrame())
         {
             TryHeal();
         }

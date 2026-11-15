@@ -29,7 +29,8 @@ public class HazardDamage : MonoBehaviour, IHazard
         // Only bump the player back on a hit that actually landed - not on
         // every OnTriggerStay2D frame while they're still invulnerable from
         // the last one.
-        if (damageApplied && other.TryGetComponent(out PlayerRespawnPoint respawnPoint))
+        // Nor on a lethal one: the death sequence takes over from there.
+        if (damageApplied && !playerHealth.IsDead && other.TryGetComponent(out PlayerRespawnPoint respawnPoint))
         {
             SceneFader.FlashAndTeleport(respawnPoint);
         }

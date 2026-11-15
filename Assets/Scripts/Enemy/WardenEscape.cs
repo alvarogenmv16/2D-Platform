@@ -215,9 +215,16 @@ public class WardenEscape : MonoBehaviour
 
         // 5. Back to the main menu
 
+        // Only this scene's sounds: the ones that live on in DontDestroyOnLoad
+        // (achievement pop-up, pause menu) would otherwise stay at volume 0
+        // for the rest of the session.
         AudioSource[] sources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
         float[] startVolumes = new float[sources.Length];
-        for (int i = 0; i < sources.Length; i++) startVolumes[i] = sources[i] != null ? sources[i].volume : 0f;
+        for (int i = 0; i < sources.Length; i++)
+        {
+            if (sources[i] != null && sources[i].gameObject.scene.buildIndex < 0) sources[i] = null;
+            startVolumes[i] = sources[i] != null ? sources[i].volume : 0f;
+        }
 
         for (float t = 0f; t < returnFadeTime; t += Time.deltaTime)
         {
@@ -389,7 +396,9 @@ public class WardenEscape : MonoBehaviour
 
     private static bool AnyButtonPressed()
     {
-        if (Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame) return true;
+        // Esc is the pause menu's key - it doesn't count as "continue".
+        Keyboard keyboard = Keyboard.current;
+        if (keyboard != null && keyboard.anyKey.wasPressedThisFrame && !keyboard.escapeKey.wasPressedThisFrame) return true;
         if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame) return true;
 
         Gamepad pad = Gamepad.current;

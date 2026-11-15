@@ -22,6 +22,12 @@ public class PlayerAttack : MonoBehaviour
     {
         // Reuse PlayerMovement's InputSystem_Actions instance instead of
         // creating a second one, to avoid duplicating input handling.
+        // Movement off = dead, hit-stunned or in a cutscene (boss intros,
+        // the save-point reload, the ending): no attacking then either.
+        // Without this an attack could cut into the death animation (Any
+        // State) and the corpse could still hit enemies.
+        if (!playerMovement.enabled) return;
+
         if (playerMovement.InputActions.Player.Attack.WasPressedThisFrame())
         {
             attackPressedThisFrame = true;

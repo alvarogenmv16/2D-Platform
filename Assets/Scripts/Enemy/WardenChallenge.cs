@@ -63,7 +63,8 @@ public class WardenChallenge : MonoBehaviour
         if (beast == null) beast = FindFirstObjectByType<BeastAI>(FindObjectsInactive.Include);
         if (beast != null) beastHealth = beast.GetComponent<EnemyHealth>();
 
-        if (appearAfterBeast && beastHealth != null)
+        // Morthos already beaten (BeastAI switches itself off): available.
+        if (appearAfterBeast && beastHealth != null && beast.gameObject.activeInHierarchy)
         {
             SetVisible(false);
             beastHealth.OnDied.AddListener(HandleBeastDied);
