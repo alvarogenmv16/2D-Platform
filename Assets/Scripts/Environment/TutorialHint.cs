@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 // A tutorial message tied to a spot of the level. Its BoxCollider2D (trigger)
 // is the zone: while the player is inside, the message is shown in the
@@ -12,8 +10,10 @@ using UnityEngine.InputSystem;
 // The message can name controls with {Action} - {Move}, {Jump}, {Attack},
 // {Dash}, {Heal}, {Interact}... (any action of the Player map). They're
 // replaced by the actual key or button, and swap between keyboard and
-// gamepad on their own depending on what the player last touched.
-//   e.g. "Pulsa {Jump} para saltar"  ->  "Pulsa [Space] para saltar"
+// gamepad on their own depending on what the player last touched
+// (ControlNames: English names, PlayStation buttons). {Up} and {Down} name
+// those directions.
+//   e.g. "Press {Jump} to jump"  ->  "Press [Space] to jump" / "Press [X] to jump"
 //
 // In the Editor the zone and the message are drawn in the Scene view, so
 // hints can be placed and read without entering Play mode.
@@ -26,8 +26,8 @@ public class TutorialHint : MonoBehaviour
     [SerializeField] private bool showOnce = false;
     [SerializeField] private DialogueUI dialogueUI; // found in the scene if empty
 
-    // Shared by every hint: what the player is currently playing with.
-    private static bool usingGamepad;
+    // What the player is playing with (ControlNames), as of this frame.
+    private bool usingGamepad;
 
     private InputSystem_Actions inputActions;
     private bool playerInside;
@@ -52,7 +52,7 @@ public class TutorialHint : MonoBehaviour
 
     private void Update()
     {
-        DetectDevice();
+        usingGamepad = ControlNames.UsingGamepad;
 
         // Switched between keyboard and gamepad while reading: re-show with
         // the right keys - but only if the box is still showing this hint.
@@ -89,77 +89,14 @@ public class TutorialHint : MonoBehaviour
     {
         if (dialogueUI == null) return;
 
+        usingGamepad = ControlNames.UsingGamepad;
         shownWithGamepad = usingGamepad;
         string hex = ColorUtility.ToHtmlStringRGB(keyColor);
         string text = Placeholder.Replace(message, m => $"<color=#{hex}><b>[{ControlName(m.Groups[1].Value)}]</b></color>");
         dialogueUI.Show(text, this);
     }
 
-    private string ControlName(string actionName)
-    {
-        // Movement is a composite (WASD + arrows): spell it out instead of
-        // listing every key.
-        if (actionName == "Move") return usingGamepad ? "Left Stick" : "A / D";
-
-        if (inputActions == null) return actionName;
-        InputAction action = inputActions.asset.FindAction("Player/" + actionName);
-        if (action == null) return actionName;
-
-        // Names come from the binding paths (the control layouts), not from
-        // the connected keyboard: GetBindingDisplayString asks the device,
-        // and Windows names keys in the OS language ("Espacio" for Space).
-        // The layout names are always the English ones.
-        string group = usingGamepad ? "Gamepad" : "Keyboard&Mouse";
-        InputBinding mask = InputBinding.MaskByGroup(group);
-        List<string> names = new List<string>();
-        foreach (InputBinding binding in action.bindings)
-        {
-            if (binding.isComposite || binding.isPartOfComposite) continue;
-            if (!mask.Matches(binding)) continue;
-
-            string path = binding.effectivePath;
-            string name = path switch
-            {
-                "<Mouse>/leftButton" => "Left Click",
-                "<Mouse>/rightButton" => "Right Click",
-                "<Mouse>/middleButton" => "Middle Click",
-                _ => InputControlPath.ToHumanReadableString(path, InputControlPath.HumanReadableStringOptions.OmitDevice),
-            };
-            if (!string.IsNullOrEmpty(name) && !names.Contains(name)) names.Add(name);
-        }
-
-        return names.Count > 0 ? string.Join(" / ", names) : actionName;
-    }
-
-    // =========================
-    // DEVICE
-    // =========================
-
-    private static void DetectDevice()
-    {
-        Gamepad pad = Gamepad.current;
-        if (!usingGamepad)
-        {
-            if (pad != null && (pad.leftStick.ReadValue().sqrMagnitude > 0.25f || AnyButton(pad)))
-            {
-                usingGamepad = true;
-            }
-        }
-        else if ((Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame)
-                 || (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame))
-        {
-            usingGamepad = false;
-        }
-    }
-
-    private static bool AnyButton(Gamepad pad)
-    {
-        foreach (InputControl control in pad.allControls)
-        {
-            if (control is UnityEngine.InputSystem.Controls.ButtonControl button && button.wasPressedThisFrame) return true;
-        }
-        return false;
-    }
+    private string ControlName(string actionName) => ControlNames.For(inputActions, actionName, usingGamepad);
 
     // =========================
     // EDITOR PREVIEW

@@ -24,14 +24,14 @@ public class SavePoint : MonoBehaviour
     [SerializeField] private Vector2 spawnOffset = new Vector2(1.2f, 0.1f);
 
     [Header("Prompt")]
-    [SerializeField] private string promptMessage = "Guardar partida";
-    [SerializeField] private string savedMessage = "Partida guardada";
+    [SerializeField] private string promptMessage = "Save Game?";
+    [SerializeField] private string savedMessage = "Game Saved!";
     [SerializeField] private float savedMessageTime = 1.5f;
     [SerializeField] private bool healOnSave = true;
     // Dark Souls style: after saving, the level reloads with every enemy
     // back (SceneFader.FadeReloadAtSavePoint), the player next to the lamp.
     [SerializeField] private bool respawnEnemiesOnSave = true;
-    // Time to read "Partida guardada" before the fade starts.
+    // Time to read "Game Saved!" before the fade starts.
     [SerializeField] private float reloadDelay = 0.8f;
     [SerializeField] private DialogueUI dialogueUI; // found in the scene if empty
 
@@ -117,6 +117,9 @@ public class SavePoint : MonoBehaviour
 
         if (!playerInRange || busy || inputActions == null) return;
 
+        // Switched between keyboard and gamepad while standing here.
+        if (promptShownWithGamepad != ControlNames.UsingGamepad) ShowPrompt();
+
         if (inputActions.Player.Interact.WasPerformedThisFrame())
         {
             StartCoroutine(SaveSequence());
@@ -164,10 +167,11 @@ public class SavePoint : MonoBehaviour
 
     private string InteractKey()
     {
-        if (inputActions == null) return "E";
-        string shown = inputActions.Player.Interact.GetBindingDisplayString(InputBinding.MaskByGroup("Keyboard&Mouse"));
-        return string.IsNullOrEmpty(shown) ? "E" : shown;
+        promptShownWithGamepad = ControlNames.UsingGamepad;
+        return inputActions == null ? (promptShownWithGamepad ? "Triangle" : "E") : ControlNames.For(inputActions, "Interact");
     }
+
+    private bool promptShownWithGamepad;
 
     private IEnumerator SaveSequence()
     {

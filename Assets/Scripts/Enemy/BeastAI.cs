@@ -195,8 +195,19 @@ public class BeastAI : MonoBehaviour
     // =========================
     // AWAKE / START
     // =========================
+    // Set when Morthos dies (GameProgress, kept by the save): the scene
+    // reloading - resting at a save point, dying to the Warden, Continue -
+    // doesn't bring it back.
+    public const string DefeatedFlag = "BeastDefeated";
+
     private void Awake()
     {
+        if (GameProgress.Has(DefeatedFlag))
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
         // Subscribed here (not OnEnable): EnemyHealth disables this
         // component for a moment on every hit, and no phase change may be
         // missed because of that.
@@ -317,6 +328,7 @@ public class BeastAI : MonoBehaviour
     // This only tidies up what the AI itself left running.
     private void OnDied()
     {
+        GameProgress.Set(DefeatedFlag);
         AchievementTracker.BossDefeated(AchievementTracker.Beast);
         if (phaseMusic != null) phaseMusic.PlayVictory(); // battle track fades out
         if (walkBob != null) walkBob.SetWalking(false);
