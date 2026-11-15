@@ -47,6 +47,18 @@ public class SavePoint : MonoBehaviour
     [SerializeField] private AudioClip saveSound;
     [SerializeField, Range(0f, 1f)] private float saveVolume = 1f;
 
+    [Header("Arrival sound (optional)")]
+    // Plays the first time the player walks up to this lamp in a game
+    // session (TempleScene: "I see you" before Morthos and the Warden).
+    // Not again after dying or saving, nor when starting right next to it.
+    [SerializeField] private AudioClip arrivalSound;
+    [SerializeField, Range(0f, 1f)] private float arrivalVolume = 1f;
+
+    private static readonly System.Collections.Generic.HashSet<string> arrivalPlayed = new System.Collections.Generic.HashSet<string>();
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStatics() => arrivalPlayed.Clear();
+
     public string Id => savePointId;
     public Vector3 SpawnPosition => transform.position + (Vector3)spawnOffset;
 
@@ -118,6 +130,7 @@ public class SavePoint : MonoBehaviour
         playerInRange = true;
         player = other.gameObject;
         AchievementTracker.SavePointReached(gameObject.scene.name, gameObject.name);
+        PlayArrivalSound();
         if (other.TryGetComponent(out PlayerMovement movement)) inputActions = movement.InputActions;
 
         if (!busy) ShowPrompt();
@@ -129,6 +142,19 @@ public class SavePoint : MonoBehaviour
 
         playerInRange = false;
         if (dialogueUI != null) dialogueUI.Hide(this);
+    }
+
+    private void PlayArrivalSound()
+    {
+        if (arrivalSound == null) return;
+
+        // Spawned here (Continue, respawn, the reload after saving): it
+        // already "knows" the player is here.
+        bool spawnedHere = Time.timeSinceLevelLoad < 1f;
+        if (!arrivalPlayed.Add(gameObject.scene.name + "/" + savePointId) || spawnedHere) return;
+
+        if (TryGetComponent(out AudioSource source)) source.PlayOneShot(arrivalSound, arrivalVolume);
+        else AudioSource.PlayClipAtPoint(arrivalSound, transform.position, arrivalVolume);
     }
 
     private void ShowPrompt()

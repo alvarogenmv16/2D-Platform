@@ -2911,6 +2911,10 @@ PrefabInstance:
       value: TempleSavePoint1
       objectReference: {fileID: 0}
     - target: {fileID: 4769698887415163859, guid: 4c5163d8910e4d16833f57225298d187, type: 3}
+      propertyPath: arrivalSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 594dd179884c6f44d9daec60feb1fd74, type: 3}
+    - target: {fileID: 4769698887415163859, guid: 4c5163d8910e4d16833f57225298d187, type: 3}
       propertyPath: savedMessage
       value: Game Saved!
       objectReference: {fileID: 0}
@@ -15992,6 +15996,10 @@ PrefabInstance:
       propertyPath: savePointId
       value: TempleSavePoint2
       objectReference: {fileID: 0}
+    - target: {fileID: 4769698887415163859, guid: 4c5163d8910e4d16833f57225298d187, type: 3}
+      propertyPath: arrivalSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 594dd179884c6f44d9daec60feb1fd74, type: 3}
     - target: {fileID: 4769698887415163859, guid: 4c5163d8910e4d16833f57225298d187, type: 3}
       propertyPath: savedMessage
       value: Game Saved!
