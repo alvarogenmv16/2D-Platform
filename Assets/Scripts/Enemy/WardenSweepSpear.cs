@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 // One flying spear of the Warden: crosses the screen along a straight line.
 // Spawned (and set up through Launch / LaunchAlong) by WardenAI.
@@ -11,6 +13,10 @@ using UnityEngine;
 //   2. Flight: it shoots along the line, hurting the player on contact, and
 //      the beam fades out.
 //   3. Destroys itself once it has gone past the end of the line.
+//
+// Phase 3 spear circle: WardenAI holds the spear instead (Hold / Place every
+// frame, harmless, no beam), lights it up once (Glow) to show its place in
+// the firing order, then Fire shoots it straight on.
 //
 // Children: Spear (moves; WardenSpear1 points along +x, so it's rotated to
 // the flight direction) and Lane (static beam, the portal column sprite
@@ -50,6 +56,7 @@ public class WardenSweepSpear : MonoBehaviour
     private bool flying;
     private float fadeTimer;
     private Vector3 laneBaseScale;
+    private bool held;              // phase 3 circle: placed by WardenAI, not moving on its own
 
     private void Awake()
     {
@@ -98,8 +105,100 @@ public class WardenSweepSpear : MonoBehaviour
         }
     }
 
+    // =========================
+    // PHASE 3 - SPEAR CIRCLE (driven by WardenAI)
+    // =========================
+
+    // Hovering, harmless and without its beam until Fire.
+    public void Hold(Vector2 position, Vector2 aimDirection)
+    {
+        held = true;
+        flying = false;
+        SetLaneAlpha(0f);
+        Place(position, aimDirection);
+    }
+
+    // position: the spear's centre; it points along aimDirection.
+    public void Place(Vector2 position, Vector2 aimDirection)
+    {
+        if (spear == null) return;
+        if (aimDirection.sqrMagnitude > 0f) direction = aimDirection.normalized;
+        spear.position = position;
+        spear.rotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
+    }
+
+    public float SpearLength => spearLength;
+    public Vector2 SpearPosition => spear != null ? (Vector2)spear.position : (Vector2)transform.position;
+
+    // Shoots straight along aimDirection for distance, then it's gone.
+    public void Fire(Vector2 aimDirection, float distance, float flightSpeed)
+    {
+        Place(SpearPosition, aimDirection);
+        held = false;
+        flying = true;
+        travelled = 0f;
+        travelLength = distance;
+        if (flightSpeed > 0f) speed = flightSpeed;
+        fadeTimer = laneFadeTime; // no beam for these
+        SetLaneAlpha(0f);
+        if (sfxPlayer != null) sfxPlayer.Play(launchSound);
+    }
+
+    // The order glow: a white flash over the spear's silhouette, a light
+    // around it and a quick swell, over duration.
+    public void Glow(float duration, Color color, float lightIntensity, float lightRadius, Shader flashShader)
+    {
+        if (spear == null || !spear.TryGetComponent(out SpriteRenderer body)) return;
+        StartCoroutine(GlowRoutine(body, duration, color, lightIntensity, lightRadius, flashShader));
+    }
+
+    private IEnumerator GlowRoutine(SpriteRenderer body, float duration, Color color, float lightIntensity,
+                                    float lightRadius, Shader flashShader)
+    {
+        SpriteRenderer overlay = null;
+        if (flashShader != null)
+        {
+            GameObject overlayObject = new GameObject("Glow");
+            overlayObject.transform.SetParent(body.transform, false);
+            overlay = overlayObject.AddComponent<SpriteRenderer>();
+            overlay.sprite = body.sprite;
+            overlay.material = new Material(flashShader);
+            overlay.sortingLayerID = body.sortingLayerID;
+            overlay.sortingOrder = body.sortingOrder + 1;
+        }
+
+        Light2D light = body.gameObject.AddComponent<Light2D>();
+        light.lightType = Light2D.LightType.Point;
+        light.color = color;
+        light.pointLightInnerRadius = 0f;
+        light.pointLightOuterRadius = lightRadius;
+
+        Vector3 baseScale = body.transform.localScale;
+        duration = Mathf.Max(0.05f, duration);
+        for (float t = 0f; t < duration; t += Time.deltaTime)
+        {
+            // Up fast, down slower.
+            float k = t / duration;
+            float strength = k < 0.25f ? k / 0.25f : 1f - (k - 0.25f) / 0.75f;
+            light.intensity = lightIntensity * strength;
+            if (overlay != null) overlay.color = new Color(color.r, color.g, color.b, 0.9f * strength);
+            body.transform.localScale = baseScale * (1f + 0.25f * strength);
+            yield return null;
+        }
+
+        body.transform.localScale = baseScale;
+        Destroy(light);
+        if (overlay != null)
+        {
+            Destroy(overlay.material);
+            Destroy(overlay.gameObject);
+        }
+    }
+
     private void Update()
     {
+        if (held) return;
+
         timer += Time.deltaTime;
 
         if (!flying)
