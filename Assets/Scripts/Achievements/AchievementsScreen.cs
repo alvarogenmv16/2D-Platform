@@ -21,7 +21,7 @@ public class AchievementsScreen : MonoBehaviour
     [SerializeField] private Sprite barFill;    // UI_powerBar1
 
     [Header("Layout (1920x1080 canvas)")]
-    [SerializeField] private float barTop = 230f;        // from the top of the screen
+    [SerializeField] private float barTop = 160f;        // from the top of the screen
     [SerializeField] private Vector2 barSize = new Vector2(700f, 75f);
     [SerializeField] private float gridTop = 330f;       // from the top of the screen
     [SerializeField] private float gridBottom = 160f;    // from the bottom (clear of the Back button)
