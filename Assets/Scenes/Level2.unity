@@ -28770,7 +28770,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 523025824866663958, guid: 9a7ccb5448a144e6850dde666a303db1, type: 3}
       propertyPath: savedMessage
-      value: Game Saved
+      value: Game Saved!
       objectReference: {fileID: 0}
     - target: {fileID: 523025824866663958, guid: 9a7ccb5448a144e6850dde666a303db1, type: 3}
       propertyPath: promptMessage

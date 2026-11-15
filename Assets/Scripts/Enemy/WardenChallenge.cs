@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 // TempleScene: the spot where the true final boss (the Warden) is challenged.
 // A spear stuck in the ground (WardenSpear0) that only shows up once Morthos
-// is dead. Standing on it shows the "Desafiar" prompt in the scene's
+// is dead. Standing on it shows the "Challenge?" prompt in the scene's
 // DialogueUI; pressing Interact accepts the challenge and fires
 // OnChallengeAccepted (the Warden fight hooks onto it). If the player never
 // presses it, nothing happens.
@@ -26,7 +26,7 @@ public class WardenChallenge : MonoBehaviour
 
     [Header("Prompt")]
     [SerializeField] private DialogueUI dialogueUI;
-    [SerializeField] private string promptMessage = "Desafiar";
+    [SerializeField] private string promptMessage = "Challenge?";
 
     [Header("Sound (optional)")]
     [SerializeField] private SfxPlayer sfxPlayer;

@@ -10,7 +10,7 @@ using UnityEngine.UI;
 // The ending. Lives on the Warden's fallen helmet (WardenFallenHelmet's
 // prefab). Once the Warden is dead, WardenAI calls EnableEscape(): standing
 // by the helmet shows the "Escape" prompt in the scene's DialogueUI, the same
-// way the "Desafiar" spot works at the start.
+// way the "Challenge?" spot works at the start.
 //
 // Pressing Interact:
 //   1. The player freezes and the camera starts shaking, harder and faster

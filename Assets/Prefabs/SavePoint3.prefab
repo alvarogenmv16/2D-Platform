@@ -193,8 +193,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SavePoint
   savePointId: Save
   spawnOffset: {x: 1.2, y: 0.1}
-  promptMessage: Guardar partida
-  savedMessage: Partida guardada
+  promptMessage: Save Game?
+  savedMessage: Game Saved!
   savedMessageTime: 1.5
   healOnSave: 1
   dialogueUI: {fileID: 0}

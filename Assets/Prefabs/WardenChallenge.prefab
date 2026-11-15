@@ -158,7 +158,7 @@ MonoBehaviour:
   appearDelay: 3
   fadeInTime: 1.5
   dialogueUI: {fileID: 0}
-  promptMessage: Desafiar
+  promptMessage: Challenge?
   sfxPlayer: {fileID: 0}
   appearSound: {fileID: 0}
   challengeSound: {fileID: 0}
