@@ -299,7 +299,7 @@ PrefabInstance:
       objectReference: {fileID: 965000005}
     - target: {fileID: 2224274585891868886, guid: 0c8dc06251cc7b242a370780b08f282a, type: 3}
       propertyPath: damage
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2906,6 +2906,10 @@ PrefabInstance:
       propertyPath: saveSound
       value: 
       objectReference: {fileID: 8300000, guid: a12dbe702b7181642a27de311865d11c, type: 3}
+    - target: {fileID: 4769698887415163859, guid: 4c5163d8910e4d16833f57225298d187, type: 3}
+      propertyPath: savePointId
+      value: TempleSavePoint1
+      objectReference: {fileID: 0}
     - target: {fileID: 4769698887415163859, guid: 4c5163d8910e4d16833f57225298d187, type: 3}
       propertyPath: savedMessage
       value: Game Saved!
@@ -15984,6 +15988,10 @@ PrefabInstance:
       propertyPath: saveSound
       value: 
       objectReference: {fileID: 8300000, guid: a12dbe702b7181642a27de311865d11c, type: 3}
+    - target: {fileID: 4769698887415163859, guid: 4c5163d8910e4d16833f57225298d187, type: 3}
+      propertyPath: savePointId
+      value: TempleSavePoint2
+      objectReference: {fileID: 0}
     - target: {fileID: 4769698887415163859, guid: 4c5163d8910e4d16833f57225298d187, type: 3}
       propertyPath: savedMessage
       value: Game Saved!
