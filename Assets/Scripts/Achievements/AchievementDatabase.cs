@@ -12,9 +12,14 @@ public class AchievementDatabase : ScriptableObject
         public string id;            // what the code passes to Achievements.Unlock
         public string title;
         [TextArea] public string description;
-        // Shown as "???" in the list until it's unlocked (for secrets).
-        public bool hidden;
+        // Its card (Sprites/PlayerSprite/Achivements.png). Only shown once
+        // it's unlocked.
+        public Sprite icon;
     }
+
+    [Header("Unlock pop-up")]
+    public AudioClip unlockSound;
+    [Range(0f, 1f)] public float unlockVolume = 1f;
 
     public Entry[] achievements = new Entry[0];
 }

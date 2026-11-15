@@ -1,6 +1,9 @@
 using System.Collections;
+using System.Collections.Generic;
+using TMPro;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -14,8 +17,10 @@ using UnityEngine.UI;
 //      every moment (Cinemachine impulses, ever closer together).
 //   2. At its peak the screen fades completely to black, the ending music
 //      plays, and "The End" fades in.
-//   3. After a few seconds "The End" and the music fade out and the game
-//      goes back to the main menu (clearing the persistent player first).
+//   3. "The End" rises and the run's statistics (RunStats) fade in below it
+//      while the music keeps playing. Any button (or statsMaxTime) moves on.
+//   4. Everything and the music fade out and the game goes back to the
+//      main menu (clearing the persistent player first).
 //
 // The trigger zone is a BoxCollider2D on the helmet itself, off until the
 // escape is available (a trigger: nothing the player can bump into).
@@ -44,10 +49,19 @@ public class WardenEscape : MonoBehaviour
     [SerializeField] private float theEndFadeTime = 2.5f;
     [SerializeField] private AudioClip endingMusic;
 
+    [Header("Statistics")]
+    // "The End" alone for this long, then it rises and the stats appear.
+    [SerializeField] private float statsDelay = 1.5f;
+    [SerializeField] private float statsFadeTime = 1.2f;
+    // Any button continues once this much time has passed...
+    [SerializeField] private float statsMinTime = 3f;
+    // ...and it continues by itself after this long.
+    [SerializeField] private float statsMaxTime = 40f;
+    [SerializeField] private string statsTitle = "GAME STATS";
+    [SerializeField] private string continueHint = "Press any button to continue";
+
     [Header("Back to the main menu")]
     [SerializeField] private string mainMenuScene = "MainMenu";
-    // How long "The End" stays up before going back.
-    [SerializeField] private float theEndHoldTime = 6f;
     // "The End" and the music fade out over this, then the menu loads.
     [SerializeField] private float returnFadeTime = 2f;
 
@@ -172,8 +186,34 @@ public class WardenEscape : MonoBehaviour
         }
         SetAlpha(theEnd, 1f);
 
-        // 4. Back to the main menu
-        yield return new WaitForSeconds(theEndHoldTime);
+        // 4. The statistics of the run, under "The End"
+        yield return new WaitForSeconds(statsDelay);
+        RunStats.Save();
+        CanvasGroup stats = BuildStats(theEnd.canvas.transform, out TextMeshProUGUI hint);
+        RectTransform endRect = theEnd.rectTransform;
+        Vector2 endMinFrom = endRect.anchorMin, endMaxFrom = endRect.anchorMax;
+        Vector2 endMinTo = new Vector2(endMinFrom.x, 0.7f), endMaxTo = new Vector2(endMaxFrom.x, 0.95f);
+        for (float t = 0f; t < statsFadeTime; t += Time.deltaTime)
+        {
+            float k = Mathf.SmoothStep(0f, 1f, t / statsFadeTime);
+            endRect.anchorMin = Vector2.Lerp(endMinFrom, endMinTo, k);
+            endRect.anchorMax = Vector2.Lerp(endMaxFrom, endMaxTo, k);
+            stats.alpha = k;
+            yield return null;
+        }
+        endRect.anchorMin = endMinTo;
+        endRect.anchorMax = endMaxTo;
+        stats.alpha = 1f;
+
+        for (float t = 0f; t < statsMaxTime; t += Time.deltaTime)
+        {
+            bool canContinue = t >= statsMinTime;
+            hint.alpha = canContinue ? 0.45f + 0.35f * Mathf.Sin(t * 3f) : 0f;
+            if (canContinue && AnyButtonPressed()) break;
+            yield return null;
+        }
+
+        // 5. Back to the main menu
 
         AudioSource[] sources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
         float[] startVolumes = new float[sources.Length];
@@ -183,6 +223,7 @@ public class WardenEscape : MonoBehaviour
         {
             float k = 1f - t / returnFadeTime;
             SetAlpha(theEnd, k);
+            stats.alpha = k;
             for (int i = 0; i < sources.Length; i++)
             {
                 if (sources[i] != null) sources[i].volume = startVolumes[i] * k;
@@ -249,6 +290,111 @@ public class WardenEscape : MonoBehaviour
         theEnd.preserveAspect = true;
         theEnd.color = new Color(1f, 1f, 1f, 0f);
         return black;
+    }
+
+    // =========================
+    // STATISTICS
+    // =========================
+
+    private CanvasGroup BuildStats(Transform canvas, out TextMeshProUGUI hint)
+    {
+        GameObject panelGo = new GameObject("Stats", typeof(RectTransform), typeof(CanvasGroup));
+        panelGo.transform.SetParent(canvas, false);
+        RectTransform panel = (RectTransform)panelGo.transform;
+        panel.anchorMin = new Vector2(0.5f, 0.06f);
+        panel.anchorMax = new Vector2(0.5f, 0.68f);
+        panel.sizeDelta = new Vector2(980f, 0f);
+        CanvasGroup group = panelGo.GetComponent<CanvasGroup>();
+        group.alpha = 0f;
+        group.blocksRaycasts = false;
+
+        Color label = new Color(0.82f, 0.78f, 0.9f);
+        Color value = Color.white;
+        Color minor = new Color(0.6f, 0.56f, 0.68f);
+
+        int total = Achievements.Total;
+        int earned = RunStats.AchievementsEarned;
+        int percent = total > 0 ? Mathf.RoundToInt(100f * earned / total) : 0;
+        string killer = RunStats.TopKiller(out int kills);
+
+        List<(string name, string number, bool small)> rows = new List<(string, string, bool)>
+        {
+            ("Play time", RunStats.FormatTime(RunStats.PlayTime), false),
+            ("Achievements this run", $"{earned} / {total}  ({percent}%)", false),
+            ("Enemies defeated", RunStats.EnemiesDefeated.ToString(), false),
+            ("Souls collected", $"{RunStats.SoulsCollected} / {AchievementTracker.TotalSouls}", false),
+            ("Deaths", RunStats.Deaths.ToString(), false),
+        };
+        foreach (string level in RunStats.Levels)
+        {
+            rows.Add(("      " + level, RunStats.DeathsIn(level).ToString(), true));
+        }
+        rows.Add(("Deadliest enemy", killer != null ? $"{killer}  ({kills})" : "None", false));
+        int hazardDeaths = RunStats.HazardDeaths;
+        rows.Add(("Not The Way To Go",
+            $"Died {hazardDeaths} {(hazardDeaths == 1 ? "time" : "times")} to the environment", false));
+        int hits = RunStats.HitsTaken;
+        rows.Add(("Tank It", $"You received {hits} {(hits == 1 ? "attack" : "attacks")}", false));
+        int heals = RunStats.Heals;
+        rows.Add(("Nurse", $"You healed {heals} {(heals == 1 ? "time" : "times")}", false));
+
+        float top = 0f;
+        TextMeshProUGUI title = CreateText("Title", panel, statsTitle, 46f, value, TextAlignmentOptions.Center);
+        title.fontStyle = FontStyles.Bold;
+        PlaceRow(title.rectTransform, top, 64f);
+        top += 84f;
+
+        foreach ((string name, string number, bool small) in rows)
+        {
+            float size = small ? 26f : 33f;
+            float height = small ? 32f : 44f;
+            TextMeshProUGUI left = CreateText(name.Trim(), panel, name, size, small ? minor : label, TextAlignmentOptions.MidlineLeft);
+            PlaceRow(left.rectTransform, top, height);
+            TextMeshProUGUI right = CreateText(name.Trim() + " Value", panel, number, size, small ? minor : value, TextAlignmentOptions.MidlineRight);
+            PlaceRow(right.rectTransform, top, height);
+            if (!small) right.fontStyle = FontStyles.Bold;
+            top += height;
+        }
+
+        hint = CreateText("Hint", panel, continueHint, 26f, minor, TextAlignmentOptions.Center);
+        PlaceRow(hint.rectTransform, top + 30f, 40f);
+        hint.alpha = 0f;
+
+        return group;
+    }
+
+    private static TextMeshProUGUI CreateText(string name, Transform parent, string content, float size, Color color, TextAlignmentOptions alignment)
+    {
+        GameObject go = new GameObject(name, typeof(RectTransform));
+        go.transform.SetParent(parent, false);
+        TextMeshProUGUI text = go.AddComponent<TextMeshProUGUI>();
+        text.text = content;
+        text.fontSize = size;
+        text.color = color;
+        text.alignment = alignment;
+        text.textWrappingMode = TextWrappingModes.NoWrap;
+        text.raycastTarget = false;
+        return text;
+    }
+
+    // A full-width row, top pixels below the top of the stats panel.
+    private static void PlaceRow(RectTransform rect, float top, float height)
+    {
+        rect.anchorMin = new Vector2(0f, 1f);
+        rect.anchorMax = new Vector2(1f, 1f);
+        rect.pivot = new Vector2(0.5f, 1f);
+        rect.anchoredPosition = new Vector2(0f, -top);
+        rect.sizeDelta = new Vector2(0f, height);
+    }
+
+    private static bool AnyButtonPressed()
+    {
+        if (Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame) return true;
+        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame) return true;
+
+        Gamepad pad = Gamepad.current;
+        return pad != null && (pad.buttonSouth.wasPressedThisFrame || pad.buttonEast.wasPressedThisFrame
+            || pad.startButton.wasPressedThisFrame);
     }
 
     private static Image CreateImage(string name, Transform parent, Vector2 anchorMin, Vector2 anchorMax)

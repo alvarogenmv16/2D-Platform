@@ -25,6 +25,23 @@ public class KeyBlock : MonoBehaviour, IBreakable
     // bring it back exactly where it was.
     private bool keepAfterBreak = false;
 
+    // Saved progress (LevelState): taken before the last save point.
+    private string Id => LevelState.IdFor("Key", this);
+
+    private void Start()
+    {
+        // Already taken (and saved): out of the level from the start. It's
+        // only hidden, never destroyed, so whoever references it (e.g.
+        // RisingFlameSea's triggerKey) still finds it. KeyManager already
+        // counted it in its Awake.
+        if (LevelState.Has(Id))
+        {
+            isBroken = true;
+            GetComponent<Collider2D>().enabled = false;
+            SetVisible(false);
+        }
+    }
+
     public void KeepAfterBreak()
     {
         keepAfterBreak = true;
@@ -58,6 +75,8 @@ public class KeyBlock : MonoBehaviour, IBreakable
             }
         }
 
+        LevelState.Mark(Id);
+
         if (KeyManager.Instance != null)
         {
             KeyManager.Instance.CollectKey();
@@ -83,6 +102,7 @@ public class KeyBlock : MonoBehaviour, IBreakable
     {
         if (!isBroken || !keepAfterBreak) return;
         isBroken = false;
+        LevelState.Unmark(Id);
 
         GetComponent<Collider2D>().enabled = true;
         SetVisible(true);

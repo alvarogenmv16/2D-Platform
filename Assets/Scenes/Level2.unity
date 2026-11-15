@@ -159,13 +159,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 523025824866663958, guid: 9a7ccb5448a144e6850dde666a303db1, type: 3}
-      propertyPath: savePointId
-      value: Level2_SavePoint2_2
-      objectReference: {fileID: 0}
-    - target: {fileID: 523025824866663958, guid: 9a7ccb5448a144e6850dde666a303db1, type: 3}
       propertyPath: saveSound
       value: 
       objectReference: {fileID: 8300000, guid: a12dbe702b7181642a27de311865d11c, type: 3}
+    - target: {fileID: 523025824866663958, guid: 9a7ccb5448a144e6850dde666a303db1, type: 3}
+      propertyPath: savePointId
+      value: Level2_SavePoint2_2
+      objectReference: {fileID: 0}
     - target: {fileID: 523025824866663958, guid: 9a7ccb5448a144e6850dde666a303db1, type: 3}
       propertyPath: savedMessage
       value: Game Saved!
@@ -745,7 +745,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 456318557566644832, guid: 0c8dc06251cc7b242a370780b08f282a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.9
+      value: -2.92
       objectReference: {fileID: 0}
     - target: {fileID: 456318557566644832, guid: 0c8dc06251cc7b242a370780b08f282a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -24529,7 +24529,7 @@ Transform:
   m_GameObject: {fileID: 704756065}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.3, y: 1.6058775, z: -10}
+  m_LocalPosition: {x: -6.3, y: 0.5858774, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24618,13 +24618,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 523025824866663958, guid: 9a7ccb5448a144e6850dde666a303db1, type: 3}
-      propertyPath: savePointId
-      value: Level2_SavePoint2_3
-      objectReference: {fileID: 0}
-    - target: {fileID: 523025824866663958, guid: 9a7ccb5448a144e6850dde666a303db1, type: 3}
       propertyPath: saveSound
       value: 
       objectReference: {fileID: 8300000, guid: a12dbe702b7181642a27de311865d11c, type: 3}
+    - target: {fileID: 523025824866663958, guid: 9a7ccb5448a144e6850dde666a303db1, type: 3}
+      propertyPath: savePointId
+      value: Level2_SavePoint2_3
+      objectReference: {fileID: 0}
     - target: {fileID: 523025824866663958, guid: 9a7ccb5448a144e6850dde666a303db1, type: 3}
       propertyPath: savedMessage
       value: Game Saved!
@@ -24763,7 +24763,7 @@ Transform:
   m_GameObject: {fileID: 640329269}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.3, y: 1.6058775, z: -10}
+  m_LocalPosition: {x: -6.3, y: 0.5858774, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -28761,13 +28761,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 523025824866663958, guid: 9a7ccb5448a144e6850dde666a303db1, type: 3}
-      propertyPath: savePointId
-      value: Level2_SavePoint2
-      objectReference: {fileID: 0}
-    - target: {fileID: 523025824866663958, guid: 9a7ccb5448a144e6850dde666a303db1, type: 3}
       propertyPath: saveSound
       value: 
       objectReference: {fileID: 8300000, guid: a12dbe702b7181642a27de311865d11c, type: 3}
+    - target: {fileID: 523025824866663958, guid: 9a7ccb5448a144e6850dde666a303db1, type: 3}
+      propertyPath: savePointId
+      value: Level2_SavePoint2
+      objectReference: {fileID: 0}
     - target: {fileID: 523025824866663958, guid: 9a7ccb5448a144e6850dde666a303db1, type: 3}
       propertyPath: savedMessage
       value: Game Saved

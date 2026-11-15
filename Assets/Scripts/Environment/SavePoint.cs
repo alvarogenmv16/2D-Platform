@@ -28,6 +28,11 @@ public class SavePoint : MonoBehaviour
     [SerializeField] private string savedMessage = "Partida guardada";
     [SerializeField] private float savedMessageTime = 1.5f;
     [SerializeField] private bool healOnSave = true;
+    // Dark Souls style: after saving, the level reloads with every enemy
+    // back (SceneFader.FadeReloadAtSavePoint), the player next to the lamp.
+    [SerializeField] private bool respawnEnemiesOnSave = true;
+    // Time to read "Partida guardada" before the fade starts.
+    [SerializeField] private float reloadDelay = 0.8f;
     [SerializeField] private DialogueUI dialogueUI; // found in the scene if empty
 
     [Header("Lantern glow")]
@@ -41,6 +46,18 @@ public class SavePoint : MonoBehaviour
     [Header("Sound")]
     [SerializeField] private AudioClip saveSound;
     [SerializeField, Range(0f, 1f)] private float saveVolume = 1f;
+
+    [Header("Arrival sound (optional)")]
+    // Plays the first time the player walks up to this lamp in a game
+    // session (TempleScene: "I see you" before Morthos and the Warden).
+    // Not again after dying or saving, nor when starting right next to it.
+    [SerializeField] private AudioClip arrivalSound;
+    [SerializeField, Range(0f, 1f)] private float arrivalVolume = 1f;
+
+    private static readonly System.Collections.Generic.HashSet<string> arrivalPlayed = new System.Collections.Generic.HashSet<string>();
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStatics() => arrivalPlayed.Clear();
 
     public string Id => savePointId;
     public Vector3 SpawnPosition => transform.position + (Vector3)spawnOffset;
@@ -113,6 +130,7 @@ public class SavePoint : MonoBehaviour
         playerInRange = true;
         player = other.gameObject;
         AchievementTracker.SavePointReached(gameObject.scene.name, gameObject.name);
+        PlayArrivalSound();
         if (other.TryGetComponent(out PlayerMovement movement)) inputActions = movement.InputActions;
 
         if (!busy) ShowPrompt();
@@ -124,6 +142,19 @@ public class SavePoint : MonoBehaviour
 
         playerInRange = false;
         if (dialogueUI != null) dialogueUI.Hide(this);
+    }
+
+    private void PlayArrivalSound()
+    {
+        if (arrivalSound == null) return;
+
+        // Spawned here (Continue, respawn, the reload after saving): it
+        // already "knows" the player is here.
+        bool spawnedHere = Time.timeSinceLevelLoad < 1f;
+        if (!arrivalPlayed.Add(gameObject.scene.name + "/" + savePointId) || spawnedHere) return;
+
+        if (TryGetComponent(out AudioSource source)) source.PlayOneShot(arrivalSound, arrivalVolume);
+        else AudioSource.PlayClipAtPoint(arrivalSound, transform.position, arrivalVolume);
     }
 
     private void ShowPrompt()
@@ -152,6 +183,14 @@ public class SavePoint : MonoBehaviour
         glowBoost = savedIntensity - idleIntensity;
         if (saveSound != null && TryGetComponent(out AudioSource source)) source.PlayOneShot(saveSound, saveVolume);
         if (dialogueUI != null) dialogueUI.Show(savedMessage, this);
+
+        // Rest: the level reloads around the player. This SavePoint goes with
+        // the old scene, so nothing after this runs - the new one takes over.
+        if (respawnEnemiesOnSave)
+        {
+            yield return new WaitForSeconds(reloadDelay);
+            if (SceneFader.FadeReloadAtSavePoint(savePointId)) yield break;
+        }
 
         yield return new WaitForSeconds(savedMessageTime);
 

@@ -17,10 +17,19 @@ public class HoundBreakableWall : MonoBehaviour
 
     private bool isBroken = false;
 
+    // Saved progress (LevelState): smashed before the last save point.
+    private string Id => LevelState.IdFor("HoundWall", this);
+
+    private void Start()
+    {
+        if (LevelState.Has(Id)) Destroy(gameObject);
+    }
+
     public void Break()
     {
         if (isBroken) return;
         isBroken = true;
+        LevelState.Mark(Id);
 
         // PlayClipAtPoint, not an AudioSource on this object: the wall is
         // destroyed right away and would cut its own sound off.

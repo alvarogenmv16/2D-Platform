@@ -287,11 +287,11 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: cb807e5248bc4fd4a8dcad05ea3d5e78, type: 3}
     - target: {fileID: 456318557566644832, guid: 0c8dc06251cc7b242a370780b08f282a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 130
+      value: 7.1
       objectReference: {fileID: 0}
     - target: {fileID: 456318557566644832, guid: 0c8dc06251cc7b242a370780b08f282a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -89.1
+      value: -23.5
       objectReference: {fileID: 0}
     - target: {fileID: 456318557566644832, guid: 0c8dc06251cc7b242a370780b08f282a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2902,10 +2902,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4769698887415163859, guid: 4c5163d8910e4d16833f57225298d187, type: 3}
-      propertyPath: savePointId
-      value: Level3_SavePoint3_3
-      objectReference: {fileID: 0}
     - target: {fileID: 1032262598012473605, guid: 4c5163d8910e4d16833f57225298d187, type: 3}
       propertyPath: m_Name
       value: SavePoint3_3
@@ -2962,6 +2958,10 @@ PrefabInstance:
       propertyPath: saveSound
       value: 
       objectReference: {fileID: 8300000, guid: a12dbe702b7181642a27de311865d11c, type: 3}
+    - target: {fileID: 4769698887415163859, guid: 4c5163d8910e4d16833f57225298d187, type: 3}
+      propertyPath: savePointId
+      value: Level3_SavePoint3_3
+      objectReference: {fileID: 0}
     - target: {fileID: 4769698887415163859, guid: 4c5163d8910e4d16833f57225298d187, type: 3}
       propertyPath: savedMessage
       value: Game Saved!
@@ -5564,10 +5564,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4769698887415163859, guid: 4c5163d8910e4d16833f57225298d187, type: 3}
-      propertyPath: savePointId
-      value: Level3_SavePoint3_2
-      objectReference: {fileID: 0}
     - target: {fileID: 1032262598012473605, guid: 4c5163d8910e4d16833f57225298d187, type: 3}
       propertyPath: m_Name
       value: SavePoint3_2
@@ -5624,6 +5620,10 @@ PrefabInstance:
       propertyPath: saveSound
       value: 
       objectReference: {fileID: 8300000, guid: a12dbe702b7181642a27de311865d11c, type: 3}
+    - target: {fileID: 4769698887415163859, guid: 4c5163d8910e4d16833f57225298d187, type: 3}
+      propertyPath: savePointId
+      value: Level3_SavePoint3_2
+      objectReference: {fileID: 0}
     - target: {fileID: 4769698887415163859, guid: 4c5163d8910e4d16833f57225298d187, type: 3}
       propertyPath: savedMessage
       value: Game Saved!
@@ -6150,7 +6150,7 @@ Transform:
   m_GameObject: {fileID: 704756065}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 130, y: -85.594124, z: -10}
+  m_LocalPosition: {x: 7.1, y: -19.994122, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6369,7 +6369,7 @@ Transform:
   m_GameObject: {fileID: 640329269}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 130, y: -85.594124, z: -10}
+  m_LocalPosition: {x: 7.1, y: -19.994122, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -47032,10 +47032,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4769698887415163859, guid: 4c5163d8910e4d16833f57225298d187, type: 3}
-      propertyPath: savePointId
-      value: Level3_SavePoint3
-      objectReference: {fileID: 0}
     - target: {fileID: 1032262598012473605, guid: 4c5163d8910e4d16833f57225298d187, type: 3}
       propertyPath: m_Name
       value: SavePoint3
@@ -47092,6 +47088,10 @@ PrefabInstance:
       propertyPath: saveSound
       value: 
       objectReference: {fileID: 8300000, guid: a12dbe702b7181642a27de311865d11c, type: 3}
+    - target: {fileID: 4769698887415163859, guid: 4c5163d8910e4d16833f57225298d187, type: 3}
+      propertyPath: savePointId
+      value: Level3_SavePoint3
+      objectReference: {fileID: 0}
     - target: {fileID: 4769698887415163859, guid: 4c5163d8910e4d16833f57225298d187, type: 3}
       propertyPath: savedMessage
       value: Game Saved!

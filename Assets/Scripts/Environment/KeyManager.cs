@@ -34,6 +34,10 @@ public class KeyManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
+        // Keys already taken before the last save point (LevelState) count
+        // from the start, so the chalices are lit and the door open on load.
+        collectedKeys = Mathf.Min(totalKeys, LevelState.Count("Key", gameObject.scene.name));
     }
 
     private void Start()

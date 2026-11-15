@@ -33,6 +33,8 @@ public class PlayerHealth : MonoBehaviour
     public UnityEvent OnInvulnerabilityStart;
     public UnityEvent OnInvulnerabilityEnd;
     private bool isDead = false;
+    private string lastDamageSource;
+    private bool lastDamageWasHazard;
     private bool isInvulnerable = false;
 
     // Lets callers that deal damage and then do their own follow-up (e.g.
@@ -82,6 +84,14 @@ public class PlayerHealth : MonoBehaviour
     // this instead of assuming every call connects.
     public bool TakeDamage(float amount, Vector2 hitSourcePosition)
     {
+        return TakeDamage(amount, hitSourcePosition, null, false);
+    }
+
+    // Same, saying what dealt it - for the end-of-game stats (RunStats):
+    // source = the enemy's name (e.g. its GameObject's), hazard = it was
+    // the environment (spikes, flames...) rather than an enemy.
+    public bool TakeDamage(float amount, Vector2 hitSourcePosition, string source, bool hazard = false)
+    {
         // Ignore damage while dead or during the brief invulnerability
         // window right after getting hit. Without this, standing inside
         // an enemy's attack range would drain health every single frame.
@@ -89,9 +99,12 @@ public class PlayerHealth : MonoBehaviour
 
         currentHealth -= amount;
         currentHealth = Mathf.Max(currentHealth, 0f);
+        lastDamageSource = source;
+        lastDamageWasHazard = hazard;
 
         Debug.Log($"Player took {amount} damage. Current health: {currentHealth}/{maxHealth}");
         AchievementTracker.PlayerDamaged();
+        RunStats.HitTaken();
 
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
 
@@ -141,6 +154,7 @@ public class PlayerHealth : MonoBehaviour
         isDead = true;
         Debug.Log("Player died!");
         AchievementTracker.PlayerDied();
+        RunStats.PlayerDied(lastDamageSource, lastDamageWasHazard);
         OnDied?.Invoke();
     }
 }

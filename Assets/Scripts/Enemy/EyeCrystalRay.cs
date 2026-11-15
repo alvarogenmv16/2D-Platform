@@ -87,7 +87,7 @@ public class EyeCrystalRay : MonoBehaviour
                     // segment never lands a second hit even if it somehow
                     // got re-entered the same physics step.
                     hasHit = true;
-                    playerHealth.TakeDamage(damage, boxCenter);
+                    playerHealth.TakeDamage(damage, boxCenter, "Eye");
                 }
             }
         }

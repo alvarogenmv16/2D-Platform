@@ -202,7 +202,7 @@ public class RisingFlameSea : MonoBehaviour, IHazard
         else
         {
             // Not chasing: a plain hazard, same as HazardDamage.
-            bool damageApplied = playerHealth.TakeDamage(damage, hitPoint);
+            bool damageApplied = playerHealth.TakeDamage(damage, hitPoint, "Flame Sea", true);
             if (damageApplied && other.TryGetComponent(out PlayerRespawnPoint safeGround))
             {
                 SceneFader.FlashAndTeleport(safeGround);
@@ -216,7 +216,7 @@ public class RisingFlameSea : MonoBehaviour, IHazard
 
         // Even if the hit is ignored (player still invulnerable from an
         // earlier hit), the section restarts - they're inside the flames.
-        playerHealth.TakeDamage(damage, hitPoint);
+        playerHealth.TakeDamage(damage, hitPoint, "Flame Sea", true);
 
         if (playerHealth.IsDead)
         {

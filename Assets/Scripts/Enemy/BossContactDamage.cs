@@ -41,7 +41,7 @@ public class BossContactDamage : MonoBehaviour
         PlayerHealth playerHealth = hit.GetComponent<PlayerHealth>();
         if (playerHealth != null)
         {
-            playerHealth.TakeDamage(damage, checkPosition);
+            playerHealth.TakeDamage(damage, checkPosition, GetComponentInParent<EnemyHealth>() is EnemyHealth owner ? owner.gameObject.name : null);
         }
     }
 

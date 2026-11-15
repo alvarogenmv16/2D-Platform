@@ -30,6 +30,20 @@ using UnityEngine.Serialization;
 // at random: the portals, or diagonal spears - parallel diagonal lines
 // falling from above the screen to the floor, in 2 volleys, the second
 // shifted half a gap so the player has to move to the next safe corridor.
+//
+// Phase 3 - back from the dead: the first time its health reaches 0 it only
+// seems to die (death pose, victory music, the bar empty) - EnemyHealth's
+// death is intercepted. After reviveDelay it rises again with its two fists
+// up (WardenPunch2's last pose), the bar fills up to full health and the
+// phase 2 music comes back louder (phase3MusicVolume). From there it fights
+// like phase 2. The second time it dies, it's for real.
+//
+// Phase 3 attack - spear circle: it raises both fists (WardenPunch2) and
+// freezes in that pose for the whole attack; nothing else is cast meanwhile.
+// 4 spears appear around the player, out of reach, pointing at them and
+// following them. One by one they glow - that's the firing order, the only
+// tell. Once the order has been shown they stop where they are and fire in
+// that order, fast, each one at where the player is at that moment.
 public class WardenAI : MonoBehaviour
 {
     private enum WardenState
@@ -38,6 +52,7 @@ public class WardenAI : MonoBehaviour
         Idle,
         Attacking,
         ChangingPhase,
+        Reviving,      // phase 3: fake death and rising again (driven by a coroutine)
     }
 
     private enum WardenAttack
@@ -45,6 +60,7 @@ public class WardenAI : MonoBehaviour
         Punch,
         Sweep,
         PunchDiagonal, // phase 2 only: same animation as Punch, diagonal spears
+        SpearCircle,   // phase 3 only: fists up, 4 spears around the player
     }
 
     [SerializeField] private WardenState currentState = WardenState.Inactive; // debug
@@ -112,6 +128,49 @@ public class WardenAI : MonoBehaviour
     [SerializeField] private float diagonalWarningTime = 0.7f;
     [SerializeField] private float diagonalSpeed = 20f;
 
+    [Header("Phase 3 - back from the dead")]
+    // From the fake death until it rises again.
+    [SerializeField] private float reviveDelay = 10f;
+    // How long the health bar takes to fill up again.
+    [SerializeField] private float reviveRefillTime = 5f;
+    // How long it holds the fists-up pose before attacking again.
+    [SerializeField] private float reviveHoldTime = 3f;
+    // The phase 2 music comes back at this volume (the usual is WardenIntro's
+    // musicVolume, 0.7).
+    [SerializeField, Range(0f, 1f)] private float phase3MusicVolume = 1f;
+    // How soon after rising the first attack comes.
+    [SerializeField] private float phase3FirstAttackDelay = 3f;
+
+    [Header("Phase 3 - spear circle")]
+    // Chance that a phase-3 attack is the spear circle (never twice in a row).
+    [SerializeField, Range(0f, 1f)] private float spearCircleChance = 0.4f;
+    // Where the spears sit around the player: angles (degrees, 0 = right,
+    // 90 = straight above) - nothing from below, the floor is there.
+    // Spears at 0 / 180 (or within horizontalSpearTolerance of them) are
+    // horizontal: they don't turn to follow the player once stopped and fly
+    // straight across - jump over them. The rest aim at the player.
+    [SerializeField] private float[] circleAngles = { 0f, 60f, 120f, 180f };
+    [SerializeField] private float horizontalSpearTolerance = 15f;
+    // From the player to each spear's tip - far enough to react.
+    [SerializeField] private float circleRadius = 8f;
+    // How fast they keep up with the player while the order is shown.
+    [SerializeField] private float circleFollowSpeed = 10f;
+    // Spears in place before the first glow.
+    [SerializeField] private float circleAppearTime = 0.6f;
+    // Time between two glows (the order 1-4), and how long each one lasts.
+    [SerializeField] private float circleGlowInterval = 0.5f;
+    [SerializeField] private float circleGlowTime = 0.4f;
+    [SerializeField] private Color circleGlowColor = new Color(0.6f, 1f, 0.95f);
+    [SerializeField] private float circleGlowLight = 4f;
+    [SerializeField] private float circleGlowRadius = 2.5f;
+    // After the last glow: they stop following and, after this, fire.
+    [SerializeField] private float circleFirePause = 0.4f;
+    // Time between two spears firing.
+    [SerializeField] private float circleFireInterval = 0.7f;
+    [SerializeField] private float circleSpearSpeed = 24f;
+    // Fists-up pose held after the last spear, before going back to idle.
+    [SerializeField] private float circleRecoverTime = 0.6f;
+
     [Header("Death")]
     [SerializeField] private AudioClip victoryMusic;
     // The death pose holds still for deathFadeDelay, then fades out over
@@ -132,6 +191,7 @@ public class WardenAI : MonoBehaviour
     private ContactFilter2D solidGroundFilter;
     private readonly RaycastHit2D[] groundHits = new RaycastHit2D[4];
     private readonly Collider2D[] wallHits = new Collider2D[4];
+    private readonly System.Collections.Generic.List<WardenSweepSpear> circleSpears = new System.Collections.Generic.List<WardenSweepSpear>();
 
     private void Awake()
     {
@@ -140,6 +200,7 @@ public class WardenAI : MonoBehaviour
         {
             health.OnDied.AddListener(OnDied);
             health.OnHealthChanged.AddListener(OnHealthChanged);
+            health.InterceptDeath = TryFakeDeath;
         }
         weakPoint = GetComponent<WardenHelmet>();
 
@@ -272,6 +333,14 @@ public class WardenAI : MonoBehaviour
 
     private WardenAttack PickAttack()
     {
+        // Phase 3: sometimes the spear circle (never twice in a row).
+        if (currentPhase >= 3 && sweepSpearPrefab != null && lastAttack != WardenAttack.SpearCircle
+            && Random.value < spearCircleChance)
+        {
+            lastAttack = WardenAttack.SpearCircle;
+            return WardenAttack.SpearCircle;
+        }
+
         bool punch = Random.value < 0.5f;
 
         // Never the same kind (punch / sweep) 3 times in a row.
@@ -295,12 +364,24 @@ public class WardenAI : MonoBehaviour
         currentAttack = attack;
         stateTimer = 0f;
         currentState = WardenState.Attacking;
-        if (animator != null) animator.SetTrigger(attack == WardenAttack.Sweep ? "SweepTrigger" : "PunchTrigger");
+        if (animator == null) return;
+
+        // Fists up straight away (OnPunch on that frame starts the spears).
+        if (attack == WardenAttack.SpearCircle) animator.Play("WardenPunch2", 0, 0f);
+        else animator.SetTrigger(attack == WardenAttack.Sweep ? "SweepTrigger" : "PunchTrigger");
     }
 
     private void HandleAttacking()
     {
         stateTimer += Time.deltaTime;
+
+        // The spear circle ends itself (SpearCircle coroutine); the safety
+        // net only covers OnPunch never arriving.
+        if (currentAttack == WardenAttack.SpearCircle)
+        {
+            if (!circleRunning && stateTimer >= maxAttackDuration) EndSpearCircle();
+            return;
+        }
 
         // The clip goes back to Idle on its own (exit time); once it's there
         // after the attack, the cooldown starts.
@@ -326,6 +407,12 @@ public class WardenAI : MonoBehaviour
     public void OnPunch()
     {
         if (currentState != WardenState.Attacking) return;
+
+        if (currentAttack == WardenAttack.SpearCircle)
+        {
+            if (!circleRunning) StartCoroutine(SpearCircle());
+            return;
+        }
 
         if (currentAttack == WardenAttack.PunchDiagonal)
         {
@@ -486,6 +573,220 @@ public class WardenAI : MonoBehaviour
     }
 
     // =========================
+    // SPEAR CIRCLE (phase 3)
+    // =========================
+
+    private bool circleRunning;
+
+    private IEnumerator SpearCircle()
+    {
+        circleRunning = true;
+
+        // Held in the fists-up pose for the whole attack.
+        if (animator != null) animator.speed = 0f;
+
+        int count = circleAngles != null ? circleAngles.Length : 0;
+        Vector2[] offsets = new Vector2[count];
+        for (int i = 0; i < count; i++)
+        {
+            float rad = circleAngles[i] * Mathf.Deg2Rad;
+            offsets[i] = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad));
+        }
+
+        // A random firing order.
+        int[] order = new int[count];
+        for (int i = 0; i < count; i++) order[i] = i;
+        for (int i = count - 1; i > 0; i--)
+        {
+            int j = Random.Range(0, i + 1);
+            (order[i], order[j]) = (order[j], order[i]);
+        }
+
+        circleSpears.Clear();
+        Vector2 centre = PlayerCentre();
+        for (int i = 0; i < count; i++)
+        {
+            GameObject spearObject = Instantiate(sweepSpearPrefab, centre, Quaternion.identity);
+            if (!spearObject.TryGetComponent(out WardenSweepSpear spear)) { Destroy(spearObject); circleSpears.Add(null); continue; }
+            spear.Hold(CirclePosition(centre, offsets[i], spear), -offsets[i]);
+            circleSpears.Add(spear);
+        }
+
+        // Following the player while the order is shown.
+        Shader flashShader = Shader.Find("Custom/2D/Sprite-WhiteFlash");
+        Vector2 followed = centre;
+        float showTime = circleAppearTime + (count - 1) * circleGlowInterval + circleGlowTime;
+        int glowed = 0;
+        for (float t = 0f; t < showTime; t += Time.deltaTime)
+        {
+            while (glowed < count && t >= circleAppearTime + glowed * circleGlowInterval)
+            {
+                WardenSweepSpear next = circleSpears[order[glowed]];
+                if (next != null) next.Glow(circleGlowTime, circleGlowColor, circleGlowLight, circleGlowRadius, flashShader);
+                glowed++;
+            }
+
+            followed = Vector2.MoveTowards(followed, PlayerCentre(), circleFollowSpeed * Time.deltaTime);
+            for (int i = 0; i < count; i++)
+            {
+                if (circleSpears[i] != null) circleSpears[i].Place(CirclePosition(followed, offsets[i], circleSpears[i]), -offsets[i]);
+            }
+            yield return null;
+        }
+
+        // They stop; still pointing at the player, then fire in the order shown.
+        for (int n = 0; n < count; n++)
+        {
+            float wait = n == 0 ? circleFirePause : circleFireInterval;
+            for (float t = 0f; t < wait; t += Time.deltaTime)
+            {
+                AimWaitingSpears(order, n, offsets);
+                yield return null;
+            }
+
+            WardenSweepSpear spear = circleSpears[order[n]];
+            if (spear == null) continue;
+
+            Vector2 from = spear.SpearPosition;
+            Vector2 aim = IsHorizontal(offsets[order[n]]) ? -offsets[order[n]] * circleRadius : PlayerCentre() - from;
+            if (aim.sqrMagnitude < 0.01f) aim = -offsets[order[n]];
+            // On through where the player was and well past it, then gone.
+            float distance = aim.magnitude + circleRadius * 2f + spear.SpearLength;
+            spear.Fire(aim, distance, circleSpearSpeed);
+        }
+
+        yield return new WaitForSeconds(circleRecoverTime);
+        circleRunning = false;
+        EndSpearCircle();
+    }
+
+    // The spears still waiting keep pointing at the player (not the
+    // horizontal ones: they stay level).
+    private void AimWaitingSpears(int[] order, int firstWaiting, Vector2[] offsets)
+    {
+        Vector2 target = PlayerCentre();
+        for (int k = firstWaiting; k < order.Length; k++)
+        {
+            WardenSweepSpear spear = circleSpears[order[k]];
+            if (spear == null || IsHorizontal(offsets[order[k]])) continue;
+            Vector2 at = spear.SpearPosition;
+            spear.Place(at, target - at);
+        }
+    }
+
+    private bool IsHorizontal(Vector2 offset)
+    {
+        return Mathf.Abs(offset.y) <= Mathf.Sin(horizontalSpearTolerance * Mathf.Deg2Rad);
+    }
+
+    // A spear's centre so that its tip is circleRadius from the player.
+    private Vector2 CirclePosition(Vector2 centre, Vector2 offset, WardenSweepSpear spear)
+    {
+        return centre + offset * (circleRadius + spear.SpearLength * 0.5f);
+    }
+
+    private Vector2 PlayerCentre()
+    {
+        if (player == null) return transform.position;
+        return player.TryGetComponent(out Collider2D col) ? (Vector2)col.bounds.center : (Vector2)player.position;
+    }
+
+    // Back to normal: the pose unfreezes into the phase 2 idle and the
+    // cooldown starts (no combo straight after this one).
+    private void EndSpearCircle()
+    {
+        circleRunning = false;
+        if (animator != null)
+        {
+            animator.speed = 1f;
+            animator.Play("WardenIdle2", 0, 0f);
+        }
+        stateTimer = 0f;
+        currentState = WardenState.Idle;
+    }
+
+    // Spears still hovering when the attack is cut short (the Warden dies).
+    private void ClearCircleSpears()
+    {
+        circleRunning = false;
+        if (animator != null) animator.speed = 1f;
+        foreach (WardenSweepSpear spear in circleSpears)
+        {
+            if (spear != null) Destroy(spear.gameObject);
+        }
+        circleSpears.Clear();
+    }
+
+    // =========================
+    // PHASE 3 - BACK FROM THE DEAD
+    // =========================
+
+    private bool hasRevived;
+
+    // WardenPunch2: fists clenched until 0.6 s, both fists up from there on.
+    private const float RiseClenchTime = 0.7f;
+
+    // EnemyHealth.InterceptDeath: the first death is a fake one.
+    private bool TryFakeDeath()
+    {
+        if (hasRevived) return false;
+
+        hasRevived = true;
+        StopAllCoroutines();
+        StartCoroutine(FakeDeathAndRevive());
+        return true;
+    }
+
+    private IEnumerator FakeDeathAndRevive()
+    {
+        currentPhase = 3;
+        currentState = WardenState.Reviving; // Update does nothing meanwhile
+        if (weakPoint != null) weakPoint.SetVulnerable(false);
+
+        // Looks exactly like the real death: death pose and victory music.
+        if (animator != null)
+        {
+            animator.ResetTrigger("PunchTrigger");
+            animator.ResetTrigger("SweepTrigger");
+            animator.SetTrigger("DieTrigger");
+        }
+        WardenIntro intro = FindAnyObjectByType<WardenIntro>();
+        if (intro != null) intro.ChangeMusic(victoryMusic, 0.6f, false);
+
+        yield return new WaitForSeconds(reviveDelay);
+
+        // It rises: WardenPunch2 from the start - fists clenched for a moment,
+        // then both fists up. That pose is frozen for as long as the rising
+        // lasts (reviveHoldTime, or longer if the bar is still filling), so
+        // it never drops to idle before it can fight again.
+        float riseTime = Mathf.Max(reviveHoldTime, reviveRefillTime);
+        if (animator != null)
+        {
+            animator.speed = 1f;
+            animator.Play("WardenPunch2", 0, 0f);
+        }
+        if (intro != null) intro.ChangeMusic(phase2Music, 0.2f, true, phase3MusicVolume);
+        if (health != null) health.Revive(reviveRefillTime);
+
+        float clench = Mathf.Min(RiseClenchTime, riseTime);
+        yield return new WaitForSeconds(clench);
+        if (animator != null) animator.speed = 0f;
+
+        yield return new WaitForSeconds(riseTime - clench);
+
+        // Fists down: the phase 2 idle, and the first attack after
+        // phase3FirstAttackDelay.
+        if (animator != null)
+        {
+            animator.speed = 1f;
+            animator.Play("WardenIdle2", 0, 0f);
+        }
+        if (weakPoint != null) weakPoint.SetVulnerable(true);
+        stateTimer = CurrentCooldown - phase3FirstAttackDelay;
+        currentState = WardenState.Idle;
+    }
+
+    // =========================
     // DEATH
     // =========================
 
@@ -497,6 +798,7 @@ public class WardenAI : MonoBehaviour
     {
         AchievementTracker.BossDefeated(AchievementTracker.Warden);
         StopAllCoroutines();
+        ClearCircleSpears(); // the animator must run again for the death clip
         currentState = WardenState.Inactive;
         if (weakPoint != null) weakPoint.SetVulnerable(false);
 
