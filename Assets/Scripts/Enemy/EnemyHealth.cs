@@ -137,6 +137,7 @@ public class EnemyHealth : MonoBehaviour
         isDead = true;
         Debug.Log("Enemy died!");
         AchievementTracker.EnemyKilled();
+        RunStats.EnemyDefeated();
 
         OnDied?.Invoke();
         StartCoroutine(DeathSequence());

@@ -54,6 +54,64 @@ public class SceneFader : MonoBehaviour
         instance.StartCoroutine(instance.FadeSequence(sceneName, entryPointId));
     }
 
+    // Resting at a save point (SavePoint), Dark Souls style: fades to black,
+    // reloads the current scene - every enemy back in place - and brings
+    // the same player back next to that save point. Everything the run keeps
+    // (souls, bosses beaten, LevelState just saved) survives the reload.
+    // Returns false if there's no fader in the scene to do it.
+    public static bool FadeReloadAtSavePoint(string savePointId)
+    {
+        if (instance == null) return false;
+
+        instance.StartCoroutine(instance.ReloadAtSavePointSequence(savePointId));
+        return true;
+    }
+
+    private IEnumerator ReloadAtSavePointSequence(string savePointId)
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null) yield break;
+
+        player.transform.SetParent(null);
+        DontDestroyOnLoad(player);
+
+        // No moving (or being pushed around) while the screen goes dark.
+        PlayerMovement movement = player.GetComponent<PlayerMovement>();
+        Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
+        if (movement != null) movement.enabled = false;
+        if (rb != null) rb.linearVelocity = Vector2.zero;
+
+        yield return StartCoroutine(Fade(0f, 1f));
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        yield return null; // same as FadeSequence: let the scene finish loading
+
+        AdoptPersistentPlayer(player);
+
+        Vector3 from = player.transform.position;
+        SavePoint savePoint = SavePoint.Find(savePointId);
+        if (savePoint != null)
+        {
+            player.transform.position = savePoint.SpawnPosition;
+            if (rb != null)
+            {
+                rb.position = savePoint.SpawnPosition;
+                rb.linearVelocity = Vector2.zero;
+            }
+            if (player.TryGetComponent(out PlayerRespawnPoint respawnPoint))
+            {
+                respawnPoint.ResetSafePosition(savePoint.SpawnPosition);
+            }
+
+            CinemachineCamera cam = Object.FindAnyObjectByType<CinemachineCamera>();
+            if (cam != null) cam.OnTargetObjectWarped(player.transform, player.transform.position - from);
+        }
+
+        if (movement != null) movement.enabled = true;
+
+        yield return StartCoroutine(Fade(1f, 0f));
+    }
+
     private IEnumerator FadeSequence(string sceneName, string entryPointId)
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");

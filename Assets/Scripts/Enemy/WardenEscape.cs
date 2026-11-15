@@ -321,6 +321,8 @@ public class WardenEscape : MonoBehaviour
         {
             ("Play time", RunStats.FormatTime(RunStats.PlayTime), false),
             ("Achievements this run", $"{earned} / {total}  ({percent}%)", false),
+            ("Enemies defeated", RunStats.EnemiesDefeated.ToString(), false),
+            ("Souls collected", $"{RunStats.SoulsCollected} / {AchievementTracker.TotalSouls}", false),
             ("Deaths", RunStats.Deaths.ToString(), false),
         };
         foreach (string level in RunStats.Levels)
@@ -328,7 +330,13 @@ public class WardenEscape : MonoBehaviour
             rows.Add(("      " + level, RunStats.DeathsIn(level).ToString(), true));
         }
         rows.Add(("Deadliest enemy", killer != null ? $"{killer}  ({kills})" : "None", false));
-        rows.Add(("Deaths by hazards", RunStats.HazardDeaths.ToString(), false));
+        int hazardDeaths = RunStats.HazardDeaths;
+        rows.Add(("Not The Way To Go",
+            $"Died {hazardDeaths} {(hazardDeaths == 1 ? "time" : "times")} to the environment", false));
+        int hits = RunStats.HitsTaken;
+        rows.Add(("Tank It", $"You received {hits} {(hits == 1 ? "attack" : "attacks")}", false));
+        int heals = RunStats.Heals;
+        rows.Add(("Nurse", $"You healed {heals} {(heals == 1 ? "time" : "times")}", false));
 
         float top = 0f;
         TextMeshProUGUI title = CreateText("Title", panel, statsTitle, 46f, value, TextAlignmentOptions.Center);
@@ -338,8 +346,8 @@ public class WardenEscape : MonoBehaviour
 
         foreach ((string name, string number, bool small) in rows)
         {
-            float size = small ? 28f : 36f;
-            float height = small ? 38f : 50f;
+            float size = small ? 26f : 33f;
+            float height = small ? 32f : 44f;
             TextMeshProUGUI left = CreateText(name.Trim(), panel, name, size, small ? minor : label, TextAlignmentOptions.MidlineLeft);
             PlaceRow(left.rectTransform, top, height);
             TextMeshProUGUI right = CreateText(name.Trim() + " Value", panel, number, size, small ? minor : value, TextAlignmentOptions.MidlineRight);

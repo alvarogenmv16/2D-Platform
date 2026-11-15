@@ -28,6 +28,11 @@ public class SavePoint : MonoBehaviour
     [SerializeField] private string savedMessage = "Partida guardada";
     [SerializeField] private float savedMessageTime = 1.5f;
     [SerializeField] private bool healOnSave = true;
+    // Dark Souls style: after saving, the level reloads with every enemy
+    // back (SceneFader.FadeReloadAtSavePoint), the player next to the lamp.
+    [SerializeField] private bool respawnEnemiesOnSave = true;
+    // Time to read "Partida guardada" before the fade starts.
+    [SerializeField] private float reloadDelay = 0.8f;
     [SerializeField] private DialogueUI dialogueUI; // found in the scene if empty
 
     [Header("Lantern glow")]
@@ -152,6 +157,14 @@ public class SavePoint : MonoBehaviour
         glowBoost = savedIntensity - idleIntensity;
         if (saveSound != null && TryGetComponent(out AudioSource source)) source.PlayOneShot(saveSound, saveVolume);
         if (dialogueUI != null) dialogueUI.Show(savedMessage, this);
+
+        // Rest: the level reloads around the player. This SavePoint goes with
+        // the old scene, so nothing after this runs - the new one takes over.
+        if (respawnEnemiesOnSave)
+        {
+            yield return new WaitForSeconds(reloadDelay);
+            if (SceneFader.FadeReloadAtSavePoint(savePointId)) yield break;
+        }
 
         yield return new WaitForSeconds(savedMessageTime);
 

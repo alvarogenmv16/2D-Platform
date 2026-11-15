@@ -104,6 +104,7 @@ public class PlayerHealth : MonoBehaviour
 
         Debug.Log($"Player took {amount} damage. Current health: {currentHealth}/{maxHealth}");
         AchievementTracker.PlayerDamaged();
+        RunStats.HitTaken();
 
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
 
