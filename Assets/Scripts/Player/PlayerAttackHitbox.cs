@@ -89,6 +89,8 @@ public class PlayerAttackHitbox : MonoBehaviour
             EnemyHealth enemyHealth = hit.GetComponent<EnemyHealth>();
             if (enemyHealth != null)
             {
+                if (enemyHealth.IsDead) continue;
+
                 enemyHealth.TakeDamage(damage, attackPointPosition);
                 playerPower?.AddPower(PowerPerHit);
                 continue;

@@ -87,6 +87,7 @@ public class SoulCollectible : MonoBehaviour
         GetComponent<Collider2D>().enabled = false;
 
         SoulScore.Collect(id, points);
+        AchievementTracker.SoulCollected(gameObject.scene.name, gameObject.name);
         StartCoroutine(CollectSequence());
     }
 

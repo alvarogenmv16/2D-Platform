@@ -2906,7 +2906,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8130852524224455234, guid: 41f4f5157e46e304a9badf34942fa298, type: 3}
       propertyPath: maxHealth
-      value: 10
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 8133231677275394959, guid: 41f4f5157e46e304a9badf34942fa298, type: 3}
       propertyPath: arena
@@ -2922,7 +2922,7 @@ PrefabInstance:
       objectReference: {fileID: 1690720233}
     - target: {fileID: 8133231677275394959, guid: 41f4f5157e46e304a9badf34942fa298, type: 3}
       propertyPath: rayInterval
-      value: 10
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8133231677275394959, guid: 41f4f5157e46e304a9badf34942fa298, type: 3}
       propertyPath: wanderSpeed

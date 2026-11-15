@@ -55,6 +55,23 @@ public class ChaliceSequence : MonoBehaviour
 
     // Called by ChaliceFlame.Break (the sword hit). Only queues the strike -
     // the closest chalice of this swing is the one that actually counts.
+    // Saved progress (LevelState): solved before the last save point.
+    private string Id => LevelState.IdFor("ChalicePuzzle", this);
+
+    private void Start()
+    {
+        if (!LevelState.Has(Id) || correctOrder == null) return;
+
+        // Solved before: every flame lit and the reward out, silently.
+        isSolved = true;
+        progress = correctOrder.Length;
+        foreach (ChaliceFlame flame in correctOrder)
+        {
+            if (flame != null) flame.SetLit(true);
+        }
+        RevealRewards();
+    }
+
     public void OnChaliceStruck(ChaliceFlame chalice)
     {
         if (isSolved) return;
@@ -92,6 +109,7 @@ public class ChaliceSequence : MonoBehaviour
             if (progress >= correctOrder.Length)
             {
                 isSolved = true;
+                LevelState.Mark(Id);
                 sfxPlayer?.Play(solvedSound);
                 RevealRewards();
                 OnSolved?.Invoke();

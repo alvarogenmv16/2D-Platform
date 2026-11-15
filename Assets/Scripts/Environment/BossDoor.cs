@@ -46,7 +46,8 @@ public class BossDoor : MonoBehaviour
         // Covers a KeyManager that already finished before this Start ran.
         if (KeyManager.Instance.AllKeysCollected)
         {
-            Open();
+            // Already opened before the last save: open without the sound.
+            Open(false);
         }
     }
 
@@ -58,7 +59,9 @@ public class BossDoor : MonoBehaviour
         }
     }
 
-    public void Open()
+    public void Open() => Open(true);
+
+    private void Open(bool playSound)
     {
         if (isOpen) return;
         isOpen = true;
@@ -72,7 +75,7 @@ public class BossDoor : MonoBehaviour
 
         // Explicit null checks instead of ?. - an unassigned Inspector
         // reference is a Unity "fake null" that ?. doesn't catch (see KeyBlock).
-        if (sfxPlayer != null) sfxPlayer.Play(openSound);
+        if (playSound && sfxPlayer != null) sfxPlayer.Play(openSound);
         if (animator != null) animator.SetTrigger("OpenTrigger");
     }
 }

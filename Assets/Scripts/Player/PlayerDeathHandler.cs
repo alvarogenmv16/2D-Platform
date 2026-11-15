@@ -137,6 +137,10 @@ public class PlayerDeathHandler : MonoBehaviour
         transform.SetParent(null); // DontDestroyOnLoad only works on root objects
         DontDestroyOnLoad(gameObject);
 
+        // Puzzle progress (keys...) goes back to what the last save point
+        // stored, like the player's position.
+        LevelState.RevertToSaved();
+
         // Back to the last save point of this run (it may be in another
         // scene); before the first save, to the start of this scene.
         string sceneToLoad = SceneManager.GetActiveScene().name;
@@ -157,10 +161,9 @@ public class PlayerDeathHandler : MonoBehaviour
 
         Vector3 from = transform.position;
 
-        SavePoint savePoint = string.IsNullOrEmpty(savePointId) ? null : SavePoint.Find(savePointId);
-        if (savePoint != null)
+        if (!string.IsNullOrEmpty(savePointId) && SaveSystem.TryGetRespawnPosition(savePointId, out Vector3 spawn))
         {
-            transform.position = savePoint.SpawnPosition;
+            transform.position = spawn;
         }
         else
         {
@@ -180,7 +183,7 @@ public class PlayerDeathHandler : MonoBehaviour
         Revive();
 
         // Snap the camera to the respawn spot instead of panning there.
-        CinemachineCamera cam = FindFirstObjectByType<CinemachineCamera>();
+        CinemachineCamera cam = FindAnyObjectByType<CinemachineCamera>();
         if (cam != null) cam.OnTargetObjectWarped(transform, transform.position - from);
     }
 

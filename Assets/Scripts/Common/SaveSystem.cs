@@ -22,6 +22,10 @@ public static class SaveSystem
     {
         public string scene;
         public string savePointId;
+        // Where the player appeared when saving - only a fallback, used if
+        // that SavePoint can't be found any more (renamed id, deleted lamp).
+        public bool hasPosition;
+        public float x, y;
         public float damage = 1f;
         public bool jumpUpgrade;
         public float jumpMultiplier = 1f;
@@ -30,6 +34,8 @@ public static class SaveSystem
         public int souls;
         public string[] collectedSouls;
         public string[] progressFlags;
+        // Puzzle progress inside levels (LevelState): keys, chalices, walls.
+        public string[] levelState;
     }
 
     private static string FilePath => Path.Combine(Application.persistentDataPath, "save.json");
@@ -45,11 +51,29 @@ public static class SaveSystem
     private static string respawnScene;
     private static string respawnPointId;
 
+    private static bool respawnHasPosition;
+    private static Vector3 respawnPosition;
+
     public static bool TryGetRespawnPoint(out string scene, out string savePointId)
     {
         scene = respawnScene;
         savePointId = respawnPointId;
         return !string.IsNullOrEmpty(respawnScene);
+    }
+
+    // Spawn spot for the respawn save point once its scene is loaded: the
+    // SavePoint with that id, or the position stored with the save.
+    public static bool TryGetRespawnPosition(string savePointId, out Vector3 position)
+    {
+        SavePoint point = string.IsNullOrEmpty(savePointId) ? null : SavePoint.Find(savePointId);
+        if (point != null)
+        {
+            position = point.SpawnPosition;
+            return true;
+        }
+
+        position = respawnPosition;
+        return respawnHasPosition;
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
@@ -58,6 +82,7 @@ public static class SaveSystem
         pending = null;
         respawnScene = null;
         respawnPointId = null;
+        respawnHasPosition = false;
         SceneManager.sceneLoaded -= OnSceneLoaded;
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -66,7 +91,7 @@ public static class SaveSystem
     // SAVE
     // =========================
 
-    public static void Save(string savePointId, GameObject player)
+    public static void Save(string savePointId, Vector3 spawnPosition, GameObject player)
     {
         SaveData data = new SaveData
         {
@@ -75,6 +100,10 @@ public static class SaveSystem
             souls = SoulScore.Total,
             collectedSouls = SoulScore.ExportCollected(),
             progressFlags = GameProgress.Export(),
+            levelState = LevelState.CommitAndExport(),
+            hasPosition = true,
+            x = spawnPosition.x,
+            y = spawnPosition.y,
         };
 
         if (player != null)
@@ -91,8 +120,12 @@ public static class SaveSystem
             }
         }
 
+        RunStats.Save();
+
         respawnScene = data.scene;
         respawnPointId = data.savePointId;
+        respawnHasPosition = true;
+        respawnPosition = spawnPosition;
 
         try
         {
@@ -111,7 +144,17 @@ public static class SaveSystem
     public static void NewGame(string firstScene)
     {
         ResetRun();
+        RunStats.StartNewRun();
         SceneManager.LoadScene(firstScene);
+    }
+
+    // Pause menu "Quit to Menu": drops the run in progress (the save file
+    // is untouched - Continue picks it up again from the last save).
+    public static void QuitToMenu(string menuScene)
+    {
+        RunStats.Save();
+        ResetRun();
+        SceneManager.LoadScene(menuScene);
     }
 
     // Returns false (and does nothing) if there's no readable save.
@@ -121,10 +164,14 @@ public static class SaveSystem
         if (data == null || string.IsNullOrEmpty(data.scene)) return false;
 
         ResetRun();
+        RunStats.Load();
         SoulScore.Import(data.souls, data.collectedSouls);
         GameProgress.Import(data.progressFlags);
+        LevelState.Import(data.levelState);
         respawnScene = data.scene;
         respawnPointId = data.savePointId;
+        respawnHasPosition = data.hasPosition;
+        respawnPosition = new Vector3(data.x, data.y, 0f);
 
         pending = data;
         SceneManager.LoadScene(data.scene);
@@ -151,9 +198,11 @@ public static class SaveSystem
     {
         SoulScore.ResetAll();
         GameProgress.ResetAll();
+        LevelState.Clear();
         pending = null;
         respawnScene = null;
         respawnPointId = null;
+        respawnHasPosition = false;
 
         foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
         {
@@ -195,16 +244,15 @@ public static class SaveSystem
             if (data.dashUpgrade) movement.UpgradeDash(data.dashMultiplier);
         }
 
-        // Where: the save point it was saved at.
-        SavePoint savePoint = SavePoint.Find(data.savePointId);
-        if (savePoint == null)
+        // Where: the save point it was saved at (or, if that lamp is gone,
+        // the spot stored with the save).
+        if (!TryGetRespawnPosition(data.savePointId, out Vector3 to))
         {
             Debug.LogWarning($"SaveSystem: no SavePoint '{data.savePointId}' in '{scene.name}' - starting at the scene's own spawn.");
             return;
         }
 
         Vector3 from = player.transform.position;
-        Vector3 to = savePoint.SpawnPosition;
         player.transform.position = to;
         if (player.TryGetComponent(out Rigidbody2D rb))
         {
@@ -213,7 +261,7 @@ public static class SaveSystem
         }
 
         // Snap the camera there instead of panning across the whole level.
-        CinemachineCamera cam = UnityEngine.Object.FindFirstObjectByType<CinemachineCamera>();
+        CinemachineCamera cam = UnityEngine.Object.FindAnyObjectByType<CinemachineCamera>();
         if (cam != null) cam.OnTargetObjectWarped(player.transform, to - from);
     }
 }

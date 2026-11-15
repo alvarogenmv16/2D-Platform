@@ -8,7 +8,7 @@ public class EnemyHealth : MonoBehaviour
     // VARIABLES
     // =========================
 
-    [SerializeField] private float maxHealth = 30f;
+    [SerializeField] private float maxHealth = 40f;
     [SerializeField] private Animator animator;
     [SerializeField] private MonoBehaviour[] aiComponentsToDisable;
 
@@ -66,6 +66,11 @@ public class EnemyHealth : MonoBehaviour
     {
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
     }
+
+    // Dead but not gone yet (falling, playing its death animation): attacks
+    // shouldn't count against it any more - PlayerAttackHitbox skips it, so
+    // it can't be farmed for heal power either.
+    public bool IsDead => isDead;
 
     public void TakeDamage(float amount, Vector2 hitSourcePosition)
     {
@@ -127,10 +132,43 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
+    // Set from code by an enemy that can come back from its "death" (the
+    // Warden's third phase). Called when health reaches 0: returning true
+    // means it handles that itself - nothing of the real death happens (no
+    // OnDied, no death animation, not destroyed, not counted). It stays
+    // "dead" (can't be hit) until it calls Revive.
+    public System.Func<bool> InterceptDeath;
+
+    // Back from an intercepted death: health refills from 0 to max over
+    // refillTime (the boss bar fills up with it), and it can be hit again
+    // once it's full.
+    public void Revive(float refillTime)
+    {
+        StartCoroutine(ReviveRoutine(refillTime));
+    }
+
+    private IEnumerator ReviveRoutine(float refillTime)
+    {
+        for (float t = 0f; t < refillTime; t += Time.deltaTime)
+        {
+            currentHealth = maxHealth * (t / refillTime);
+            OnHealthChanged?.Invoke(currentHealth, maxHealth);
+            yield return null;
+        }
+
+        currentHealth = maxHealth;
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
+        isDead = false;
+    }
+
     private void Die()
     {
         isDead = true;
+        if (InterceptDeath != null && InterceptDeath()) return;
+
         Debug.Log("Enemy died!");
+        AchievementTracker.EnemyKilled();
+        RunStats.EnemyDefeated();
 
         OnDied?.Invoke();
         StartCoroutine(DeathSequence());

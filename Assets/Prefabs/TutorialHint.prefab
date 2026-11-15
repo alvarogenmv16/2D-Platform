@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 288fd4e940c240cba3788b9a333137c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialHint
-  message: Pulsa {Jump} para saltar
+  message: Press {Jump} to jump
   keyColor: {r: 0.8, g: 0.5, b: 1, a: 1}
   showOnce: 0
   dialogueUI: {fileID: 0}

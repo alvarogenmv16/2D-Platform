@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1c3e5b7d9f2a4c6e8b1d3f5a7c9e201, type: 3}
+  m_Name: Achievements
+  m_EditorClassIdentifier:
+  unlockSound: {fileID: 8300000, guid: d79a62f9ab6cce24a8a65101e2d47c92, type: 3}
+  unlockVolume: 1
+  achievements:
+  - id: HeyListen
+    title: 'Hey, Listen!'
+    description: 'Complete the tutorial.'
+    icon: {fileID: 402389772465282151, guid: f90e0f61f60a9d04d8a1163ec539f5ba, type: 3}
+  - id: YouDied
+    title: 'You Died!'
+    description: 'Die for the first time.'
+    icon: {fileID: 4594644724837090386, guid: f90e0f61f60a9d04d8a1163ec539f5ba, type: 3}
+  - id: TheCakeIsALie
+    title: 'The Cake Is a Lie'
+    description: 'Walk through the invisible spikes in Level 1 and claim the soul behind them.'
+    icon: {fileID: 264476212967869470, guid: f90e0f61f60a9d04d8a1163ec539f5ba, type: 3}
+  - id: HereWeGoAgain
+    title: 'Ah Shit, Here We Go Again'
+    description: 'Get killed by a boss and face it again.'
+    icon: {fileID: -7622082159286685610, guid: f90e0f61f60a9d04d8a1163ec539f5ba, type: 3}
+  - id: GottaGoFast
+    title: 'Gotta Go Fast'
+    description: 'Make it through the spike gauntlet in Level 2 and reach the lamp at its end.'
+    icon: {fileID: -3256715685237006177, guid: f90e0f61f60a9d04d8a1163ec539f5ba, type: 3}
+  - id: PraiseTheSun
+    title: 'Praise The Sun'
+    description: 'Find the secret wall in Level 3 and the soul hidden behind it.'
+    icon: {fileID: -2689834157352018978, guid: f90e0f61f60a9d04d8a1163ec539f5ba, type: 3}
+  - id: NoRussian
+    title: 'No Russian'
+    description: 'Defeat the Level 1 boss and talk to your companion.'
+    icon: {fileID: 8327764994112016259, guid: f90e0f61f60a9d04d8a1163ec539f5ba, type: 3}
+  - id: DangerousToGoAlone
+    title: 'It''s Dangerous To Go Alone, Take This'
+    description: 'Get your first damage upgrade in Level 2.'
+    icon: {fileID: -884426417288524850, guid: f90e0f61f60a9d04d8a1163ec539f5ba, type: 3}
+  - id: AreYouNotEntertained
+    title: 'Are You Not Entertained?'
+    description: 'Defeat the Level 2 boss.'
+    icon: {fileID: -6724968372837348372, guid: f90e0f61f60a9d04d8a1163ec539f5ba, type: 3}
+  - id: MyPrecious
+    title: 'My Precious'
+    description: 'Collect every soul in Levels 1, 2 and 3.'
+    icon: {fileID: 294014996121747225, guid: f90e0f61f60a9d04d8a1163ec539f5ba, type: 3}
+  - id: TheForceIsStrong
+    title: 'The Force Is Strong With This One'
+    description: 'Get every damage upgrade and max out your damage.'
+    icon: {fileID: -3140751322332521538, guid: f90e0f61f60a9d04d8a1163ec539f5ba, type: 3}
+  - id: YouShallNotPass
+    title: 'You Shall Not Pass!'
+    description: 'Make a Hound smash through a wall... and itself.'
+    icon: {fileID: -3634535203245955149, guid: f90e0f61f60a9d04d8a1163ec539f5ba, type: 3}
+  - id: FinishHim
+    title: 'Finish Him!'
+    description: 'Defeat Morthos in the temple.'
+    icon: {fileID: -6272078433281259404, guid: f90e0f61f60a9d04d8a1163ec539f5ba, type: 3}
+  - id: Perfect
+    title: 'Perfect!'
+    description: 'Defeat a boss without taking any damage.'
+    icon: {fileID: 2034142747741531486, guid: f90e0f61f60a9d04d8a1163ec539f5ba, type: 3}
+  - id: NextLevel
+    title: 'Welcome To The Next Level'
+    description: 'Leave Level 1 behind and reach Level 2.'
+    icon: {fileID: 6140189055602721932, guid: f90e0f61f60a9d04d8a1163ec539f5ba, type: 3}
+  - id: GottaCatchEmAll
+    title: 'Gotta Catch ''Em All'
+    description: 'Gather all your companions in the temple.'
+    icon: {fileID: -5407712738000408330, guid: f90e0f61f60a9d04d8a1163ec539f5ba, type: 3}
+  - id: ThankYouForPlaying
+    title: 'Thank You So Much For Playing My Game'
+    description: 'Finish the game.'
+    icon: {fileID: 432400220590406726, guid: f90e0f61f60a9d04d8a1163ec539f5ba, type: 3}
+  - id: WildEnemyAppeared
+    title: 'A Wild Enemy Appeared'
+    description: 'Defeat your first enemy.'
+    icon: {fileID: -5802500414599803795, guid: f90e0f61f60a9d04d8a1163ec539f5ba, type: 3}
+  - id: MammaMia
+    title: 'Mamma Mia'
+    description: 'Die on the spikes.'
+    icon: {fileID: -3161601458095514294, guid: f90e0f61f60a9d04d8a1163ec539f5ba, type: 3}
+  - id: Over9000
+    title: 'It''s Over 9000!'
+    description: 'Defeat every boss without taking any damage.'
+    icon: {fileID: 584607821601049509, guid: f90e0f61f60a9d04d8a1163ec539f5ba, type: 3}
+  - id: BackInTheFight
+    title: 'Back In The Fight!'
+    description: 'Fully heal yourself for the first time.'
+    icon: {fileID: -7392338933464028169, guid: f90e0f61f60a9d04d8a1163ec539f5ba, type: 3}

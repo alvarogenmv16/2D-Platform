@@ -1193,9 +1193,9 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3011728049689107408, guid: 96e0d3fd1e5c4304a09870507d6aaf1d, type: 3}
       propertyPath: message
-      value: Attack pressing {Enter}. The more attacks you land the more soul you
-        will collect. You can also attack upwards pressing {Enter} + {Up}. The soul
-        gained will appear in the top left corner of the screen.
+      value: Press {Attack} to attack. The more attacks you land, the more soul you
+        will collect. You can also attack upwards by pressing {Attack} + {Up}. The
+        soul gained will appear in the top left corner of the screen.
       objectReference: {fileID: 0}
     - target: {fileID: 3256588142981407917, guid: 96e0d3fd1e5c4304a09870507d6aaf1d, type: 3}
       propertyPath: m_Name
@@ -1256,7 +1256,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3011728049689107408, guid: 96e0d3fd1e5c4304a09870507d6aaf1d, type: 3}
       propertyPath: message
-      value: Press {Jump} twice to execute a double Jump
+      value: Press {Jump} twice to double jump
       objectReference: {fileID: 0}
     - target: {fileID: 3256588142981407917, guid: 96e0d3fd1e5c4304a09870507d6aaf1d, type: 3}
       propertyPath: m_Name
@@ -3919,7 +3919,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3011728049689107408, guid: 96e0d3fd1e5c4304a09870507d6aaf1d, type: 3}
       propertyPath: message
-      value: Press {Dash} to dash and extend the Jump distance
+      value: Press {Dash} to dash and extend your jump distance
       objectReference: {fileID: 0}
     - target: {fileID: 3256588142981407917, guid: 96e0d3fd1e5c4304a09870507d6aaf1d, type: 3}
       propertyPath: m_Name
@@ -4203,7 +4203,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3011728049689107408, guid: 96e0d3fd1e5c4304a09870507d6aaf1d, type: 3}
       propertyPath: message
-      value: Press {Jump} to Jump
+      value: Press {Jump} to jump
       objectReference: {fileID: 0}
     - target: {fileID: 3256588142981407917, guid: 96e0d3fd1e5c4304a09870507d6aaf1d, type: 3}
       propertyPath: m_Name
@@ -5101,7 +5101,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3011728049689107408, guid: 96e0d3fd1e5c4304a09870507d6aaf1d, type: 3}
       propertyPath: message
-      value: 'Press {Heal} to restore all you health. '
+      value: Press {Heal} to restore all your health
       objectReference: {fileID: 0}
     - target: {fileID: 3256588142981407917, guid: 96e0d3fd1e5c4304a09870507d6aaf1d, type: 3}
       propertyPath: m_Name
@@ -6044,7 +6044,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3011728049689107408, guid: 96e0d3fd1e5c4304a09870507d6aaf1d, type: 3}
       propertyPath: message
-      value: You can hold {Down} to take a look at your surroundings and avoid damage.
+      value: Hold {Down} to look at your surroundings and avoid damage
       objectReference: {fileID: 0}
     - target: {fileID: 3256588142981407917, guid: 96e0d3fd1e5c4304a09870507d6aaf1d, type: 3}
       propertyPath: m_Name

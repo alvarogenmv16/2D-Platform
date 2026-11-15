@@ -99,6 +99,7 @@ public class DamageUpgradePickup : MonoBehaviour
         if (playerAttackHitbox != null)
         {
             playerAttackHitbox.IncreaseDamage(damageIncrease);
+            AchievementTracker.DamageUpgradeClaimed(gameObject.scene.name, playerAttackHitbox.Damage);
         }
 
         // Explicit null checks instead of ?. (Unity fake-null, see KeyBlock).
