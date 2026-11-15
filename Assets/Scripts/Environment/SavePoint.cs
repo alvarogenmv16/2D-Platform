@@ -192,7 +192,12 @@ public class SavePoint : MonoBehaviour
         // the old scene, so nothing after this runs - the new one takes over.
         if (respawnEnemiesOnSave)
         {
-            yield return new WaitForSeconds(reloadDelay);
+            // The reload destroys this lamp - and its AudioSource with it - so
+            // the screen only goes fully black once the save sound is over
+            // (it keeps playing during the fade).
+            float wait = reloadDelay;
+            if (saveSound != null) wait = Mathf.Max(wait, saveSound.length - SceneFader.FadeTime);
+            yield return new WaitForSeconds(wait);
             if (SceneFader.FadeReloadAtSavePoint(savePointId)) yield break;
         }
 

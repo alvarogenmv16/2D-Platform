@@ -59,6 +59,9 @@ public class SceneFader : MonoBehaviour
     // the same player back next to that save point. Everything the run keeps
     // (souls, bosses beaten, LevelState just saved) survives the reload.
     // Returns false if there's no fader in the scene to do it.
+    // How long each fade (to black, or back in) takes. 0 without a fader.
+    public static float FadeTime => instance != null ? instance.fadeDuration : 0f;
+
     public static bool FadeReloadAtSavePoint(string savePointId)
     {
         if (instance == null) return false;
