@@ -146,9 +146,13 @@ public class WardenAI : MonoBehaviour
     [SerializeField, Range(0f, 1f)] private float spearCircleChance = 0.4f;
     // Where the spears sit around the player: angles (degrees, 0 = right,
     // 90 = straight above) - nothing from below, the floor is there.
-    [SerializeField] private float[] circleAngles = { 10f, 60f, 120f, 170f };
+    // Spears at 0 / 180 (or within horizontalSpearTolerance of them) are
+    // horizontal: they don't turn to follow the player once stopped and fly
+    // straight across - jump over them. The rest aim at the player.
+    [SerializeField] private float[] circleAngles = { 0f, 60f, 120f, 180f };
+    [SerializeField] private float horizontalSpearTolerance = 15f;
     // From the player to each spear's tip - far enough to react.
-    [SerializeField] private float circleRadius = 6f;
+    [SerializeField] private float circleRadius = 8f;
     // How fast they keep up with the player while the order is shown.
     [SerializeField] private float circleFollowSpeed = 10f;
     // Spears in place before the first glow.
@@ -162,8 +166,8 @@ public class WardenAI : MonoBehaviour
     // After the last glow: they stop following and, after this, fire.
     [SerializeField] private float circleFirePause = 0.4f;
     // Time between two spears firing.
-    [SerializeField] private float circleFireInterval = 0.45f;
-    [SerializeField] private float circleSpearSpeed = 32f;
+    [SerializeField] private float circleFireInterval = 0.7f;
+    [SerializeField] private float circleSpearSpeed = 24f;
     // Fists-up pose held after the last spear, before going back to idle.
     [SerializeField] private float circleRecoverTime = 0.6f;
 
@@ -636,7 +640,7 @@ public class WardenAI : MonoBehaviour
             float wait = n == 0 ? circleFirePause : circleFireInterval;
             for (float t = 0f; t < wait; t += Time.deltaTime)
             {
-                AimWaitingSpears(order, n);
+                AimWaitingSpears(order, n, offsets);
                 yield return null;
             }
 
@@ -644,7 +648,7 @@ public class WardenAI : MonoBehaviour
             if (spear == null) continue;
 
             Vector2 from = spear.SpearPosition;
-            Vector2 aim = PlayerCentre() - from;
+            Vector2 aim = IsHorizontal(offsets[order[n]]) ? -offsets[order[n]] * circleRadius : PlayerCentre() - from;
             if (aim.sqrMagnitude < 0.01f) aim = -offsets[order[n]];
             // On through where the player was and well past it, then gone.
             float distance = aim.magnitude + circleRadius * 2f + spear.SpearLength;
@@ -656,17 +660,23 @@ public class WardenAI : MonoBehaviour
         EndSpearCircle();
     }
 
-    // The spears still waiting keep pointing at the player.
-    private void AimWaitingSpears(int[] order, int firstWaiting)
+    // The spears still waiting keep pointing at the player (not the
+    // horizontal ones: they stay level).
+    private void AimWaitingSpears(int[] order, int firstWaiting, Vector2[] offsets)
     {
         Vector2 target = PlayerCentre();
         for (int k = firstWaiting; k < order.Length; k++)
         {
             WardenSweepSpear spear = circleSpears[order[k]];
-            if (spear == null) continue;
+            if (spear == null || IsHorizontal(offsets[order[k]])) continue;
             Vector2 at = spear.SpearPosition;
             spear.Place(at, target - at);
         }
+    }
+
+    private bool IsHorizontal(Vector2 offset)
+    {
+        return Mathf.Abs(offset.y) <= Mathf.Sin(horizontalSpearTolerance * Mathf.Deg2Rad);
     }
 
     // A spear's centre so that its tip is circleRadius from the player.
