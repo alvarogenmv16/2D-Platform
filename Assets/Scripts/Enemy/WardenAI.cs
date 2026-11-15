@@ -30,6 +30,13 @@ using UnityEngine.Serialization;
 // at random: the portals, or diagonal spears - parallel diagonal lines
 // falling from above the screen to the floor, in 2 volleys, the second
 // shifted half a gap so the player has to move to the next safe corridor.
+//
+// Phase 3 - back from the dead: the first time its health reaches 0 it only
+// seems to die (death pose, victory music, the bar empty) - EnemyHealth's
+// death is intercepted. After reviveDelay it rises again with its two fists
+// up (WardenPunch2's last pose), the bar fills up to full health and the
+// phase 2 music comes back louder (phase3MusicVolume). From there it fights
+// like phase 2. The second time it dies, it's for real.
 public class WardenAI : MonoBehaviour
 {
     private enum WardenState
@@ -38,6 +45,7 @@ public class WardenAI : MonoBehaviour
         Idle,
         Attacking,
         ChangingPhase,
+        Reviving,      // phase 3: fake death and rising again (driven by a coroutine)
     }
 
     private enum WardenAttack
@@ -112,6 +120,19 @@ public class WardenAI : MonoBehaviour
     [SerializeField] private float diagonalWarningTime = 0.7f;
     [SerializeField] private float diagonalSpeed = 20f;
 
+    [Header("Phase 3 - back from the dead")]
+    // From the fake death until it rises again.
+    [SerializeField] private float reviveDelay = 8f;
+    // How long the health bar takes to fill up again.
+    [SerializeField] private float reviveRefillTime = 3f;
+    // How long it holds the fists-up pose before attacking again.
+    [SerializeField] private float reviveHoldTime = 2f;
+    // The phase 2 music comes back at this volume (the usual is WardenIntro's
+    // musicVolume, 0.7).
+    [SerializeField, Range(0f, 1f)] private float phase3MusicVolume = 1f;
+    // How soon after rising the first attack comes.
+    [SerializeField] private float phase3FirstAttackDelay = 2f;
+
     [Header("Death")]
     [SerializeField] private AudioClip victoryMusic;
     // The death pose holds still for deathFadeDelay, then fades out over
@@ -140,6 +161,7 @@ public class WardenAI : MonoBehaviour
         {
             health.OnDied.AddListener(OnDied);
             health.OnHealthChanged.AddListener(OnHealthChanged);
+            health.InterceptDeath = TryFakeDeath;
         }
         weakPoint = GetComponent<WardenHelmet>();
 
@@ -483,6 +505,63 @@ public class WardenAI : MonoBehaviour
                 spear.LaunchAlong(dir, start, lengthToFloor, diagonalWarningTime, true, diagonalSpeed);
             }
         }
+    }
+
+    // =========================
+    // PHASE 3 - BACK FROM THE DEAD
+    // =========================
+
+    private bool hasRevived;
+
+    // EnemyHealth.InterceptDeath: the first death is a fake one.
+    private bool TryFakeDeath()
+    {
+        if (hasRevived) return false;
+
+        hasRevived = true;
+        StopAllCoroutines();
+        StartCoroutine(FakeDeathAndRevive());
+        return true;
+    }
+
+    private IEnumerator FakeDeathAndRevive()
+    {
+        currentPhase = 3;
+        currentState = WardenState.Reviving; // Update does nothing meanwhile
+        if (weakPoint != null) weakPoint.SetVulnerable(false);
+
+        // Looks exactly like the real death: death pose and victory music.
+        if (animator != null)
+        {
+            animator.ResetTrigger("PunchTrigger");
+            animator.ResetTrigger("SweepTrigger");
+            animator.SetTrigger("DieTrigger");
+        }
+        WardenIntro intro = FindAnyObjectByType<WardenIntro>();
+        if (intro != null) intro.ChangeMusic(victoryMusic, 0.6f, false);
+
+        yield return new WaitForSeconds(reviveDelay);
+
+        // It rises: two fists up (the end of WardenPunch2, helmetless),
+        // held for reviveHoldTime, then the clip ends on its own in
+        // WardenIdle2 - the phase 2 idle.
+        if (animator != null)
+        {
+            animator.Play("WardenPunch2", 0, 0f);
+            animator.Update(0f);
+            AnimatorStateInfo punch = animator.GetCurrentAnimatorStateInfo(0);
+            float length = punch.length > 0f ? punch.length : 3f;
+            float from = Mathf.Clamp01((length - reviveHoldTime) / length);
+            animator.Play("WardenPunch2", 0, from);
+        }
+        if (intro != null) intro.ChangeMusic(phase2Music, 0.2f, true, phase3MusicVolume);
+        if (health != null) health.Revive(reviveRefillTime);
+
+        yield return new WaitForSeconds(Mathf.Max(reviveHoldTime, reviveRefillTime));
+
+        if (weakPoint != null) weakPoint.SetVulnerable(true);
+        stateTimer = CurrentCooldown - phase3FirstAttackDelay;
+        currentState = WardenState.Idle;
     }
 
     // =========================
