@@ -162,6 +162,7 @@ public class WardenAI : MonoBehaviour
     public void Activate()
     {
         if (currentState != WardenState.Inactive) return;
+        AchievementTracker.BossFightStarted(AchievementTracker.Warden);
 
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject != null) player = playerObject.transform;
@@ -494,6 +495,7 @@ public class WardenAI : MonoBehaviour
     // victory music, and fade the body out over the end of the clip.
     private void OnDied()
     {
+        AchievementTracker.BossDefeated(AchievementTracker.Warden);
         StopAllCoroutines();
         currentState = WardenState.Inactive;
         if (weakPoint != null) weakPoint.SetVulnerable(false);

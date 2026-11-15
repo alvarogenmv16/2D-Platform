@@ -39,6 +39,17 @@ public class EyeArenaController : MonoBehaviour
     // in — reads as "something is about to happen" instead of an instant cut.
     [SerializeField] private float revealDelay = 1.5f;
 
+    [Header("Intro (title card, same as the other bosses)")]
+    // Off, or with no title sprite: the old reveal (revealDelay, then the Eye).
+    [SerializeField] private bool playIntro = true;
+    [SerializeField] private TitleCard.Settings intro = new TitleCard.Settings();
+
+    [Header("After the victory")]
+    // Remembered in GameProgress for the rest of the run (see BossArenaController).
+    [SerializeField] private string defeatedFlag = "Boss2Defeated";
+    // Inactive in the scene until the Eye is dead (e.g. the portal to Level3).
+    [SerializeField] private GameObject[] enableOnVictory;
+
     private Collider2D triggerCollider;
     private bool hasActivated = false;
 
@@ -59,10 +70,30 @@ public class EyeArenaController : MonoBehaviour
     // =========================
     // START
     // =========================
+    private void Awake()
+    {
+        // Reloaded after the Eye is already dead (e.g. dying before taking
+        // the portal): no Eye, no fight, the portal already open.
+        if (!GameProgress.Has(defeatedFlag)) return;
+
+        hasActivated = true;
+        if (eye != null) eye.gameObject.SetActive(false);
+        SetVictoryObjectsActive(true);
+    }
+
     private void Start()
     {
         triggerCollider = GetComponent<Collider2D>();
         triggerCollider.isTrigger = true;
+        if (hasActivated)
+        {
+            triggerCollider.enabled = false;
+
+            // The floor only breaks during the fight: open it again so the
+            // room below (and its portal) can still be reached.
+            EyeFloorCrumble floor = FindFirstObjectByType<EyeFloorCrumble>();
+            if (floor != null) floor.SetCrumbled();
+        }
 
         SetWallsActive(false);
     }
@@ -110,7 +141,14 @@ public class EyeArenaController : MonoBehaviour
         SetWallsActive(true);
         triggerCollider.enabled = false; // one-shot: never fire again once the fight has started
 
-        StartCoroutine(RevealSequence());
+        if (playIntro && intro.titleSprite != null)
+        {
+            StartCoroutine(IntroSequence(other.gameObject));
+        }
+        else
+        {
+            StartCoroutine(RevealSequence());
+        }
     }
 
     private IEnumerator RevealSequence()
@@ -121,20 +159,50 @@ public class EyeArenaController : MonoBehaviour
         if (eyeHealthUI != null) eyeHealthUI.Show();
     }
 
+    // Same beats as BossArenaController's intro: player frozen, fade to
+    // black, the Eye's title while its music starts, back to the scene with
+    // the health bar up, then the Eye starts summoning itself in.
+    private IEnumerator IntroSequence(GameObject player)
+    {
+        PlayerMovement movement = player.GetComponent<PlayerMovement>();
+        Rigidbody2D playerRb = player.GetComponent<Rigidbody2D>();
+
+        if (movement != null) movement.enabled = false;
+        if (playerRb != null) playerRb.linearVelocity = new Vector2(0f, playerRb.linearVelocity.y);
+
+        yield return TitleCard.Play(intro, () =>
+        {
+            PlayBattleMusic();
+            if (eyeHealthUI != null) eyeHealthUI.Show();
+        });
+
+        if (movement != null) movement.enabled = true;
+
+        if (eye != null) eye.Activate();
+    }
+
     // Called via EyeAI.OnSummonComplete — only once the Eye has actually
-    // finished growing in, not the moment it starts appearing.
+    // finished growing in, not the moment it starts appearing. With the
+    // intro the music is already on by then.
     private void HandleSummonComplete()
     {
-        if (musicSource != null && battleMusic != null)
-        {
-            musicSource.clip = battleMusic;
-            musicSource.loop = true;
-            musicSource.Play();
-        }
+        PlayBattleMusic();
+    }
+
+    private void PlayBattleMusic()
+    {
+        if (musicSource == null || battleMusic == null) return;
+        if (musicSource.isPlaying && musicSource.clip == battleMusic) return;
+
+        musicSource.clip = battleMusic;
+        musicSource.loop = true;
+        musicSource.Play();
     }
 
     private void HandleEyeDied()
     {
+        GameProgress.Set(defeatedFlag);
+        SetVictoryObjectsActive(true);
         SetWallsActive(false);
 
         if (musicSource != null)
@@ -142,6 +210,16 @@ public class EyeArenaController : MonoBehaviour
             musicSource.loop = false;
             musicSource.clip = victoryMusic;
             musicSource.Play();
+        }
+    }
+
+    private void SetVictoryObjectsActive(bool active)
+    {
+        if (enableOnVictory == null) return;
+
+        foreach (GameObject go in enableOnVictory)
+        {
+            if (go != null) go.SetActive(active);
         }
     }
 

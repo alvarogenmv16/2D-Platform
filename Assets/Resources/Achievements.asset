@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1c3e5b7d9f2a4c6e8b1d3f5a7c9e201, type: 3}
+  m_Name: Achievements
+  m_EditorClassIdentifier:
+  achievements:
+  - id: HeyListen
+    title: 'Hey, Listen!'
+    description: 'Complete the tutorial.'
+    hidden: 0
+  - id: YouDied
+    title: 'You Died!'
+    description: 'Die for the first time.'
+    hidden: 0
+  - id: TheCakeIsALie
+    title: 'The Cake Is a Lie'
+    description: 'Walk through the invisible spikes in Level 1 and claim the soul behind them.'
+    hidden: 0
+  - id: HereWeGoAgain
+    title: 'Ah Shit, Here We Go Again'
+    description: 'Get killed by a boss and face it again.'
+    hidden: 0
+  - id: GottaGoFast
+    title: 'Gotta Go Fast'
+    description: 'Make it through the spike gauntlet in Level 2 and reach the lamp at its end.'
+    hidden: 0
+  - id: PraiseTheSun
+    title: 'Praise The Sun'
+    description: 'Find the secret wall in Level 3 and the soul hidden behind it.'
+    hidden: 0
+  - id: NoRussian
+    title: 'No Russian'
+    description: 'Defeat the Level 1 boss and talk to your companion.'
+    hidden: 0
+  - id: DangerousToGoAlone
+    title: 'It''s Dangerous To Go Alone, Take This'
+    description: 'Get your first damage upgrade in Level 2.'
+    hidden: 0
+  - id: AreYouNotEntertained
+    title: 'Are You Not Entertained?'
+    description: 'Defeat the Level 2 boss.'
+    hidden: 0
+  - id: MyPrecious
+    title: 'My Precious'
+    description: 'Collect every soul in Levels 1, 2 and 3.'
+    hidden: 0
+  - id: TheForceIsStrong
+    title: 'The Force Is Strong With This One'
+    description: 'Get every damage upgrade and max out your damage.'
+    hidden: 0
+  - id: YouShallNotPass
+    title: 'You Shall Not Pass!'
+    description: 'Make a Hound smash through a wall... and itself.'
+    hidden: 0
+  - id: FinishHim
+    title: 'Finish Him!'
+    description: 'Defeat Morthos in the temple.'
+    hidden: 0
+  - id: Perfect
+    title: 'Perfect!'
+    description: 'Defeat a boss without taking any damage.'
+    hidden: 0
+  - id: NextLevel
+    title: 'Welcome To The Next Level'
+    description: 'Leave Level 1 behind and reach Level 2.'
+    hidden: 0
+  - id: GottaCatchEmAll
+    title: 'Gotta Catch ''Em All'
+    description: 'Gather all your companions in the temple.'
+    hidden: 0
+  - id: ThankYouForPlaying
+    title: 'Thank You So Much For Playing My Game'
+    description: 'Finish the game.'
+    hidden: 0
+  - id: WildEnemyAppeared
+    title: 'A Wild Enemy Appeared'
+    description: 'Defeat your first enemy.'
+    hidden: 0
+  - id: MammaMia
+    title: 'Mamma Mia'
+    description: 'Die on the spikes.'
+    hidden: 0
+  - id: Over9000
+    title: 'It''s Over 9000!'
+    description: 'Defeat every boss without taking any damage.'
+    hidden: 0
+  - id: BackInTheFight
+    title: 'Back In The Fight!'
+    description: 'Fully heal yourself for the first time.'
+    hidden: 0

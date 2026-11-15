@@ -47,26 +47,26 @@ public class EyeAI : MonoBehaviour
     [SerializeField] private float barrageCooldown = 1.5f; // pause between barrages, before the next one starts
 
     [Header("Phase 1 - wandering")]
-    [SerializeField] private float wanderSpeed = 3f;
-    [SerializeField] private float minWanderPause = 2f; // how long it sits still at each spot before moving again
-    [SerializeField] private float maxWanderPause = 4f;
+    [SerializeField] private float wanderSpeed = 15f;
+    [SerializeField] private float minWanderPause = 0.5f; // how long it sits still at each spot before moving again
+    [SerializeField] private float maxWanderPause = 1.5f;
     // Keeps wander targets off the walls, same reasoning as BossAI's wallMargin.
     [SerializeField] private float wanderMarginX = 3.5f;
     // No upward attack exists yet, so it's kept low enough that a double jump
     // can still reach it — this is a rough estimate from the player's jump
     // physics (jumpForces 5/4, gravityScale 1), not a measured value. Tune
     // both after playtesting the actual double-jump apex.
-    [SerializeField] private float minHeightAboveFloor = 1.5f;
-    [SerializeField] private float maxHeightAboveFloor = 3.5f;
+    [SerializeField] private float minHeightAboveFloor = 4f;
+    [SerializeField] private float maxHeightAboveFloor = 6f;
 
     [Header("Phase 2 - wandering")]
     // Same drift-pause-drift idea as Phase 1's wandering, just slower and
     // with longer pauses to suit the smaller Phase 2 room — and using
     // Phase2FloorY/Phase2CeilingY directly instead of an estimated height
     // band, since Phase 2 has both markers already (Phase 1 only has a floor).
-    [SerializeField] private float phase2WanderSpeed = 1.5f;
-    [SerializeField] private float phase2MinWanderPause = 3f;
-    [SerializeField] private float phase2MaxWanderPause = 6f;
+    [SerializeField] private float phase2WanderSpeed = 10f;
+    [SerializeField] private float phase2MinWanderPause = 1f;
+    [SerializeField] private float phase2MaxWanderPause = 3f;
     [SerializeField] private float phase2WanderMarginX = 2f;
     [SerializeField] private float phase2WanderMarginY = 1.5f;
 
@@ -115,7 +115,14 @@ public class EyeAI : MonoBehaviour
         SetPhase2PlatformsActive(false);
     }
 
-    private void OnEnable()
+    // Subscribed for the Eye's whole life (Awake/OnDestroy), NOT in
+    // OnEnable/OnDisable: EnemyHealth disables this component for the
+    // knockback after every hit (aiComponentsToDisable), and listeners
+    // removed in OnDisable would miss whatever fires during those 0.5 s -
+    // the hit that crosses the Phase 2 threshold, or the player landing on
+    // the Phase 2 floor, which only fires once and would leave Phase 2
+    // waiting for it forever.
+    private void Awake()
     {
         if (health != null)
         {
@@ -129,7 +136,7 @@ public class EyeAI : MonoBehaviour
         }
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         if (health != null)
         {
@@ -152,6 +159,7 @@ public class EyeAI : MonoBehaviour
     {
         if (currentState != EyeState.Dormant) return;
 
+        AchievementTracker.BossFightStarted(AchievementTracker.Eye);
         currentState = EyeState.Summoning;
         StartCoroutine(SummonSequence());
     }
@@ -258,6 +266,7 @@ public class EyeAI : MonoBehaviour
     // forever after the Eye is dead. Stop everything explicitly instead.
     private void HandleDied()
     {
+        AchievementTracker.BossDefeated(AchievementTracker.Eye);
         StopAllCoroutines();
     }
 
@@ -297,7 +306,7 @@ public class EyeAI : MonoBehaviour
         // they'd exist in time to catch the player mid-fall instead of the floor.
         if (phase2FloorTrigger != null)
         {
-            yield return new WaitUntil(() => phase2FloorReached);
+            yield return new WaitUntil(() => phase2FloorReached || phase2FloorTrigger.HasTriggered);
         }
 
         SetPhase2PlatformsActive(true);

@@ -24,6 +24,7 @@ public class HazardDamage : MonoBehaviour, IHazard
         // wherever on the hazard shape was actually touched.
         Vector2 hitSourcePosition = hazardCollider.ClosestPoint(other.transform.position);
         bool damageApplied = playerHealth.TakeDamage(damage, hitSourcePosition);
+        if (damageApplied && playerHealth.IsDead) AchievementTracker.KilledByHazard();
 
         // Only bump the player back on a hit that actually landed - not on
         // every OnTriggerStay2D frame while they're still invulnerable from

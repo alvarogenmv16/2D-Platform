@@ -37,6 +37,17 @@ public class EyeFloorCrumble : MonoBehaviour
     // FUNCTIONS
     // =========================
 
+    // Already broken, no animation or sound - for a reload after the Eye is
+    // dead (EyeArenaController), so the room below stays reachable.
+    public void SetCrumbled()
+    {
+        hasCrumbled = true;
+
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        if (crumbleFrames != null && crumbleFrames.Length > 0) sr.sprite = crumbleFrames[crumbleFrames.Length - 1];
+        GetComponent<Collider2D>().enabled = false;
+    }
+
     public IEnumerator Crumble()
     {
         if (hasCrumbled) yield break;

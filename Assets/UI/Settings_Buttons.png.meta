@@ -1,0 +1,403 @@
+fileFormatVersion: 2
+guid: bbaa1ccff0c84374cb2d869a50ea398a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -349501769233167598
+    second: UI_Buttons_0
+  - first:
+      213: 1002314541381079101
+    second: UI_Buttons_1
+  - first:
+      213: -3302942199910501919
+    second: UI_Buttons_2
+  - first:
+      213: -8388676363910138018
+    second: UI_Buttons_3
+  - first:
+      213: -5942230873519039519
+    second: UI_Buttons_4
+  - first:
+      213: -9075372253054032488
+    second: UI_Buttons_5
+  - first:
+      213: -3752086400668895170
+    second: UI_Buttons_6
+  - first:
+      213: 5443615423995280755
+    second: UI_Buttons_7
+  - first:
+      213: -7257974199788926244
+    second: UI_Buttons_8
+  - first:
+      213: 296944135989094092
+    second: UI_Buttons_9
+  - first:
+      213: -6730508959240759184
+    second: UI_Buttons_10
+  - first:
+      213: -5501386671893047495
+    second: UI_Buttons_11
+  - first:
+      213: 5802799835174370958
+    second: UI_Buttons_12
+  - first:
+      213: 9160267285729102424
+    second: UI_Buttons_13
+  - first:
+      213: -6187156380514981872
+    second: UI_Buttons_14
+  - first:
+      213: 3142690178943411350
+    second: UI_Buttons_15
+  - first:
+      213: 8169849489479417636
+    second: UI_Buttons_16
+  - first:
+      213: 5213170071327885048
+    second: UI_Buttons_17
+  - first:
+      213: 5811623420353488977
+    second: UI_Buttons_18
+  - first:
+      213: -3516707813035802125
+    second: UI_Buttons_19
+  - first:
+      213: -1939118953878457694
+    second: UI_Buttons_20
+  - first:
+      213: 5987559647945176134
+    second: UI_Buttons_21
+  - first:
+      213: -6674059747960205598
+    second: UI_Buttons_22
+  - first:
+      213: 6029490960356256969
+    second: UI_Buttons_23
+  - first:
+      213: 37834372265971893
+    second: UI_Buttons_24
+  - first:
+      213: -4793978554613580757
+    second: UI_Buttons_25
+  - first:
+      213: -4367795049968701439
+    second: UI_Buttons_26
+  - first:
+      213: -416702877962891998
+    second: UI_Buttons_27
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Gamepad
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 400
+        width: 761
+        height: 457
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f34a01c423b55564eb126bc47a1491c4
+      internalID: -542914256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enter
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 198
+        width: 361
+        height: 139
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49b146c356ed9c346980522c699af14e
+      internalID: -599751383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Space
+      rect:
+        serializedVersion: 2
+        x: 489
+        y: 199
+        width: 522
+        height: 133
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8923d397a27bd8e45bb9d0dd3ff75d70
+      internalID: 117615392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shift
+      rect:
+        serializedVersion: 2
+        x: 1058
+        y: 199
+        width: 344
+        height: 139
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f81f2437fee6a84595e70a33aa71607
+      internalID: -1320221757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arrow
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 663
+        width: 262
+        height: 103
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b107f8c1eaeb4f4eaf97c56d131043d
+      internalID: 589091410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Key
+      rect:
+        serializedVersion: 2
+        x: 865
+        y: 419
+        width: 158
+        height: 147
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2030b1c6082ca7041b61a306e3809c53
+      internalID: -652070471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LongKey
+      rect:
+        serializedVersion: 2
+        x: 1096
+        y: 419
+        width: 390
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2a231c97726968498d975809d45b707
+      internalID: -127864592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5126ae93e803e774fad0676f3ec567d6
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Arrow: 589091410
+      Enter: -599751383
+      Gamepad: -542914256
+      Key: -652070471
+      LongKey: -127864592
+      Shift: -1320221757
+      Space: 117615392
+      UI_Buttons_0: -349501769233167598
+      UI_Buttons_1: 1002314541381079101
+      UI_Buttons_10: -6730508959240759184
+      UI_Buttons_11: -5501386671893047495
+      UI_Buttons_12: 5802799835174370958
+      UI_Buttons_13: 9160267285729102424
+      UI_Buttons_14: -6187156380514981872
+      UI_Buttons_15: 3142690178943411350
+      UI_Buttons_16: 8169849489479417636
+      UI_Buttons_17: 5213170071327885048
+      UI_Buttons_18: 5811623420353488977
+      UI_Buttons_19: -3516707813035802125
+      UI_Buttons_2: -3302942199910501919
+      UI_Buttons_20: -1939118953878457694
+      UI_Buttons_21: 5987559647945176134
+      UI_Buttons_22: -6674059747960205598
+      UI_Buttons_23: 6029490960356256969
+      UI_Buttons_24: 37834372265971893
+      UI_Buttons_25: -4793978554613580757
+      UI_Buttons_26: -4367795049968701439
+      UI_Buttons_27: -416702877962891998
+      UI_Buttons_3: -8388676363910138018
+      UI_Buttons_4: -5942230873519039519
+      UI_Buttons_5: -9075372253054032488
+      UI_Buttons_6: -3752086400668895170
+      UI_Buttons_7: 5443615423995280755
+      UI_Buttons_8: -7257974199788926244
+      UI_Buttons_9: 296944135989094092
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

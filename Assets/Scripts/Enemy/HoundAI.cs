@@ -115,7 +115,9 @@ public class HoundAI : MonoBehaviour
     // =========================
     private void FixedUpdate()
     {
-        if (player == null) return;
+        // Re-found if lost: the player that survives a scene change
+        // replaces (and destroys) the one this scene started with.
+        if (!PlayerLocator.Refresh(ref player)) return;
 
         switch (currentState)
         {
@@ -239,6 +241,7 @@ public class HoundAI : MonoBehaviour
         // Same death sequence as any other enemy (animation, AI disabled,
         // destroyed after EnemyDeath), just not reachable through damage.
         health?.Kill();
+        AchievementTracker.HoundBrokeWall();
     }
 
     private void EndCharge()

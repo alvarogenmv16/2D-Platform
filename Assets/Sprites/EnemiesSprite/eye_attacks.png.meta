@@ -485,6 +485,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: eye_vortex
+      rect:
+        serializedVersion: 2
+        x: 1289
+        y: 285
+        width: 172
+        height: 159
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e73b2df811b4825bed0959bb17d5b15
+      internalID: -1518885843520160199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -499,6 +521,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+      eye_vortex: -1518885843520160199
       eye_attacks_1: -8530296342938029052
       eye_attacks_3: 7607930353866897018
       eye_attacks_4: -7219958874472573928

@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6880f022588ee7241a2fa22acbe1025f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  maxHealth: 5
+  maxHealth: 6
   animator: {fileID: 200023}
   aiComponentsToDisable:
   - {fileID: 200005}

@@ -11,10 +11,11 @@ public class PlayerPower : MonoBehaviour
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private Animator animator;
 
-    // How many landed hits it takes to fill the bar from empty to full.
-    // Each confirmed hit adds 1 unit of power, and maxPower is derived
-    // from this so the bar always fills after exactly this many hits.
-    [SerializeField] private int hitsToFillBar = 6;
+    // How many landed hits it takes to fill the bar from empty to full
+    // with the starting damage. Each hit adds a bit more power per damage
+    // upgrade (see PlayerAttackHitbox.powerPerExtraDamage), so upgrades
+    // fill the bar faster.
+    [SerializeField] private int hitsToFillBar = 7;
 
     private float maxPower;
     private float currentPower;
@@ -23,6 +24,16 @@ public class PlayerPower : MonoBehaviour
     // called and the ApplyHeal animation event landing. Blocks a second
     // heal from starting mid-animation.
     private bool isHealing;
+
+    // If the heal animation is cut short before its ApplyHeal event - a hit,
+    // dash, jump or attack (all Any State transitions), death's Rebind, a
+    // scene change - the event never comes and isHealing would stay true
+    // for good, so the player could never heal again. Update watches for
+    // that (see CheckHealInterrupted) once the Animator has had this long
+    // to actually enter PlayerHeal.
+    private const float HealStartGrace = 0.2f;
+    private static readonly int HealState = Animator.StringToHash("PlayerHeal");
+    private float healStartedAt;
 
     // Fired whenever power changes, passing (currentPower, maxPower).
     // The UI power bar subscribes to this to update its fill amount,
@@ -44,6 +55,8 @@ public class PlayerPower : MonoBehaviour
 
     private void Update()
     {
+        if (isHealing) CheckHealInterrupted();
+
         // Reuse PlayerMovement's InputSystem_Actions instance instead of
         // creating a second one, same convention as PlayerAttack.
         if (playerMovement != null && playerMovement.InputActions.Player.Heal.WasPressedThisFrame())
@@ -65,7 +78,8 @@ public class PlayerPower : MonoBehaviour
     }
 
     // Adds power, clamped to maxPower. Called once per enemy hit that
-    // actually connects, from PlayerAttackHitbox.
+    // actually connects, from PlayerAttackHitbox (amount = damage relative
+    // to the starting damage).
     public void AddPower(float amount)
     {
         currentPower = Mathf.Clamp(currentPower + amount, 0f, maxPower);
@@ -83,12 +97,29 @@ public class PlayerPower : MonoBehaviour
         if (isHealing || currentPower < maxPower) return false;
 
         isHealing = true;
+        healStartedAt = Time.time;
         currentPower = 0f;
         OnPowerChanged?.Invoke(currentPower, maxPower);
 
         animator?.SetTrigger("HealTrigger");
 
         return true;
+    }
+
+    // The heal was cancelled without landing: unlock healing again and give
+    // the bar back, since no health was restored for it.
+    private void CheckHealInterrupted()
+    {
+        if (animator == null || Time.time - healStartedAt < HealStartGrace) return;
+
+        bool inHeal = animator.GetCurrentAnimatorStateInfo(0).shortNameHash == HealState
+            || (animator.IsInTransition(0) && animator.GetNextAnimatorStateInfo(0).shortNameHash == HealState);
+        if (inHeal) return;
+
+        isHealing = false;
+        animator.ResetTrigger("HealTrigger");
+        currentPower = maxPower;
+        OnPowerChanged?.Invoke(currentPower, maxPower);
     }
 
     // Called via an Animation Event on the PlayerHeal clip, at the exact
@@ -98,5 +129,6 @@ public class PlayerPower : MonoBehaviour
     {
         playerHealth.FullHeal();
         isHealing = false;
+        AchievementTracker.Healed();
     }
 }

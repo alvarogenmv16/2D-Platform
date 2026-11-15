@@ -119,6 +119,7 @@ public class WardenEscape : MonoBehaviour
     {
         escaping = true;
         SetPrompt(false);
+        AchievementTracker.GameFinished();
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
@@ -208,6 +209,10 @@ public class WardenEscape : MonoBehaviour
         {
             Destroy(soul.gameObject);
         }
+
+        // Collected souls (and their total) belong to this run only.
+        SoulScore.ResetAll();
+        GameProgress.ResetAll();
     }
 
     private CinemachineImpulseSource CreateShakeSource()

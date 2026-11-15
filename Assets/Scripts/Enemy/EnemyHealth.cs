@@ -8,7 +8,7 @@ public class EnemyHealth : MonoBehaviour
     // VARIABLES
     // =========================
 
-    [SerializeField] private float maxHealth = 30f;
+    [SerializeField] private float maxHealth = 40f;
     [SerializeField] private Animator animator;
     [SerializeField] private MonoBehaviour[] aiComponentsToDisable;
 
@@ -66,6 +66,11 @@ public class EnemyHealth : MonoBehaviour
     {
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
     }
+
+    // Dead but not gone yet (falling, playing its death animation): attacks
+    // shouldn't count against it any more - PlayerAttackHitbox skips it, so
+    // it can't be farmed for heal power either.
+    public bool IsDead => isDead;
 
     public void TakeDamage(float amount, Vector2 hitSourcePosition)
     {
@@ -131,6 +136,7 @@ public class EnemyHealth : MonoBehaviour
     {
         isDead = true;
         Debug.Log("Enemy died!");
+        AchievementTracker.EnemyKilled();
 
         OnDied?.Invoke();
         StartCoroutine(DeathSequence());

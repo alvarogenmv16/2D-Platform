@@ -136,7 +136,12 @@ MonoBehaviour:
   diveSpeed: 40
   fallDistance: 20
   anticipationDelay: 0.15
-  diveDuration: 0.35
+  diveDuration: 2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  holdFallFrameAt: 0.3
+  impactFrameTime: 0.35
   stuckDuration: 1
   returnSpeed: 6
   weapon: {fileID: 100007}

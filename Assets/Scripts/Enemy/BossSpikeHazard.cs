@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 // Lives on a standalone prefab, instantiated by BossAI's spike attack —
@@ -24,6 +25,17 @@ public class BossSpikeHazard : MonoBehaviour
     [SerializeField] private Vector2 hitBoxSize = new Vector2(1f, 2f);
     [SerializeField] private Vector2 hitBoxOffset = new Vector2(0f, 1f);
 
+    // On = hurts wherever the spike is actually drawn: the current animation
+    // frame's physics shape (Sprite Editor > Custom Physics Shape) is copied
+    // into a trigger PolygonCollider2D every time the frame changes, so the
+    // damage area grows and shrinks with the spike. Overrides the two above.
+    [SerializeField] private bool useSpriteShape = false;
+    // Shrinks that shape around the spike's base centre (the pivot), to make
+    // the hit more forgiving than the drawing: 1 = exactly the drawn shape,
+    // 0.7 = 70% as wide/tall. Can be tweaked live in Play mode.
+    [SerializeField, Range(0.2f, 1f)] private float shapeWidthScale = 1f;
+    [SerializeField, Range(0.2f, 1f)] private float shapeHeightScale = 1f;
+
     [Header("Sound")]
     [SerializeField] private SfxPlayer sfxPlayer;
     [SerializeField] private AudioClip startSound; // plays on spawn, telegraph begins
@@ -35,9 +47,32 @@ public class BossSpikeHazard : MonoBehaviour
     // damage window instead of a single instant.
     private bool isDangerous = false;
 
+    // useSpriteShape
+    private SpriteRenderer spriteRenderer;
+    private PolygonCollider2D shapeCollider;
+    private Sprite shapeSprite;
+    private Vector2 shapeScale;
+    private ContactFilter2D playerFilter;
+    private readonly List<Vector2> shapePoints = new List<Vector2>();
+    private readonly List<Collider2D> overlaps = new List<Collider2D>();
+
     // =========================
     // START
     // =========================
+    private void Awake()
+    {
+        if (!useSpriteShape) return;
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        shapeCollider = gameObject.AddComponent<PolygonCollider2D>();
+        shapeCollider.isTrigger = true;
+        shapeCollider.pathCount = 0;
+
+        playerFilter = new ContactFilter2D();
+        playerFilter.SetLayerMask(playerLayer);
+        playerFilter.useTriggers = false; // the player's body, not its hitboxes
+    }
+
     private void Start()
     {
         sfxPlayer?.Play(startSound);
@@ -50,6 +85,23 @@ public class BossSpikeHazard : MonoBehaviour
     private void FixedUpdate()
     {
         if (!isDangerous) return;
+
+        if (useSpriteShape && shapeCollider != null)
+        {
+            SyncShapeToSprite();
+
+            int count = shapeCollider.Overlap(playerFilter, overlaps);
+            for (int i = 0; i < count; i++)
+            {
+                PlayerHealth health = overlaps[i].GetComponentInParent<PlayerHealth>();
+                if (health != null)
+                {
+                    health.TakeDamage(damage, transform.position);
+                    return;
+                }
+            }
+            return;
+        }
 
         Collider2D hit = useHitBox
             ? Physics2D.OverlapBox(HitBoxCenter, HitBoxSize, 0f, playerLayer)
@@ -91,6 +143,29 @@ public class BossSpikeHazard : MonoBehaviour
     public void OnSpikeEnd()
     {
         isDangerous = false;
+    }
+
+    // Rebuilds the trigger from the frame currently shown, only when the
+    // Animator has actually switched sprites.
+    private void SyncShapeToSprite()
+    {
+        Sprite sprite = spriteRenderer != null ? spriteRenderer.sprite : null;
+        Vector2 scale = new Vector2(shapeWidthScale, shapeHeightScale);
+        if (sprite == shapeSprite && scale == shapeScale) return;
+        shapeSprite = sprite;
+        shapeScale = scale;
+
+        int paths = sprite != null ? sprite.GetPhysicsShapeCount() : 0;
+        shapeCollider.pathCount = paths;
+        for (int i = 0; i < paths; i++)
+        {
+            sprite.GetPhysicsShape(i, shapePoints);
+            for (int p = 0; p < shapePoints.Count; p++)
+            {
+                shapePoints[p] = Vector2.Scale(shapePoints[p], scale);
+            }
+            shapeCollider.SetPath(i, shapePoints);
+        }
     }
 
     // Box scaled with the object, so a smaller/bigger instance stays right.
