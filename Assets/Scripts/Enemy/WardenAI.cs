@@ -130,16 +130,16 @@ public class WardenAI : MonoBehaviour
 
     [Header("Phase 3 - back from the dead")]
     // From the fake death until it rises again.
-    [SerializeField] private float reviveDelay = 30f;
+    [SerializeField] private float reviveDelay = 10f;
     // How long the health bar takes to fill up again.
-    [SerializeField] private float reviveRefillTime = 10f;
+    [SerializeField] private float reviveRefillTime = 5f;
     // How long it holds the fists-up pose before attacking again.
-    [SerializeField] private float reviveHoldTime = 10f;
+    [SerializeField] private float reviveHoldTime = 3f;
     // The phase 2 music comes back at this volume (the usual is WardenIntro's
     // musicVolume, 0.7).
     [SerializeField, Range(0f, 1f)] private float phase3MusicVolume = 1f;
     // How soon after rising the first attack comes.
-    [SerializeField] private float phase3FirstAttackDelay = 10f;
+    [SerializeField] private float phase3FirstAttackDelay = 3f;
 
     [Header("Phase 3 - spear circle")]
     // Chance that a phase-3 attack is the spear circle (never twice in a row).
@@ -713,6 +713,9 @@ public class WardenAI : MonoBehaviour
 
     private bool hasRevived;
 
+    // WardenPunch2: fists clenched until 0.6 s, both fists up from there on.
+    private const float RiseClenchTime = 0.7f;
+
     // EnemyHealth.InterceptDeath: the first death is a fake one.
     private bool TryFakeDeath()
     {
@@ -742,23 +745,32 @@ public class WardenAI : MonoBehaviour
 
         yield return new WaitForSeconds(reviveDelay);
 
-        // It rises: two fists up (the end of WardenPunch2, helmetless),
-        // held for reviveHoldTime, then the clip ends on its own in
-        // WardenIdle2 - the phase 2 idle.
+        // It rises: WardenPunch2 from the start - fists clenched for a moment,
+        // then both fists up. That pose is frozen for as long as the rising
+        // lasts (reviveHoldTime, or longer if the bar is still filling), so
+        // it never drops to idle before it can fight again.
+        float riseTime = Mathf.Max(reviveHoldTime, reviveRefillTime);
         if (animator != null)
         {
+            animator.speed = 1f;
             animator.Play("WardenPunch2", 0, 0f);
-            animator.Update(0f);
-            AnimatorStateInfo punch = animator.GetCurrentAnimatorStateInfo(0);
-            float length = punch.length > 0f ? punch.length : 3f;
-            float from = Mathf.Clamp01((length - reviveHoldTime) / length);
-            animator.Play("WardenPunch2", 0, from);
         }
         if (intro != null) intro.ChangeMusic(phase2Music, 0.2f, true, phase3MusicVolume);
         if (health != null) health.Revive(reviveRefillTime);
 
-        yield return new WaitForSeconds(Mathf.Max(reviveHoldTime, reviveRefillTime));
+        float clench = Mathf.Min(RiseClenchTime, riseTime);
+        yield return new WaitForSeconds(clench);
+        if (animator != null) animator.speed = 0f;
 
+        yield return new WaitForSeconds(riseTime - clench);
+
+        // Fists down: the phase 2 idle, and the first attack after
+        // phase3FirstAttackDelay.
+        if (animator != null)
+        {
+            animator.speed = 1f;
+            animator.Play("WardenIdle2", 0, 0f);
+        }
         if (weakPoint != null) weakPoint.SetVulnerable(true);
         stateTimer = CurrentCooldown - phase3FirstAttackDelay;
         currentState = WardenState.Idle;
