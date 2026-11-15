@@ -26,6 +26,9 @@ public static class RunStats
         public float playTime;
         public int deaths;
         public int hazardDeaths;
+        public int enemiesDefeated;
+        public int heals;
+        public int hitsTaken;
         public List<Counter> deathsPerLevel = new List<Counter>();
         public List<Counter> killers = new List<Counter>();
         public List<string> achievements = new List<string>();
@@ -160,6 +163,15 @@ public static class RunStats
         Save();
     }
 
+    // EnemyHealth, when any enemy dies (bosses included).
+    public static void EnemyDefeated() => data.enemiesDefeated++;
+
+    // PlayerPower.ApplyHeal, when a heal lands.
+    public static void Healed() => data.heals++;
+
+    // PlayerHealth, every hit that actually lands (enemies and hazards).
+    public static void HitTaken() => data.hitsTaken++;
+
     // Achievements.Unlock - counted even if it was already unlocked in an
     // earlier run: what matters here is that it was earned in this one.
     public static void AchievementEarned(string id)
@@ -175,6 +187,11 @@ public static class RunStats
     public static int Deaths => data.deaths;
     public static int HazardDeaths => data.hazardDeaths;
     public static int AchievementsEarned => data.achievements.Count;
+    public static int EnemiesDefeated => data.enemiesDefeated;
+    public static int Heals => data.heals;
+    public static int HitsTaken => data.hitsTaken;
+    // Souls taken this run (SoulScore lives with the run, like these stats).
+    public static int SoulsCollected => SoulScore.ExportCollected().Length;
 
     public static int DeathsIn(string level)
     {

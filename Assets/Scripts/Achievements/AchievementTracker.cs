@@ -53,6 +53,17 @@ public static class AchievementTracker
         { "Level3", 3 },
     };
 
+    // Every soul in the game, for the end-of-game stats.
+    public static int TotalSouls
+    {
+        get
+        {
+            int total = 0;
+            foreach (int n in SoulsPerLevel.Values) total += n;
+            return total;
+        }
+    }
+
     // Damage with every DamageUpgradePickup taken (1 base + Level2 + Level3).
     private const float MaxDamage = 3f;
 
