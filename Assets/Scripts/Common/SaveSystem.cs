@@ -34,6 +34,8 @@ public static class SaveSystem
         public int souls;
         public string[] collectedSouls;
         public string[] progressFlags;
+        // Puzzle progress inside levels (LevelState): keys, chalices, walls.
+        public string[] levelState;
     }
 
     private static string FilePath => Path.Combine(Application.persistentDataPath, "save.json");
@@ -98,6 +100,7 @@ public static class SaveSystem
             souls = SoulScore.Total,
             collectedSouls = SoulScore.ExportCollected(),
             progressFlags = GameProgress.Export(),
+            levelState = LevelState.CommitAndExport(),
             hasPosition = true,
             x = spawnPosition.x,
             y = spawnPosition.y,
@@ -164,6 +167,7 @@ public static class SaveSystem
         RunStats.Load();
         SoulScore.Import(data.souls, data.collectedSouls);
         GameProgress.Import(data.progressFlags);
+        LevelState.Import(data.levelState);
         respawnScene = data.scene;
         respawnPointId = data.savePointId;
         respawnHasPosition = data.hasPosition;
@@ -194,6 +198,7 @@ public static class SaveSystem
     {
         SoulScore.ResetAll();
         GameProgress.ResetAll();
+        LevelState.Clear();
         pending = null;
         respawnScene = null;
         respawnPointId = null;

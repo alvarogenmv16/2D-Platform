@@ -137,6 +137,10 @@ public class PlayerDeathHandler : MonoBehaviour
         transform.SetParent(null); // DontDestroyOnLoad only works on root objects
         DontDestroyOnLoad(gameObject);
 
+        // Puzzle progress (keys...) goes back to what the last save point
+        // stored, like the player's position.
+        LevelState.RevertToSaved();
+
         // Back to the last save point of this run (it may be in another
         // scene); before the first save, to the start of this scene.
         string sceneToLoad = SceneManager.GetActiveScene().name;
